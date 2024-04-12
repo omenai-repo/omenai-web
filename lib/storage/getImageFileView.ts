@@ -7,7 +7,7 @@ export const getImageFileView = (
   format?: string
 ) => {
   const fileData = storage.getFilePreview(
-    process.env.NEXT_APPWRITE_BUCKET_ID!,
+    process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
     fileId,
 
     width, // width, will be resized using this value.

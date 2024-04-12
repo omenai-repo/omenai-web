@@ -57,7 +57,7 @@ export default function UploadArtworkImage() {
         const upload_response = await uploadArtworkData(data);
         if (!upload_response?.isOk) {
           await storage.deleteFile(
-            process.env.NEXT_APPWRITE_BUCKET_ID!,
+            process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
             file.fileId
           );
           toast.error(upload_response!.body.message);

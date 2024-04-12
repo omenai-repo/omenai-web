@@ -57,8 +57,8 @@ export default function Admin() {
         };
 
         const { $id } = await database.createDocument(
-          process.env.NEXT_APPWRITE_EDITORIAL_DATABASE_ID!,
-          process.env.NEXT_APPWRITE_EDITORIAL_COLLECTION_ID!,
+          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_DATABASE_ID!,
+          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_COLLECTION_ID!,
           ID.unique(),
           { ...parse_data }
         );

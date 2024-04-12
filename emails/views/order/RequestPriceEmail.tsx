@@ -23,7 +23,7 @@ const RequestPriceEmail = (
 ) => {
   const url = getApiUrl();
   const image = storage.getFileView(
-    process.env.NEXT_APPWRITE_BUCKET_ID!,
+    process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
     artwork_data.url
   );
   return (
