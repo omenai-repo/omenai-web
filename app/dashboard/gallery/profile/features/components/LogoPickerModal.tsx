@@ -32,7 +32,7 @@ export default function LogoPickerModal() {
     try {
       if (logo) {
         const logoUpdated = await storage.createFile(
-          process.env.NEXT_PUBLIC_APPWRITE_LOGO_BUCKET_ID!,
+          process.env.NEXT_APPWRITE_LOGO_BUCKET_ID!,
           ID.unique(),
           logo
         );
@@ -44,7 +44,7 @@ export default function LogoPickerModal() {
           };
 
           const fileData = storage.getFilePreview(
-            process.env.NEXT_PUBLIC_APPWRITE_LOGO_BUCKET_ID!,
+            process.env.NEXT_APPWRITE_LOGO_BUCKET_ID!,
             file.fileId
           );
 

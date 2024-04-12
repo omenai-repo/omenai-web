@@ -2,7 +2,7 @@ import { storage } from "../controller/appwrite";
 
 export const getEditorialImageFilePreview = (fileId: string, width: number) => {
   const fileData = storage.getFilePreview(
-    process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_BUCKET_ID!,
+    process.env.NEXT_APPWRITE_EDITORIAL_BUCKET_ID!,
     fileId,
 
     width, // width, will be resized using this value.
