@@ -1,12 +1,12 @@
 import { getApiUrl } from "@/config";
 
-export async function verifyEmailAccount(
+export async function sendPasswordResetLink(
   route: RouteIdentifier,
   payload: { email: string }
 ) {
   const url = getApiUrl();
 
-  const result = await fetch(`${url}/api/auth/${route}/reset`, {
+  const result = await fetch(`${url}/api/auth/${route}/sendPasswordResetLink`, {
     method: "POST",
     body: JSON.stringify({ recoveryEmail: payload.email }),
     headers: {

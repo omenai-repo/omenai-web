@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(
-      { message: "Verification link sent", id: gallery_id },
+      { message: "Password reset link has been sent", id: gallery_id },
       { status: 200 }
     );
   } catch (error) {

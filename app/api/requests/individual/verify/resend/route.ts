@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     if (verified)
       throw new ForbiddenError(
-        "This action is not permitted. User already verified"
+        "This action is not permitted. Account already verified"
       );
 
     const email_token = await generateString();

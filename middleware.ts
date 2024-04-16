@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   const isUserDashboard = userDashboardRegex.test(request.url);
   const isGalleryDashboard = galleryDashboardRegex.test(request.url);
 
-  if (token) {
+  if (token) { 
     switch (token.role) {
       case "user":
         if (isGalleryDashboard) {
