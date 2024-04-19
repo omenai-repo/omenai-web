@@ -79,36 +79,29 @@ export default function FormInput() {
         <label htmlFor={"email"} className="text-xs text-[#858585]">
           Email address
         </label>
-        <div className="border border-[#E0E0E0] mt-3 rounded-md overflow-hidden">
-          <input
-            type="Gallery email address"
-            value={form.email}
-            name="email"
-            placeholder="Enter your gallery's email address"
-            className="px-3 text-xs focus:ring-0 border-0 outline-none focus:outline-none h-[56px] w-full bg-[#FAFAFA] placeholder:text-dark/40"
-            onKeyDown={handleKeyPress}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <input
+          type="Gallery email address"
+          value={form.email}
+          name="email"
+          className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
+          onKeyDown={handleKeyPress}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div className="flex flex-col">
         <label htmlFor={"password"} className="text-xs text-[#858585]">
           Password
         </label>
-        <div className="flex items-center gap-0 h-[56px] w-full rounded-md mt-3 bg-[#FAFAFA] border border-[#E0E0E0]">
-            <input
-                value={form.password}
-                type={hidePassword ? "password" : "text"}
-                name="password"
-                placeholder="Enter your password"
-                className="flex-1 text-xs placeholder:text-dark/40 bg-transparent border-0 outline-none focus:outline-none focus:ring-0"
-                onKeyDown={handleKeyPress}
-                onChange={handleChange}
-                required
-            />
-            <div className="h-full px-5 flex items-center justify-center cursor-pointer text-sm text-[#858585]" onClick={() => setHidePassword(prev => !prev)} > {hidePassword ? <FiEyeOff /> : <FiEye />} </div>
-        </div>
+        <input
+            value={form.password}
+            type="password"
+            name="password"
+            className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
+            onKeyDown={handleKeyPress}
+            onChange={handleChange}
+            required
+        />
       </div>
       <FormActions />
     </form>

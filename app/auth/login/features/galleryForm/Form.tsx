@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import FormInput from "./components/FormInput";
 import { FiArrowLeft } from "react-icons/fi";
 import { useLoginStore } from '@/store/auth/login/LoginStore';
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Form() {
   const { updateCurrent } = useLoginStore();
@@ -14,14 +16,20 @@ export default function Form() {
         animate={{ x: 0, opacity: 1 }}
         exit={{ y: -300 }}
         transition={{ duration: 0.33 }}
-        className='max-w-[560px] py-[20px] md:py-[30px]'
+        className='w-full py-[20px] md:py-[30px] lg:px-[2rem] xl:px-[4rem] 2xl:px-[7rem]'
       >
-        <div className="flex items-center gap-5">
-          <div className="h-[30px] w-[30px] rounded-full border border-line text-base flex items-center justify-center cursor-pointer" onClick={() => updateCurrent(0)}> <FiArrowLeft className="text-[#161616]" /> </div>
-          <h1 className='text-2xl font-medium'>Enter your login details</h1>
+        <div className="text-center flex items-center flex-col mt-10">
+          <Link href={'/'}>
+            <Image
+              src={"/omenai_logo.png"}
+              alt="omenai logo"
+              width={150}
+              height={30}
+            />
+          </Link>
+          <p className='text-[#616161] mt-5'>Welcome back. kindly login to your gallery account</p>
         </div>
-        <p className='text-[#616161] mt-2'>Kindly provide the following details</p>
-        <div className='mt-[50px]'>
+        <div className='mt-[40px]'>
             <FormInput />
         </div>
       </motion.div>

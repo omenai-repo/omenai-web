@@ -1,14 +1,15 @@
 "use client";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
 import { actionStore } from "@/store/actions/ActionStore";
 import { individualLoginStore } from "@/store/auth/login/IndividualLoginStore";
-import Link from "next/link";
+import { useLoginStore } from "@/store/auth/login/LoginStore";
 import { GoArrowRight } from "react-icons/go";
 
 export default function FormActions() {
   const [updateRecoveryModal] = actionStore((state) => [
     state.updateRecoveryModal,
   ]);
+
+  const { updateCurrent } = useLoginStore();
 
   const [isLoading] = individualLoginStore((state) => [state.isLoading]);
 
@@ -23,7 +24,7 @@ export default function FormActions() {
           Reset it
         </span>
       </p>
-      <div className="flex flex-col w-full gap-2 mt-[50px]">
+      <div className="flex flex-col w-full gap-2 mt-[30px]">
         <button
             disabled={isLoading}
             type="submit"
@@ -31,7 +32,7 @@ export default function FormActions() {
         >
             {isLoading ? "Loading..." : "Login"} {!isLoading && <GoArrowRight className="text-md opacity-70" />}
         </button>
-        <Link href={'/'} className="h-[50px] w-full text-center flex items-center justify-center bg-white">Go back home</Link>
+        <button onClick={() => updateCurrent(1)} className="h-[50px] w-full text-center flex items-center justify-center bg-white cursor-pointer">Sign in to Gallery</button>
       </div>
     </div>
   );

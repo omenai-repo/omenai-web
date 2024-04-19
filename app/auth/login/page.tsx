@@ -13,7 +13,7 @@ function Page() {
         <section className="h-[100vh] w-full grid place-items-center overflow-x-hidden">
             <div className="w-full h-full md:grid grid-cols-[1fr_1.3fr]">
                 {/* Side section */}
-                <div className='w-full h-full bg-authSideDark relative sticky'>
+                <div className='w-full h-full bg-authSideDark relative hidden md:block'>
                     <Image
                         fill={true}
                         src={'/authSideImage.svg'}
@@ -21,19 +21,19 @@ function Page() {
                         alt="auth side image"
                     />
                     <div className='absolute h-[100vh] w-full py-10 px-7 flex flex-col'>
-                        <a> <Image src={'/logo-white-bg.svg'} height={44} width={160} objectFit='contain' alt="auth side image" /> </a>
                         <div className='flex-1' />
                         <div className='pb-10 text-white'>
-                            <h1 className='text-2xl font-medium'>Your easy access to artworks</h1>
+                            <h1 className='text-2xl font-medium'>Enter your login details</h1>
                             <p className='mt-2'>If you are really interested in getting artworks for reasonable prices, then sign up</p>
                         </div>
                     </div>
                 </div>
                 {/* Form section */}
-                <div className='w-full h-full px-[20px] md:px-[50px]'>
-                    {current === 0 && <SelectSection />}
-                    {current === 1 && <IndividualLoginForm />}
-                    {current === 2 && <GalleryLoginForm /> }
+                <div className='w-full h-full p-5 md:px-[50px] overflow-x-hidden'>
+                    {/* removed initial selection page */}
+                    {/* {current === 0 && <SelectSection />} */}
+                    {current === 0 && <IndividualLoginForm />}
+                    {current === 1 && <GalleryLoginForm /> }
                 </div>
             </div>
         </section>
