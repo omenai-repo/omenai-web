@@ -7,7 +7,7 @@ export default function Action() {
         Got an account? Gotcha!{" "}
         <Link
           href={"/auth/login/individual"}
-          className="text-primary underline"
+          className="text-dark underline font-bold"
         >
           Log in
         </Link>
@@ -16,7 +16,7 @@ export default function Action() {
         Gallery?{" "}
         <Link
           href={"/auth/register/gallery"}
-          className="text-primary underline"
+          className="text-dark underline font-bold"
         >
           Sign up here
         </Link>

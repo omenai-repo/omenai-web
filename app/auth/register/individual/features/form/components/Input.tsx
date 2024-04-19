@@ -5,6 +5,7 @@ import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { useIndividualAuthStore } from "@/store/auth/register/IndividualAuthStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { MdOutlineArrowForward } from "react-icons/md";
 
 export default function Input({
   label,
@@ -50,16 +51,16 @@ export default function Input({
   return (
     <AnimatePresence key={id}>
       <motion.div
-        initial={{ x: 300, opacity: 0 }}
+        initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        exit={{ y: -300 }}
+        exit={{ y: -100 }}
         transition={{ duration: 0.33 }}
         className="flex flex-col gap-2 container"
       >
         <label htmlFor={labelText}>{label}</label>
         <input
           type={type}
-          className=" border-0 focus:ring-0 border-b-[1px] px-0 border-b-primary outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-2"
+          className=" border-0 focus:ring-0 border-b-[1px] px-0 border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-2"
           placeholder={`e.g ${placeholder}`}
           disabled={disabled}
           onChange={onChange}
@@ -77,18 +78,18 @@ export default function Input({
             );
           })}
 
-        <div className="self-end flex gap-4">
+        <div className="self-end flex gap-4 mt-8">
           <button
             className={`${
               currentSignupFormIndex > 0 ? "block" : "hidden"
-            } px-[1.5rem] py-[0.4rem] mt-[1rem] bg-dark text-white hover:bg-dark/30 transition-all ease-linear duration-200`}
+            } px-[1.5rem] py-[0.5rem]  bg-dark text-white hover:bg-dark/30 transition-all ease-linear duration-200`}
             type={"button"}
             onClick={handleClickPrev}
           >
             Back
           </button>
           <button
-            className="px-[1.5rem] py-[0.4rem] mt-[1rem] bg-dark text-white hover:bg-dark/30 transition-all ease-linear duration-200"
+            className="px-[1.5rem] py-[0.5rem]  bg-dark text-white flex justify-center items-center gap-x-2 hover:bg-dark/30 transition-all ease-linear duration-200"
             type={"button"}
             onClick={() =>
               handleClick(
@@ -97,7 +98,8 @@ export default function Input({
               )
             }
           >
-            {"Next"}
+            <span>Next</span>
+            <MdOutlineArrowForward />
           </button>
         </div>
       </motion.div>
