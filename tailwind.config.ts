@@ -35,6 +35,7 @@ const config: Config = {
         },
 
         line: "#DEDEDE",
+        authSideDark: '#1A1A1A'
       },
       screens: {
         xs: "460px",
