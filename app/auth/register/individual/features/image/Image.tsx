@@ -4,7 +4,7 @@ export default function ImageBlock() {
   return (
     <aside className="h-full w-full relative flex-1 hidden md:block">
       <Image
-        src={"/dark_bg_1.jpg"}
+        src={"/authSideImage.svg"}
         alt="Individual sign up image block"
         width={500}
         height={500}
@@ -19,7 +19,7 @@ export default function ImageBlock() {
           prices, then sign up
         </p>
       </div>
-      <div className="absolute inset-0 bg-dark opacity-80 z-10" />
+      {/* <div className="absolute inset-0 bg-dark opacity-50 z-10" /> */}
     </aside>
   );
 }

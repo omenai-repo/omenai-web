@@ -26,6 +26,9 @@ export const purchase_artwork = async (
           email: email,
           name: name,
         },
+        meta: {
+          type: "Artwork purchase",
+        },
         customizations: {
           title: `Omenai artwork payment: ${artwork}`,
           logo: "https://cloud.appwrite.io/v1/storage/buckets/655c43e6901e0f772192/files/omenai_logo/view?project=655231c3469bf1ef8d8f",

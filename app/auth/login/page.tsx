@@ -16,7 +16,7 @@ function Page() {
                 <div className='w-full h-full bg-authSideDark relative hidden md:block'>
                     <Image
                         fill={true}
-                        src={'/authSideImage.svg'}
+                        src={'/dark_bg_1.jpg'}
                         objectFit="cover"
                         alt="auth side image"
                     />
