@@ -3,17 +3,17 @@ import Link from "next/link";
 export default function Action() {
   return (
     <div className="sm:absolute bottom-6 flex justify-between items-center w-full px-4 my-[1rem] text-center flex-col sm:flex-row md:flex-col lg:flex-row">
-      <p className="font-normal text-base">
+      <p className="font-normal text-xs">
         Got an account? Gotcha!{" "}
-        <Link href={"/auth/login/gallery"} className="text-primary underline">
+        <Link href={"/auth/login/"} className="text-dark font-bold underline">
           Log in
         </Link>
       </p>
-      <p className="font-normal text-base">
+      <p className="font-normal text-xs">
         Individual?{" "}
         <Link
           href={"/auth/register/individual"}
-          className="text-primary underline"
+          className="text-dark font-bold underline"
         >
           Sign up here
         </Link>

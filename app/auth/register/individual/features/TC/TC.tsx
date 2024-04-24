@@ -1,14 +1,16 @@
 "use client";
-import { useGalleryAuthStore } from "@/store/auth/register/GalleryAuthStore";
+import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { useIndividualAuthStore } from "@/store/auth/register/IndividualAuthStore";
+import { Checkbox, Label } from "flowbite-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
-import { Checkbox, Label } from "flowbite-react";
+import React from "react";
 
-export default function FormConfirm() {
-  const [decrementCurrentGallerySignupFormIndex, isLoading] =
-    useGalleryAuthStore((state) => [
-      state.decrementCurrentGallerySignupFormIndex,
+export default function TC() {
+  const [decrementCurrentSignupFormIndex, preferences, isLoading] =
+    useIndividualAuthStore((state) => [
+      state.decrementCurrentSignupFormIndex,
+      state.preferences,
       state.isLoading,
     ]);
   return (
@@ -59,7 +61,7 @@ export default function FormConfirm() {
         <button
           className={` rounded-full px-[1.5rem] py-[0.4rem] mt-[1rem] text-dark underline transition-all ease-linear duration-200`}
           type={"button"}
-          onClick={decrementCurrentGallerySignupFormIndex}
+          onClick={decrementCurrentSignupFormIndex}
         >
           Back
         </button>

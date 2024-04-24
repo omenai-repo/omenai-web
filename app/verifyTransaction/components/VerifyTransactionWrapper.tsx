@@ -30,7 +30,7 @@ export default function VerifyTransactionWrapper() {
       set_redirect_uri(`${url}/dashboard/gallery/subscription`);
       setTimeout(() => {
         toast.success("Please log back in");
-        signOut({ callbackUrl: "/auth/login/gallery" });
+        signOut({ callbackUrl: "/auth/login/" });
       }, 3000);
 
       return { message: result.message, isOk: response.ok };

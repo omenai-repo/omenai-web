@@ -15,11 +15,11 @@ export const GalleryLogo = ({ className, theme = "dark" }: LogoProps) => {
         <Image
           src={"/omenai_logo.png"}
           alt="omenai logo"
-          width={150}
-          height={30}
+          width={130}
+          height={50}
         />
         <span
-          className={`font-normal text relative xxs:top-1 ${
+          className={`font-normal text-xs relative xxs:top-1 ${
             theme === "light" ? "text-white" : "text-black"
           } ${className}`}
         >

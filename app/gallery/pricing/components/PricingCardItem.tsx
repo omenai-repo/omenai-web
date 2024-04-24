@@ -39,7 +39,7 @@ export default function PricingCardItem({
     ) {
       set_redirect_uri(`${url}/gallery/pricing`);
       toast.error("Please login to your gallery account");
-      router.push("/auth/login/gallery");
+      router.push("/auth/login/");
     } else {
       setLoading(true);
       const response = await fetch("/api/subscriptions/subscribeUser", {
