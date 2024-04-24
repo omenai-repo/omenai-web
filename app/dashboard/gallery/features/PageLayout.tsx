@@ -14,7 +14,7 @@ export default function PageLayout() {
   ]);
 
   function handleSignout() {
-    signOut({ callbackUrl: "/auth/login/gallery" });
+    signOut({ callbackUrl: "/auth/login/" });
     toast.success("Successfully signed out...redirecting");
   }
 

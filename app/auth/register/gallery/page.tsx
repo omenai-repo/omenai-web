@@ -5,10 +5,10 @@ export default function GallerySignup() {
   return (
     <section className="h-[100vh] w-full">
       <div className="h-full md:flex w-full">
-        {/* Form section */}
-        <FormBlock />
         {/* Image section */}
         <ImageBlock />
+        {/* Form section */}
+        <FormBlock />
       </div>
     </section>
   );

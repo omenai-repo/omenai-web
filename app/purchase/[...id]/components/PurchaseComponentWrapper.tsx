@@ -43,7 +43,7 @@ export default function PurchaseComponentWrapper({
         "Unauthorized access detected. Please login to the appropriate account to view this page"
       );
       set_redirect_uri(`${url}${route}`);
-      router.replace("/auth/login/individual");
+      router.replace("/auth/login/");
     }
     if (session.data?.user !== undefined) {
       setIsLoggedIn(true);

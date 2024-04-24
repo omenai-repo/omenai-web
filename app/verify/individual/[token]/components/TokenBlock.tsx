@@ -37,7 +37,7 @@ export default function TokenBlock({ token }: TokenProps) {
       if (!res.isOk) toast.error(res.body.message);
       if (res.isOk) {
         toast.success(res.body.message);
-        router.push("/auth/login/individual");
+        router.push("/auth/login/");
       }
       setIsLoading();
     }

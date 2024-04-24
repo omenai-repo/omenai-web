@@ -36,7 +36,7 @@ export default function ComponentWrapper({ order_id }: { order_id: string }) {
         "Unauthorized access detected. Please login to the appropriate account to view this page"
       );
       set_redirect_uri(`${url}${route}?id_key=${user_id_key}`);
-      router.replace("/auth/login/individual");
+      router.replace("/auth/login/");
     } else {
       setIsLoggedIn(true);
     }

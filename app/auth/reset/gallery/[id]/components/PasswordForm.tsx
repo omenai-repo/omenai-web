@@ -66,7 +66,7 @@ export default function PasswordForm({ id }: IdProps) {
         if (!response.isOk) toast.error(response.body.message);
         else {
           toast.success(response.body.message);
-          router.replace("/auth/login/gallery");
+          router.replace("/auth/login/");
         }
         setIsLoading();
       }

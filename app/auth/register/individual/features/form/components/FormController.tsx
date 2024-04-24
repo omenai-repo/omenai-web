@@ -5,6 +5,7 @@ import Preferences from "../../preferences/Preferences";
 import { useIndividualAuthStore } from "@/store/auth/register/IndividualAuthStore";
 import { ChangeEvent } from "react";
 import { inputProperties } from "@/mocks/input/individual/InputMock";
+import TC from "../../TC/TC";
 
 export default function FormController() {
   const [currentSignupFormIndex, updateSignUpData] = useIndividualAuthStore(
@@ -32,6 +33,7 @@ export default function FormController() {
       )}
 
       {currentSignupFormIndex === inputProperties.length && <Preferences />}
+      {currentSignupFormIndex === inputProperties.length + 1 && <TC />}
     </>
   );
 }

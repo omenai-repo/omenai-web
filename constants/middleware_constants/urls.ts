@@ -1,7 +1,7 @@
 export const URLS = {
-  galleryLogin: "/auth/login/gallery",
+  galleryLogin: "/auth/login/",
   galleryRegister: "/auth/register/gallery",
-  userLogin: "/auth/login/individual",
+  userLogin: "/auth/login/",
   userRegister: "/auth/register/individual",
   galleryDashboard: "/dashboard/gallery/overview",
   userDashboard: "/dashboard/user",
