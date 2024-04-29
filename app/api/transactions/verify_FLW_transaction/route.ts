@@ -37,6 +37,7 @@ export async function POST(request: Request) {
         { status: 200 }
       );
     } else {
+      // If subscription verification, save token to database
       return NextResponse.json(
         {
           message: "Transaction successful",
