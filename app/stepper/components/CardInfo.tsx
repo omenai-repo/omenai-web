@@ -6,9 +6,6 @@ import { FormEvent, useState } from "react";
 import { initiateDirectCharge } from "@/services/subscriptions/subscribeUser/initiateDirectCharge";
 import { toast } from "sonner";
 
-type CardInfoProps = {
-    showSection: boolean
-}
 
 type CardInputTypes = {
     // value: ChangeEvent<HTMLInputElement>,
@@ -16,7 +13,7 @@ type CardInputTypes = {
     label: string
 }
 
-function CardInfo({showSection} : CardInfoProps) {
+function CardInfo() {
     const { cardInput, setCardInput, updateIndex, setStoreCardInputResponse } = useStepperStore();
     const [cardInputLoading, setCardInputLoading] = useState(false);
 
@@ -52,72 +49,70 @@ function CardInfo({showSection} : CardInfoProps) {
     
     return (
         <AnimatePresence>
-            {showSection && (
-                <motion.div
-                    initial={{ x: 100, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ y: -100 }}
-                    transition={{ duration: 0.33 }}
-                >
-                    <form onSubmit={handleCardInputSubmit} className="flex flex-col mb-4">
-                        <div className="flex flex-col gap-y-1">
-                            <label
-                            className="text-dark text-xs font-bold"
-                            htmlFor="card number"
-                            >
-                            Card number
-                            </label>
-                            <input
-                            type="text"
-                            className="px-3 py-2 border border-dark/50 w-[500px]"
-                            name="card"
-                            onChange={(e) => handleCardInputChange({label: "card", value: e})}
-                            />
-                        </div>
-                        <div className="flex flex-col gap-y-1">
-                            <label className="text-dark text-xs font-bold" htmlFor="month">
-                            Month
-                            </label>
-                            <input
-                            type="text"
-                            className="px-3 py-2 border border-dark/50 w-[500px]"
-                            name="month"
-                            onChange={(e) => handleCardInputChange({label: "month", value: e})}
-                            />
-                        </div>
-                        <div className="flex flex-col gap-y-1">
-                            <label className="text-dark text-xs font-bold" htmlFor="year">
-                            Year
-                            </label>
-                            <input
-                            type="text"
-                            className="px-3 py-2 border border-dark/50 w-[500px]"
-                            name="year"
-                            onChange={(e) => handleCardInputChange({label: "year", value: e})}
-                            />
-                        </div>
-                        <div className="flex flex-col gap-y-1">
-                            <label className="text-dark text-xs font-bold" htmlFor="cvv">
-                            CVV
-                            </label>
-                            <input
-                            type="text"
-                            className="px-3 py-2 border border-dark/50 w-[500px]"
-                            name="cvv"
-                            onChange={(e) => handleCardInputChange({label: "cvv", value: e})}
-                            />
-                        </div>
-
-                        <button
-                            disabled={cardInputLoading}
-                            type="submit"
-                            className="px-4 py-2 mt-3 bg-dark text-white disabled:bg-dark/20 disabled:cursor-not-allowed"
+            <motion.div
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ y: -100 }}
+                transition={{ duration: 0.33 }}
+            >
+                <form onSubmit={handleCardInputSubmit} className="flex flex-col mb-4">
+                    <div className="flex flex-col gap-y-1">
+                        <label
+                        className="text-dark text-xs font-bold"
+                        htmlFor="card number"
                         >
-                            {cardInputLoading ? "Loading..." : "Submit"}
-                        </button>
-                    </form>
-                </motion.div>
-            )}
+                        Card number
+                        </label>
+                        <input
+                        type="text"
+                        className="px-3 py-2 border border-dark/50 w-[500px]"
+                        name="card"
+                        onChange={(e) => handleCardInputChange({label: "card", value: e})}
+                        />
+                    </div>
+                    <div className="flex flex-col gap-y-1">
+                        <label className="text-dark text-xs font-bold" htmlFor="month">
+                        Month
+                        </label>
+                        <input
+                        type="text"
+                        className="px-3 py-2 border border-dark/50 w-[500px]"
+                        name="month"
+                        onChange={(e) => handleCardInputChange({label: "month", value: e})}
+                        />
+                    </div>
+                    <div className="flex flex-col gap-y-1">
+                        <label className="text-dark text-xs font-bold" htmlFor="year">
+                        Year
+                        </label>
+                        <input
+                        type="text"
+                        className="px-3 py-2 border border-dark/50 w-[500px]"
+                        name="year"
+                        onChange={(e) => handleCardInputChange({label: "year", value: e})}
+                        />
+                    </div>
+                    <div className="flex flex-col gap-y-1">
+                        <label className="text-dark text-xs font-bold" htmlFor="cvv">
+                        CVV
+                        </label>
+                        <input
+                        type="text"
+                        className="px-3 py-2 border border-dark/50 w-[500px]"
+                        name="cvv"
+                        onChange={(e) => handleCardInputChange({label: "cvv", value: e})}
+                        />
+                    </div>
+
+                    <button
+                        disabled={cardInputLoading}
+                        type="submit"
+                        className="px-4 py-2 mt-3 bg-dark text-white disabled:bg-dark/20 disabled:cursor-not-allowed"
+                    >
+                        {cardInputLoading ? "Loading..." : "Submit"}
+                    </button>
+                </form>
+            </motion.div>
         </AnimatePresence>
     )
 }

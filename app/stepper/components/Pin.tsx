@@ -6,11 +6,7 @@ import { FormEvent, useState } from "react";
 import { validateChargeAuthorization } from "@/services/subscriptions/subscribeUser/validateChargeAuthorization";
 import { toast } from "sonner";
 
-type PinProps = {
-    showSection: boolean
-}
-
-function Pin({showSection} : PinProps) {
+function Pin() {
     const { cardInput, pinInput, setPinInput, updateIndex, storeCardInputResponse, setStorePinInputResponse } = useStepperStore();
 
     const [pinInputLoading, setPinInputLoading] = useState(false);
@@ -43,37 +39,35 @@ function Pin({showSection} : PinProps) {
 
     return (
         <AnimatePresence>
-            {showSection && (
-                <motion.div
-                    initial={{ x: 100, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    exit={{ y: -100 }}
-                    transition={{ duration: 0.33 }}
+            <motion.div
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ y: -100 }}
+                transition={{ duration: 0.33 }}
+            >
+                <form
+                    onSubmit={handlePinInputSubmit}
+                    className="flex flex-col gap-y-2 mb-4"
                 >
-                    <form
-                        onSubmit={handlePinInputSubmit}
-                        className="flex flex-col gap-y-2 mb-4"
+                    <div className="flex flex-col gap-y-1">
+                        <label className="text-dark text-xs font-bold" htmlFor="pin">
+                        Pin
+                        </label>
+                        <input
+                        type="text"
+                        className="px-3 py-2 border border-dark/50 w-[500px]"
+                        onChange={(e) => setPinInput(e.target.value)}
+                        />
+                    </div>
+                    <button
+                        disabled={pinInputLoading}
+                        type="submit"
+                        className="px-4 py-2 bg-dark text-white disabled:bg-dark/20 disabled:cursor-not-allowed"
                     >
-                        <div className="flex flex-col gap-y-1">
-                            <label className="text-dark text-xs font-bold" htmlFor="pin">
-                            Pin
-                            </label>
-                            <input
-                            type="text"
-                            className="px-3 py-2 border border-dark/50 w-[500px]"
-                            onChange={(e) => setPinInput(e.target.value)}
-                            />
-                        </div>
-                        <button
-                            disabled={pinInputLoading}
-                            type="submit"
-                            className="px-4 py-2 bg-dark text-white disabled:bg-dark/20 disabled:cursor-not-allowed"
-                        >
-                            {pinInputLoading ? "Loading..." : "Submit"}
-                        </button>
-                    </form>
-                </motion.div>
-            )}
+                        {pinInputLoading ? "Loading..." : "Submit"}
+                    </button>
+                </form>
+            </motion.div>
         </AnimatePresence>
     )
 }
