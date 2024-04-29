@@ -283,3 +283,10 @@ type SubscriptionCardDetails = {
   type: string;
   expiry: string;
 };
+
+type CardInputTypes = {
+  card: string,
+  cvv: string,
+  month: string,
+  year: string
+}
