@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 import TopLabel from "./components/TopLabel";
 import CardInfo from "./components/CardInfo";
 import { useStepperStore } from "@/store/stepper/stepperStore" 

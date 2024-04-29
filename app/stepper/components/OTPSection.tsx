@@ -2,10 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useStepperStore } from "@/store/stepper/stepperStore" 
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { validateCharge } from "@/services/subscriptions/subscribeUser/validateCharge";
-import { initiateDirectCharge } from "@/services/subscriptions/subscribeUser/initiateDirectCharge";
-import { validateChargeAuthorization } from "@/services/subscriptions/subscribeUser/validateChargeAuthorization";
 import { toast } from "sonner";
 
 type OTPSectionProps = {
