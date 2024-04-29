@@ -36,6 +36,8 @@ function Pin({showSection} : PinProps) {
             toast.error("Something went wrong");
         }
         setPinInputLoading(false);
+
+        // should be moved to the success response
         updateIndex()
     }
 

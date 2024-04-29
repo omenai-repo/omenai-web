@@ -36,6 +36,8 @@ function OTPSection({showSection} : OTPSectionProps) {
           toast.error("Something went wrong");
         }
         setOtpInputLoading(false);
+
+        // should be moved to the success response
         updateIndex()
     }
 

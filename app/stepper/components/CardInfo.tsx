@@ -45,6 +45,8 @@ function CardInfo({showSection} : CardInfoProps) {
           toast.error("Something went wrong");
         }
         setCardInputLoading(false);
+
+        // should be moved to the success response
         updateIndex()
       }
     
