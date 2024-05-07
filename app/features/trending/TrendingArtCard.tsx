@@ -30,13 +30,15 @@ export default function TrendingArtworkCard({
   return (
     <div>
       <div className="flex flex-col w-auto h-full max-h-[500px] justify-end">
-        <Link href={`/artwork/${name}`} className="relative">
-          <img
-            src={image_href}
-            alt={name + " image"}
-            className="w-auto max-w-[230px] max-h-[500px] h-fit aspect-auto object-top object-contain cursor-pointer"
-          />
-          <div className="absolute top-5 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
+        <div className="relative">
+          <Link href={`/artwork/${name}`}>
+            <img
+              src={image_href}
+              alt={name + " image"}
+              className="w-auto max-w-[230px] max-h-[500px] h-full aspect-auto object-top object-contain cursor-pointer"
+            />
+          </Link>
+          <div className="absolute top-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent
               impressions={impressions}
               likeIds={likeIds}
@@ -44,7 +46,7 @@ export default function TrendingArtworkCard({
               art_id={art_id}
             />
           </div>
-        </Link>
+        </div>
 
         <div className="mb-[3rem] bg-[#FAFAFA] py-2 px-3">
           <div className="flex justify-between items-center my-2">

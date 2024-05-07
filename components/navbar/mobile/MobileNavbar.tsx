@@ -45,7 +45,7 @@ export default function MobileNavbar() {
         <hr className="border-dark/20 my-4" />
         {session.status === "authenticated" &&
           session.data.user.role === "user" && (
-            <div className="block sm:hidden p-4">
+            <div className="block sm:hidden">
               <LoggedInUser user={session.data!.user.name} />
             </div>
           )}
