@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
 import ArtworkCardTags from "@/components/artworks/ArtworkCardTags";
 import LikeComponent from "@/components/likes/LikeComponent";
+import Image from "next/image";
 export default function TrendingArtworkCard({
   image,
   artist,
@@ -32,10 +33,12 @@ export default function TrendingArtworkCard({
       <div className="flex flex-col w-auto h-full max-h-[500px] justify-end">
         <div className="relative">
           <Link href={`/artwork/${name}`}>
-            <img
+            <Image
               src={image_href}
               alt={name + " image"}
-              className="w-auto max-w-[230px] max-h-[500px] h-full aspect-auto object-top object-contain cursor-pointer"
+              height={500}
+              width={220}
+              className="min-w-[220px] aspect-auto object-top object-cover cursor-pointer"
             />
           </Link>
           <div className="absolute top-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
