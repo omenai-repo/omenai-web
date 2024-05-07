@@ -7,6 +7,7 @@ import LikeComponent from "../likes/LikeComponent";
 import Image from "next/image";
 import { blurHash } from "@/utils/blurhash";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
+import ArtworkCardTags from "./ArtworkCardTags";
 export default function ArtworkCard({
   image,
   artist,
@@ -16,6 +17,8 @@ export default function ArtworkCard({
   likeIds,
   sessionId,
   art_id,
+  medium,
+  rarity,
 }: {
   image: string;
   artist: string;
@@ -24,6 +27,8 @@ export default function ArtworkCard({
   likeIds: string[];
   sessionId: string | undefined;
   art_id: string;
+  medium: string;
+  rarity: string;
   pricing?: {
     price: string;
     shouldShowPrice: "Yes" | "No" | string;
@@ -32,21 +37,14 @@ export default function ArtworkCard({
   const image_href = getImageFileView(image, 300);
   return (
     <div>
-      <div className="flex flex-col gap-y-4 w-auto h-full max-h-[420px] justify-end px-1">
-        <Link href={`/artwork/${name}`}>
+      <div className="flex flex-col w-auto h-full max-h-[500px] justify-end">
+        <Link href={`/artwork/${name}`} className="relative">
           <img
             src={image_href}
             alt={name + " image"}
-            className="w-auto max-w-[180px] max-h-[420px] h-auto aspect-auto object-top object-contain cursor-pointer"
+            className="w-auto max-w-[230px] max-h-[500px] h-fit aspect-auto object-top object-contain cursor-pointer"
           />
-        </Link>
-
-        <div className="mb-[3rem]">
-          <div className="flex justify-between items-center">
-            <p className="font-medium text-dark text-xs">
-              {artist.substring(0, 20)}
-              {artist.length > 20 && "..."}
-            </p>
+          <div className="absolute top-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent
               impressions={impressions}
               likeIds={likeIds}
@@ -54,17 +52,33 @@ export default function ArtworkCard({
               art_id={art_id}
             />
           </div>
-          <p className="font-semibold text-dark italic">
-            {name.substring(0, 20)}
-            {name.length > 20 && "..."}
-          </p>
-          {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
-            <p className="font-semibold text-xs text-dark">
-              {formatPrice(pricing.price)}
+        </Link>
+
+        <div className="mb-[3rem] bg-[#FAFAFA] py-2 px-3">
+          <div className="flex justify-between items-center my-2">
+            <p className="font-medium text-[14px] text-dark ">
+              {name.substring(0, 20)}
+              {name.length > 20 && "..."}
             </p>
-          ) : (
-            <p className="font-normal text-xs">Price on request</p>
-          )}
+          </div>
+          <div className="flex justify-between items-center">
+            <p className="font-normal text-dark text-xs">
+              {artist.substring(0, 20)}
+              {artist.length > 20 && "..."}
+            </p>
+            {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
+              <p className="font-semibold text-xs text-dark">
+                {formatPrice(pricing.price)}
+              </p>
+            ) : (
+              <p className="font-normal underline text-xs">Request</p>
+            )}
+          </div>
+          <hr className="border-dark/10 my-5" />
+          <div className="flex gap-x-2 mb-2 items-center">
+            <ArtworkCardTags tag={medium} />
+            <ArtworkCardTags tag={rarity} />
+          </div>
         </div>
       </div>
     </div>

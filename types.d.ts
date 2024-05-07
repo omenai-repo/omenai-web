@@ -270,9 +270,11 @@ type SubscriptionModelSchemaTypes = {
 };
 
 type SubscriptionCustomer = {
+  created_at: string;
   name: string;
   email: string;
-  flw_customer_id: string;
+  id: string;
+  phone_number: string;
 };
 
 type SubscriptionCardDetails = {
@@ -282,11 +284,12 @@ type SubscriptionCardDetails = {
   country: string;
   type: string;
   expiry: string;
+  token: string;
 };
 
 type CardInputTypes = {
-  card: string,
-  cvv: string,
-  month: string,
-  year: string
-}
+  card: string;
+  cvv: string;
+  month: string;
+  year: string;
+};

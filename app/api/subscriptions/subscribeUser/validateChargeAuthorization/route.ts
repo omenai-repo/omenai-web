@@ -13,8 +13,8 @@ export async function POST(request: Request) {
       expiry_year: payload.year,
       currency: "USD",
       amount: "50",
-      email: "dantereus1@gmail.com",
-      fullname: "Flutterwave Developers",
+      email: "annieumana1@gmail.com",
+      fullname: "Aniebiet Umana",
       tx_ref: payload.tx_ref,
       redirect_url: "https://example_company.com/success",
       authorization: {
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
         pin: payload.authorization.pin,
       },
       meta: {
-        type: "subscription payment",
+        type: "subscription",
       },
     };
     const encrypted_payload = encryptPayload(

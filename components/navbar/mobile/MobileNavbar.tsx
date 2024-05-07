@@ -28,19 +28,11 @@ export default function MobileNavbar() {
       </div>
       <div className="my-4">
         <ul className="flex flex-col space-y-4 px-4">
+          <NavbarLink disabled={false} text={"Catalogue"} link={"/catalog"} />
+
           <NavbarLink
             disabled={false}
-            text={"Buy artworks"}
-            link={"/catalog"}
-          />
-          <NavbarLink
-            disabled={false}
-            text={"Omenai for galleries"}
-            link={"/dashboard/gallery/overview"}
-          />
-          <NavbarLink
-            disabled={false}
-            text={"Pricing for galleries"}
+            text={"Pricing"}
             link={"/gallery/pricing"}
           />
           <NavbarLink
@@ -48,34 +40,21 @@ export default function MobileNavbar() {
             text={"Omenai shop"}
             link={"https://omenai.shop"}
           />
-          <NavbarLink
-            disabled={false}
-            text={"Omenai editorials"}
-            link={"/articles"}
-          />
+          <NavbarLink disabled={false} text={"Editorials"} link={"/articles"} />
         </ul>
         <hr className="border-dark/20 my-4" />
-        <ul className="flex flex-col space-y-4 px-4 w-fit">
-          <NavbarLink disabled={false} text={"Artists"} link={"/"} />
-          <NavbarLink disabled={false} text={"Artworks"} link={"/"} />
-          <NavbarLink disabled={true} text={"Auctions"} link={"/"} />
-          <NavbarLink disabled={true} text={"Fairs"} link={"/"} />
-          <NavbarLink disabled={true} text={"Shows"} link={"/"} />
-        </ul>
-      </div>
-
-      {/* <hr className="border-dark/20 mt-4" />
-      {session.status === "authenticated" &&
-        session.data.user.role === "user" && (
-          <div className="block sm:hidden p-4">
-            <LoggedInUser user={session.data!.user.name} />
+        {session.status === "authenticated" &&
+          session.data.user.role === "user" && (
+            <div className="block sm:hidden p-4">
+              <LoggedInUser user={session.data!.user.name} />
+            </div>
+          )}
+        {session.status === "unauthenticated" && (
+          <div className=" block">
+            <NavbarActionButtons />
           </div>
         )}
-      {session.status === "unauthenticated" && (
-        <div className=" block sm:hidden">
-          <NavbarActionButtons />
-        </div>
-      )} */}
+      </div>
     </div>
   );
 }

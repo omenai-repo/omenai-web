@@ -27,14 +27,13 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
       <motion.div animate={open ? "open" : "closed"} className="relative">
         <button
           onClick={() => setOpen((pv) => !pv)}
-          className="flex items-center gap-2 pl-3 py-2 rounded-sm text-dark transition-colors"
+          className="flex items-center gap-1 pl-3 py-2 rounded-sm text-dark transition-colors"
         >
           <span className="sm:block hidden font-normal text-[0.9rem]">
             {user}
           </span>
-          <span className="sm:hidden block">
-            <MdAccountCircle className="text-md" />
-          </span>
+          <MdAccountCircle className="text-md" />
+
           <motion.span variants={iconVariants}>
             <FiChevronDown />
           </motion.span>

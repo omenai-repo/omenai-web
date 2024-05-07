@@ -1,7 +1,6 @@
 import { sendSubscriptionPaymentFailedMail } from "@/emails/models/subscription/sendSubscriptionPaymentFailedMail";
 import { sendSubscriptionPaymentSuccessfulMail } from "@/emails/models/subscription/sendSubscriptionPaymentSuccessMail";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
-import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
 import { NextResponse } from "next/server";
@@ -18,16 +17,6 @@ export async function POST(request: Request) {
   // Send failure mail if status is failure
 
   await connectMongoDB();
-
-  if (req.event === "subscription.cancelled") {
-    const cancel_subscription = await Subscriptions.updateOne(
-      { "customer.email": req.data.customer.email },
-      { $set: { sub_status: "canceled" } }
-    );
-
-    if (!cancel_subscription) return NextResponse.json({ status: 401 });
-    return NextResponse.json({ status: 200 });
-  }
 
   if (req.event === "charge.completed") {
     if (req.data.status === "failed") {

@@ -19,18 +19,15 @@ export default function LatestArtworks({
 
   if (isLoading)
     return (
-      <div className="h-[20vh] w-full place-items-center grid">
+      <div className="h-[500px] w-full place-items-center grid">
         <Loader theme={"dark"} />
       </div>
     );
   return (
     <>
       {artworks.length > 0 && (
-        <div className=" mt-8 p-4 relative mb-[4rem]">
-          <h1 className="text-dark font-normal text-[20px] sm:text-md mb-8">
-            Latest Artworks
-          </h1>
-          <div className="flex relative overflow-x-scroll w-full">
+        <div className="py-4 md:p-4 relative mt-5">
+          <div className="flex relative gap-x-4 overflow-x-scroll w-full">
             {artworks.map((artwork: any, index: number) => {
               return (
                 <ArtworkCard
@@ -43,6 +40,8 @@ export default function LatestArtworks({
                   likeIds={artwork.like_IDs}
                   sessionId={sessionId}
                   art_id={artwork.art_id}
+                  medium={artwork.medium}
+                  rarity={artwork.rarity}
                 />
               );
             })}
