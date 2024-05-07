@@ -42,7 +42,7 @@ export default function ArtworkCard({
           <img
             src={image_href}
             alt={name + " image"}
-            className="w-auto max-w-[230px] max-h-[500px] h-fit aspect-auto object-top object-contain cursor-pointer"
+            className="w-auto max-w-[230px] max-h-[500px] h-full aspect-auto object-top object-contain cursor-pointer"
           />
           <div className="absolute top-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent
