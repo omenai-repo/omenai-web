@@ -1,7 +1,7 @@
 "use client";
 import { IndividualLogo } from "../../logo/Logo";
 import NavbarLink from "../ui/NavbarLink";
-import NavbarInput from "../ui/NavbarInput";
+import NavbarInput from "../ui/SearchInput";
 import NavbarActionButtons from "../ui/NavbarActionButtons";
 import { CiMenuFries } from "react-icons/ci";
 import MobileNavbar from "../mobile/MobileNavbar";
@@ -13,32 +13,23 @@ export default function DesktopNavbar() {
   const session = useSession();
 
   return (
-    <div className="sticky top-0 bg-white z-30">
+    <div className="sticky top-0 z-30 bg-white">
       <nav
-        className="pt-5 px-4 lg:px-8 text-base text-black font-medium "
+        className="px-4 py-6 lg:py-2 lg:px-8 text-base text-black font-medium "
         id="navbar"
       >
-        <div className="flex justify-between items-center">
+        <MobileNavbar />
+        <div className="w-full flex justify-between items-center">
           <IndividualLogo />
-          <div className="lg:hidden block">
+          <div className="md:hidden block">
             <CiMenuFries onClick={() => updateOpenSideNav(true)} />
           </div>
-          <MobileNavbar />
 
-          <ul className="lg:flex space-x-6 hidden">
+          <ul className="md:flex space-x-6 hidden">
+            <NavbarLink disabled={false} text={"Catalogue"} link={"/catalog"} />
             <NavbarLink
               disabled={false}
-              text={"Buy artworks"}
-              link={"/catalog"}
-            />
-            <NavbarLink
-              disabled={false}
-              text={"Omenai for galleries"}
-              link={"/dashboard/gallery/overview"}
-            />
-            <NavbarLink
-              disabled={false}
-              text={"Pricing for galleries"}
+              text={"Pricing"}
               link={"/gallery/pricing"}
             />
             <NavbarLink
@@ -48,23 +39,10 @@ export default function DesktopNavbar() {
             />
             <NavbarLink
               disabled={false}
-              text={"Omenai editorials"}
+              text={"Editorials"}
               link={"/articles"}
             />
           </ul>
-        </div>
-        <div className="flex items-center justify-between my-2">
-          {/* Links */}
-          <ul className="hidden lg:flex space-x-6 w-fit">
-            <NavbarLink disabled={true} text={"Artists"} link={"/"} />
-            <NavbarLink disabled={false} text={"Artworks"} link={"/catalog"} />
-            <NavbarLink disabled={true} text={"Auctions"} link={"/"} />
-            <NavbarLink disabled={true} text={"Fairs"} link={"/"} />
-            <NavbarLink disabled={true} text={"Shows"} link={"/"} />
-          </ul>
-          {/* Search bar */}
-          <NavbarInput />
-          {/* Action buttons */}
           {session.status === "authenticated" &&
             session.data.user.role === "user" && (
               <div className="">
@@ -73,13 +51,23 @@ export default function DesktopNavbar() {
             )}
           {((session.data && session.data.user.role === "gallery") ||
             session.status === "unauthenticated") && (
-            <div className="">
+            <div className="md:flex hidden">
               <NavbarActionButtons />
             </div>
           )}
         </div>
+        {/* <div className="flex items-center justify-between my-2">
+          <ul className="hidden lg:flex space-x-6 w-fit">
+            <NavbarLink disabled={true} text={"Artists"} link={"/"} />
+            <NavbarLink disabled={false} text={"Artworks"} link={"/catalog"} />
+            <NavbarLink disabled={true} text={"Auctions"} link={"/"} />
+            <NavbarLink disabled={true} text={"Fairs"} link={"/"} />
+            <NavbarLink disabled={true} text={"Shows"} link={"/"} />
+          </ul>
+          <NavbarInput />
+\        </div> */}
       </nav>
-      <hr className="border-dark/10" />
+      <hr className="border-dark/10 " />
     </div>
   );
 }

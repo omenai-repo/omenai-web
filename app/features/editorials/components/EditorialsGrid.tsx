@@ -1,5 +1,4 @@
 import EditorialGridItemLarge from "./EditorialGridItemLarge";
-import EditorialGridItemsList from "./EditorialGridItemsList";
 
 export default function EditorialsGrid({
   editorials,
@@ -18,20 +17,13 @@ export default function EditorialsGrid({
     return sortedEditorial;
   });
 
-  const editorialSubList = sortedEditorials.slice(1, 8);
 
   return (
     <>
-      <div className="grid md:grid-cols-2 lg:grid-cols-12 ">
-        <div className="md:col-span-0 lg:col-span-4">
-          <EditorialGridItemLarge editorial={sortedEditorials[0]} />
-        </div>
-
-        <div className="md:col-span-2 lg:col-span-8">
-          <EditorialGridItemsList editorials={editorialSubList} />
-        </div>
-
-        {/* <EditorialGridItemsList editorials={sortedEditorials.slice(5, 7)} /> */}
+      <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:gap-x-4">
+        {sortedEditorials.map((editorial) => {
+          return <EditorialGridItemLarge editorial={editorial} />;
+        })}
       </div>
     </>
   );

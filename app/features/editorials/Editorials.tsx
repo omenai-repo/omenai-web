@@ -4,6 +4,7 @@ import EditorialsGrid from "./components/EditorialsGrid";
 import { useQuery } from "@tanstack/react-query";
 import { listEditorials } from "@/app/secure/editorial/admin/lib/getAllBlogArticles";
 import Loader from "@/components/loader/Loader";
+import { MdArrowRightAlt } from "react-icons/md";
 
 export default function Editorials() {
   const { data: editorials, isLoading } = useQuery({
@@ -24,16 +25,17 @@ export default function Editorials() {
   return (
     <>
       {editorials?.length === 0 ? null : (
-        <div className="p-1 sm:p-4 relative my-[4rem] md:my-[3rem]">
+        <div className="p-1 sm:px-4 py-16 mb-12 relative bg-[#FAFAFA]">
           <div className="flex justify-between items-center p-2">
-            <h1 className="text-dark font-normal text-[20px] sm:text-md">
-              Omenai editorials
+            <h1 className="text-dark font-normal text-[20px] sm:text-sm">
+              Editorials
             </h1>
             <Link
               href={"/articles"}
-              className="text-dark font-normal sm:text-base underline break-words"
+              className="text-dark flex items-center gap-x-2 font-normal text-[14px] break-words"
             >
               View all editorials
+              <MdArrowRightAlt />
             </Link>
           </div>
           <EditorialsGrid editorials={editorials} />

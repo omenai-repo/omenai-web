@@ -39,6 +39,8 @@ export default function SimilarArtworks({
                 impressions: number;
                 like_IDs: string[];
                 art_id: string;
+                medium: string;
+                rarity: string;
               },
               index: any
             ) => {
@@ -53,6 +55,8 @@ export default function SimilarArtworks({
                   likeIds={art.like_IDs}
                   sessionId={sessionId}
                   art_id={art.art_id}
+                  medium={art.medium}
+                  rarity={art.rarity}
                 />
               );
             }

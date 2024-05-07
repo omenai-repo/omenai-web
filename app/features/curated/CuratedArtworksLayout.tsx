@@ -22,7 +22,7 @@ export default function CuratedArtworksLayout({
 
   if (isLoading)
     return (
-      <div className="h-[20vh] w-full place-items-center grid">
+      <div className="h-[500px] w-full place-items-center grid">
         <Loader theme={"dark"} />
       </div>
     );
@@ -30,10 +30,7 @@ export default function CuratedArtworksLayout({
   return (
     <>
       {userCuratedArtworks !== undefined && userCuratedArtworks.length > 0 && (
-        <div className=" mt-8 p-4 relative mb-[4rem]">
-          <h1 className="text-dark font-normal text-[20px] sm:text-md mb-4">
-            Curated picks: Just for you
-          </h1>
+        <div className="py-4 md:p-4 relative mt-5">
           <div className="flex relative overflow-x-scroll w-full space-x-2">
             {userCuratedArtworks.map((artwork: any, index: number) => {
               return (
@@ -47,6 +44,8 @@ export default function CuratedArtworksLayout({
                   likeIds={artwork.like_IDs}
                   sessionId={sessionId}
                   art_id={artwork.art_id}
+                  medium={artwork.medium}
+                  rarity={artwork.rarity}
                 />
               );
             })}

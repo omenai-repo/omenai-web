@@ -13,13 +13,13 @@ export async function POST(request: Request) {
       expiry_year: data.year,
       currency: "USD",
       amount: "50",
-      email: "moses@gmail.com",
-      fullname: "Flutterwave Developers",
+      email: "annieumana1@gmail.com",
+      fullname: "Aniebiet Umana",
       tx_ref: data.tx_ref,
       redirect_url: "https://example_company.com/success",
       meta: {
-        type: "subscription payment"
-      }
+        type: "subscription",
+      },
     };
 
     const encrypted_payload = encryptPayload(

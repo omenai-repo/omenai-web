@@ -13,7 +13,7 @@ const config: Config = {
       center: true,
     },
     fontSize: {
-      xs: "0.875rem",
+      xs: "0.75rem",
       base: "1rem",
       sm: "1.2rem",
       md: "1.44rem",
@@ -25,7 +25,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#2A9EDF",
-        dark: "#15171E",
+        dark: "#1A1A1A",
         gray: {
           200: "#47748E",
           300: "#F6F6F6",
@@ -35,7 +35,7 @@ const config: Config = {
         },
 
         line: "#DEDEDE",
-        authSideDark: '#1A1A1A'
+        authSideDark: "#1A1A1A",
       },
       screens: {
         xs: "460px",

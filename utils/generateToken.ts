@@ -3,7 +3,7 @@
 import cryptoRandomString from "crypto-random-string";
 import { v4 as uuidv4 } from "uuid";
 
-export default async function generateString() {
+export default function generateString() {
   let result = uuidv4();
 
   return result;
