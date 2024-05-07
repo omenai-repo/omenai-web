@@ -23,15 +23,13 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
   );
 
   return (
-    <div className=" py-4 flex items-center justify-center bg-white">
+    <div className=" flex items-center justify-center bg-white">
       <motion.div animate={open ? "open" : "closed"} className="relative">
         <button
           onClick={() => setOpen((pv) => !pv)}
           className="flex items-center gap-1 pl-3 py-2 rounded-sm text-dark transition-colors"
         >
-          <span className="sm:block hidden font-normal text-[0.9rem]">
-            {user}
-          </span>
+          <span className="block font-normal text-[0.9rem]">{user}</span>
           <MdAccountCircle className="text-md" />
 
           <motion.span variants={iconVariants}>
@@ -43,7 +41,7 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
           initial={wrapperVariants.closed}
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-100%" }}
-          className="flex flex-col gap-2 p-2 rounded-lg text-dark bg-white shadow-xl absolute top-[120%] left-[100%] w-48 overflow-hidden z-40 ring-1 ring-dark/20"
+          className="flex flex-col gap-2 p-2 rounded-lg text-dark bg-white shadow-xl absolute top-[120%] left-[140%] md:left-[100%] w-48 overflow-hidden z-40 ring-1 ring-dark/20"
         >
           <Option
             setSelectedTab={setSelected}

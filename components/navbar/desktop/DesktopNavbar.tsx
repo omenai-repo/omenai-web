@@ -1,7 +1,6 @@
 "use client";
 import { IndividualLogo } from "../../logo/Logo";
 import NavbarLink from "../ui/NavbarLink";
-import NavbarInput from "../ui/SearchInput";
 import NavbarActionButtons from "../ui/NavbarActionButtons";
 import { CiMenuFries } from "react-icons/ci";
 import MobileNavbar from "../mobile/MobileNavbar";
@@ -15,7 +14,7 @@ export default function DesktopNavbar() {
   return (
     <div className="sticky top-0 z-30 bg-white">
       <nav
-        className="px-4 py-6 lg:py-2 lg:px-8 text-base text-black font-medium "
+        className="px-4 py-5 lg:py-4 lg:px-8 text-base text-black font-medium "
         id="navbar"
       >
         <MobileNavbar />
@@ -45,7 +44,7 @@ export default function DesktopNavbar() {
           </ul>
           {session.status === "authenticated" &&
             session.data.user.role === "user" && (
-              <div className="">
+              <div className="md:flex hidden">
                 <LoggedInUser user={session.data?.user.name} />
               </div>
             )}
