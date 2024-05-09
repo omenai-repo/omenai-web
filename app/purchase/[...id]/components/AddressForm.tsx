@@ -61,7 +61,7 @@ export default function AddressForm({
   return (
     <>
       <div className="w-full my-[2rem]">
-        <h1 className="text-sm mb-[2rem] font-medium">Shipping Information</h1>
+        <h1 className="text-sm mb-[2rem] font-normal">Shipping Information</h1>
         <form onSubmit={handleOrderSubmission}>
           <div className="">
             {userDetails.map((detail, index) => {

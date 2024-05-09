@@ -17,7 +17,7 @@ export default function UploadArtwork() {
       {session?.data?.user.gallery_verified &&
         session.data.user.subscription_active && (
           <div className="px-5 py-0">
-            <h1 className="text-dark font-bold text-sm">Upload an artwork</h1>
+            <h1 className="text-dark font-medium text-sm">Upload an artwork</h1>
             <UploadArtworkDetails />
           </div>
         )}

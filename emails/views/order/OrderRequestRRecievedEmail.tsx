@@ -49,7 +49,7 @@ const OrderRequestReceivedEmail = (
               Thank you for expressing your interest in purchasing the{" "}
               <Link
                 href={`${url}/artwork/${artwork_data.title}`}
-                className="underline text-blue-800 italic font-medium"
+                className="underline text-blue-800 italic font-normal"
               >
                 {artwork_data.title}
               </Link>{" "}

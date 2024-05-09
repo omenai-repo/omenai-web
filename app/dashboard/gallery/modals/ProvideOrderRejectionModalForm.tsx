@@ -53,7 +53,7 @@ export default function ProvideOrderRejectionModalForm() {
 
   return (
     <div>
-      <h1 className="text-sm font-bold mb-4">Uh oh! That&apos;s so sad</h1>
+      <h1 className="text-sm font-medium mb-4">Uh oh! That&apos;s so sad</h1>
       <form className="w-full" onSubmit={handleSubmitTrackingInfo}>
         <div className="space-y-2 mb-2 flex flex-col w-full">
           <div className="relative w-full h-auto">

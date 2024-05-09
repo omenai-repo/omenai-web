@@ -14,10 +14,10 @@ export default function ArtworkSlides() {
   return (
     <div className="mt-8 p-5">
       <div className="hidden md:block">
-        <Tabs />
+        <Tabs catalogue={false} />
       </div>
       <div className="md:hidden block">
-        <TabsDropdown />
+        <TabsDropdown catalogue={false} />
       </div>
 
       <div className="my-5">

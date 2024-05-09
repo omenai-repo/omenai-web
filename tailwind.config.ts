@@ -25,7 +25,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#2A9EDF",
-        dark: "#1A1A1A",
+        dark: "#030303",
         gray: {
           200: "#47748E",
           300: "#F6F6F6",
@@ -45,7 +45,7 @@ const config: Config = {
         "2xl": "1440px",
       },
       fontFamily: {
-        sans: ["var(--font-nunito_sans)"],
+        sans: ["var(--font-neue_montreal)"],
       },
 
       backgroundImage: {

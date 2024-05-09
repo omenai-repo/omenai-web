@@ -58,7 +58,7 @@ function CardInfo() {
         <form onSubmit={handleCardInputSubmit} className="flex flex-col mb-4">
           <div className="flex flex-col gap-y-1">
             <label
-              className="text-dark text-xs font-bold"
+              className="text-dark text-xs font-medium"
               htmlFor="card number"
             >
               Card number
@@ -73,7 +73,7 @@ function CardInfo() {
             />
           </div>
           <div className="flex flex-col gap-y-1">
-            <label className="text-dark text-xs font-bold" htmlFor="month">
+            <label className="text-dark text-xs font-medium" htmlFor="month">
               Month
             </label>
             <input
@@ -86,7 +86,7 @@ function CardInfo() {
             />
           </div>
           <div className="flex flex-col gap-y-1">
-            <label className="text-dark text-xs font-bold" htmlFor="year">
+            <label className="text-dark text-xs font-medium" htmlFor="year">
               Year
             </label>
             <input
@@ -99,7 +99,7 @@ function CardInfo() {
             />
           </div>
           <div className="flex flex-col gap-y-1">
-            <label className="text-dark text-xs font-bold" htmlFor="cvv">
+            <label className="text-dark text-xs font-medium" htmlFor="cvv">
               CVV
             </label>
             <input

@@ -22,7 +22,7 @@ export default function OrderHistory({ orders }: { orders: any }) {
             {history.map((orderlist, index) => {
               return (
                 <div key={index} className="flex flex-col gap-3">
-                  <h5 className="text-sm font-medium">{orderlist.date}</h5>
+                  <h5 className="text-sm font-normal">{orderlist.date}</h5>
                   <div className="flex flex-col gap-3 w-full">
                     {orderlist.data.map((order, index) => {
                       if (order.status !== "completed") return null;

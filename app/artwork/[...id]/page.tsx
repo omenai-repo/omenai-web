@@ -7,6 +7,8 @@ import { nextAuthOptions } from "@/lib/auth/next-auth-options";
 import { getServerSession } from "next-auth";
 import Footer from "@/components/footer/Footer";
 import { notFound } from "next/navigation";
+import FullArtworkDetails from "./components/FullArtworkDetails";
+import ArtistInformation from "./components/ArtistInformation";
 
 export default async function page({ params }: { params: { id: string } }) {
   const session = await getServerSession(nextAuthOptions);
@@ -29,6 +31,13 @@ export default async function page({ params }: { params: { id: string } }) {
       <ProductBox
         data={artworkDetails.data}
         sessionId={session?.user.role === "user" ? session?.user.id : undefined}
+      />
+      <hr className="border-dark/10" />
+      <FullArtworkDetails data={artworkDetails.data} />
+      <ArtistInformation
+        name={artworkDetails.data.artist}
+        year={artworkDetails.data.artist_birthyear}
+        location={artworkDetails.data.artist_country_origin}
       />
       <SimilarArtworks
         title={artworkDetails.data.title}

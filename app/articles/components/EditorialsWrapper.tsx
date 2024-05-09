@@ -38,7 +38,7 @@ export default function EditorialsWrapper({
   };
   return (
     <div className="p-5 relative">
-      <h1 className="text-dark/80 text-sm md:text-md lg:text-lg font-medium">
+      <h1 className="text-dark/80 text-sm md:text-md lg:text-lg font-normal">
         Editorial articles
       </h1>
       <>
@@ -72,7 +72,7 @@ export default function EditorialsWrapper({
             Show more
           </button>
         ) : (
-          <p className="font-medium text-base">That&apos;s all for now...</p>
+          <p className="font-normal text-base">That&apos;s all for now...</p>
         )}
       </div>
       {showTopBtn && (

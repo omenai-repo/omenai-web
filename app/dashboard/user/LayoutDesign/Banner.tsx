@@ -20,7 +20,7 @@ export default function Banner() {
           </div>
 
           <div>
-            <h1 className="text-base sm:text-sm md:text-md font-bold">
+            <h1 className="text-base sm:text-sm md:text-md font-medium">
               {user.data?.user.name}
             </h1>
             <p className="text-xs sm:text-base font-light">

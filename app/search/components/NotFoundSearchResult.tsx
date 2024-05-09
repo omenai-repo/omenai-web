@@ -11,7 +11,7 @@ export default function NotFoundSearchResult() {
     <>
       <div className="w-full h-[60svh]">
         <div className="px-5 py-8">
-          <h1 className="text-sm md:text-md lg:text-lg font-medium text-dark/80">
+          <h1 className="text-sm md:text-md lg:text-lg font-normal text-dark/80">
             No results found for term{" "}
             <span className="text-blue-600">&apos;{searchTerm}&apos;</span>
           </h1>

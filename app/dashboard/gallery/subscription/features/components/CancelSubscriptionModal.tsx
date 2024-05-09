@@ -41,12 +41,12 @@ export default function CancelSubscriptionModal({
       <Modal dismissible show={openModal}>
         <div className=" p-10">
           <div className="flex flex-col gap-4 font-normal text-[15px]">
-            <h2 className="text-red-600 text-md font-semibold">
+            <h2 className="text-red-600 text-md font-medium">
               You are about to cancel your subscription.
             </h2>
             <p>
               Your current subscription will remain active till{" "}
-              <span className="font-medium">{formatISODate(sub_end)}.</span> If
+              <span className="font-normal">{formatISODate(sub_end)}.</span> If
               you would like to proceed with canceling your subscription, please
               select “Cancel subscription” below.
             </p>
@@ -56,7 +56,7 @@ export default function CancelSubscriptionModal({
               <IoWarning className="text-md text-[#FFA500]" />
               <p>
                 Are you sure?, After{" "}
-                <span className="font-medium">{formatISODate(sub_end)}</span>,
+                <span className="font-normal">{formatISODate(sub_end)}</span>,
                 you will be unable to upload artworks and events or use any of
                 the services provided by Omenai Inc. All artworks uploaded will
                 be suspended until your subscriptions are restarted.

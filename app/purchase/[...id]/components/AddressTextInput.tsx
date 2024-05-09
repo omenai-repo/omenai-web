@@ -24,7 +24,7 @@ export default function AddressTextInput({
   };
   return (
     <div className="flex flex-col gap-1 my-4 px-2">
-      <label htmlFor={name} className="text-dark font-medium text-base">
+      <label htmlFor={name} className="text-dark font-normal text-base">
         {label}
       </label>
       <input

@@ -27,7 +27,7 @@ export default function FormActions() {
         <p className="font-normal text-xs text-dark/70 text-right">
           Forgot password?{" "}
           <span
-            className="text-black cursor-pointer underline font-semibold"
+            className="text-black cursor-pointer underline font-medium"
             onClick={() => updateRecoveryModal("gallery")}
           >
             Reset it
@@ -39,7 +39,7 @@ export default function FormActions() {
         <button
           disabled={isLoading}
           type="submit"
-          className="h-[56px] w-full font-bold flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs"
+          className="h-[56px] w-full font-medium flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs"
         >
           {isLoading ? "Loading..." : "Login"}{" "}
           {!isLoading && <GoArrowRight className="text-md opacity-70" />}

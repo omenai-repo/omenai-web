@@ -1,7 +1,6 @@
 "use client";
 import Dimensions from "./Dimensions";
 import { GrCertificate } from "react-icons/gr";
-import { MdOutlineWorkspacePremium } from "react-icons/md";
 import { formatPrice } from "@/utils/priceFormatter";
 import { IoHeartOutline } from "react-icons/io5";
 import { GiCheckMark } from "react-icons/gi";
@@ -12,8 +11,8 @@ import { requestPrice } from "@/services/requests/requestPrice";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useState } from "react";
-import Loader from "@/components/loader/Loader";
 import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { PiFrameCornersThin } from "react-icons/pi";
 
 type ArtworkDetailTypes = {
   data: ArtworkResultTypes;
@@ -70,45 +69,46 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
   return (
     <div className="flex flex-col gap-y-4">
       <div className="">
-        <h1 className="xl:text-md md:text-sm text-[1.2rem] font-semibold">
-          {data.artist}
-        </h1>
-        <h3 className="xl:text-lg md:text-md text-sm font-semibold italic text-dark/70">
-          {data.title}
-        </h3>
+        <h1 className="text-md font-medium">{data.title}</h1>
+        <h3 className="text-base font-normal text-dark/70">{data.artist}</h3>
       </div>
-      <p className="text-base font-medium text-dark/80">
-        Medium: {data.medium}
+      <p className="text-xs font-normal text-dark/80 gap-x-4 flex items-center">
+        <span>{data.medium}</span>
+        <span>|</span>
+        <span>{data.rarity}</span>
       </p>
       <Dimensions dimensions={data.dimensions} />
-
-      <div className="flex gap-x-2 items-center">
-        <MdOutlineWorkspacePremium />
-        <p>{data.rarity} work</p>
-      </div>
-      {data.certificate_of_authenticity === "Yes" && (
-        <div className="flex gap-x-2 items-center">
-          <GrCertificate />
-          <p>
-            Includes a{" "}
-            <span className="font-bold underline">
-              Certificate of Authenticity
-            </span>
-          </p>
+      <div className="flex items-center gap-x-4">
+        {data.certificate_of_authenticity === "Yes" && (
+          <div className="flex gap-x-2 text-xs items-center px-4 py-1 bg-[#E7F6EC] text-[#004617] w-fit rounded-full">
+            <GrCertificate />
+            <p>Certificate of authenticity available</p>
+          </div>
+        )}
+        <div className="flex gap-x-2 text-xs items-center px-4 py-1 bg-[#e5f4ff] text-[#30589f] w-fit rounded-full">
+          <PiFrameCornersThin />
+          {data.framing === "Framed"
+            ? "Frame Included"
+            : "Artwork is not framed"}
         </div>
-      )}
+      </div>
 
-      <h1 className="lg:text-md text-sm font-bold">
-        {data.pricing.shouldShowPrice === "Yes"
-          ? formatPrice(data.pricing.price)
-          : null}
-      </h1>
+      <hr className="border-dark/10" />
+      <div className="flex flex-col gap-y-2">
+        <span className="text-[14px] font-light">Price</span>
+        <h1 className=" text-base font-normal">
+          {data.pricing.shouldShowPrice === "Yes"
+            ? formatPrice(data.pricing.price)
+            : "Price on request"}
+        </h1>
+      </div>
+      <hr className="border-dark/10" />
 
-      <div className="flex sm:flex-row flex-col gap-2">
+      <div className="flex flex-col gap-2 font-normal w-full text-[14px]">
         <button
           disabled={loading}
           onClick={handleBuyButtonClick}
-          className="w-full bg-dark px-4 py-2 rounded-md  underline text-white text-base hover:bg-white disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:text-dark hover:border  hover:underline duration-300 grid place-items-center group"
+          className="w-full bg-dark px-4 py-3  text-white hover:bg-dark/80 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:text-white hover:duration-200 grid place-items-center group"
         >
           {loading ? (
             <LoaderAnimation theme="dark" />
@@ -123,18 +123,19 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
           (sessionId && !likedState.ids.includes(sessionId))) && (
           <button
             onClick={() => handleLike(true)}
-            className="w-full px-4 py-2 rounded-md justify-center flex items-center gap-2 underline text-dark text-base hover:bg-dark hover:text-white border border-dark duration-300 group"
+            className="w-full px-4 py-3 justify-center flex items-center gap-2  text-dark hover:bg-dark/10 hover:text-dark border border-dark/10 duration-300 group"
           >
-            <IoHeartOutline /> <span>Save artwork</span>
+            <span>Save artwork</span>
+            <IoHeartOutline />
           </button>
         )}
         {sessionId !== undefined && likedState.ids.includes(sessionId) && (
           <button
             onClick={() => handleLike(false)}
-            className="w-full px-4 py-2 rounded-md border flex justify-center items-center gap-2 hover:bg-dark/10 duration-300 border-dark/30 text-dark text-base group"
+            className="w-full px-4 py-2 rounded-md border flex justify-center items-center gap-2 hover:bg-dark/10 duration-200 border-dark/10 text-dark text-base group"
           >
-            <GiCheckMark />
             <span>Remove from saved</span>
+            <GiCheckMark />
           </button>
         )}
       </div>

@@ -5,10 +5,13 @@ import Tab from "./Tab";
 import { MdArrowRightAlt } from "react-icons/md";
 import { useSession } from "next-auth/react";
 
-export default function Tabs() {
+type TabsTypes = {
+  catalogue: boolean;
+};
+export default function Tabs({ catalogue = false }: TabsTypes) {
   const session = useSession();
   return (
-    <div className="flex justify-between items-center p-5">
+    <div className="flex justify-between items-center py-5 px-2">
       <div className="flex gap-x-2 items-center">
         <Tab mobile={false} title="Recently uploaded" tag="recent" />
         <Tab mobile={false} title="Trending uploads" tag="trending" />
@@ -17,7 +20,7 @@ export default function Tabs() {
           <Tab mobile={false} title="Tailored for you" tag="tailored" />
         )}
       </div>
-      <div>
+      <div className={`${catalogue ? "hidden" : "block"}`}>
         <Link href={""} className="flex items-center gap-x-2 text-xs">
           <span>See more</span>
           <MdArrowRightAlt />

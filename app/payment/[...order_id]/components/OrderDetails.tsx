@@ -59,7 +59,7 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
             />
             <div className="">
               <div className="flex justify-between items-center">
-                <p className="font-medium text-dark text-[18px]">
+                <p className="font-normal text-dark text-[18px]">
                   {order.artwork_data.artist.substring(0, 20)}
                   {order.artwork_data.artist.length > 20 && "..."}
                 </p>
@@ -68,7 +68,7 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
                 {order.artwork_data.title.substring(0, 20)}
                 {order.artwork_data.title.length > 20 && "..."}
               </p>
-              <p className="font-bold  text-dark">
+              <p className="font-medium  text-dark">
                 Price: {formatPrice(order.artwork_data.pricing.price)}
               </p>
             </div>
@@ -78,33 +78,33 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
           <div className="text-[18px]">
             <div className="flex justify-between items-center  my-3 text-dark">
               <p>Price</p>
-              <p className="font-bold">
+              <p className="font-medium">
                 {formatPrice(order.artwork_data.pricing.price)}
               </p>
             </div>
             <div className="flex justify-between items-center text-dark my-3">
               <p>Shipping</p>
-              <p className="font-bold">${order.shipping_quote.shipping_fees}</p>
+              <p className="font-medium">${order.shipping_quote.shipping_fees}</p>
             </div>
             <div className="flex justify-between items-center text-dark my-3">
               <p>Taxes</p>
-              <p className="font-bold">${order.shipping_quote.taxes}</p>
+              <p className="font-medium">${order.shipping_quote.taxes}</p>
             </div>
             <div className="flex justify-between items-center text-dark my-3">
               <p>Package carrier</p>
-              <p className="font-bold">
+              <p className="font-medium">
                 {order.shipping_quote.package_carrier}
               </p>
             </div>
 
-            <div className="flex justify-between items-center font-bold text-[20px] mt-10">
+            <div className="flex justify-between items-center font-medium text-[20px] mt-10">
               <p>Grand total</p>
               <p>${total}</p>
             </div>
             {order.shipping_quote.additional_information && (
               <div className="flex justify-between items-center text-dark my-3">
                 <p>Additional information</p>
-                <p className="font-bold">
+                <p className="font-medium">
                   {order.shipping_quote.additional_information}
                 </p>
               </div>

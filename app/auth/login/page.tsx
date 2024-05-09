@@ -22,10 +22,10 @@ function Page() {
             className="absolute inset-0 w-full h-full object-center object-cover rounded-tr-xl rounded-br-xl"
           />
           <div className="absolute bottom-14 left-6 z-20 text-white">
-            <h1 className="text-lg xl:text-xl font-semibold mb-2">
+            <h1 className="text-lg xl:text-xl font-medium mb-2">
               Enter your login details
             </h1>
-            <p className="font-medium">
+            <p className="font-normal">
               Let's get you back to getting artworks at reasonable prices.
             </p>
           </div>

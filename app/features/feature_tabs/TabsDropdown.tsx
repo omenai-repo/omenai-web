@@ -7,7 +7,11 @@ import { MdArrowRightAlt } from "react-icons/md";
 import Link from "next/link";
 import { useState } from "react";
 import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
-export function TabsDropdown() {
+
+type TabDropdownTypes = {
+  catalogue: boolean;
+};
+export function TabsDropdown({ catalogue }: TabDropdownTypes) {
   const session = useSession();
   const [dropdown, setDropDown] = useState(false);
   const { selectedTab, setSelectedTab } = artworkActionStore();
@@ -60,7 +64,7 @@ export function TabsDropdown() {
           )}
         </div>
       </div>
-      <div>
+      <div className={`${catalogue ? "hidden" : "block"}`}>
         <Link href={""} className="flex items-center gap-x-2 text-xs">
           <span>See more</span>
           <MdArrowRightAlt />

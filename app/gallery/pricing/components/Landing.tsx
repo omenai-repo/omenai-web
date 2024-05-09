@@ -3,7 +3,7 @@ export default function Landing() {
     <div className="h-[40vh] grid place-items-center">
       <div className="text-center sm:w-3/4 lg:w-1/2">
         <p className="text-primary">Pricing</p>
-        <h1 className="text-md xs:text-lg xl:text-xl font-bold text-dark">
+        <h1 className="text-md xs:text-lg xl:text-xl font-medium text-dark">
           Simple, transparent pricing
         </h1>
         <p className="text-base font-light text-dark my-3">

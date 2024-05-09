@@ -28,7 +28,7 @@ export default function Error({
           via{" "}
           <Link
             href={"mailto: moses@omenai.net"}
-            className="text-primary font-bold underline"
+            className="text-primary font-medium underline"
           >
             {" "}
             our mail

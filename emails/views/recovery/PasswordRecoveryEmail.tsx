@@ -54,7 +54,7 @@ const PasswordRecoveryEmail = (
             </Text>
 
             <Section className="text-center mt-[32px] mb-[32px]">
-              <Text className="text-black text-[14px] font-bold leading-[24px]">
+              <Text className="text-black text-[14px] font-medium leading-[24px]">
                 <strong>{`${url}/auth/reset/${route}/${token}`}</strong>
               </Text>
             </Section>

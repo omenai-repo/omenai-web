@@ -53,8 +53,8 @@ export default function ShippingQuoteModalDataForm() {
 
   return (
     <div>
-      <h1 className="text-sm font-bold mb-2">Buyer address information</h1>
-      <div className="font-medium text-dark space-y-2 text-base">
+      <h1 className="text-sm font-medium mb-2">Buyer address information</h1>
+      <div className="font-normal text-dark space-y-2 text-base">
         <p>Name: {galleryOrderActionModalData.buyer}</p>
         <p>
           Address line:{" "}
@@ -67,7 +67,7 @@ export default function ShippingQuoteModalDataForm() {
       </div>
       <hr className="border-dark/30 my-4" />
       <div className="mb-5">
-        <h1 className="text-sm font-bold mb-4">Shipping Quote</h1>
+        <h1 className="text-sm font-medium mb-4">Shipping Quote</h1>
         <p>
           Please provide a shipping quote and all relevant taxes based on the
           buyer&apos;s information above

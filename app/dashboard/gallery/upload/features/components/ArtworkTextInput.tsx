@@ -45,7 +45,7 @@ export default function ArtworkTextInput({
         type === "textarea" && "lg:last:col-span-4 md:last:col-span-2"
       } `}
     >
-      <label htmlFor={name} className="text-dark/80 font-medium text-[0.95rem]">
+      <label htmlFor={name} className="text-dark/80 font-normal text-[0.95rem]">
         {label}
       </label>
       {type === "text" && (

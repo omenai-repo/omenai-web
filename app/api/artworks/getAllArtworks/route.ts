@@ -8,7 +8,7 @@ export async function GET() {
   try {
     await connectMongoDB();
 
-    const allArtworks = await Artworkuploads.find();
+    const allArtworks = await Artworkuploads.find().sort({createdAt: -1})
 
     return NextResponse.json(
       {
