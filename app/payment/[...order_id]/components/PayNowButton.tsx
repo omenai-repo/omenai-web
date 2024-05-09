@@ -114,7 +114,7 @@ export default function PayNowButton({
           {locked && <CiLock className="absolute right-[-15px] top-[-5px]" />}
         </div>
 
-        <p className="font-bold text-red-600 lg:w-1/2">
+        <p className="font-medium text-red-600 lg:w-1/2">
           <span className="text-[1.15rem] uppercase underline">
             Please note:
           </span>

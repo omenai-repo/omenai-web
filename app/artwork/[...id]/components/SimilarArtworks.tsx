@@ -15,16 +15,16 @@ export default function SimilarArtworks({
     return artwork.title !== title;
   });
   return (
-    <div className="w-full h-full p-4 ">
-      <h1 className="text-dark/70 underline font-semibold md:text-md text-sm mb-8">
-        Similar artworks
+    <div className="w-full h-full p-4 my-12">
+      <h1 className="text-dark/70 font-normal text-sm mb-8">
+        You may also like
       </h1>
       {artworks.length === 0 ? (
         <div className="w-full h-full grid place-items-center">
           <NotFoundData />
         </div>
       ) : (
-        <div className="flex relative overflow-x-scroll w-full">
+        <div className="flex relative gap-x-4 overflow-x-scroll w-full">
           {artworks.map(
             (
               art: {

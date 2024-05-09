@@ -18,7 +18,7 @@ export default function Wallet() {
             <Balances />
           </div>
           <div className="mt-[5rem]">
-            <h1 className="text-dark font-bold text-sm mb-5">
+            <h1 className="text-dark font-medium text-sm mb-5">
               Transaction history
             </h1>
 

@@ -27,7 +27,7 @@ export default function WithdrawableBalanceBar() {
           </Tooltip>
         </div>
 
-        <h1 className="text-base lg:text-sm font-bold">$14,546.43</h1>
+        <h1 className="text-base lg:text-sm font-medium">$14,546.43</h1>
       </div>
     </div>
   );

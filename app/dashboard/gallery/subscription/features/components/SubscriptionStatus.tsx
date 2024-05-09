@@ -13,16 +13,16 @@ export default function SubscriptionStatus({
     <div className="w-full px-5 mt-8">
       <div className="flex flex-col gap-6">
         <div className="flex space-x-4 items-center">
-          <h4 className="text-dark text-base font-semibold">
+          <h4 className="text-dark text-base font-medium">
             Subscription status:
           </h4>
-          <p className="text-green-600 font-bold">Active</p>
+          <p className="text-green-600 font-medium">Active</p>
         </div>
         <div className="flex space-x-4 items-center">
-          <h4 className="text-dark text-base font-semibold">
+          <h4 className="text-dark text-base font-medium">
             Subscription package tier:
           </h4>
-          <p className=" text-base font-bold text-green-600">Premium</p>
+          <p className=" text-base font-medium text-green-600">Premium</p>
         </div>
       </div>
 

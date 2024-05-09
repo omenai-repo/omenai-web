@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
     const artworks = await Artworkuploads.find(
       { medium },
-      "artist title url art_id pricing impressions like_IDs"
+      "artist title url art_id pricing impressions like_IDs medium rarity"
     ).exec();
 
     if (!artworks)

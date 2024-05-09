@@ -14,7 +14,7 @@ export default function DesktopNavbar() {
   return (
     <div className="sticky top-0 z-30 bg-white">
       <nav
-        className="px-4 py-5 lg:py-4 lg:px-8 text-base text-black font-medium "
+        className="px-4 py-5 lg:py-4 lg:px-8 text-base text-black font-normal "
         id="navbar"
       >
         <MobileNavbar />

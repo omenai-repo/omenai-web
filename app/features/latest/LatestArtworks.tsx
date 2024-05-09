@@ -23,6 +23,7 @@ export default function LatestArtworks({
         <Loader theme={"dark"} />
       </div>
     );
+
   return (
     <>
       {artworks.length > 0 && (

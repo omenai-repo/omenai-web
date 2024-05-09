@@ -56,7 +56,7 @@ export default function LoginModalForm() {
     <>
       <div className="flex flex-col items-center justify-center gap-2 my-4">
         <IndividualLogo />
-        <h1 className="text-base text-dark font-medium mt-3 mb-5">
+        <h1 className="text-base text-dark font-normal mt-3 mb-5">
           Login to your individual account
         </h1>
       </div>

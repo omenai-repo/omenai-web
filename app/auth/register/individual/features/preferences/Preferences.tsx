@@ -55,7 +55,7 @@ function Preferences() {
           {/* Submit */}
           <div className="flex gap-4 justify-end my-5">
             <button
-              className={`px-[1.5rem] py-[0.5rem] mt-[1rem] text-xs font-bold bg-dark text-white flex justify-center items-center gap-x-2 hover:bg-dark/30 transition-all ease-linear duration-200`}
+              className={`px-[1.5rem] py-[0.5rem] mt-[1rem] text-xs font-medium bg-dark text-white flex justify-center items-center gap-x-2 hover:bg-dark/30 transition-all ease-linear duration-200`}
               type={"button"}
               onClick={decrementCurrentSignupFormIndex}
             >
@@ -64,7 +64,7 @@ function Preferences() {
             <button
               disabled={isLoading || preferences.length < 5}
               onClick={incrementCurrentSignupFormIndex}
-              className=" disabled:bg-gray-400 disabled:cursor-not-allowed px-[1.5rem] py-[0.5rem] mt-[1rem] text-xs font-bold bg-dark text-white flex justify-center items-center gap-x-2 hover:bg-dark/30 transition-all ease-linear duration-200"
+              className=" disabled:bg-gray-400 disabled:cursor-not-allowed px-[1.5rem] py-[0.5rem] mt-[1rem] text-xs font-medium bg-dark text-white flex justify-center items-center gap-x-2 hover:bg-dark/30 transition-all ease-linear duration-200"
             >
               <span>Next</span>
               <MdOutlineArrowForward />

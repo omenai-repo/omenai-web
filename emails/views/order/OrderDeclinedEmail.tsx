@@ -49,7 +49,7 @@ const OrderDeclinedEmail = (
               We regret to inform you that the order request for{" "}
               <Link
                 href={`${url}/artwork/${artwork_data.title}`}
-                className="underline text-blue-800 italic font-medium"
+                className="underline text-blue-800 italic font-normal"
               >
                 {artwork_data.title}
               </Link>{" "}
@@ -68,7 +68,7 @@ const OrderDeclinedEmail = (
               encourage you to{" "}
               <Link
                 href={`${url}/catalog`}
-                className="underline text-blue-800 italic font-medium"
+                className="underline text-blue-800 italic font-normal"
               >
                 explore
               </Link>{" "}

@@ -21,7 +21,7 @@ export default function ProductItem({
           />
           <div className="">
             <div className="flex justify-between items-center">
-              <p className="font-medium text-dark text-[18px]">
+              <p className="font-normal text-dark text-[18px]">
                 {artwork.artist.substring(0, 20)}
                 {artwork.artist.length > 20 && "..."}
               </p>
@@ -30,7 +30,7 @@ export default function ProductItem({
               {artwork.title.substring(0, 20)}
               {artwork.title.length > 20 && "..."}
             </p>
-            <p className="font-bold  text-dark">
+            <p className="font-medium  text-dark">
               Price: {formatPrice(artwork.pricing.price)}
             </p>
           </div>
@@ -40,17 +40,17 @@ export default function ProductItem({
         <div className="text-[18px]">
           <div className="flex justify-between items-center  my-3 text-dark/70">
             <p>Price</p>
-            <p className="font-bold">{formatPrice(artwork.pricing.price)}</p>
+            <p className="font-medium">{formatPrice(artwork.pricing.price)}</p>
           </div>
           <div className="flex justify-between items-center text-dark/70 my-3">
             <p>Shipping</p>
-            <p className="font-bold">To be calculated...</p>
+            <p className="font-medium">To be calculated...</p>
           </div>
           <div className="flex justify-between items-center text-dark/70 my-3">
             <p>Taxes</p>
-            <p className="font-bold">To be calculated...</p>
+            <p className="font-medium">To be calculated...</p>
           </div>
-          <div className="flex justify-between items-center font-bold text-[20px] mt-10">
+          <div className="flex justify-between items-center font-medium text-[20px] mt-10">
             <p>Grand total</p>
             <p>Waiting for final cost</p>
           </div>

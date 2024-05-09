@@ -50,7 +50,7 @@ const OrderAcceptedEmail = (
               We are thrilled to inform you that your order request for{" "}
               <Link
                 href={`${url}/artwork/${artwork_data.title}`}
-                className="underline text-blue-800 italic font-medium"
+                className="underline text-blue-800 italic font-normal"
               >
                 {artwork_data.title}
               </Link>{" "}

@@ -36,7 +36,7 @@ export default function ArtworkCard({
 }) {
   const image_href = getImageFileView(image, 300);
   return (
-    <div>
+    <div className="my-2 md:my-4">
       <div className="flex flex-col w-auto h-full max-h-[500px] justify-end">
         <div className="relative">
           <Link href={`/artwork/${name}`}>
@@ -44,11 +44,11 @@ export default function ArtworkCard({
               src={image_href}
               alt={name + " image"}
               height={500}
-              width={220}
+              width={250}
               className="min-w-[220px] aspect-auto object-top object-cover cursor-pointer"
             />
           </Link>
-          <div className="absolute top-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
+          <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent
               impressions={impressions}
               likeIds={likeIds}
@@ -58,9 +58,9 @@ export default function ArtworkCard({
           </div>
         </div>
 
-        <div className="mb-[3rem] bg-[#FAFAFA] py-2 px-3">
+        <div className="mb-[3rem] bg-[#FAFAFA] py-1 px-3 max-w-[250px]">
           <div className="flex justify-between items-center my-2">
-            <p className="font-medium text-[14px] text-dark ">
+            <p className="font-normal text-[14px] text-dark ">
               {name.substring(0, 20)}
               {name.length > 20 && "..."}
             </p>
@@ -71,7 +71,7 @@ export default function ArtworkCard({
               {artist.length > 20 && "..."}
             </p>
             {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
-              <p className="font-semibold text-xs text-dark">
+              <p className="font-normal text-xs text-dark">
                 {formatPrice(pricing.price)}
               </p>
             ) : (
@@ -79,7 +79,7 @@ export default function ArtworkCard({
             )}
           </div>
           <hr className="border-dark/10 my-5" />
-          <div className="flex gap-x-2 mb-2 items-center">
+          <div className="flex flex-wrap gap-2 mb-2 items-center">
             <ArtworkCardTags tag={medium} />
             <ArtworkCardTags tag={rarity} />
           </div>

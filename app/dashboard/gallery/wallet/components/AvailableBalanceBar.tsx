@@ -33,7 +33,7 @@ export default function AvailableBalanceBar() {
           </Tooltip>
         </div>
 
-        <h1 className="text-base lg:text-sm font-bold">$24,163.53</h1>
+        <h1 className="text-base lg:text-sm font-medium">$24,163.53</h1>
       </div>
     </div>
   );

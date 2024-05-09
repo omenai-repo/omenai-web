@@ -10,11 +10,11 @@ export default function OrderReceived() {
   return (
     <div className="flex flex-col items-center gap-1 text-center">
       <Lottie animationData={animationData} className="w-[200px] h-[200px]" />
-      <p className="text-dark text-[18px] font-medium ">
+      <p className="text-dark text-[18px] font-normal ">
         Your order has been successfully received, we&apos;ll be in touch within
         the next 48 hours with an accurate shipping quote and next steps.
       </p>
-      <p className="text-dark text-[18px] font-medium">
+      <p className="text-dark text-[18px] font-normal">
         Thank you for your patience
       </p>
 

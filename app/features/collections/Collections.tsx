@@ -12,7 +12,7 @@ export default function Collections() {
   return (
     <div className="p-4 md:p-8 mb-[4rem]">
       <div className="my-5 flex flex-col gap-y-2">
-        <h1 className="text-sm font-semibold">Art collections</h1>
+        <h1 className="text-sm font-medium">Art collections</h1>
         <p className="text-[14px]">
           Discover artworks meticulously curated into various collections for
           your browsing pleasure.

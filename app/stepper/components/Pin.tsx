@@ -57,7 +57,7 @@ function Pin() {
           className="flex flex-col gap-y-2 mb-4"
         >
           <div className="flex flex-col gap-y-1">
-            <label className="text-dark text-xs font-bold" htmlFor="pin">
+            <label className="text-dark text-xs font-medium" htmlFor="pin">
               Pin
             </label>
             <input

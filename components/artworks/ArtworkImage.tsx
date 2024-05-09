@@ -56,17 +56,17 @@ export const ArtworkImage = ({
 
         <div className="absolute bottom-0 flex justify-between items-center gap-y-[0.1rem] text-white px-2 py-1 z-10 bg-dark/50 w-full rounded-md cursor-pointer">
           <div className="flex-col flex gap-y-[0.1rem]">
-            <span className="font-bold text-base">{title}</span>
+            <span className="font-medium text-base">{title}</span>
             <span className="text-xs text-[#fafafa]">{author}</span>
           </div>
 
           {pricing?.price &&
             (pricing?.price && pricing.shouldShowPrice === "Yes" ? (
-              <span className="font-bold text-xs text-white">
+              <span className="font-medium text-xs text-white">
                 {formatPrice(pricing.price)}
               </span>
             ) : (
-              <span className="underline font-medium text-xs">
+              <span className="underline font-normal text-xs">
                 Price on request
               </span>
             ))}

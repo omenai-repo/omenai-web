@@ -1,5 +1,4 @@
 import ArtworkCard from "@/components/artworks/ArtworkCard";
-import { ArtworkImage } from "@/components/artworks/ArtworkImage";
 import NotFoundData from "@/components/notFound/NotFoundData";
 
 type AllArtworksTypes = {
@@ -10,29 +9,28 @@ export default function AllArtworks({
   sessionId,
 }: AllArtworksTypes & { sessionId: string | undefined }) {
   return (
-    <div className="p-4">
-      <h1 className="text-dark font-normal text-[20px] sm:text-md mb-8">
-        All arworks
-      </h1>
+    <div className="p-4 my-16">
       {data.length === 0 ? (
         <div className="w-full h-full grid place-items-center">
           <NotFoundData />
         </div>
       ) : (
-        <div className="2xl:columns-5 xl:columns-4 md:columns-3 xs:columns-2 columns-1 gap-y-6">
+        <div className="flex flex-wrap gap-x-1 space-y-4 items-end justify-around w-fit">
           {data.map((art: ArtworkResultTypes, index: number) => {
             return (
               <div key={index}>
-                <ArtworkImage
+                <ArtworkCard
                   key={index}
-                  url={art.url}
-                  title={art.title}
-                  author={art.artist}
+                  image={art.url}
+                  name={art.title}
+                  artist={art.artist}
                   art_id={art.art_id}
                   pricing={art.pricing}
                   impressions={art.impressions as number}
                   likeIds={art.like_IDs as string[]}
                   sessionId={sessionId}
+                  medium={art.medium}
+                  rarity={art.rarity}
                 />
               </div>
             );

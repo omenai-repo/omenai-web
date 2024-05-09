@@ -44,12 +44,12 @@ export default function EditorialItem({
             </p>
             <p></p>
             <p className="text-dark/60 text-xs">{minutes} minutes read</p>{" "}
-            {/* <span className="font-bold">•</span> */}
-            {/* <span className="font-bold">•</span> */}
+            {/* <span className="font-medium">•</span> */}
+            {/* <span className="font-medium">•</span> */}
           </div>
           <div className="flex flex-col gap-2">
             <Link href={`articles/${id}/${title}`}>
-              <h1 className="text-sm leading-tight font-medium ">{title}</h1>
+              <h1 className="text-sm leading-tight font-normal ">{title}</h1>
             </Link>
 
             <p className="text-dark text-xs">{summary}</p>

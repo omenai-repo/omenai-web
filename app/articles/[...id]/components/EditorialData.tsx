@@ -44,7 +44,7 @@ export default function EditorialData({
         >
           <div className="px-5 md:px-[6rem] py-[2rem]">
             <div className="flex justify-center my-[2rem] text-center">
-              <h1 className="lg:text-xl md:text-lg text-md font-bold leading-tight w-full sm:w-2/3 flex justify-center ">
+              <h1 className="lg:text-xl md:text-lg text-md font-medium leading-tight w-full sm:w-2/3 flex justify-center ">
                 {singleEditorialData?.title}
               </h1>
             </div>
@@ -52,9 +52,9 @@ export default function EditorialData({
             <div className="flex justify-between flex-col lg:flex-row items-center my-[1rem]">
               <div className="flex gap-2 items-center">
                 <p className="text-dark text-base">
-                  <span className="font-bold uppercase">Olabisi Onabanjo</span>
+                  <span className="font-medium uppercase">Olabisi Onabanjo</span>
                 </p>
-                <span className="font-bold">•</span>
+                <span className="font-medium">•</span>
                 <p className="text-dark/60 text-[14px] uppercase">
                   {singleEditorialData?.minutes} minutes read
                 </p>

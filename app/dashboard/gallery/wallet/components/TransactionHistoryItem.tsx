@@ -29,16 +29,16 @@ export default function TransactionHistoryItem({
             />
           </div>
           <div className="space-y-1 text-[14px]">
-            <h1 className="font-bold">Account {type.toLowerCase()}</h1>
-            <p className="font-medium">
+            <h1 className="font-medium">Account {type.toLowerCase()}</h1>
+            <p className="font-normal">
               Transaction reference:{" "}
-              <span className="font-bold">{reference}</span>
+              <span className="font-medium">{reference}</span>
             </p>
-            <p className="font-medium">Transaction date: {date}</p>
+            <p className="font-normal">Transaction date: {date}</p>
           </div>
         </div>
         <div className="space-y-1 text-[14px]">
-          <p className="font-bold">
+          <p className="font-medium">
             <span
               className={`${
                 type === "Deposit" ? "text-green-600" : "text-red-600"
@@ -48,7 +48,7 @@ export default function TransactionHistoryItem({
               {amount}
             </span>
           </p>
-          <p className="font-medium">{status}</p>
+          <p className="font-normal">{status}</p>
         </div>
       </div>
       <hr className="border-dark/10 my-3" />

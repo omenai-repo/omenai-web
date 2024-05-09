@@ -74,14 +74,14 @@ export default function PricingCardItem({
       {/* Plan name and popularity tag (optional) */}
       <div className="p-8 w-full flex flex-col gap-3">
         <div className="flex justify-between items-center">
-          <p className="font-medium">{plan} plan</p>
+          <p className="font-normal">{plan} plan</p>
           {/* <div className="border border-primary rounded-full px-2 py-[0.1rem]">
             <span className="text-xs text-primary font-normal">popular</span>
           </div> */}
         </div>
         {/* Plan price */}
         <div className="w-full flex gap-1 items-center">
-          <p className="text-xl font-bold">{price}</p>
+          <p className="text-xl font-medium">{price}</p>
           <p className="text-base">{duration}</p>
         </div>
         {/* Plan description if applicable */}
@@ -103,9 +103,9 @@ export default function PricingCardItem({
 
       {/* Features */}
       <div className="flex-col flex gap-2 p-8">
-        <h6 className="font-medium text-sm">Features</h6>
+        <h6 className="font-normal text-sm">Features</h6>
         <span className="text-xs font-light">
-          Everything in the <span className="font-medium">{plan}</span> plan
+          Everything in the <span className="font-normal">{plan}</span> plan
           plus...
         </span>
         <div className="w-full mt-4">

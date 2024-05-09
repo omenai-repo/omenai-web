@@ -28,7 +28,7 @@ export default function EditorialArticleCard({
     >
       <div className="grid md:grid-cols-2 md:gap-x-4">
         <div className="mb-4">
-          <span className="font-bold text-xs">{date}</span>
+          <span className="font-medium text-xs">{date}</span>
           <h1 className="text-sm sm:text-md xl:text-lg">{title}</h1>
           <p className="text-base md:text-sm">Olusegun Onabanjo</p>
         </div>

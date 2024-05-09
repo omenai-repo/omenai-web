@@ -39,7 +39,7 @@ export default function AddressSelectInput({
 
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="text-dark/80 font-medium text-[0.95rem]">
+      <label htmlFor={name} className="text-dark/80 font-normal text-[0.95rem]">
         {label}
       </label>
       {name !== "state" ? (

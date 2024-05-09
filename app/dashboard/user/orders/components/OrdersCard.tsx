@@ -53,15 +53,15 @@ export default function OrdersCard({
             {title}
           </p>
           <span className="text-dark text-[14px]">{artist}</span>
-          <span className="text-dark font-bold">{price}</span>
+          <span className="text-dark font-medium">{price}</span>
         </div>
       </div>
       <div className="flex flex-col md:mt-0 mt-5 text-[14px] md:items-end items-start gap-y-1">
         <span className="text-dark font-normal">
-          Order ID: <span className="font-bold">{order_id}</span>
+          Order ID: <span className="font-medium">{order_id}</span>
         </span>
         <span className="text-dark">{order_date}</span>
-        <span className="text-dark font-bold">
+        <span className="text-dark font-medium">
           {status.toLocaleUpperCase()}
         </span>
         {state === "pending" ? (

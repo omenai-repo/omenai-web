@@ -57,7 +57,7 @@ const OrderRequestToGalleryMail = (
               platform. Specifically, there has been an order request for the{" "}
               <Link
                 href={`${url}/artwork/${artwork_data.title}`}
-                className="underline text-blue-800 italic font-medium"
+                className="underline text-blue-800 italic font-normal"
               >
                 {artwork_data.title}
               </Link>{" "}
