@@ -79,7 +79,7 @@ type IndividualAddressTypes = {
 
 type ArtworkSchemaTypes = {
   artist: string;
-  year: string;
+  year: number;
   title: string;
   medium: string;
   rarity: string;
@@ -109,7 +109,7 @@ type ArtworkDimensions = {
 };
 
 type ArtworkPricing = {
-  price: string;
+  price: number;
   shouldShowPrice: "Yes" | "No" | string;
 };
 
@@ -121,7 +121,7 @@ type ArtworkResultTypes = ArtworkSchemaTypes & {
 
 type ArtworkUploadStateTypes = {
   artist: string;
-  year: string;
+  year: number;
   title: string;
   medium: string;
   rarity: string;
@@ -130,7 +130,7 @@ type ArtworkUploadStateTypes = {
   width: string;
   depth?: string;
   weight: string;
-  price: string;
+  price: number;
   shouldShowPrice: "Yes" | "No" | string;
   artist_birthyear: string;
   artist_country_origin: string;

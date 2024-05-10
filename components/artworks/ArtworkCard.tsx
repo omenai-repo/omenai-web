@@ -30,7 +30,7 @@ export default function ArtworkCard({
   medium: string;
   rarity: string;
   pricing?: {
-    price: string;
+    price: number;
     shouldShowPrice: "Yes" | "No" | string;
   };
 }) {

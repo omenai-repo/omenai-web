@@ -84,7 +84,9 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
             </div>
             <div className="flex justify-between items-center text-dark my-3">
               <p>Shipping</p>
-              <p className="font-medium">${order.shipping_quote.shipping_fees}</p>
+              <p className="font-medium">
+                ${order.shipping_quote.shipping_fees}
+              </p>
             </div>
             <div className="flex justify-between items-center text-dark my-3">
               <p>Taxes</p>

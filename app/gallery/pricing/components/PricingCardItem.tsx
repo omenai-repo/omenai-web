@@ -81,7 +81,7 @@ export default function PricingCardItem({
         </div>
         {/* Plan price */}
         <div className="w-full flex gap-1 items-center">
-          <p className="text-xl font-medium">{price}</p>
+          <p className="text-xl font-normal">{price}</p>
           <p className="text-base">{duration}</p>
         </div>
         {/* Plan description if applicable */}

@@ -8,7 +8,7 @@ import Link from "next/link";
 type OverviewOrdersCardProps = {
   title: string;
   artist: string;
-  price: string;
+  price: number;
   order_date: string;
   url: string;
   status: string;

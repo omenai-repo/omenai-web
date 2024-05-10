@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const artworkUpload = new Schema<ArtworkSchemaTypes>(
   {
     artist: { type: String, required: true },
-    year: { type: String, required: true },
+    year: { type: Number, required: true },
     title: { type: String, required: true, unique: true },
     medium: { type: String, required: true },
     rarity: { type: String, required: true },
@@ -16,7 +16,7 @@ const artworkUpload = new Schema<ArtworkSchemaTypes>(
       depth: { type: String, required: false },
     },
     pricing: {
-      price: { type: String, required: true },
+      price: { type: Number, required: true },
       shouldShowPrice: { type: String, required: true },
     },
     art_id: { type: String, default: () => uuidv4(), unique: true },
