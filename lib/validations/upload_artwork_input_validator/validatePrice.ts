@@ -1,19 +1,11 @@
 import { z } from "zod";
 
 export const validatePrice = (value: string): string[] => {
-  const schema = z.string();
-
   let errors = [];
 
-  // Validate if the value is not blank and follows the price format
-  if (
-    !schema
-      .regex(/^\$\d+(\.\d{1,2})?$/, { message: "Invalid price format" })
-      .safeParse(value).success
-  ) {
-    errors.push(
-      "Invalid price format. Please enter a valid price with a currency symbol, e.g., '$1599'."
-    );
+  // Validate if the value contains only digits
+  if (!/^\d+$/.test(value)) {
+    errors.push("Invalid price format. Please enter numbers only.");
   }
 
   return errors;

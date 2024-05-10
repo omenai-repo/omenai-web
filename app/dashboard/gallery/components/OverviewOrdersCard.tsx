@@ -8,7 +8,7 @@ import { IoIosArrowForward } from "react-icons/io";
 type OverviewOrdersCardProps = {
   title: string;
   artist: string;
-  price: string;
+  price: number;
   buyer: string;
   order_date: string;
   url: string;
@@ -81,15 +81,15 @@ export default function OverviewOrdersCard({
         <div className="flex flex-col">
           <p className="text-dark font-normal text-[18px]">{title}</p>
           <span className="text-dark ">{artist}</span>
-          <span className="text-dark font-medium">{price}</span>
+          <span className="text-dark font-normal">{price}</span>
         </div>
       </div>
       <div className="flex flex-col items-end gap-y-1 text-[14px]">
         <span className="text-dark font-normal">
-          Order ID: <span className="font-medium">{order_id}</span>
+          Order ID: <span className="font-normal">{order_id}</span>
         </span>
         <span className="text-dark">{order_date}</span>
-        <span className="text-dark font-medium">
+        <span className="text-dark font-normal">
           {status.toLocaleUpperCase()}
         </span>
         {state === "pending" ? (

@@ -18,7 +18,7 @@ type ArtworkImageProps = {
   sessionId: string | undefined;
   art_id: string;
   pricing?: {
-    price: string;
+    price: number;
     shouldShowPrice: "Yes" | "No" | string;
   };
 };

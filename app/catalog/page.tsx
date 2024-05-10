@@ -7,21 +7,20 @@ import Hero from "../features/hero/Hero";
 import Filter from "./components/Filter";
 
 export default async function page() {
-  // const artworks: { message: string; data: ArtworkResultTypes[] } =
-  //   await fetchAllArtworks();
-  // const session = await getServerSession(nextAuthOptions);
+  const artworks: { message: string; data: ArtworkResultTypes[] } =
+    await fetchAllArtworks();
+  const session = await getServerSession(nextAuthOptions);
 
   return (
     <main className="relative">
       <DesktopNavbar />
-      <p>In progress</p>
 
-      {/* <Hero />
+      <Hero />
       <Filter />
       <AllArtworks
         data={artworks.data}
         sessionId={session?.user.role === "user" ? session?.user.id : undefined}
-      /> */}
+      />
     </main>
   );
 }

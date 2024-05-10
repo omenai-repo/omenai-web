@@ -23,7 +23,7 @@ export default function NavbarLink({ disabled, text, link }: NavbarLinkProps) {
           </li>
         </>
       ) : (
-        <li className="text-[0.9rem] w-fit text-black font-normal flex flex-col group">
+        <li className="text-xs w-fit text-black font-normal flex flex-col group">
           <Link href={link} onClick={() => updateOpenSideNav(false)}>
             {text}
           </Link>
