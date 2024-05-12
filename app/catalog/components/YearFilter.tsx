@@ -32,7 +32,7 @@ export default function YearFilter() {
       </div>
       <FilterOptionBox
         filters={yearFilterOptions}
-        label={"rarity"}
+        label={"year"}
         open={openDropdown}
       />
     </div>
