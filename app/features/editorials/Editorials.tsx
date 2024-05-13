@@ -18,7 +18,7 @@ export default function Editorials() {
   if (isLoading)
     return (
       <div className="h-[20vh] w-full place-items-center grid">
-        <Loader theme={"dark"} />
+        <Loader />
       </div>
     );
 

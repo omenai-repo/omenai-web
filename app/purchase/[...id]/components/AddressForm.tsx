@@ -129,11 +129,7 @@ export default function AddressForm({
                 type="submit"
                 className="w-full px-5 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:border-dark bg-dark py-3 text-white text-base hover:bg-white hover:text-dark hover:border hover:border-dark hover:underline duration-300 grid place-items-center group"
               >
-                {!loading ? (
-                  "Request price quote"
-                ) : (
-                  <LoaderAnimation theme="dark" />
-                )}
+                {!loading ? "Request price quote" : <LoaderAnimation />}
               </button>
             </div>
           </div>

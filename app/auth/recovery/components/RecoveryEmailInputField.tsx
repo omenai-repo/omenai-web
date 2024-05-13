@@ -39,7 +39,7 @@ export default function RecoveryEmailInputField() {
         type="submit"
         className="grid self-end disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center w-full sm:w-fit px-4 py-2 bg-primary hover:bg-primary/50 rounded-md text-white text-xs"
       >
-        {isLoading ? <LoaderAnimation theme="dark" /> : "Send link"}
+        {isLoading ? <LoaderAnimation /> : "Send link"}
       </button>
     </form>
   );

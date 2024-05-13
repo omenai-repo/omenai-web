@@ -105,7 +105,7 @@ export default function PasswordForm({ id }: IdProps) {
             disabled={isLoading}
             className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-md bg-black px-4 py-2 text-white hover:bg-black/90"
           >
-            {isLoading ? <LoaderAnimation theme="dark" /> : "Update"}
+            {isLoading ? <LoaderAnimation /> : "Update"}
           </button>
         </div>
       </form>

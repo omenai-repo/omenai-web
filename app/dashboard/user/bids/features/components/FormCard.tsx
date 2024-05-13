@@ -73,7 +73,7 @@ export const FormCard = () => {
         // }
         className="disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center px-8 py-2 bg-primary hover:bg-primary/50 rounded-full text-white text-base"
       >
-        {isLoading ? <LoaderAnimation theme="dark" /> : "Save edit data"}
+        {isLoading ? <LoaderAnimation /> : "Save edit data"}
       </button> */}
     </form>
   );

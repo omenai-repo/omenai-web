@@ -20,7 +20,7 @@ export default function TrendingArtworks({
   if (isLoading)
     return (
       <div className="h-[500px] w-full place-items-center grid">
-        <Loader theme={"dark"} />
+        <Loader />
       </div>
     );
   return (

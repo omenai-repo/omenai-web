@@ -16,16 +16,16 @@ export default function OverviewPage() {
 
       <div className="grid lg:grid-cols-2 gap-x-[1rem] pb-4">
         <div className="">
-          <Suspense fallback={<Loader theme="dark" />}>
+          <Suspense fallback={<Loader />}>
             <PopularArtworks />
           </Suspense>
         </div>
 
-        <Suspense fallback={<Loader theme="dark" />}>
+        <Suspense fallback={<Loader />}>
           <ActivityWrapper />
         </Suspense>
 
-        <Suspense fallback={<Loader theme="dark" />}>
+        <Suspense fallback={<Loader />}>
           <Orders />
         </Suspense>
 

@@ -27,7 +27,7 @@ export default function SearchResultDetails({
     <div>
       {data === "pending" ? (
         <div className="h-[80vh] w-full grid place-items-center">
-          <Loader theme="dark" />
+          <Loader />
         </div>
       ) : (
         <div className="w-full h-full">

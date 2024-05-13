@@ -54,7 +54,7 @@ export default function ComponentWrapper({ order_id }: { order_id: string }) {
         </>
       ) : (
         <div className="w-full h-screen grid place-items-center">
-          <Loader theme="dark" />
+          <Loader />
         </div>
       )}
     </div>

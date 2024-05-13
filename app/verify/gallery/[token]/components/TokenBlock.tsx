@@ -87,7 +87,7 @@ export default function TokenBlock({ token }: TokenProps) {
           className=" disabled:bg-gray-400 grid place-items-center disabled:cursor-not-allowed px-4 py-2 bg-black text-white rounded-md transition-all ease-linear duration-200"
           type={"submit"}
         >
-          {isLoading ? <LoaderAnimation theme="dark" /> : "Submit"}
+          {isLoading ? <LoaderAnimation /> : "Submit"}
         </button>
       </form>
       <p>

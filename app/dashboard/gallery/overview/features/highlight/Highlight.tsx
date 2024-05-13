@@ -12,8 +12,8 @@ export default function Highlight() {
               key={index}
               className="px-3 py-2 flex justify-between items-center rounded-lg ring-1 ring-dark/20 bg-white"
             >
-              <div className="flex flex-col">
-                <p className="text-dark font-normal">{item.title}</p>
+              <div className="flex flex-col gap-y-2">
+                <p className="text-dark text-xs font-normal">{item.title}</p>
                 <HighlightCard
                   title={item.title}
                   icon={item.icon}

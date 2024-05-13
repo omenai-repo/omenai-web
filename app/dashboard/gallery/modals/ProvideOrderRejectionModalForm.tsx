@@ -75,7 +75,7 @@ export default function ProvideOrderRejectionModalForm() {
             type="submit"
             className="px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
           >
-            {loading ? <LoaderAnimation theme="dark" /> : " Decline order"}
+            {loading ? <LoaderAnimation /> : " Decline order"}
           </button>
         </div>
       </form>

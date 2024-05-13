@@ -111,7 +111,7 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
           className="w-full bg-dark px-4 py-3  text-white hover:bg-dark/80 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:text-white hover:duration-200 grid place-items-center group"
         >
           {loading ? (
-            <LoaderAnimation theme="dark" />
+            <LoaderAnimation />
           ) : data.pricing.shouldShowPrice === "Yes" ? (
             "Purchase artwork"
           ) : (

@@ -80,11 +80,7 @@ export default function CancelSubscriptionModal({
                 color="gray"
                 onClick={cancel_subscription}
               >
-                {loading ? (
-                  <LoaderAnimation theme="dark" />
-                ) : (
-                  "Cancel Subscription"
-                )}
+                {loading ? <LoaderAnimation /> : "Cancel Subscription"}
               </button>
             </div>
           </div>
