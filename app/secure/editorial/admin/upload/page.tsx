@@ -89,7 +89,7 @@ export default function Admin() {
                   loading ? "bg-dark" : "bg-primary"
                 } hover:bg-dark rounded-md`}
               >
-                {loading ? <LoaderAnimation theme="dark" /> : "Save"}
+                {loading ? <LoaderAnimation /> : "Save"}
               </button>
             </div>
 

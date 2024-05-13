@@ -104,11 +104,7 @@ export default function PayNowButton({
               disabled={locked || loading}
               className="w-fit px-5 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark py-3 text-white text-base hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
             >
-              {loading ? (
-                <LoaderAnimation theme="dark" />
-              ) : (
-                "Proceed to payment"
-              )}
+              {loading ? <LoaderAnimation /> : "Proceed to payment"}
             </button>
           </Tooltip>
           {locked && <CiLock className="absolute right-[-15px] top-[-5px]" />}

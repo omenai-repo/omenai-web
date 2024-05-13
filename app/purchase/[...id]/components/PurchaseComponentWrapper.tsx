@@ -61,7 +61,7 @@ export default function PurchaseComponentWrapper({
   if (!isLoggedIn)
     return (
       <div className="h-[90vh] w-full grid place-items-center">
-        <Loader theme="dark" />
+        <Loader />
       </div>
     );
 

@@ -45,16 +45,14 @@ export default function Filter() {
 
   return (
     <div className="sticky top-[63px] z-20 bg-white border-b border-b-dark/10 pt-4">
-      <div className="w-full flex justify-between items-center py-4 px-4 md:px-8">
-        {width < 769 && (
-          <button
-            className="py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
-            onClick={() => setShowFilterBlock(!showFilterBlock)}
-          >
-            <span className="text-xs font-medium text-white">Filters</span>
-            <GiSettingsKnobs className="rotate-90 text-white" />
-          </button>
-        )}
+      <div className="w-full flex justify-between items-center py-4 px-4">
+        <button
+          className="py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
+          onClick={() => setShowFilterBlock(!showFilterBlock)}
+        >
+          <span className="text-xs font-medium text-white">Filters</span>
+          <GiSettingsKnobs className="rotate-90 text-white" />
+        </button>
         <div />
         <button
           disabled={isEmptyFilter(filterOptions)}
@@ -67,7 +65,7 @@ export default function Filter() {
 
       <div
         className={`${
-          width > 768 ? "grid" : "hidden"
+          showFilterBlock ? "grid" : "hidden"
         } duration-200 sm:grid-cols-2 lg:grid-cols-4 gap-x-2 items-center px-2`}
       >
         <PriceFilter />
@@ -75,16 +73,6 @@ export default function Filter() {
         <MediumFilter />
         <RarityFilter />
       </div>
-      {width < 769 && showFilterBlock && (
-        <div
-          className={` grid duration-200 sm:grid-cols-2 lg:grid-cols-4 gap-x-2 items-center px-2`}
-        >
-          <PriceFilter />
-          <YearFilter />
-          <MediumFilter />
-          <RarityFilter />
-        </div>
-      )}
     </div>
   );
 }

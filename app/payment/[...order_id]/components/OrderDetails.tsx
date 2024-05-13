@@ -27,7 +27,7 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
   if (isLoading) {
     return (
       <div className="w-full h-[80vh] grid place-items-center">
-        <Loader theme="dark" />
+        <Loader />
       </div>
     );
   }

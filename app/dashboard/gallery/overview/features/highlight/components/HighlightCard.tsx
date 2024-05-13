@@ -16,7 +16,7 @@ export default function HighlightCard({ tag }: HightlightCardProps) {
     },
   });
 
-  if (isLoading) return <Loader theme="dark" />;
+  if (isLoading) return <Loader />;
 
-  return <h4 className="font-medium text-xs sm:text-base text-dark">{data}</h4>;
+  return <h4 className="font-normal text-xs text-dark">{data}</h4>;
 }

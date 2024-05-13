@@ -4,6 +4,7 @@ import { galleryLoginStore } from "@/store/auth/login/GalleryLoginStore";
 import { GoArrowRight } from "react-icons/go";
 import { useLoginStore } from "@/store/auth/login/LoginStore";
 import Link from "next/link";
+import LoaderAnimation from "@/components/loader/LoaderAnimation";
 
 export default function FormActions() {
   const [updateRecoveryModal] = actionStore((state) => [
@@ -41,7 +42,7 @@ export default function FormActions() {
           type="submit"
           className="h-[56px] w-full font-medium flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs"
         >
-          {isLoading ? "Loading..." : "Login"}{" "}
+          {isLoading ? <LoaderAnimation /> : "Login"}{" "}
           {!isLoading && <GoArrowRight className="text-md opacity-70" />}
         </button>
         <button

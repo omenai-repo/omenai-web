@@ -56,7 +56,7 @@ export default function TC() {
           disabled={isLoading}
           className="h-[56px] w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-dark text-white text-xs font-medium"
         >
-          {isLoading ? <LoaderAnimation theme="dark" /> : "Create account"}
+          {isLoading ? <LoaderAnimation /> : "Create account"}
         </button>
         <button
           className={` rounded-full px-[1.5rem] py-[0.4rem] mt-[1rem] text-dark underline transition-all ease-linear duration-200`}

@@ -41,7 +41,7 @@ export default function VerifyTransactionWrapper() {
       <div className="w-full h-[80vh] grid place-items-center">
         <div className="flex flex-col gap-y-1 justify-center items-center">
           <p>Verifying transaction status</p>
-          <LoaderAnimation theme="dark" />
+          <LoaderAnimation />
         </div>
       </div>
     );

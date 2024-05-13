@@ -94,7 +94,7 @@ export default function PricingCardItem({
             onClick={handleSubscribe}
             className={`bg-primary rounded-md w-full py-2 grid place-items-center disabled:bg-gray-400 disabled:text-dark disabled:cursor-pointer text-white`}
           >
-            {loading ? <LoaderAnimation theme="dark" /> : "Subscribe"}
+            {loading ? <LoaderAnimation /> : "Subscribe"}
           </button>
         </div>
       </div>
