@@ -33,7 +33,7 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
   }
   const image_href = getImageFileView(order.artwork_data.url, 200);
   const total = calculatePurchaseGrandTotal(
-    formatPrice(order.artwork_data.pricing.price),
+    order.artwork_data.pricing.price,
     order.shipping_quote.shipping_fees,
     order.shipping_quote.taxes
   );
@@ -43,7 +43,7 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
         <PayNowButton
           art_id={order.artwork_data.art_id}
           artwork={order.artwork_data.title}
-          amount={total}
+          amount={"500"}
           gallery_id={order.gallery_id}
           order_id={order_id}
         />

@@ -1,9 +1,7 @@
 "use client";
 
 import { filterStore } from "@/store/artworks/FilterStore";
-import { buildMongoQuery } from "@/utils/buildMongoFilterQuery";
 import { hasFilterValue } from "@/utils/checkIfFilterExists";
-import { isEmptyFilter } from "@/utils/isFilterEmpty";
 import { ChangeEvent } from "react";
 
 type FilterOptionBoxTypes = {
@@ -21,12 +19,19 @@ export default function FilterOptionBox({
   label,
   open,
 }: FilterOptionBoxTypes) {
-  const { updateFilter, removeFilter, filterOptions } = filterStore();
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const {
+    updateFilter,
+    setSelectedFilters,
+    removeSingleFilterSelection,
+    selectedFilters,
+  } = filterStore();
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, filter: string) => {
     if (e.target.checked) {
       updateFilter(label, e.target.value);
+      setSelectedFilters(e.target.value, filter, label);
     } else {
-      removeFilter(label, e.target.value);
+      // removeFilter(label, e.target.value);
+      removeSingleFilterSelection(filter);
     }
   };
   return (
@@ -50,9 +55,9 @@ export default function FilterOptionBox({
                   <input
                     id={filter.option}
                     type="checkbox"
-                    checked={hasFilterValue(filterOptions, label, filter.value)}
+                    checked={hasFilterValue(selectedFilters, filter.option)}
                     value={JSON.stringify(filter.value)}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e, filter.option)}
                     className="w-4 h-4 text-dark bg-gray-100 border-dark/10 rounded focus:ring-dark dark:focus:ring-dark dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <label

@@ -20,7 +20,7 @@ export const purchase_artwork = async (
       body: JSON.stringify({
         tx_ref: await generateDigit(8),
         currency: "USD",
-        amount: amount,
+        amount: "50",
         redirect_url: `${url}/payment/verifyTransaction`,
         customer: {
           email: email,
@@ -33,7 +33,6 @@ export const purchase_artwork = async (
           title: `Omenai artwork payment: ${artwork}`,
           logo: "https://cloud.appwrite.io/v1/storage/buckets/655c43e6901e0f772192/files/omenai_logo/view?project=655231c3469bf1ef8d8f",
         },
-        payment_options: "card, account",
       }),
     }
   );

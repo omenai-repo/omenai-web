@@ -1,3 +1,4 @@
+import { Label } from "flowbite-react";
 import { create } from "zustand";
 
 export type FilterStoreTypes = {
@@ -14,8 +15,18 @@ export type FilterStoreTypes = {
     rarity: string[];
   };
 
-  updateFilter: (label: string, value: any) => void;
+  updateFilter: (label: string, value: string) => void;
   removeFilter: (label: string, value: any) => void;
+  selectedFilters: SelectedFilterArray[];
+  setSelectedFilters: (value: string, name: string, label: string) => void;
+  removeSingleFilterSelection: (filter: string) => void;
+  clearAllFilters: () => void;
+};
+
+type SelectedFilterArray = {
+  name: string;
+  label: string;
+  value: string;
 };
 
 export const filterStore = create<FilterStoreTypes>((set, get) => ({
@@ -26,7 +37,7 @@ export const filterStore = create<FilterStoreTypes>((set, get) => ({
     rarity: [],
   },
 
-  updateFilter: (label: string, value: any) => {
+  updateFilter: (label: string, value: string) => {
     const currentFilterData: Record<string, any> = get().filterOptions;
     if (!label || typeof value === "undefined") {
       return; // Do nothing if filters, label, or value is missing
@@ -71,5 +82,44 @@ export const filterStore = create<FilterStoreTypes>((set, get) => ({
       }
       set({ filterOptions: currentFilterData as any });
     }
+  },
+  selectedFilters: [],
+
+  setSelectedFilters: (value: string, name: string, label: string) => {
+    const currentFilterSelection = get().selectedFilters;
+    currentFilterSelection.push({ value, name, label });
+    set({ selectedFilters: currentFilterSelection });
+  },
+
+  removeSingleFilterSelection: (name: string) => {
+    const currentFilterSelection = get().selectedFilters;
+
+    const currentSelectedFilter = currentFilterSelection.find(
+      (filter) => filter.name === name
+    );
+    const removeFilterValue = get().removeFilter;
+
+    removeFilterValue(
+      currentSelectedFilter!.label,
+      currentSelectedFilter!.value
+    );
+
+    const removeSelectedFilter = currentFilterSelection.filter(
+      (element) => element.name !== name
+    );
+
+    set({ selectedFilters: removeSelectedFilter });
+  },
+
+  clearAllFilters: () => {
+    set({
+      filterOptions: {
+        price: [],
+        year: [],
+        medium: [],
+        rarity: [],
+      },
+    });
+    set({ selectedFilters: [] });
   },
 }));
