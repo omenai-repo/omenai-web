@@ -60,8 +60,10 @@ export default function AddressForm({
 
   return (
     <>
-      <div className="w-full my-[2rem]">
-        <h1 className="text-sm mb-[2rem] font-normal">Shipping Information</h1>
+      <div className="w-full my-[1rem]">
+        <h1 className="mb-[1rem] text-[14px] font-normal">
+          Shipping Information
+        </h1>
         <form onSubmit={handleOrderSubmission}>
           <div className="">
             {userDetails.map((detail, index) => {
@@ -111,7 +113,7 @@ export default function AddressForm({
             })}
           </div>
 
-          <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center mt-8">
+          <div className="flex sm:flex-row flex-col sm:justify-between sm:items-center mt-2">
             <div className="my-5">
               <div className="flex items-center gap-2">
                 <input
@@ -120,14 +122,16 @@ export default function AddressForm({
                   id="save_address"
                   onChange={(e) => setSaveShippingAddress(e.target.checked)}
                 />
-                <label htmlFor="age">Save my address</label>
+                <label htmlFor="age" className="text-xs">
+                  Save my address
+                </label>
               </div>
             </div>
             <div className="w-fit my-4">
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full px-5 disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:border-dark bg-dark py-3 text-white text-base hover:bg-white hover:text-dark hover:border hover:border-dark hover:underline duration-300 grid place-items-center group"
+                className="w-full px-5 text-xs disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:border-dark bg-dark py-3 text-white hover:bg-white hover:text-dark hover:border hover:border-dark hover:underline duration-300 grid place-items-center group"
               >
                 {!loading ? "Request price quote" : <LoaderAnimation />}
               </button>
