@@ -69,8 +69,8 @@ export default function PurchaseComponentWrapper({
     <div>
       <div className="relative h-full">
         <DesktopNavbar />
-        <div className="grid-cols-1 grid md:grid-cols-2 xl:grid-cols-3 my-[3rem] p-5 gap-x-2">
-          <div className="col-span-1 xl:col-span-2">
+        <div className="grid-cols-1 grid md:grid-cols-2 xl:grid-cols-3 p-5 md:gap-x-8 lg:gap-x-16 gap-y-8">
+          <div className="col-span-1 xl:col-span-2 border border-dark/10 px-5 pt-12">
             <DeliveryMethod />
             <AddressForm
               userAddress={address}
