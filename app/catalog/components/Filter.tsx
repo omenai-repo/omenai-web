@@ -1,27 +1,26 @@
 "use client";
-import { actionStore } from "@/store/actions/ActionStore";
 import { GiSettingsKnobs } from "react-icons/gi";
 import PriceFilter from "./PriceFilter";
 import YearFilter from "./YearFilter";
 import MediumFilter from "./MediumFilter";
 import RarityFilter from "./RarityFilter";
 import { useState } from "react";
-import { useWindowSize } from "usehooks-ts";
 import { filterStore } from "@/store/artworks/FilterStore";
 import { isEmptyFilter } from "@/utils/isFilterEmpty";
-import { fetchFilterResults } from "@/services/artworks/fetchFilterResults";
 import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
 import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
 import { artworkStore } from "@/store/artworks/ArtworkStore";
 import { toast } from "sonner";
+import FilterPill from "./FilterPill";
+import { ImBin2 } from "react-icons/im";
+import { useRouter } from "next/navigation";
 
 export default function Filter() {
   const [showFilterBlock, setShowFilterBlock] = useState(false);
-  const { filterOptions } = filterStore();
+  const { filterOptions, selectedFilters, clearAllFilters } = filterStore();
   const { paginationCount, updatePaginationCount } = artworkActionStore();
   const { setArtworks, setIsLoading, setPageCount } = artworkStore();
-
-  const { width } = useWindowSize();
+  const router = useRouter();
 
   async function handleSubmitFilter() {
     updatePaginationCount("reset");
@@ -43,6 +42,20 @@ export default function Filter() {
     });
   }
 
+  const handleClearAll = async () => {
+    clearAllFilters();
+    const response = await fetchPaginatedArtworks(paginationCount, {
+      price: [],
+      year: [],
+      medium: [],
+      rarity: [],
+    });
+    if (response?.isOk) {
+      setArtworks(response.data);
+      setPageCount(response.count);
+    }
+  };
+
   return (
     <div className="sticky top-[63px] z-20 bg-white border-b border-b-dark/10 pt-4">
       <div className="w-full flex justify-between items-center py-4 px-4">
@@ -50,7 +63,7 @@ export default function Filter() {
           className="py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
           onClick={() => setShowFilterBlock(!showFilterBlock)}
         >
-          <span className="text-xs font-medium text-white">Filters</span>
+          <span className="text-xs font-normal text-white">Filters</span>
           <GiSettingsKnobs className="rotate-90 text-white" />
         </button>
         <div />
@@ -59,9 +72,25 @@ export default function Filter() {
           className=" disabled:bg-dark/30 disabled:cursor-not-allowed py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
           onClick={handleSubmitFilter}
         >
-          <span className="text-xs font-medium text-white">Apply filters</span>
+          <span className="text-xs font-normal text-white">Apply filters</span>
         </button>
       </div>
+      {selectedFilters.length > 0 && (
+        <>
+          <div className="flex flex-wrap gap-2 items-center p-4 cursor-pointer">
+            {selectedFilters.map((filter, index) => {
+              return <FilterPill key={index} filter={filter.name} />;
+            })}
+            <div
+              onClick={handleClearAll}
+              className="px-3 py-1 border border-dark/10 rounded-full flex gap-x-2 items-center text-xs font-normal"
+            >
+              <span>Clear all </span>
+              <ImBin2 />
+            </div>
+          </div>
+        </>
+      )}
 
       <div
         className={`${

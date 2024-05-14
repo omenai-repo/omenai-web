@@ -5,7 +5,6 @@ import { fetchSingleArtworkOnPurchase } from "@/services/artworks/fetchSingleArt
 import PurchaseComponentWrapper from "./components/PurchaseComponentWrapper";
 
 export default async function page({ params }: { params: { id: string } }) {
-  const session = await getServerSession(nextAuthOptions);
   const artwork = await fetchSingleArtworkOnPurchase(
     decodeURIComponent(params.id)
   );
