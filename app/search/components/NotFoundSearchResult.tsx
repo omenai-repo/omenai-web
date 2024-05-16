@@ -11,7 +11,7 @@ export default function NotFoundSearchResult() {
     <>
       <div className="w-full h-[60svh]">
         <div className="px-5 py-8">
-          <h1 className="text-sm md:text-md lg:text-lg font-normal text-dark/80">
+          <h1 className="text-base font-normal text-dark">
             No results found for term{" "}
             <span className="text-blue-600">&apos;{searchTerm}&apos;</span>
           </h1>
@@ -19,7 +19,7 @@ export default function NotFoundSearchResult() {
             Try checking for spelling errors or try another search term.
           </h2>
         </div>
-        <hr className=" border-dark/30" />
+        <hr className=" border-dark/10" />
         <div className="w-full h-[40vh] md:h-[50vh] grid place-items-center">
           <NotFoundData />
         </div>

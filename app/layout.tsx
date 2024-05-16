@@ -13,33 +13,11 @@ import LoginModal from "@/components/modal/LoginModal";
 import RecoveryModal from "@/components/modal/RecoveryModal";
 import { OrderReceivedModal } from "@/components/modal/OrderConfirmedModal";
 
-const neue_montreal = localFont({
-  src: [
-    {
-      path: "../public/fonts/NeueMontreal-Light.otf",
-      weight: "300",
-    },
-    {
-      path: "../public/fonts/NeueMontreal-Regular.otf",
-      weight: "400",
-    },
-    {
-      path: "../public/fonts/NeueMontreal-Medium.otf",
-      weight: "500",
-    },
-    {
-      path: "../public/fonts/NeueMontreal-Bold.otf",
-      weight: "700",
-    },
-  ],
-  variable: "--font-neue_montreal",
+const nunito_sans = Nunito_Sans({
+  subsets: ["latin"],
+  variable: "--font-nunito_sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
-
-// const nunito_sans = Nunito_Sans({
-//   subsets: ["latin"],
-//   variable: "--font-nunito_sans",
-//   weight: ["300", "400", "500", "600", "700", "800"],
-// });
 
 export const metadata: Metadata = {
   title: "Omenai",
@@ -54,9 +32,7 @@ export default async function RootLayout({
   const session = await getServerSession(nextAuthOptions);
   return (
     <html lang="en">
-      <body
-        className={`${neue_montreal.className} flex flex-col justify-center`}
-      >
+      <body className={`${nunito_sans.className} flex flex-col justify-center`}>
         <NextTopLoader color="#6246EA" height={6} />
         <Toaster richColors position="top-center" visibleToasts={1} />
         <AuthProvider session={session}>

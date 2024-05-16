@@ -21,6 +21,8 @@ export default function SearchResultWrapper() {
         | "url"
         | "impressions"
         | "like_IDs"
+        | "medium"
+        | "rarity"
       > & { _id: string })[]
     | []
     | "pending"

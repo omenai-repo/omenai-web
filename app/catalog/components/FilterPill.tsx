@@ -29,7 +29,7 @@ export default function FilterPill({ filter }: { filter: string }) {
   }
 
   return (
-    <div className="px-3 py-1 bg-dark text-xs font-normal text-white flex items-center gap-x-2 rounded-full">
+    <div className="px-3 py-1.5 bg-dark text-xs font-normal text-white flex items-center gap-x-2 rounded-full">
       <span className="text-xs">{filter}</span>
       <MdClear onClick={handleRemoveSingleFilter} className="cursor-pointer" />
     </div>
