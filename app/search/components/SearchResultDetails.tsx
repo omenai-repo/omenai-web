@@ -1,5 +1,4 @@
 import ArtworkCard from "@/components/artworks/ArtworkCard";
-import { ArtworkImage } from "@/components/artworks/ArtworkImage";
 import Loader from "@/components/loader/Loader";
 
 type SearchResultDetailsProps = {
@@ -13,6 +12,8 @@ type SearchResultDetailsProps = {
         | "url"
         | "impressions"
         | "like_IDs"
+        | "medium"
+        | "rarity"
       > & { _id: string })[]
     | "pending";
   searchTerm: string;
@@ -32,28 +33,32 @@ export default function SearchResultDetails({
       ) : (
         <div className="w-full h-full">
           <div className="px-5 py-8">
-            <h1 className="text-sm md:text-md lg:text-lg font-normal text-dark/80">
+            <h1 className="text-base font-normal text-dark">
               {data.length} result(s) found for term{" "}
               <span className="text-blue-600">&apos;{searchTerm}&apos;</span>
             </h1>
           </div>
-          <hr className=" border-dark/30" />
-          <div className="2xl:columns-5 xl:columns-4 md:columns-2 xs:columns-2 columns-1 gap-y-6 my-[2rem] p-4">
-            {data.map((artwork, index) => {
-              return (
-                <ArtworkImage
-                  key={index}
-                  url={artwork.url}
-                  title={artwork.title}
-                  author={artwork.artist}
-                  art_id={artwork.art_id}
-                  pricing={artwork.pricing}
-                  impressions={artwork.impressions as number}
-                  likeIds={artwork.like_IDs as string[]}
-                  sessionId={undefined}
-                />
-              );
-            })}
+          <hr className=" border-dark/10" />
+          <div className="p-4">
+            <div className="grid grid-row-auto xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 gap-y-12 w-full items-end ">
+              {data.map((artwork, index) => {
+                return (
+                  <ArtworkCard
+                    key={index}
+                    image={artwork.url}
+                    name={artwork.title}
+                    artist={artwork.artist}
+                    art_id={artwork.art_id}
+                    pricing={artwork.pricing}
+                    impressions={artwork.impressions as number}
+                    likeIds={artwork.like_IDs as string[]}
+                    sessionId={sessionId}
+                    medium={artwork.medium}
+                    rarity={artwork.rarity}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       )}

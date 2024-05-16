@@ -20,8 +20,8 @@ export default function RecoveryModalForm() {
             />
           </div>
           <div className="">
-            <h1 className="text-md md:text-lg font-medium">Let us help</h1>
-            <p className="text-xs sm:text-base font-light sm:font-normal">
+            <h1 className="text-sm md:text-md font-medium">Let us help</h1>
+            <p className="text-xs font-light sm:font-normal">
               Enter your email so we can help recover your account
             </p>
           </div>
@@ -29,7 +29,7 @@ export default function RecoveryModalForm() {
             <RecoveryModalEmailInputField />
           </div>
           <div>
-            <p className="text-xs sm:text-base font-light sm:font-normal text-red-600">
+            <p className="text-xs font-light sm:font-normal text-red-600">
               Kindly note that a link will be sent to your email address. Click
               the link to complete this process.
             </p>

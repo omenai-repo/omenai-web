@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { useRouter } from "next/navigation";
+import { MdClear } from "react-icons/md";
 
 export default function Filter() {
   const [showFilterBlock, setShowFilterBlock] = useState(false);
@@ -57,19 +58,27 @@ export default function Filter() {
   };
 
   return (
-    <div className="sticky top-[63px] z-20 bg-white border-b border-b-dark/10 pt-4">
+    <div className="sticky top-[63px] px-0 lg:px-4 z-20 bg-white border-b border-b-dark/10">
       <div className="w-full flex justify-between items-center py-4 px-4">
         <button
-          className="py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
+          className={`${
+            showFilterBlock
+              ? "bg-dark text-white rounded-sm"
+              : "border-dark/10 border rounded-sm bg-white text-dark"
+          } duration-200 py-2 px-5  flex space-x-2 items-center w-fit cursor-pointer`}
           onClick={() => setShowFilterBlock(!showFilterBlock)}
         >
-          <span className="text-xs font-normal text-white">Filters</span>
-          <GiSettingsKnobs className="rotate-90 text-white" />
+          <span className="text-xs font-normal">Filters</span>
+          {showFilterBlock ? (
+            <MdClear />
+          ) : (
+            <GiSettingsKnobs className="rotate-90" />
+          )}
         </button>
         <div />
         <button
           disabled={isEmptyFilter(filterOptions)}
-          className=" disabled:bg-dark/30 disabled:cursor-not-allowed py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
+          className=" disabled:bg-dark/30 disabled:cursor-not-allowed rounded-sm py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
           onClick={handleSubmitFilter}
         >
           <span className="text-xs font-normal text-white">Apply filters</span>

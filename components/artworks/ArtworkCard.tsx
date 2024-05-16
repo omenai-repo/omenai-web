@@ -36,16 +36,16 @@ export default function ArtworkCard({
 }) {
   const image_href = getImageFileView(image, 300);
   return (
-    <div className="my-2 md:my-4">
-      <div className="flex flex-col w-auto h-full max-h-[500px] justify-end">
-        <div className="relative">
+    <div className="my-2 md:my-4 w-full p-4 xxm:p-0">
+      <div className="flex flex-col min-w-[220px] max-w-full justify-end">
+        <div className="relative w-full">
           <Link href={`/artwork/${name}`}>
-            <Image
+            <img
               src={image_href}
               alt={name + " image"}
-              height={500}
-              width={250}
-              className="min-w-[220px] aspect-auto object-top object-cover cursor-pointer"
+              // height={400}
+              // width={400}
+              className="min-w-[220px] max-h-[400px] w-full h-auto object-top cursor-pointer"
             />
           </Link>
           <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
@@ -58,7 +58,7 @@ export default function ArtworkCard({
           </div>
         </div>
 
-        <div className="mb-[3rem] bg-[#FAFAFA] py-1 px-3 max-w-[250px]">
+        <div className=" bg-[#FAFAFA] py-1 px-3 w-full">
           <div className="flex justify-between items-center my-2">
             <p className="font-normal text-[14px] text-dark ">
               {name.substring(0, 20)}

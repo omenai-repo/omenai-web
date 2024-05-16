@@ -31,7 +31,7 @@ export default function CuratedArtworksLayout({
     <>
       {userCuratedArtworks !== undefined && userCuratedArtworks.length > 0 && (
         <div className="py-4 md:p-4 relative mt-5">
-          <div className="flex relative overflow-x-scroll w-full space-x-2">
+          <div className="flex items-end relative overflow-x-scroll w-full space-x-2">
             {userCuratedArtworks.map((artwork: any, index: number) => {
               return (
                 <ArtworkCard

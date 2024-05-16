@@ -26,7 +26,7 @@ export default function TrendingArtworks({
   return (
     <>
       {artworks.length > 0 && (
-        <div className="py-4 md:p-4 relative mt-5">
+        <div className="py-4 md:p-4 relative">
           <div className=" flex relative gap-x-4 overflow-x-scroll w-full">
             {artworks.map((artwork: any, index: number) => {
               if (artwork.impressions === 0) return null;

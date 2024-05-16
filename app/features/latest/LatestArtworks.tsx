@@ -27,8 +27,8 @@ export default function LatestArtworks({
   return (
     <>
       {artworks.length > 0 && (
-        <div className="py-4 md:p-4 relative mt-5">
-          <div className="flex relative gap-x-4 overflow-x-scroll w-full">
+        <div className="py-4 md:p-4 relative">
+          <div className="flex items-end relative gap-x-2 overflow-x-scroll w-full">
             {artworks.map((artwork: any, index: number) => {
               return (
                 <ArtworkCard

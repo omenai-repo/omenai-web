@@ -18,10 +18,10 @@ export default function SearchInput() {
     else router.push(`/search?searchTerm=${searchTerm}`);
   };
   return (
-    <div className="relative flex justify-between gap-x-5 mt-12 items-center p-3 rounded-full border bg-[#FAFAFA] border-dark/10">
+    <div className="relative flex justify-between gap-x-5 items-center px-3 py-2 rounded-full border bg-[#FAFAFA] border-dark/30">
       <input
         type="text"
-        className="w-full py-[0.3rem] bg-[#FAFAFA] px-3 border-none rounded-sm placeholder:text-base placeholder:font-light focus:border-none focus:ring-0 focus:border-0"
+        className="w-full py-[0.3rem] bg-[#FAFAFA] px-3 border-none rounded-sm placeholder:text-xs placeholder:font-normal focus:border-none focus:ring-0 focus:border-0"
         placeholder="Search for anything"
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyDown={handleKeyPress}
