@@ -24,7 +24,7 @@ export default function SimilarArtworks({
           <NotFoundData />
         </div>
       ) : (
-        <div className="flex relative gap-x-4 overflow-x-scroll w-full">
+        <div className="flex relative gap-x-4 items-end overflow-x-scroll w-full">
           {artworks.map(
             (
               art: {

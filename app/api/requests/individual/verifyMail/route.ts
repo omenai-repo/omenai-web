@@ -28,7 +28,10 @@ export async function POST(request: Request) {
       "verified"
     ).exec();
 
-    if (user.verified) throw new ForbiddenError("This action is not permitted, account already verified");
+    if (user.verified)
+      throw new ForbiddenError(
+        "This action is not permitted, account already verified"
+      );
 
     const isTokenActive = await VerificationCodes.findOne({
       author: params,
@@ -47,7 +50,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     const error_response = handleErrorEdgeCases(error);
-    console.log(error)
+    console.log(error);
 
     return NextResponse.json(
       { message: error_response?.message },
