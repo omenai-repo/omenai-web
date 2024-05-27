@@ -24,10 +24,10 @@ export async function POST(request: Request) {
 
     await connectMongoDB();
 
-    const { gallery_id } = await request.json();
+    const { author } = await request.json();
 
     const { admin, email, verified } = await AccountGallery.findOne(
-      { gallery_id },
+      { gallery_id: author },
       "admin email verified"
     ).exec();
 
@@ -42,18 +42,18 @@ export async function POST(request: Request) {
     const email_token = await generateDigit(6);
 
     const isVerificationTokenActive = await VerificationCodes.findOne({
-      author: gallery_id,
+      author,
     });
 
     if (isVerificationTokenActive)
       await VerificationCodes.deleteOne({
-        author: gallery_id,
+        author,
         code: isVerificationTokenActive.code,
       });
 
     const storeVerificationCode = await VerificationCodes.create({
       code: email_token,
-      author: gallery_id,
+      author,
     });
 
     if (!storeVerificationCode)
