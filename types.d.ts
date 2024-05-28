@@ -293,3 +293,13 @@ type CardInputTypes = {
   month: string;
   year: string;
 };
+
+type AdminGalleryListItemTypes = {
+  name: string;
+  location: string;
+  description: string;
+  _id: string;
+  email: string;
+  admin: string;
+  logo: string;
+};

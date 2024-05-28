@@ -1,22 +1,17 @@
 "use client";
 import NextTopLoader from "nextjs-toploader";
-import PageLayout from "./features/PageLayout";
-import MobilePageLayout from "./features/MobilePageLayout";
-import Appbar from "./components/Appbar";
-import { galleryNavigationActions } from "@/store/gallery/gallery_navigation/GalleryNavigation";
+
 import { useWindowSize } from "usehooks-ts";
-import NoMobileView from "./components/NoMobileView";
-import { ShippingQuoteModal } from "./modals/ShippingQuoteUpdateModal";
-import { UploadTrackingIDModal } from "./modals/ProvideTrackingIDModal";
-import { UploadOrderRejectionReason } from "./modals/ProvideOrderRejectionReason";
+import NoMobileView from "./NoMobileView";
+import PageLayout from "./PageLayout";
+import Appbar from "./Appbar";
+import { adminNavigationActions } from "@/store/admin/AdminNavigationStore";
 export default function GalleryDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [open] = galleryNavigationActions((state: { open: any }) => [
-    state.open,
-  ]);
+  const [open] = adminNavigationActions((state: { open: any }) => [state.open]);
   const { width } = useWindowSize();
 
   return (
@@ -30,9 +25,6 @@ export default function GalleryDashboardLayout({
             <div className="hidden md:block">
               <PageLayout />
             </div>
-            <div className="block md:hidden">
-              <MobilePageLayout />
-            </div>
 
             <div
               className={`w-full ${
@@ -41,9 +33,6 @@ export default function GalleryDashboardLayout({
             >
               <Appbar />
               <div className="h-auto rounded-lg relative my-5 px-5">
-                <ShippingQuoteModal />
-                <UploadTrackingIDModal />
-                <UploadOrderRejectionReason />
                 {children}
               </div>
             </div>
