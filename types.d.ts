@@ -55,6 +55,7 @@ type GallerySchemaTypes = {
   role: string;
   logo?: string;
   subscription_active: boolean;
+  status: "active" | "blocked";
 };
 
 type IndividualSchemaTypes = {
@@ -302,4 +303,6 @@ type AdminGalleryListItemTypes = {
   email: string;
   admin: string;
   logo: string;
+  gallery_id: string;
+  status: "active" | "blocked";
 };

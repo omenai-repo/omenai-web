@@ -1,14 +1,18 @@
-import { fetchUnverifiedGalleries } from "@/services/admin/fetch_unverified_galleries";
-import React from "react";
 import GalleryList from "./components/GalleryList";
 import GalleryDetailPopupModal from "./components/GalleryDetailPopupModal";
+import TabGroup from "./components/TabGroup";
+import AcceptConfirmationPopupModal from "./components/AcceptGalleryConfirmationPopup";
+import RejectConfirmationPopupModal from "./components/RejectGalleryConfirmationModal";
+import BlockGalleryConfirmationPopupModal from "./components/BlockGalleryConfirmationPopup";
 
-export default async function page() {
-  const galleries = await fetchUnverifiedGalleries();
+export default function page() {
   return (
     <div className="relative">
-      <GalleryList galleries={galleries?.data} />
+      <TabGroup />
       <GalleryDetailPopupModal />
+      <AcceptConfirmationPopupModal />
+      <RejectConfirmationPopupModal />
+      <BlockGalleryConfirmationPopupModal />
     </div>
   );
 }

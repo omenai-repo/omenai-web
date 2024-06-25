@@ -58,7 +58,7 @@ export default function ArtworkCard({
           </div>
         </div>
 
-        <div className=" bg-[#FAFAFA] py-1 px-3 w-full">
+        <div className=" bg-[#FAFAFA] p-3 w-full">
           <div className="flex justify-between items-center my-2">
             <p className="font-normal text-[14px] text-dark ">
               {name.substring(0, 20)}
@@ -78,11 +78,11 @@ export default function ArtworkCard({
               <p className="font-normal underline text-xs">Request</p>
             )}
           </div>
-          <hr className="border-dark/10 my-5" />
-          <div className="flex flex-wrap gap-2 mb-2 items-center">
+          {/* <hr className="border-dark/10 my-5" /> */}
+          {/* <div className="flex flex-wrap gap-2 mb-2 items-center">
             <ArtworkCardTags tag={medium} />
             <ArtworkCardTags tag={rarity} />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

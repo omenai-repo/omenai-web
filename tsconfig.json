@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "store/AuthStore.ts",
     "lib/validations/validatorGroup.ts",
-    "app/api/test/route.ts",
+    "app/api/subscriptions/test/route.ts",
     "app/admin/dashboard/galleries"
   ],
   "exclude": ["node_modules"]

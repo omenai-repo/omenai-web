@@ -7,6 +7,7 @@ import { sendGalleryMail } from "@/emails/models/gallery/sendGalleryMail";
 import { parseRegisterData } from "@/lib/auth/parseRegisterData";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
+import { RejectedGallery } from "@/models/auth/RejectedGalleryScema";
 import { VerificationCodes } from "@/models/auth/verification/codeTimeoutSchema";
 import { generateDigit } from "@/utils/generateToken";
 import { NextResponse } from "next/server";
@@ -17,13 +18,21 @@ export async function POST(request: Request) {
 
     const data = await request.json();
 
-    const isAccountRegistered = await AccountGallery.findOne(
-      { email: data.email },
-      "email"
-    ).exec();
+    const isAccountRegistered = await AccountGallery.findOne({
+      email: data.email,
+    }).exec();
 
     if (isAccountRegistered)
       throw new ConflictError("Account already exists, please login");
+
+    const isAccountRejected = await RejectedGallery.findOne({
+      email: data.email,
+    }).exec();
+
+    if (isAccountRejected)
+      throw new ConflictError(
+        "Unfortunately, you cannot create an account with us at this time. Please contact support."
+      );
 
     const parsedData = await parseRegisterData(data);
 

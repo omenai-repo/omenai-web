@@ -4,19 +4,22 @@ import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const unverified_galleries = await AccountGallery.find(
-      { gallery_verified: false },
-      "name location admin logo description email"
+    const { gallery_id, status } = await request.json();
+
+    const block_gallery = await AccountGallery.updateOne(
+      { gallery_id },
+      { $set: { status } }
     );
 
-    if (!unverified_galleries)
-      throw new ServerError("Something went wrong, contact tech team");
+    if (!block_gallery) throw new ServerError("Something went wrong");
+
+    // TODO: Send mail to gallery
 
     return NextResponse.json(
-      { message: "Data retrieved", data: unverified_galleries },
+      { message: "Gallery status updated" },
       { status: 200 }
     );
   } catch (error) {

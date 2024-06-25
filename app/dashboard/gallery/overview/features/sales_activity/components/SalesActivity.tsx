@@ -33,7 +33,7 @@ export function SalesActivity({ activityData }: any) {
         }}
       >
         <ResponsiveContainer>
-          <AreaChart data={activityData} margin={{ top: 5, bottom: 35 }}>
+          <AreaChart data={activityData} margin={{ top: 3, bottom: 35 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" height={20} className="text-xs" />
             <YAxis width={50} className="text-xs " />
@@ -42,10 +42,10 @@ export function SalesActivity({ activityData }: any) {
             <Area
               type="monotone"
               dataKey="Revenue"
-              stroke="#2A9EDF"
-              fill="#2A9EDF"
+              stroke="#585858"
+              fill="#EFEFEF"
             />
-            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
           </AreaChart>
         </ResponsiveContainer>
       </div>

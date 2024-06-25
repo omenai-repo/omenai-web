@@ -1,22 +1,21 @@
 "use client";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import GalleryListItem from "./GalleryListItem";
 import Loader from "@/components/loader/Loader";
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { AnimatePresence, motion } from "framer-motion";
 import { fetchGalleriesOnVerifStatus } from "@/services/admin/fetch_galleries_on_verif_status";
 
-export default function GalleryList() {
+export default function VerifiedGalleryList() {
   const { data: galleries, isLoading } = useQuery({
-    queryKey: ["fetch_non_verified_galleries"],
+    queryKey: ["fetch_verified_galleries"],
     queryFn: async () => {
-      const res = await fetchGalleriesOnVerifStatus(false);
+      const res = await fetchGalleriesOnVerifStatus(true);
 
       if (res?.isOk) {
         return res.data;
       }
     },
-    staleTime: 0,
   });
 
   if (isLoading) {
@@ -57,7 +56,7 @@ export default function GalleryList() {
                   admin={gallery.admin}
                   logo={gallery.logo}
                   gallery_id={gallery.gallery_id}
-                  verified={false}
+                  verified={true}
                   status={gallery.status}
                 />
               );

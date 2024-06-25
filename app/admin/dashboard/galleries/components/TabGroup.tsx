@@ -1,0 +1,36 @@
+"use client";
+import Loader from "@/components/loader/Loader";
+import { Suspense, useState } from "react";
+import GalleryList from "./GalleryList";
+import TabSelector from "./TabSelector";
+import VerifiedGalleryList from "./VerifiedGalleryList";
+
+export default function TabGroup() {
+  const [tab, setTab] = useState("pending");
+
+  return (
+    <>
+      <div className="w-full p-10 grid place-items-center">
+        <TabSelector tab={tab} setTab={setTab} />
+      </div>
+      <div className="w-full h-full grid place-items-center container">
+        {tab === "pending" ? (
+          <Suspense fallback={<Loader />}>
+            {/* <PendingOrders orders={orders} /> */}
+            <GalleryList />
+          </Suspense>
+        ) : tab === "verified" ? (
+          <Suspense fallback={<Loader />}>
+            <VerifiedGalleryList />
+            {/* <OrderHistory orders={orders} /> */}
+          </Suspense>
+        ) : (
+          <Suspense fallback={<Loader />}>
+            <p>Rejected</p>
+            {/* <OrderHistory orders={orders} /> */}
+          </Suspense>
+        )}
+      </div>
+    </>
+  );
+}

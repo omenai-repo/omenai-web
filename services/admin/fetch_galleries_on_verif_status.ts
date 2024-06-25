@@ -1,10 +1,11 @@
 import { getApiUrl } from "@/config";
 
-export async function fetchUnverifiedGalleries() {
+export async function fetchGalleriesOnVerifStatus(status: boolean) {
   try {
     const url = getApiUrl();
-    const res = await fetch(`${url}/api/admin/get_non_verified_galleries`, {
-      method: "GET",
+    const res = await fetch(`${url}/api/admin/get_galleries_on_verif_status`, {
+      method: "POST",
+      body: JSON.stringify({ status }),
     });
 
     const result = await res.json();
