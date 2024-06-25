@@ -55,6 +55,7 @@ type GallerySchemaTypes = {
   role: string;
   logo?: string;
   subscription_active: boolean;
+  status: "active" | "blocked";
 };
 
 type IndividualSchemaTypes = {
@@ -292,4 +293,16 @@ type CardInputTypes = {
   cvv: string;
   month: string;
   year: string;
+};
+
+type AdminGalleryListItemTypes = {
+  name: string;
+  location: string;
+  description: string;
+  _id: string;
+  email: string;
+  admin: string;
+  logo: string;
+  gallery_id: string;
+  status: "active" | "blocked";
 };

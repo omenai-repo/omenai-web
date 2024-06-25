@@ -1,12 +1,10 @@
 "use client";
 import NextTopLoader from "nextjs-toploader";
 import PageLayout from "./features/PageLayout";
-import MobilePageLayout from "./features/MobilePageLayout";
 import Appbar from "./components/Appbar";
 import { galleryNavigationActions } from "@/store/gallery/gallery_navigation/GalleryNavigation";
 import { useWindowSize } from "usehooks-ts";
 import NoMobileView from "./components/NoMobileView";
-import Providers from "@/react-query-provider/Provider";
 import { ShippingQuoteModal } from "./modals/ShippingQuoteUpdateModal";
 import { UploadTrackingIDModal } from "./modals/ProvideTrackingIDModal";
 import { UploadOrderRejectionReason } from "./modals/ProvideOrderRejectionReason";
@@ -31,14 +29,9 @@ export default function GalleryDashboardLayout({
             <div className="hidden md:block">
               <PageLayout />
             </div>
-            <div className="block md:hidden">
-              <MobilePageLayout />
-            </div>
 
             <div
-              className={`w-full ${
-                open ? "xl:ml-[19rem] md:ml-[15rem]" : "md:ml-[7rem] ml-0"
-              } relative duration-200`}
+              className={`w-full xl:ml-[19rem] md:ml-[15rem] bg-[#FAFAFA] rounded-xl relative duration-200`}
             >
               <Appbar />
               <div className="h-auto rounded-lg relative my-5 px-5">

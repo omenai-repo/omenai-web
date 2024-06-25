@@ -63,6 +63,10 @@ const gallerySignupSchema = new Schema<GallerySchemaTypes>(
       required: true,
       default: () => false,
     },
+    status: {
+      type: String,
+      default: () => "active",
+    },
   },
   { timestamps: true }
 );

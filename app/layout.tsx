@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Nunito_Sans } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import "./globals.css";
 

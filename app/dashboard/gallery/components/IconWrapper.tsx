@@ -9,7 +9,7 @@ export default function IconWrapper({
 }) {
   return (
     <div
-      className={`p-2 rounded-md w-fit shadow-md ${className} group`}
+      className={`p-2 w-fit rounded-md  ${className} group`}
       onClick={onClick}
     >
       {children}

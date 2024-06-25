@@ -10,7 +10,7 @@ export default function Highlight() {
           <>
             <div
               key={index}
-              className="px-3 py-2 flex justify-between items-center rounded-lg ring-1 ring-dark/20 bg-white"
+              className="px-3 py-2 flex justify-between items-center rounded-lg ring-1 ring-[#eeeeee] bg-white"
             >
               <div className="flex flex-col gap-y-2">
                 <p className="text-dark text-xs font-normal">{item.title}</p>

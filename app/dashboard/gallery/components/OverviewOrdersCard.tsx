@@ -3,7 +3,7 @@ import { getImageFileView } from "@/lib/storage/getImageFileView";
 import { actionStore } from "@/store/actions/ActionStore";
 import Image from "next/image";
 import Link from "next/link";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 type OverviewOrdersCardProps = {
   title: string;
@@ -69,7 +69,7 @@ export default function OverviewOrdersCard({
   }
 
   return (
-    <div className="flex justify-between items-center px-5 py-3 rounded-lg ring-1 ring-dark/10 shadow-sm w-full">
+    <div className="flex justify-between items-center px-5 py-3 rounded-lg ring-1 ring-[#eeeeee] shadow-sm w-full">
       <div className=" flex gap-x-3">
         <Image
           src={image_url}
@@ -79,18 +79,14 @@ export default function OverviewOrdersCard({
           className="object-top object-contain"
         />
         <div className="flex flex-col">
-          <p className="text-dark font-normal text-[18px]">{title}</p>
-          <span className="text-dark ">{artist}</span>
-          <span className="text-dark font-normal">{price}</span>
+          <p className="text-dark font-normal text-base">{title}</p>
+          <span className="text-dark text-xs font-light">{artist}</span>
         </div>
       </div>
-      <div className="flex flex-col items-end gap-y-1 text-[14px]">
-        <span className="text-dark font-normal">
-          Order ID: <span className="font-normal">{order_id}</span>
-        </span>
-        <span className="text-dark">{order_date}</span>
-        <span className="text-dark font-normal">
-          {status.toLocaleUpperCase()}
+      <div className="flex flex-col items-end gap-y-1 text-xs">
+        <span className="text-dark text-xs">{order_date}</span>
+        <span className="text-dark font-normal px-2 py-1 text-[12px] rounded-full bg-amber-50">
+          {status.charAt(0).toUpperCase() + status.slice(1)}
         </span>
         {state === "pending" ? (
           payment_information!.status === "completed" ? (
@@ -140,10 +136,10 @@ export default function OverviewOrdersCard({
         {state === "overview" && (
           <Link
             href="/dashboard/gallery/orders"
-            className="text-dark/80 flex gap-x-1 items-center underline cursor-pointer"
+            className="text-dark/80 flex gap-x-1 text-xs items-center mt-4 cursor-pointer"
           >
             View Order
-            <IoIosArrowForward />
+            <IoIosArrowRoundForward />
           </Link>
         )}
       </div>

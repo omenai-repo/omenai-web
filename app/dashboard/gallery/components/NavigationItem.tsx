@@ -25,66 +25,32 @@ export default function NavigationItem({
   return (
     <>
       {title === "Sign out" ? (
-        <Tooltip
-          content={title}
-          style="dark"
-          animation="duration-500"
-          className={`text-[0.7rem] border-primary p-2 relative  ${
-            open && "hidden"
-          }`}
+        <li
+          onClick={onClick}
+          className={`p-2 group flex items-center w-full hover:bg-dark hover:text-white rounded-md`}
         >
-          <li
-            onClick={onClick}
-            className={`p-2 ${
-              (open || mobile) && "gap-x-4 "
-            } group flex items-center w-fit rounded-md`}
-          >
-            <IconWrapper
-              className={`group-hover:bg-primary bg-white duration-300 `}
-            >
-              {icon}
-            </IconWrapper>
-            <p
-              className={`text-xs p-2 text-white font-light ${
-                !open && !mobile && "scale-0 hidden"
-              } duration-200`}
-            >
-              {title}
-            </p>
-          </li>
-        </Tooltip>
+          <IconWrapper>{icon}</IconWrapper>
+          <p className={`text-xs p-2 font-normal`}>{title}</p>
+        </li>
       ) : (
-        <Tooltip
-          content={title}
-          style="dark"
-          animation="duration-500"
-          className={`text-[0.7rem] border-primary p-2 relative ${
-            open && "hidden"
-          }`}
+        <Link
+          onClick={onClick}
+          href={url}
+          className={`p-2 ${
+            pathname.startsWith(url)
+              ? "bg-dark text-white"
+              : "bg-white text-dark"
+          } group flex items-center w-full hover:bg-dark rounded-md`}
         >
-          <Link
-            onClick={onClick}
-            href={url}
-            className={`p-2 ${
-              (open || mobile) && "gap-x-4"
-            } group flex items-center w-fitrounded-md`}
+          <IconWrapper
+            className={` ${pathname.startsWith(url) && "bg-white text-white"}`}
           >
-            <IconWrapper
-              className={`group-hover:bg-primary duration-300 ${
-                pathname.startsWith(url) ? "bg-primary" : "bg-white"
-              }`}
-            >
-              {icon}
-            </IconWrapper>
-            <p
-              className={`text-xs p-2 text-white  font-light ${
-                !open && !mobile && "scale-0 hidden"
-              } duration-200`}
-            >
-              {title}
-            </p>
-          </Link>
-        </Tooltip>
+            {icon}
+          </IconWrapper>
+          <p className={`text-xs p-2 font-normal group-hover:text-white`}>
+            {title}
+          </p>
+        </Link>
       )}
     </>
   );
