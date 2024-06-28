@@ -1,9 +1,9 @@
 "use client";
 import { actionStore } from "@/store/actions/ActionStore";
 import { AnimatePresence, motion } from "framer-motion";
-import ShippingQuoteModalDataForm from "./ShippingQuoteModalDataForm";
+import ShippingQuoteModalDataForm from "./OrderActionModalForm";
 
-export const ShippingQuoteModal = () => {
+export const OrderActionModal = () => {
   const [
     openGalleryOrderActionModal,
     toggleGalleryOrderActionModal,
@@ -32,8 +32,11 @@ export const ShippingQuoteModal = () => {
             animate={{ scale: 1, rotate: "0deg" }}
             exit={{ scale: 0, rotate: "0deg" }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-white text-dark p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative h-[90vh] overflow-y-scroll"
+            className="bg-white text-dark p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative  overflow-y-scroll"
           >
+            <h1 className="text-base font-medium mb-5">
+              Order Request Details
+            </h1>
             {/* Add modal form here */}
             <div className="h-auto w-full">
               <ShippingQuoteModalDataForm />

@@ -6,7 +6,7 @@ import CancelSubscriptionModal from "./components/CancelSubscriptionModal";
 import SubscriptionStatus from "./components/SubscriptionStatus";
 import { retrieveSubscriptionData } from "@/services/subscriptions/retriveSubscriptionData";
 import { useSession } from "next-auth/react";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 
 export default function SubscriptionActiveTheme() {
   const session = useSession();
@@ -23,7 +23,7 @@ export default function SubscriptionActiveTheme() {
   if (isLoading) {
     return (
       <div className="h-[85vh] w-full grid place-items-center">
-        <Loader />
+        <Load />
       </div>
     );
   }

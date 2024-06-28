@@ -1,5 +1,4 @@
 import ArtworkDetail from "./ArtworkDetail";
-import FullArtworkDetails from "./FullArtworkDetails";
 import ImageBox from "./ImageBox";
 
 type ProductBoxTypes = {

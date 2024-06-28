@@ -7,7 +7,7 @@ import { artworkStore } from "@/store/artworks/ArtworkStore";
 import { useQuery } from "@tanstack/react-query";
 import Pagination from "./Pagination";
 import { filterStore } from "@/store/artworks/FilterStore";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 
 export default function AllArtworks({
   sessionId,
@@ -34,7 +34,7 @@ export default function AllArtworks({
   if (loading || isLoading) {
     return (
       <div className="h-[85vh] w-full grid place-items-center">
-        <Loader />
+        <Load />
       </div>
     );
   }

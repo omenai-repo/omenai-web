@@ -55,14 +55,14 @@ export default function Pagination() {
         <button
           disabled={paginationCount === 1}
           onClick={() => handlePaginationArtworkFetch("dec")}
-          className="bg-dark text-xs rounded-sm text-white px-5 py-1.5 disabled:bg-dark/30 disabled:cursor-not-allowed"
+          className="bg-dark text-xs rounded-sm text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
           Previous
         </button>
         <button
           disabled={paginationCount === pageCount}
           onClick={() => handlePaginationArtworkFetch("inc")}
-          className="bg-dark text-xs rounded-sm text-white px-5 py-1.5 disabled:bg-dark/30 disabled:cursor-not-allowed"
+          className="bg-dark text-xs rounded-sm text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
           Next
         </button>

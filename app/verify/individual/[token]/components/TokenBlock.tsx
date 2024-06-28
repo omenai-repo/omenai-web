@@ -6,7 +6,7 @@ import { verifyAuthStore } from "@/store/auth/verify/VerifyAuthStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { toast } from "sonner";
 type TokenProps = {
   token: string;
@@ -76,7 +76,7 @@ export default function TokenBlock({ token }: TokenProps) {
       >
         <input
           type="text"
-          className="px-4 py-2 ring-1 ring-dark rounded-md w-full md:w-1/3"
+          className=" h-[50px] px-4 ring-1 ring-dark rounded-md w-full md:w-1/3"
           placeholder="Verification token"
           required
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -85,10 +85,10 @@ export default function TokenBlock({ token }: TokenProps) {
         />
         <button
           disabled={isLoading}
-          className=" disabled:bg-gray-400 grid place-items-center disabled:cursor-not-allowed px-4 py-2 bg-black text-white rounded-md transition-all ease-linear duration-200"
+          className=" disabled:bg-gray-400 grid place-items-center disabled:cursor-not-allowed h-[50px] px-4 bg-black text-white rounded-md transition-all ease-linear duration-200"
           type={"submit"}
         >
-          {isLoading ? <LoaderAnimation /> : "Submit"}
+          {isLoading ? <LoadSmall /> : "Submit"}
         </button>
       </form>
       <p>

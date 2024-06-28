@@ -1,9 +1,9 @@
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 
 export default function Loader() {
   return (
     <div className="w-full h-full grid place-items-center">
-      <LoaderAnimation />
+      <LoadSmall />
     </div>
   );
 }

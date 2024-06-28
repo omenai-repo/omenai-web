@@ -1,5 +1,5 @@
 import ArtworkCard from "@/components/artworks/ArtworkCard";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 
 type SearchResultDetailsProps = {
   data:
@@ -28,7 +28,7 @@ export default function SearchResultDetails({
     <div>
       {data === "pending" ? (
         <div className="h-[80vh] w-full grid place-items-center">
-          <Loader />
+          <Load />
         </div>
       ) : (
         <div className="w-full h-full">

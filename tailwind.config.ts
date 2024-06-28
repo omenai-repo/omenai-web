@@ -13,7 +13,7 @@ const config: Config = {
       center: true,
     },
     fontSize: {
-      xs: "0.875rem",
+      xs: "0.8125rem",
       base: "1rem",
       sm: "1.2rem",
       md: "1.44rem",

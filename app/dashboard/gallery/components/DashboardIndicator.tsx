@@ -35,13 +35,13 @@ export default function DashboardIndicator({
       {/* Request verification */}
       {!gallery_verified ? (
         <div className="" id="gallery-verification">
-          <button className="px-3 py-2 bg-dark text-white rounded-md text-[14px] hover:bg-dark/90">
+          <button className=" h-[50px] px-4 bg-dark text-white rounded-md text-[14px] hover:bg-dark/90">
             Request gallery verification
           </button>
         </div>
       ) : (
         <div className="flex gap-2 items-center">
-          <RiAdminLine className="text-md font-light text-dark" />
+          <RiAdminLine className="text-sm font-light text-dark" />
           <div>
             <p className="text-dark text-xs font-bold">{admin_name}</p>
             {/* <p className="text-dark text-xs">{gallery_name}</p> */}

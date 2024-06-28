@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import TrendingArtworkCard from "./TrendingArtCard";
 import { fetchAllArtworkImpressions } from "@/services/artworks/fetchArtworkImpressions";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 
 export default function TrendingArtworks({
   sessionId,
@@ -20,7 +20,7 @@ export default function TrendingArtworks({
   if (isLoading)
     return (
       <div className="h-[500px] w-full place-items-center grid">
-        <Loader />
+        <Load />
       </div>
     );
   return (

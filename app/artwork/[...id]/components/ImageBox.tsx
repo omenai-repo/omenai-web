@@ -13,12 +13,6 @@ export default function ImageBox({ url, title }: ImageBoxProps) {
 
   return (
     <div className="w-auto h-full max-h-[1000px]">
-      {/* <InnerImageZoom
-        src={image_href}
-        fullscreenOnMobile={false}
-        hasSpacer={true}
-        zoomType="hover"
-      /> */}
       <Image
         src={image_href}
         alt={`${title} image`}
@@ -26,11 +20,6 @@ export default function ImageBox({ url, title }: ImageBoxProps) {
         height={500}
         className="min-w-[300px] aspect-auto object-top object-cover cursor-pointer"
       />
-      {/* <img
-        src={image_href}
-        alt={`${title} image`}
-        className="max-w-[600px] min-w-[300px] w-auto aspect-auto max-h-[600px] h-auto"
-      /> */}
     </div>
   );
 }

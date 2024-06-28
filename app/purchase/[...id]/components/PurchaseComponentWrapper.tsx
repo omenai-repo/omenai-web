@@ -13,7 +13,7 @@ import DeliveryMethod from "./DeliveryMethod";
 import ProductItem from "./ProductItem";
 import { fetchUserData } from "@/services/requests/fetchUserData";
 import { Session } from "next-auth";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 
 export default function PurchaseComponentWrapper({
   artwork,
@@ -61,7 +61,7 @@ export default function PurchaseComponentWrapper({
   if (!isLoggedIn)
     return (
       <div className="h-[90vh] w-full grid place-items-center">
-        <Loader />
+        <Load />
       </div>
     );
 

@@ -1,6 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
-
+/* eslint-disable @next/next/no-img-element */
 import { getImageFileView } from "@/lib/storage/getImageFileView";
 import { formatPrice } from "@/utils/priceFormatter";
 

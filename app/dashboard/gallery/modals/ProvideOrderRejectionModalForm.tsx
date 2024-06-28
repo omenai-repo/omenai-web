@@ -1,10 +1,9 @@
 "use client";
 
-import Loader from "@/components/loader/Loader";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { declineOrderRequest } from "@/services/orders/declineOrderRequest";
-import { updateOrderTrackingData } from "@/services/orders/updateTrackingInformation";
 import { actionStore } from "@/store/actions/ActionStore";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
@@ -14,6 +13,7 @@ export default function ProvideOrderRejectionModalForm() {
     state.toggleDeclineOrderModal,
     state.current_order_id,
   ]);
+  const queryClient = useQueryClient();
   const [accepted_status, setAcceptedStatus] =
     useState<OrderAcceptedStatusTypes>({
       status: "declined",
@@ -46,6 +46,9 @@ export default function ProvideOrderRejectionModalForm() {
     } else {
       setLoading(false);
       toast.success(response.message);
+      queryClient.invalidateQueries({
+        queryKey: ["fetch_orders_by_category"],
+      });
       toggleDeclineOrderModal(false);
       router.refresh();
     }
@@ -53,29 +56,31 @@ export default function ProvideOrderRejectionModalForm() {
 
   return (
     <div>
-      <h1 className="text-sm font-medium mb-4">Uh oh! That&apos;s so sad</h1>
+      <h1 className="text-base font-normal mb-4 text-dark">Sure to decline?</h1>
       <form className="w-full" onSubmit={handleSubmitTrackingInfo}>
         <div className="space-y-2 mb-2 flex flex-col w-full">
-          <div className="relative w-full h-auto">
-            <label htmlFor="shipping">Is there a reason for this?</label>
+          <div className="relative w-full h-auto my-2">
+            <label htmlFor="shipping" className="text-xs text-[#858585] mb-2">
+              Reason for declining request
+            </label>
             <input
               onChange={handleInputChange}
               name="reason"
               type="text"
               required
-              placeholder="Please indicate a reason why this order has been declined"
-              className="px-3 py-2 border border-dark/20 rounded-md w-full focus:border-none focus:ring-1 focus:ring-dark focus:outline-none"
+              placeholder="e.g Artwork no longer available"
+              className="h-[50px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xs"
             />
           </div>
         </div>
 
-        <div className="w-full flex justify-end items-end mt-5">
+        <div className="w-full  mt-5">
           <button
             disabled={loading}
             type="submit"
-            className="px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
+            className="h-[50px] px-4 w-full text-xs text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-200 grid place-items-center"
           >
-            {loading ? <LoaderAnimation /> : " Decline order"}
+            {loading ? <LoadSmall /> : " Decline order"}
           </button>
         </div>
       </form>

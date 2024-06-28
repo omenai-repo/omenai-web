@@ -65,7 +65,7 @@ export default function Filter() {
             showFilterBlock
               ? "bg-dark text-white rounded-sm"
               : "border-dark/10 border rounded-sm bg-white text-dark"
-          } duration-200 py-2 px-5  flex space-x-2 items-center w-fit cursor-pointer`}
+          } duration-200 h-[50px] px-4  flex space-x-2 items-center w-fit cursor-pointer`}
           onClick={() => setShowFilterBlock(!showFilterBlock)}
         >
           <span className="text-xs font-normal">Filters</span>
@@ -78,7 +78,7 @@ export default function Filter() {
         <div />
         <button
           disabled={isEmptyFilter(filterOptions)}
-          className=" disabled:bg-dark/30 disabled:cursor-not-allowed rounded-sm py-2 px-5 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
+          className=" disabled:bg-dark/30 disabled:cursor-not-allowed rounded-sm h-[50px] px-4 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
           onClick={handleSubmitFilter}
         >
           <span className="text-xs font-normal text-white">Apply filters</span>

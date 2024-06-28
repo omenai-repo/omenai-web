@@ -1,6 +1,6 @@
 "use client";
+import Load from "@/components/loader/Load";
 import ArtworkCard from "../../../components/artworks/ArtworkCard";
-import Loader from "@/components/loader/Loader";
 import { fetchAllArtworks } from "@/services/artworks/fetchAllArtworks";
 import { useQuery } from "@tanstack/react-query";
 
@@ -20,7 +20,7 @@ export default function LatestArtworks({
   if (isLoading)
     return (
       <div className="h-[500px] w-full place-items-center grid">
-        <Loader />
+        <Load />
       </div>
     );
 

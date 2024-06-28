@@ -1,22 +1,19 @@
 import { getApiUrl } from "@/config";
-import { nextAuthOptions } from "@/lib/auth/next-auth-options";
-import { getServerSession } from "next-auth";
+
+import { getSession } from "next-auth/react";
 
 export async function fetchPopularArtworks() {
-  const session = await getServerSession(nextAuthOptions);
+  const session = await getSession();
   try {
     const url = getApiUrl();
-    const response = await fetch(`${url}/api/artworks/getPopularArtworks`, {
+    const res = await fetch(`${url}/api/artworks/getPopularArtworks`, {
       method: "POST",
       body: JSON.stringify({ id: session?.user.id }),
-    }).then(async (res) => {
-      if (!res.ok) return undefined;
-      const result = await res.json();
-
-      return result;
     });
 
-    return response;
+    const result = await res.json();
+
+    return { isOk: res.ok, message: result.message, data: result.data };
   } catch (error: any) {
     console.log(error);
   }

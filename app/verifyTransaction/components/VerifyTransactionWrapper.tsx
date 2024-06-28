@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { signOut } from "next-auth/react";
 import { useLocalStorage } from "usehooks-ts";
 import { getApiUrl } from "@/config";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 
 export default function VerifyTransactionWrapper() {
   const searchParams = useSearchParams();
@@ -41,7 +41,7 @@ export default function VerifyTransactionWrapper() {
       <div className="w-full h-[80vh] grid place-items-center">
         <div className="flex flex-col gap-y-1 justify-center items-center">
           <p>Verifying transaction status</p>
-          <LoaderAnimation />
+          <LoadSmall />
         </div>
       </div>
     );

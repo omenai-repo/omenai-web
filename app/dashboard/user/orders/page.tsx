@@ -6,7 +6,8 @@ export default async function Orders() {
   if (!orders?.isOk) throw new Error("Something went wrong, please try again");
   return (
     <>
-      <OrdersGroup orders={orders.data} />
+      {/* <OrdersGroup orders={orders.data} /> */}
+      <p>Dashboard orders page</p>
     </>
   );
 }

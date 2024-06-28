@@ -3,7 +3,7 @@ import Link from "next/link";
 import EditorialsGrid from "./components/EditorialsGrid";
 import { useQuery } from "@tanstack/react-query";
 import { listEditorials } from "@/app/secure/editorial/admin/lib/getAllBlogArticles";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 import { MdArrowRightAlt } from "react-icons/md";
 
 export default function Editorials() {
@@ -17,8 +17,8 @@ export default function Editorials() {
 
   if (isLoading)
     return (
-      <div className="h-[20vh] w-full place-items-center grid">
-        <Loader />
+      <div className="h-[500px] w-full place-items-center grid">
+        <Load />
       </div>
     );
 
@@ -28,7 +28,7 @@ export default function Editorials() {
         <div className="p-1 sm:px-4 py-16 mb-12 relative bg-[#FAFAFA]">
           <div className="flex justify-between items-center p-2">
             <h1 className="text-dark font-normal text-[20px] sm:text-sm">
-              Editorials
+              Editorial articles for you
             </h1>
             <Link
               href={"/articles"}

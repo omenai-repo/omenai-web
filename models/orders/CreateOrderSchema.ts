@@ -22,6 +22,10 @@ const createOrder = new Schema<CreateOrderModelTypes>(
       type: Schema.Types.Mixed,
       required: true,
     },
+    delivery_confirmed: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   { timestamps: true }
 );

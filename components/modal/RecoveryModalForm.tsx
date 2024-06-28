@@ -10,7 +10,7 @@ export default function RecoveryModalForm() {
   return (
     <div className="w-auto h-auto">
       <div className="flex flex-col gap-8 items-center">
-        <div className="bg-white flex flex-col gap-y-8 px-2 py-4 rounded-xl relative">
+        <div className="bg-white flex flex-col gap-y-8 px-2 py-4 rounded-md relative">
           <div className="absolute top-5 right-5">
             <GrClose
               className="cursor-pointer"
@@ -20,7 +20,7 @@ export default function RecoveryModalForm() {
             />
           </div>
           <div className="">
-            <h1 className="text-sm md:text-md font-medium">Let us help</h1>
+            <h1 className="text-sm font-medium">Let us help</h1>
             <p className="text-xs font-light sm:font-normal">
               Enter your email so we can help recover your account
             </p>

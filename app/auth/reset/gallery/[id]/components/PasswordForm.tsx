@@ -15,7 +15,7 @@ import {
   ReactPortal,
   useState,
 } from "react";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { toast } from "sonner";
 
 type IdProps = {
@@ -114,9 +114,9 @@ export default function PasswordForm({ id }: IdProps) {
         <div className="self-end">
           <button
             disabled={isLoading}
-            className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-md bg-black px-4 py-2 text-white hover:bg-black/90"
+            className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-md bg-dark h-[50px] px-4 text-white hover:bg-dark/90"
           >
-            {isLoading ? <LoaderAnimation /> : "Update"}
+            {isLoading ? <LoadSmall /> : "Update"}
           </button>
         </div>
       </form>

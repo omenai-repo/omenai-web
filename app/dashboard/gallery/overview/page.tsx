@@ -4,9 +4,8 @@ import EditorialRecommendations from "./features/editorials/EditorialRecommendat
 import Highlight from "./features/highlight/Highlight";
 import Orders from "./features/orders/Orders";
 import PopularArtworks from "./features/popular_artworks/PopularArtworks";
-import OverviewComponentCard from "./components/OverviewComponentCard";
 import ActivityWrapper from "./features/sales_activity/ActivityWrapper";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 import PageTitle from "../components/PageTitle";
 
 export default function OverviewPage() {
@@ -15,20 +14,18 @@ export default function OverviewPage() {
       <Tour />
       <PageTitle title={"Overview"} />
       <Highlight />
+      <Suspense fallback={<Load />}>
+        <ActivityWrapper />
+      </Suspense>
 
       <div className="grid lg:grid-cols-2 gap-x-[1rem] pb-4">
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Load />}>
           <Orders />
         </Suspense>
 
-        <Suspense fallback={<Loader />}>
-          <ActivityWrapper />
-        </Suspense>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Load />}>
           <PopularArtworks />
         </Suspense>
-
-        <EditorialRecommendations />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+"use client";
 import { getOverviewOrders } from "@/services/orders/getOverviewOrders";
 import OverviewComponentCard from "../../components/OverviewComponentCard";
 import OverviewOrdersCard from "../../../components/OverviewOrdersCard";
@@ -5,11 +6,29 @@ import NotFoundData from "../../../../../../components/notFound/NotFoundData";
 import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
 import Link from "next/link";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { useQuery } from "@tanstack/react-query";
+import Load from "@/components/loader/Load";
 
-export default async function Orders() {
-  const orders = await getOverviewOrders();
-  const limitedOrders = orders.data.filter(
-    (order: any) => order.status === "pending"
+export default function Orders() {
+  const { data: orders, isLoading } = useQuery({
+    queryKey: ["get_overview_order"],
+    queryFn: async () => {
+      const orders = await getOverviewOrders();
+      if (orders?.isOk) {
+        return orders.data;
+      }
+    },
+  });
+
+  if (isLoading)
+    return (
+      <div className="h-[40vh] grid place-items-center">
+        <Load />
+      </div>
+    );
+
+  const limitedOrders = orders!.filter(
+    (order: any) => order.order_accepted.status === ""
   );
   return (
     <OverviewComponentCard
@@ -17,7 +36,9 @@ export default async function Orders() {
       title={"Recent orders"}
       id="tour-footer"
     >
-      {orders.data.length === 0 ? (
+      {isLoading && <div>!</div>}
+
+      {orders!.length === 0 ? (
         <NotFoundData />
       ) : (
         <>
@@ -33,8 +54,6 @@ export default async function Orders() {
                   price={order.artwork_data.pricing.price}
                   order_date={formatIntlDateTime(order.createdAt)}
                   status={order.status}
-                  order_id={order.order_id}
-                  state="overview"
                 />
               );
             })}
@@ -44,7 +63,7 @@ export default async function Orders() {
               href="/dashboard/gallery/orders"
               className="text-dark/80 flex gap-x-1 text-xs items-center mt-4 cursor-pointer"
             >
-              View all Orders
+              View {limitedOrders.length} pending orders
               <IoIosArrowRoundForward />
             </Link>
           </div>

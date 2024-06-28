@@ -27,7 +27,7 @@ export function formatISODate(isoDate: string) {
   hours = hours ? hours : 12; // Handle midnight
   const formattedHours = ("0" + hours).slice(-2); // Add leading zero if needed
 
-  const dateString = `${dayOfWeek}, ${month} ${day}, ${year}`;
+  const dateString = `${dayOfWeek}, ${day}, ${month}, ${year}`;
   // ${formattedHours}:${minutes} ${ampm}
 
   return dateString;

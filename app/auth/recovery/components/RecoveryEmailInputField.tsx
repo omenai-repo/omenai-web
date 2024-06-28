@@ -1,5 +1,5 @@
 "use client";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { sendPasswordResetLink } from "@/services/password/sendPasswordResetLink";
 import { actionStore } from "@/store/actions/ActionStore";
 import { FormEvent, useState } from "react";
@@ -23,13 +23,10 @@ export default function RecoveryEmailInputField() {
     setIsloading(false);
   };
   return (
-    <form
-      className="flex sm:flex-row flex-col gap-4 w-full"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit}>
       <input
         type="text"
-        className="flex-1 w-full ring-1 ring-dark/20 focus:ring-primary px-4 py-1 rounded-md placeholder:text-xs"
+        className="p-3 border border-[#E0E0E0] text-xs placeholder:text-[#858585] placeholder:text-xs bg-white w-full focus:border-none focus:ring-1 focus:ring-dark focus:outline-none"
         placeholder="Email address"
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -37,9 +34,9 @@ export default function RecoveryEmailInputField() {
       <button
         disabled={isLoading}
         type="submit"
-        className="grid self-end disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center w-full sm:w-fit px-4 py-2 bg-primary hover:bg-primary/50 rounded-md text-white text-xs"
+        className=" disabled:cursor-not-allowed grid disabled:bg-white disabled:border disabled:border-dark place-items-center w-full h-[50px]  bg-dark hover:bg-dark/80 hover:text-white rounded-sm text-white text-xs "
       >
-        {isLoading ? <LoaderAnimation /> : "Send link"}
+        {isLoading ? <LoadSmall /> : "Send reset link"}
       </button>
     </form>
   );

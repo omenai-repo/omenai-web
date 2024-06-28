@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import NotFoundData from "../../../../../components/notFound/NotFoundData";
 import OverviewOrdersCard from "../../components/OverviewOrdersCard";
 import { ObjectId } from "mongoose";
+import OrdersTable from "./OrdersTable";
 
 export default function PendingOrders({
   orders,
@@ -22,38 +23,8 @@ export default function PendingOrders({
         transition={{ duration: 0.33 }}
         className="w-full"
       >
-        {orders.length === 0 ? (
-          <NotFoundData />
-        ) : (
-          <div className="flex flex-col gap-3 w-full">
-            {orders.map((order: any, index: number) => {
-              return (
-                <>
-                  <OverviewOrdersCard
-                    key={index}
-                    url={order.artwork_data.url}
-                    title={order.artwork_data.title}
-                    artist={order.artwork_data.artist}
-                    buyer={order.buyer.name}
-                    price={order.artwork_data.pricing.price}
-                    order_date={formatIntlDateTime(order.createdAt)}
-                    status={order.status}
-                    order_id={order.order_id}
-                    shipping_address={order.shipping_address}
-                    state="pending"
-                    payment_information={order.payment_information}
-                    tracking_information={order.tracking_information}
-                    shipping_quote={order.shipping_quote}
-                    order_accepted={order.order_accepted}
-                  />
-                  <hr className="h-px my-2 bg-dark/10 border-0 dark:bg-gray-700" />
-                </>
-              );
-            })}
-          </div>
-        )}
+        {orders.length === 0 ? <NotFoundData /> : <OrdersTable data={orders} />}
       </motion.div>
-      ;
     </AnimatePresence>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { fetchHighlightData } from "@/services/overview_highlights/fetchHighlightData";
 import { useQuery } from "@tanstack/react-query";
 type HightlightCardProps = {
@@ -16,7 +16,7 @@ export default function HighlightCard({ tag }: HightlightCardProps) {
     },
   });
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <LoadSmall />;
 
   return <h4 className="font-normal text-xs text-dark">{data}</h4>;
 }

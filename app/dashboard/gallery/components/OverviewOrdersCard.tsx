@@ -1,9 +1,6 @@
 "use client";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
-import { actionStore } from "@/store/actions/ActionStore";
 import Image from "next/image";
-import Link from "next/link";
-import { IoIosArrowRoundForward } from "react-icons/io";
 
 type OverviewOrdersCardProps = {
   title: string;
@@ -13,13 +10,6 @@ type OverviewOrdersCardProps = {
   order_date: string;
   url: string;
   status: string;
-  order_id: string;
-  shipping_address?: IndividualAddressTypes;
-  state: "pending" | "history" | "overview";
-  payment_information?: PaymentStatusTypes;
-  tracking_information?: TrackingInformationTypes;
-  shipping_quote?: ShippingQuoteTypes;
-  order_accepted?: OrderAcceptedStatusTypes;
 };
 export default function OverviewOrdersCard({
   title,
@@ -29,44 +19,8 @@ export default function OverviewOrdersCard({
   order_date,
   url,
   status,
-  order_id,
-  shipping_address,
-  state,
-  payment_information,
-  tracking_information,
-  shipping_quote,
-  order_accepted,
 }: OverviewOrdersCardProps) {
   const image_url = getImageFileView(url, 200);
-
-  const [
-    updateGalleryOrderActionModalData,
-    toggleGalleryOrderActionModal,
-    toggleUploadTrackingInfoModal,
-    update_current_order_id,
-    toggleDeclineOrderModal,
-  ] = actionStore((state) => [
-    state.updateGalleryOrderActionModalData,
-    state.toggleGalleryOrderActionModal,
-    state.toggleUploadTrackingInfoModal,
-    state.update_current_order_id,
-    state.toggleDeclineOrderModal,
-  ]);
-
-  function handleAcceptOrderRequest() {
-    updateGalleryOrderActionModalData(buyer, shipping_address!, order_id);
-    toggleGalleryOrderActionModal(true);
-  }
-
-  function handleUploadTrackingInformationRequest() {
-    update_current_order_id(order_id);
-    toggleUploadTrackingInfoModal(true);
-  }
-
-  function handleDeclineOrderRequest() {
-    update_current_order_id(order_id);
-    toggleDeclineOrderModal(true);
-  }
 
   return (
     <div className="flex justify-between items-center px-5 py-3 rounded-lg ring-1 ring-[#eeeeee] shadow-sm w-full">
@@ -83,65 +37,11 @@ export default function OverviewOrdersCard({
           <span className="text-dark text-xs font-light">{artist}</span>
         </div>
       </div>
-      <div className="flex flex-col items-end gap-y-1 text-xs">
+      <div className="flex flex-col items-end gap-y-2 text-xs">
         <span className="text-dark text-xs">{order_date}</span>
-        <span className="text-dark font-normal px-2 py-1 text-[12px] rounded-full bg-amber-50">
+        <span className="text-dark font-normal px-2 py-1 text-[12px] rounded-full bg-amber-200">
           {status.charAt(0).toUpperCase() + status.slice(1)}
         </span>
-        {state === "pending" ? (
-          payment_information!.status === "completed" ? (
-            <button
-              disabled={tracking_information?.tracking_id !== ""}
-              onClick={handleUploadTrackingInformationRequest}
-              className="px-4 py-2 text-white disabled:cursor-not-allowed disabled:text-dark/50 disabled:bg-gray-400 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
-            >
-              {tracking_information?.tracking_id === ""
-                ? "Upload tracking information"
-                : "Tracking information uploaded"}
-            </button>
-          ) : (
-            <div className="flex gap-x-4">
-              {shipping_quote?.shipping_fees !== "" ? (
-                <>
-                  <button
-                    disabled
-                    className="bg-gray-400 grid place-items-center px-4 py-2 rounded-md disabled:cursor-not-allowed text-dark/50"
-                  >
-                    Order request accepted, awaiting customer payment
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    disabled={order_accepted!.status === "declined"}
-                    onClick={handleDeclineOrderRequest}
-                    className="px-4 py-2 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 text-white rounded-md bg-red-600 hover:bg-red-800 duration-300 grid place-items-center"
-                  >
-                    {order_accepted!.status === "declined"
-                      ? "Order has been declined"
-                      : "Decline order request"}
-                  </button>
-                  <button
-                    disabled={order_accepted!.status === "declined"}
-                    onClick={handleAcceptOrderRequest}
-                    className="px-4 py-2 text-white disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
-                  >
-                    Provide shipping quote
-                  </button>
-                </>
-              )}
-            </div>
-          )
-        ) : null}
-        {state === "overview" && (
-          <Link
-            href="/dashboard/gallery/orders"
-            className="text-dark/80 flex gap-x-1 text-xs items-center mt-4 cursor-pointer"
-          >
-            View Order
-            <IoIosArrowRoundForward />
-          </Link>
-        )}
       </div>
     </div>
   );

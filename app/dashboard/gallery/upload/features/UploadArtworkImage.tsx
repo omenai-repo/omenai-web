@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { galleryArtworkUploadStore } from "@/store/gallery/gallery_artwork_upload/GalleryArtworkUpload";
 import { FormEvent, useRef, useState } from "react";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { storage } from "@/appwrite";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 
 export default function UploadArtworkImage() {
   const imagePickerRef = useRef<HTMLInputElement>(null);
@@ -129,7 +129,7 @@ export default function UploadArtworkImage() {
           className="inline-flex justify-center rounded-md border border-transparent disabled:bg-dark/30 bg-primary px-4 py-2 font-light hover:bg-primary foucs:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2  disabled:text-gray-300 disabled:cursor-not-allowed text-white "
           type="submit"
         >
-          {loading ? <LoaderAnimation /> : "Upload artwork"}
+          {loading ? <LoadSmall /> : "Upload artwork"}
         </button>
       </div>
     </form>

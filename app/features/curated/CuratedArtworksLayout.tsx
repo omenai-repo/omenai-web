@@ -1,6 +1,6 @@
 "use client";
 import ArtworkCard from "@/components/artworks/ArtworkCard";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
@@ -23,7 +23,7 @@ export default function CuratedArtworksLayout({
   if (isLoading)
     return (
       <div className="h-[500px] w-full place-items-center grid">
-        <Loader />
+        <Load />
       </div>
     );
 

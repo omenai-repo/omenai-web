@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 import { checkLockStatus } from "@/services/orders/checkLockStatus";
 import { createOrderLock } from "@/services/orders/createOrderLock";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { CiLock } from "react-icons/ci";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { purchase_artwork } from "@/services/purchase_artwork/purchase_artwork";
 import { useLocalStorage } from "usehooks-ts";
 
@@ -102,9 +102,9 @@ export default function PayNowButton({
             <button
               onClick={handleClickPayNow}
               disabled={locked || loading}
-              className="w-fit px-5 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark py-3 text-white text-base hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
+              className="w-fit h-[50px] px-4 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark text-white text-base hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
             >
-              {loading ? <LoaderAnimation /> : "Proceed to payment"}
+              {loading ? <LoadSmall /> : "Proceed to payment"}
             </button>
           </Tooltip>
           {locked && <CiLock className="absolute right-[-15px] top-[-5px]" />}

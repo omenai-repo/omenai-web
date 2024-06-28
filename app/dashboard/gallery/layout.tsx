@@ -2,10 +2,9 @@
 import NextTopLoader from "nextjs-toploader";
 import PageLayout from "./features/PageLayout";
 import Appbar from "./components/Appbar";
-import { galleryNavigationActions } from "@/store/gallery/gallery_navigation/GalleryNavigation";
 import { useWindowSize } from "usehooks-ts";
 import NoMobileView from "./components/NoMobileView";
-import { ShippingQuoteModal } from "./modals/ShippingQuoteUpdateModal";
+import { OrderActionModal } from "./modals/OrderActionModal";
 import { UploadTrackingIDModal } from "./modals/ProvideTrackingIDModal";
 import { UploadOrderRejectionReason } from "./modals/ProvideOrderRejectionReason";
 export default function GalleryDashboardLayout({
@@ -13,29 +12,24 @@ export default function GalleryDashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [open] = galleryNavigationActions((state: { open: any }) => [
-    state.open,
-  ]);
   const { width } = useWindowSize();
 
   return (
     <>
-      {width < 768 ? (
+      {width < 991 ? (
         <NoMobileView />
       ) : (
-        <div className=" w-full h-screen">
+        <div className=" w-full h-full">
           <NextTopLoader color="#6246EA" height={6} />
           <main className="flex h-full">
-            <div className="hidden md:block">
-              <PageLayout />
-            </div>
+            <PageLayout />
 
             <div
               className={`w-full xl:ml-[19rem] md:ml-[15rem] bg-[#FAFAFA] rounded-xl relative duration-200`}
             >
               <Appbar />
               <div className="h-auto rounded-lg relative my-5 px-5">
-                <ShippingQuoteModal />
+                <OrderActionModal />
                 <UploadTrackingIDModal />
                 <UploadOrderRejectionReason />
                 {children}
