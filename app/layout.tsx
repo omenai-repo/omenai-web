@@ -32,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito_sans.className} flex flex-col justify-center`}>
-        <NextTopLoader color="#6246EA" height={6} />
+        <NextTopLoader color="#1A1A1A" height={6} />
         <Toaster richColors position="top-center" visibleToasts={1} />
         <AuthProvider session={session}>
           <Providers>

@@ -1,10 +1,9 @@
 "use client";
 import { Suspense, useState } from "react";
-import OrderHistory from "./OrderHistory";
 import PendingOrders from "./PendingOrders";
 import OrdersTab from "./OrdersTab";
 import { ObjectId } from "mongoose";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 
 export default function OrdersGroup({
   orders,
@@ -20,18 +19,19 @@ export default function OrdersGroup({
   return (
     <>
       <div className="w-full p-10 grid place-items-center">
-        <OrdersTab tab={tab} setTab={setTab} />
+        {/* <OrdersTab tab={tab} setTab={setTab} />
       </div>
       <div className="w-full h-full grid place-items-center container">
         {tab === "pending" ? (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Load />}>
             <PendingOrders orders={orders} />
           </Suspense>
         ) : (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Load />}>
             <OrderHistory orders={orders} />
           </Suspense>
-        )}
+        )} */}
+        <p>ello</p>
       </div>
     </>
   );

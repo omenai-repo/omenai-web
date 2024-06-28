@@ -40,7 +40,7 @@ export default function PageTitle({ title }: { title: string }) {
 
   return (
     <div className="w-full flex flex-col gap-y-1 mt-5 mb-12">
-      <h1 className="font-light text-md">{title}</h1>
+      <h1 className="font-medium text-md text-dark">{title}</h1>
       <p className="text-base flex">{breadcrumbs}</p>
     </div>
   );

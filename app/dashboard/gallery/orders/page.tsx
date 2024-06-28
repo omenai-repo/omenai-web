@@ -1,11 +1,11 @@
-import { getOverviewOrders } from "@/services/orders/getOverviewOrders";
 import OrdersGroup from "./components/OrdersGroup";
+import PageTitle from "../components/PageTitle";
 
 export default async function Orders() {
-  const orders = await getOverviewOrders();
   return (
     <>
-      <OrdersGroup orders={orders.data} />
+      <PageTitle title="Orders" />
+      <OrdersGroup />
     </>
   );
 }

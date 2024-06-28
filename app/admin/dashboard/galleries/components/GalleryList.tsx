@@ -1,7 +1,7 @@
 "use client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import GalleryListItem from "./GalleryListItem";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { AnimatePresence, motion } from "framer-motion";
 import { fetchGalleriesOnVerifStatus } from "@/services/admin/fetch_galleries_on_verif_status";
@@ -22,7 +22,7 @@ export default function GalleryList() {
   if (isLoading) {
     return (
       <div className="h-[85vh] w-full grid place-items-center">
-        <Loader />
+        <Load />
       </div>
     );
   }

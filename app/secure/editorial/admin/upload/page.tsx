@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import { uploadImage } from "../lib/uploadImage";
 import formatDate from "../utils/formatData";
 import { ID, database } from "../controller/appwrite";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 
 export default function Admin() {
   const [loading, setLoading] = useState(false);
@@ -89,7 +89,7 @@ export default function Admin() {
                   loading ? "bg-dark" : "bg-primary"
                 } hover:bg-dark rounded-md`}
               >
-                {loading ? <LoaderAnimation /> : "Save"}
+                {loading ? <LoadSmall /> : "Save"}
               </button>
             </div>
 

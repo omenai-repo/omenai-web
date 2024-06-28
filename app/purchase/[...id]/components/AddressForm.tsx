@@ -8,10 +8,10 @@ import { useSession } from "next-auth/react";
 import { indexAddress } from "../indexAddressOptions";
 import { createShippingOrder } from "@/services/orders/createShippingOrder";
 import { toast } from "sonner";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 
 import { actionStore } from "@/store/actions/ActionStore";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 
 type AddressFormTypes = {
   userAddress: IndividualAddressTypes;
@@ -131,9 +131,9 @@ export default function AddressForm({
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full px-5 text-xs disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:border-dark bg-dark py-3 text-white hover:bg-white hover:text-dark hover:border hover:border-dark hover:underline duration-300 grid place-items-center group"
+                className="w-full h-[50px] px-4 text-xs disabled:cursor-not-allowed disabled:bg-white disabled:border disabled:border-dark bg-dark text-white hover:bg-white hover:text-dark hover:border hover:border-dark hover:underline duration-300 grid place-items-center group"
               >
-                {!loading ? "Request price quote" : <LoaderAnimation />}
+                {!loading ? "Request price quote" : <LoadSmall />}
               </button>
             </div>
           </div>

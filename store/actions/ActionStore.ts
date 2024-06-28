@@ -33,11 +33,15 @@ type ActionStoreTypes = {
     buyer: string;
     shipping_address: IndividualAddressTypes;
     order_id: string;
+    artwork: Pick<ArtworkSchemaTypes, "pricing" | "title" | "url" | "artist">;
+    status: string;
   };
   updateGalleryOrderActionModalData: (
     buyer: string,
     shipping_address: IndividualAddressTypes,
-    order_id: string
+    order_id: string,
+    status: "completed" | "pending",
+    artwork: Pick<ArtworkSchemaTypes, "pricing" | "title" | "url" | "artist">
   ) => void;
   clearGalleryOrderActionModalData: () => void;
   current_order_id: string;
@@ -122,13 +126,30 @@ export const actionStore = create<ActionStoreTypes>((set, get) => ({
       zip: "",
     },
     order_id: "",
+    artwork: {
+      title: "",
+      url: "",
+      pricing: { price: 0, shouldShowPrice: "" },
+      artist: "",
+    },
+    status: "",
   },
   updateGalleryOrderActionModalData: (
     buyer: string,
     shipping_address: IndividualAddressTypes,
-    order_id: string
+    order_id: string,
+    status: "completed" | "pending",
+    artwork: Pick<ArtworkSchemaTypes, "pricing" | "title" | "url" | "artist">
   ) => {
-    set({ galleryOrderActionModalData: { buyer, shipping_address, order_id } });
+    set({
+      galleryOrderActionModalData: {
+        buyer,
+        shipping_address,
+        order_id,
+        artwork,
+        status,
+      },
+    });
   },
 
   clearGalleryOrderActionModalData: () => {
@@ -143,8 +164,16 @@ export const actionStore = create<ActionStoreTypes>((set, get) => ({
           zip: "",
         },
         order_id: "",
+        artwork: {
+          title: "",
+          url: "",
+          pricing: { price: 0, shouldShowPrice: "" },
+          artist: "",
+        },
+        status: "",
       },
     });
+    set({ current_order_id: "" });
   },
 
   current_order_id: "",

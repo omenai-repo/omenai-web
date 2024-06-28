@@ -1,5 +1,5 @@
 "use client";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { useIndividualAuthStore } from "@/store/auth/register/IndividualAuthStore";
 import { Checkbox, Label } from "flowbite-react";
 import { motion } from "framer-motion";
@@ -54,12 +54,12 @@ export default function TC() {
         <button
           type="submit"
           disabled={isLoading}
-          className="h-[56px] w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-dark text-white text-xs font-medium"
+          className=" h-[50px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-dark text-white text-xs font-medium"
         >
-          {isLoading ? <LoaderAnimation /> : "Create account"}
+          {isLoading ? <LoadSmall /> : "Create account"}
         </button>
         <button
-          className={` rounded-full px-[1.5rem] py-[0.4rem] mt-[1rem] text-dark underline transition-all ease-linear duration-200`}
+          className={` rounded-full  h-[50px] px-4 mt-[1rem] text-dark underline transition-all ease-linear duration-200`}
           type={"button"}
           onClick={decrementCurrentSignupFormIndex}
         >

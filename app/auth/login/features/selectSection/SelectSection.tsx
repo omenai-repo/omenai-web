@@ -48,7 +48,7 @@ function SelectSection() {
           </Link>
         </p>
         <Link href={"/"}>
-          <button className="h-[56px] w-full bg-black text-white cursor-pointer mt-[50px]">
+          <button className="h-[50px] px-4 w-full bg-black text-white cursor-pointer mt-[50px]">
             Go back home
           </button>
         </Link>

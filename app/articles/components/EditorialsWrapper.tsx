@@ -67,7 +67,7 @@ export default function EditorialsWrapper({
         {pageCount <= editorials.length ? (
           <button
             onClick={handlePageCount}
-            className="bg-dark text-white px-5 py-4 rounded-full hover:bg-white hover:text-dark hover:border hover:border-dark duration-300"
+            className="bg-dark text-white  h-[50px] px-4 rounded-full hover:bg-white hover:text-dark hover:border hover:border-dark duration-300"
           >
             Show more
           </button>

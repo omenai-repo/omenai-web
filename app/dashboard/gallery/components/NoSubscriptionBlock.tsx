@@ -12,7 +12,7 @@ export default function NoSubscriptionBlock() {
           </p>
         </div>
         <div className="">
-          <button className="px-3 py-2 bg-white text-dark rounded-lg ">
+          <button className=" h-[50px] px-4 bg-white text-dark rounded-sm ">
             Activate Subscription
           </button>
         </div>

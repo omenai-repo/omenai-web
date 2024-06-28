@@ -3,7 +3,7 @@
 import { sendPasswordResetLink } from "@/services/password/sendPasswordResetLink";
 import { useState, FormEvent } from "react";
 import { toast } from "sonner";
-import LoaderAnimation from "../loader/LoaderAnimation";
+import { LoadSmall } from "../loader/Load";
 
 export default function RecoveryModalEmailInputField() {
   const [loading, setIsloading] = useState(false);
@@ -22,13 +22,10 @@ export default function RecoveryModalEmailInputField() {
     setIsloading(false);
   };
   return (
-    <form
-      className="flex sm:flex-row flex-col gap-4 w-full"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit}>
       <input
         type="text"
-        className="flex-1 w-full border border-dark/10 focus:ring-0 focus:border-dark px-4 py-1 rounded-sm placeholder:text-xs"
+        className="p-3 border border-[#E0E0E0] text-xs placeholder:text-[#858585] placeholder:text-xs bg-white w-full focus:border-none focus:ring-1 focus:ring-dark focus:outline-none"
         placeholder="Email address"
         required
         onChange={(e) => setEmail(e.target.value)}
@@ -36,9 +33,9 @@ export default function RecoveryModalEmailInputField() {
       <button
         type="submit"
         disabled={loading}
-        className=" disabled:cursor-not-allowed grid disabled:bg-white disabled:border disabled:border-dark place-items-center w-full sm:w-fit px-4 py-2 bg-dark hover:bg-dark/10 hover:text-dark rounded-sm text-white text-xs "
+        className=" disabled:cursor-not-allowed grid disabled:bg-white disabled:border disabled:border-dark place-items-center w-full h-[50px]  bg-dark hover:bg-dark/80 hover:text-white rounded-sm text-white text-xs "
       >
-        {!loading ? "Send reset link" : <LoaderAnimation />}
+        {!loading ? "Send reset link" : <LoadSmall />}
       </button>
     </form>
   );

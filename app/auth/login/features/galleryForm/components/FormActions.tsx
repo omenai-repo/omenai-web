@@ -4,7 +4,7 @@ import { galleryLoginStore } from "@/store/auth/login/GalleryLoginStore";
 import { GoArrowRight } from "react-icons/go";
 import { useLoginStore } from "@/store/auth/login/LoginStore";
 import Link from "next/link";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 
 export default function FormActions() {
   const [updateRecoveryModal] = actionStore((state) => [
@@ -40,14 +40,14 @@ export default function FormActions() {
         <button
           disabled={isLoading}
           type="submit"
-          className="h-[56px] w-full font-medium flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs"
+          className="h-[50px] px-4 w-full font-medium flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs"
         >
-          {isLoading ? <LoaderAnimation /> : "Login"}{" "}
+          {isLoading ? <LoadSmall /> : "Login"}{" "}
           {!isLoading && <GoArrowRight className="text-md opacity-70" />}
         </button>
         <button
           onClick={() => updateCurrent(0)}
-          className="h-[50px] w-full text-center underline flex text-xs items-center justify-center bg-white cursor-pointer"
+          className="h-[50px] px-4 w-full text-center underline flex text-xs items-center justify-center bg-white cursor-pointer"
         >
           Sign in to Individual account
         </button>

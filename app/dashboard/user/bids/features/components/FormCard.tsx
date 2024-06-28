@@ -7,7 +7,7 @@ import { galleryProfileUpdate } from "@/store/gallery/gallery_profile_update/Gal
 import { updateProfile } from "@/services/update/updateProfile";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 
 export const FormCard = () => {
   const session = useSession();
@@ -73,7 +73,7 @@ export const FormCard = () => {
         // }
         className="disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center px-8 py-2 bg-primary hover:bg-primary/50 rounded-full text-white text-base"
       >
-        {isLoading ? <LoaderAnimation /> : "Save edit data"}
+        {isLoading ? <LoadSmall /> : "Save edit data"}
       </button> */}
     </form>
   );

@@ -18,7 +18,7 @@ export default function NoVerificationBlock() {
           </p>
         </div>
         <div className="">
-          <button className="px-3 py-2 bg-white text-dark rounded-lg ">
+          <button className=" h-[50px] px-4 bg-white text-dark rounded-sm ">
             Request gallery verification
           </button>
         </div>

@@ -1,3 +1,5 @@
+import { ObjectId } from "mongoose";
+
 interface OriginalObject {
   _id: string;
   createdAt: string;
@@ -9,17 +11,17 @@ interface OriginalObject {
   order_id: string;
 }
 
-interface FormattedObject extends OriginalObject {
+interface FormattedObject extends CreateOrderModelTypes {
   createdAt: string; // Updated type for formatted date
 }
 
 interface FinalObject {
   date: string;
-  data: OriginalObject[];
+  data: CreateOrderModelTypes[];
 }
 
 export function sortOrdersDataByDate(
-  inputArray: OriginalObject[]
+  inputArray: CreateOrderModelTypes[]
 ): FinalObject[] {
   // Format and sort the data
   const formattedData: FormattedObject[] = inputArray

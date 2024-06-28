@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
-
-import Loader from "@/components/loader/Loader";
+/* eslint-disable @next/next/no-img-element */
+import Load from "@/components/loader/Load";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
 import { getSingleOrder } from "@/services/orders/getSingleOrder";
 import { formatPrice } from "@/utils/priceFormatter";
@@ -27,7 +26,7 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
   if (isLoading) {
     return (
       <div className="w-full h-[80vh] grid place-items-center">
-        <Loader />
+        <Load />
       </div>
     );
   }

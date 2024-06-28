@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 import { Suspense, useState } from "react";
 import GalleryList from "./GalleryList";
 import TabSelector from "./TabSelector";
@@ -15,17 +15,17 @@ export default function TabGroup() {
       </div>
       <div className="w-full h-full grid place-items-center container">
         {tab === "pending" ? (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Load />}>
             {/* <PendingOrders orders={orders} /> */}
             <GalleryList />
           </Suspense>
         ) : tab === "verified" ? (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Load />}>
             <VerifiedGalleryList />
             {/* <OrderHistory orders={orders} /> */}
           </Suspense>
         ) : (
-          <Suspense fallback={<Loader />}>
+          <Suspense fallback={<Load />}>
             <p>Rejected</p>
             {/* <OrderHistory orders={orders} /> */}
           </Suspense>

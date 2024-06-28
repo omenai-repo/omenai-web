@@ -1,9 +1,9 @@
 "use client";
 
-import Loader from "@/components/loader/Loader";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { updateOrderTrackingData } from "@/services/orders/updateTrackingInformation";
 import { actionStore } from "@/store/actions/ActionStore";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
@@ -16,6 +16,9 @@ export default function UploadTrackingInformationModalForm() {
     tracking_link: "",
     tracking_id: "",
   });
+
+  const queryClient = useQueryClient();
+
   const [loading, setLoading] = useState(false);
 
   function handleInputChange(
@@ -43,6 +46,9 @@ export default function UploadTrackingInformationModalForm() {
     } else {
       setLoading(false);
       toast.success(response.message);
+      queryClient.invalidateQueries({
+        queryKey: ["fetch_orders_by_category"],
+      });
       toggleUploadTrackingInfoModal(false);
       router.refresh();
     }
@@ -50,41 +56,48 @@ export default function UploadTrackingInformationModalForm() {
 
   return (
     <div>
-      <h1 className="text-sm font-medium mb-4">Tracking information</h1>
+      <h1 className="text-base font-normal mb-4 text-dark">
+        Tracking information
+      </h1>
       <form className="w-full" onSubmit={handleSubmitTrackingInfo}>
         <div className="space-y-2 mb-2 flex flex-col w-full">
           <div className="relative w-full h-auto">
-            <label htmlFor="shipping">Package tracking link</label>
+            <label htmlFor="shipping" className="text-xs text-[#858585] mb-2">
+              Package tracking link
+            </label>
             <input
               onChange={handleInputChange}
               name="tracking_link"
               type="text"
               required
               placeholder="Please provide a link to track this order"
-              className="px-3 py-2 border border-dark/20 rounded-md w-full focus:border-none focus:ring-1 focus:ring-dark focus:outline-none"
+              className="h-[50px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
             />
           </div>
         </div>
         <div className="space-y-2 mb-2 flex flex-col w-full">
           <div className="relative w-full h-auto">
-            <label htmlFor="shipping">Tracking ID</label>
+            <label htmlFor="shipping" className="text-xs text-[#858585] mb-2">
+              Tracking ID
+            </label>
             <input
               onChange={handleInputChange}
               name="tracking_id"
               type="text"
+              placeholder="Please provide a tracking ID for this package"
               required
-              className="px-3 py-2 border border-dark/20 rounded-md w-full focus:border-none focus:ring-1 focus:ring-dark focus:outline-none"
+              className="h-[50px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
             />
           </div>
         </div>
 
-        <div className="w-full flex justify-end items-end mt-5">
+        <div className="w-full mt-5">
           <button
             disabled={loading}
             type="submit"
-            className="px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-gray-400 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
+            className="h-[50px] px-4 w-full text-xs text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
           >
-            {loading ? <LoaderAnimation /> : " Submit tracking information"}
+            {loading ? <LoadSmall /> : " Submit tracking information"}
           </button>
         </div>
       </form>

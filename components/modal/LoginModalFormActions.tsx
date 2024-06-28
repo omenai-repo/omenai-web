@@ -2,6 +2,7 @@
 import { actionStore } from "@/store/actions/ActionStore";
 import Link from "next/link";
 import LoaderAnimation from "../loader/LoaderAnimation";
+import { LoadSmall } from "../loader/Load";
 
 export default function LoginModalFormActions({
   loading,
@@ -30,9 +31,9 @@ export default function LoginModalFormActions({
         <button
           type="submit"
           disabled={loading}
-          className=" disabled:cursor-not-allowed grid disabled:bg-white disabled:border disabled:border-dark place-items-center w-full h-[56px] bg-dark hover:bg-dark/70 rounded-sm text-white text-xs "
+          className=" disabled:cursor-not-allowed grid disabled:bg-white disabled:border disabled:border-dark place-items-center w-full h-[50px] px-4 bg-dark hover:bg-dark/70 rounded-sm text-white text-xs "
         >
-          {!loading ? "Login to your account" : <LoaderAnimation />}
+          {!loading ? "Login to your account" : <LoadSmall />}
         </button>
       </div>
       <div className="w-full flex justify-center my-2">
@@ -41,7 +42,7 @@ export default function LoginModalFormActions({
           <button onClick={() => toggleLoginModal(false)}>
             <Link
               href="/auth/register/individual"
-              className="text-primary underline font-normal"
+              className="text-dark underline font-normal"
             >
               Create one
             </Link>

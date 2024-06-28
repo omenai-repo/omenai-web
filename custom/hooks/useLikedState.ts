@@ -1,3 +1,4 @@
+"use client";
 import { updateArtworkImpressions } from "@/services/artworks/updateArtworkImpressions";
 import { actionStore } from "@/store/actions/ActionStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

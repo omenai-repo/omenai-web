@@ -1,6 +1,5 @@
 import ArtworkCard from "@/components/artworks/ArtworkCard";
 import NotFoundData from "@/components/notFound/NotFoundData";
-import { fetchArtworksByCriteria } from "@/services/artworks/fetchArtworksByCriteria";
 
 export default function SimilarArtworks({
   title,

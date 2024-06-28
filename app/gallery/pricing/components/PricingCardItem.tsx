@@ -5,7 +5,7 @@ import PricingCardFeatureListItem from "./PricingCardFeatureListItem";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { useSession } from "next-auth/react";
 import { useLocalStorage } from "usehooks-ts";
 import { getApiUrl } from "@/config";
@@ -94,7 +94,7 @@ export default function PricingCardItem({
             onClick={handleSubscribe}
             className={`bg-primary rounded-md w-full py-2 grid place-items-center disabled:bg-gray-400 disabled:text-dark disabled:cursor-pointer text-white`}
           >
-            {loading ? <LoaderAnimation /> : "Subscribe"}
+            {loading ? <LoadSmall /> : "Subscribe"}
           </button>
         </div>
       </div>

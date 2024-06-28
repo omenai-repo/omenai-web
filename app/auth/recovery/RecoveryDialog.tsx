@@ -17,7 +17,7 @@ export default function Recovery() {
         } fixed inset-0 grid place-items-center p-2 z-50 bg-black/90`}
       >
         <div className="flex flex-col gap-8 items-center">
-          <div className="bg-white max-w-[450px] flex flex-col gap-y-8 p-[2rem] rounded-xl relative">
+          <div className="bg-white max-w-[450px] flex flex-col gap-y-8 px-5 py-8 rounded-md relative">
             <div className="absolute top-5 right-5">
               <GrClose
                 className="cursor-pointer"
@@ -27,8 +27,8 @@ export default function Recovery() {
               />
             </div>
             <div className="">
-              <h1 className="text-md md:text-lg font-medium">Let us help</h1>
-              <p className="text-xs sm:text-base font-light sm:font-normal">
+              <h1 className="text-sm font-medium">Let us help</h1>
+              <p className="text-xs font-light">
                 Enter your email so we can help recover your account
               </p>
             </div>
@@ -36,7 +36,7 @@ export default function Recovery() {
               <RecoveryEmailInputField />
             </div>
             <div>
-              <p className="text-xs sm:text-base font-light sm:font-normal text-red-600">
+              <p className="text-xs font-normal text-red-600">
                 Kindly note that a link will be sent to your email address.
                 Click the link to complete this process.
               </p>

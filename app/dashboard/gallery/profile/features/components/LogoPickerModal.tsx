@@ -4,7 +4,7 @@ import { Modal } from "flowbite-react";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { galleryLogoUpdate } from "@/store/gallery/gallery_logo_upload/GalleryLogoUpload";
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { storage } from "@/appwrite";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
@@ -140,7 +140,7 @@ export default function LogoPickerModal() {
               disabled={loading || !logo}
               className="px-3 py-2 bg-primary rounded-lg disabled:grayscale disabled:cursor-not-allowed text-white font-normal text-base hover:grayscale duration-200"
             >
-              {loading ? <LoaderAnimation /> : "Upload logo"}
+              {loading ? <LoadSmall /> : "Upload logo"}
             </button>
           </div>
         </div>

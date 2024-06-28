@@ -10,7 +10,7 @@ import {
 } from "next/navigation";
 import { useLocalStorage } from "usehooks-ts";
 import { getApiUrl } from "@/config";
-import Loader from "@/components/loader/Loader";
+import Load from "@/components/loader/Load";
 import { toast } from "sonner";
 import OrderDetails from "./OrderDetails";
 export default function ComponentWrapper({ order_id }: { order_id: string }) {
@@ -54,7 +54,7 @@ export default function ComponentWrapper({ order_id }: { order_id: string }) {
         </>
       ) : (
         <div className="w-full h-screen grid place-items-center">
-          <Loader />
+          <Load />
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import LoaderAnimation from "@/components/loader/LoaderAnimation";
+import { LoadSmall } from "@/components/loader/Load";
 import { cancelSubscription } from "@/services/subscriptions/cancelSubscription";
 import { galleryModalStore } from "@/store/gallery/gallery_modals/GalleryModals";
 import { formatISODate } from "@/utils/formatISODate";
@@ -69,18 +69,18 @@ export default function CancelSubscriptionModal({
             <div className="flex gap-3 text-[15px]">
               <button
                 disabled={loading}
-                className="px-6 py-2 text-white disabled:cursor-not-allowed bg-dark hover:bg-dark/60 duration-200"
+                className=" h-[50px] px-4 text-white disabled:cursor-not-allowed bg-dark hover:bg-dark/60 duration-200"
                 onClick={() => updateOpenModal()}
               >
                 Quit
               </button>
               <button
                 disabled={loading}
-                className="px-6 py-2 text-white disabled:cursor-not-allowed bg-red-600 hover:bg-red-600/60 duration-200"
+                className=" h-[50px] px-4 text-white disabled:cursor-not-allowed bg-red-600 hover:bg-red-600/60 duration-200"
                 color="gray"
                 onClick={cancel_subscription}
               >
-                {loading ? <LoaderAnimation /> : "Cancel Subscription"}
+                {loading ? <LoadSmall /> : "Cancel Subscription"}
               </button>
             </div>
           </div>

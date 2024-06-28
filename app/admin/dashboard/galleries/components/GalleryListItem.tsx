@@ -55,7 +55,7 @@ export default function GalleryListItem({
           <p className="text-xs font-normal">{location}</p>
           <button
             onClick={updateGalleryPopupData}
-            className="flex gap-x-2 w-fit rounded-md items-center px-4 py-2 bg-dark text-white"
+            className="flex gap-x-2 w-fit rounded-md items-center h-[50px] px-4 bg-dark text-white"
           >
             <span className="text-xs ">View</span>
 
@@ -73,7 +73,7 @@ export default function GalleryListItem({
                     status: "blocked",
                   })
                 }
-                className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center px-4 py-2.5 bg-red-600 text-white"
+                className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center h-[50px] px-4 bg-red-600 text-white"
               >
                 <span className="text-xs ">Block Gallery</span>
               </button>
@@ -88,7 +88,7 @@ export default function GalleryListItem({
                     status: "active",
                   })
                 }
-                className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center px-4 py-2.5 bg-dark text-white"
+                className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center  h-[50px] px-4 bg-dark text-white"
               >
                 <span className="text-xs ">Unblock Gallery</span>
               </button>
@@ -105,7 +105,7 @@ export default function GalleryListItem({
                   gallery_id,
                 })
               }
-              className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center px-4 py-2.5 bg-red-600 text-white"
+              className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center h-[50px] px-4 bg-red-600 text-white"
             >
               <span className="text-xs ">Reject Gallery</span>
 
@@ -116,7 +116,7 @@ export default function GalleryListItem({
               onClick={() =>
                 setAcceptConfirmationPopup({ show: true, gallery_id })
               }
-              className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center px-4 py-2.5 bg-green-600 text-white"
+              className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center  h-[50px] px-4 bg-green-600 text-white"
             >
               <span className="text-xs ">Accept Gallery</span>
 

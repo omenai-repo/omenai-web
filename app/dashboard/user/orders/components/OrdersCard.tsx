@@ -69,7 +69,7 @@ export default function OrdersCard({
             <button
               disabled={tracking_information?.tracking_id === ""}
               onClick={() => toggleUserTrackingInfoModal(true)}
-              className="px-4 py-2 text-white disabled:cursor-not-allowed disabled:text-dark/50 disabled:bg-gray-400 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
+              className=" h-[50px] px-4 text-white disabled:cursor-not-allowed disabled:text-dark/50 disabled:bg-gray-400 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
             >
               View tracking information
             </button>
@@ -79,7 +79,7 @@ export default function OrdersCard({
                 <Link
                   href={`/payment/${order_id}?id_key=${session.data!.user.id}`}
                 >
-                  <button className="bg-green-600 grid place-items-center px-4 py-2 rounded-md disabled:cursor-not-allowed text-white">
+                  <button className="bg-green-600 grid place-items-center  h-[50px] px-4 rounded-md disabled:cursor-not-allowed text-white">
                     Pay now
                   </button>
                 </Link>
@@ -87,7 +87,7 @@ export default function OrdersCard({
                 <>
                   <button
                     disabled
-                    className="px-4 py-2 text-white disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
+                    className=" h-[50px] px-4 text-white disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:bg-green-800 rounded-md bg-green-600 duration-300 grid place-items-center"
                   >
                     Awaiting gallery confirmation
                   </button>
