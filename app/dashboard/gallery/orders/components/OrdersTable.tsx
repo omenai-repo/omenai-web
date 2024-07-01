@@ -7,6 +7,8 @@ import { IoClose } from "react-icons/io5";
 import { MdInfo } from "react-icons/md";
 import { GoIssueClosed } from "react-icons/go";
 import { VscEye } from "react-icons/vsc";
+import { ChangeEvent, useState } from "react";
+import { RiSearch2Line } from "react-icons/ri";
 
 type OrdersTableProps = {
   data: CreateOrderModelTypes[] & {
@@ -18,6 +20,37 @@ type OrdersTableProps = {
 };
 
 export default function OrdersTable({ data, tab }: OrdersTableProps) {
+  const [orders, setOrders] = useState<
+    | (CreateOrderModelTypes[] & {
+        createdAt: string;
+        updatedAt: string;
+        _id: ObjectId;
+      })
+    | []
+  >(data);
+
+  function handleSearchChange(e: ChangeEvent<HTMLInputElement>) {
+    const searchValue = e.target.value.toLowerCase();
+
+    // Update state using setState
+    if (searchValue === "" || null) {
+      setOrders(data);
+    }
+    setOrders(() => {
+      const searchFilter = data.filter(
+        (order) =>
+          order.order_id.toLowerCase().startsWith(searchValue) ||
+          order.artwork_data.title.toLowerCase().startsWith(searchValue) ||
+          order.buyer.name.toLowerCase().startsWith(searchValue)
+      );
+
+      return [...searchFilter] as CreateOrderModelTypes[] & {
+        createdAt: string;
+        updatedAt: string;
+        _id: ObjectId;
+      };
+    });
+  }
   const [
     updateGalleryOrderActionModalData,
     toggleGalleryOrderActionModal,
@@ -132,6 +165,15 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
 
   return (
     <div className="mt-5 overflow-hidden">
+      <div className="mt-1 mb-8 w-fit h-fit relative pl-1">
+        <input
+          type="text"
+          className="h-[50px] px-4 pl-10 w-[500px] border border-[#E0E0E0] text-xs placeholder:text-[#858585] placeholder:text-xs bg-transparent focus:border-none focus:ring-1 focus:ring-dark/80 duration-300 focus:outline-none"
+          placeholder="Search by order ID, artwork name or buyer name"
+          onChange={handleSearchChange}
+        />
+        <RiSearch2Line className="absolute left-5 top-4 text-[#858585]" />
+      </div>
       <table className=" w-full table-auto border-separate border-spacing-y-2 overflow-scroll text-left md:overflow-auto">
         <thead className="w-full rounded-lg bg-[#EFEFEF] text-base font-semibold text-white">
           <tr className="px-1">
@@ -158,7 +200,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
           </tr>
         </thead>
         <tbody>
-          {data.map((artwork: any, index: number) => {
+          {orders.map((artwork: any, index: number) => {
             return (
               <tr
                 key={index}
@@ -214,7 +256,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                   {artwork.payment_information.status === "completed" &&
                     artwork.order_accepted.status === "accepted" &&
                     artwork.tracking_information.tracking_link === "" && (
-                      <div className="relative flex items-center gap-1">
+                      <div className="relative flex items-center gap-x-1">
                         <button
                           onClick={() =>
                             handleUploadTrackingInformationRequest(
@@ -230,7 +272,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                     )}
 
                   {artwork.order_accepted.status === "" && (
-                    <div className="relative flex items-center gap-1">
+                    <div className="relative flex items-center gap-x-1">
                       <button
                         onClick={() =>
                           handleViewOrder(
@@ -249,7 +291,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                     </div>
                   )}
                   {artwork.status === "completed" && (
-                    <div className="relative flex items-center gap-1">
+                    <div className="relative flex items-center gap-x-1">
                       <button
                         onClick={() =>
                           handleViewOrder(

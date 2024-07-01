@@ -1,13 +1,10 @@
 "use client";
 import { Suspense, useState } from "react";
-import Loader from "../../components/Loader";
-import OrderHistory from "./ProcessingOrders";
 import PendingOrders from "./PendingOrders";
 import OrdersTab from "./OrdersTab";
 import { ObjectId } from "mongoose";
 import { useQuery } from "@tanstack/react-query";
 import { getOverviewOrders } from "@/services/orders/getOverviewOrders";
-import { LoadSmall } from "@/components/loader/Load";
 import ProcessingOrders from "./ProcessingOrders";
 import CompletedOrders from "./CompletedOrders";
 import Load from "@/components/loader/Load";
@@ -63,7 +60,7 @@ export default function OrdersGroup() {
   );
   return (
     <>
-      <div className="w-full my-5">
+      <div className="w-full my-3">
         <OrdersTab tab={tab} setTab={setTab} />
       </div>
       <div className="w-full h-full grid place-items-center ">
