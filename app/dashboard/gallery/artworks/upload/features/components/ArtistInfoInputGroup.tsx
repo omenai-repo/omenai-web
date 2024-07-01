@@ -1,15 +1,18 @@
-import { uploadArtworkPriceInputMocks } from "../mocks";
+import {
+  uploadArtistDetailsInputMocks,
+  uploadArtworkDimensionInputMocks,
+} from "../mocks";
 import ArtworkSelectInput from "./ArtworkSelectInput";
 import ArtworkTextInput from "./ArtworkTextInput";
 
-export default function ArtworkPriceInputGroup() {
+export default function ArtistInfoInputGroup() {
   return (
     <div className="my-10">
-      <h2 className="text-primary font-normal text-base my-4">
-        Artwork Pricing
+      <h2 className="text-dark font-normal text-base my-4">
+        Artist information
       </h2>
       <div className="grid grid-cols-3 gap-5 ">
-        {uploadArtworkPriceInputMocks.map((input, index) => {
+        {uploadArtistDetailsInputMocks.map((input, index) => {
           if (input.type === "text") {
             return (
               <ArtworkTextInput

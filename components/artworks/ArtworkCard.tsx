@@ -17,8 +17,7 @@ export default function ArtworkCard({
   likeIds,
   sessionId,
   art_id,
-  medium,
-  rarity,
+  isDashboard = false,
 }: {
   image: string;
   artist: string;
@@ -27,12 +26,11 @@ export default function ArtworkCard({
   likeIds: string[];
   sessionId: string | undefined;
   art_id: string;
-  medium: string;
-  rarity: string;
   pricing?: {
     price: number;
     shouldShowPrice: "Yes" | "No" | string;
   };
+  isDashboard?: boolean;
 }) {
   const image_href = getImageFileView(image, 300);
   return (
@@ -48,17 +46,19 @@ export default function ArtworkCard({
               className="min-w-[220px] max-h-[400px] w-full h-auto object-top cursor-pointer"
             />
           </Link>
-          <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
-            <LikeComponent
-              impressions={impressions}
-              likeIds={likeIds}
-              sessionId={sessionId}
-              art_id={art_id}
-            />
-          </div>
+          {isDashboard ? null : (
+            <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
+              <LikeComponent
+                impressions={impressions}
+                likeIds={likeIds}
+                sessionId={sessionId}
+                art_id={art_id}
+              />
+            </div>
+          )}
         </div>
 
-        <div className=" bg-[#FAFAFA] p-3 w-full">
+        <div className=" bg-[#FAFAFA] border border-[#E0E0E0] p-3 w-full">
           <div className="flex justify-between items-center my-2">
             <p className="font-normal text-[14px] text-dark ">
               {name.substring(0, 20)}
@@ -75,7 +75,7 @@ export default function ArtworkCard({
                 {formatPrice(pricing.price)}
               </p>
             ) : (
-              <p className="font-normal underline text-xs">Request</p>
+              <p className="font-normal underline text-xs">On request</p>
             )}
           </div>
           {/* <hr className="border-dark/10 my-5" /> */}

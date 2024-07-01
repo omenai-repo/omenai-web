@@ -41,8 +41,6 @@ export default function LatestArtworks({
                   likeIds={artwork.like_IDs}
                   sessionId={sessionId}
                   art_id={artwork.art_id}
-                  medium={artwork.medium}
-                  rarity={artwork.rarity}
                 />
               );
             })}

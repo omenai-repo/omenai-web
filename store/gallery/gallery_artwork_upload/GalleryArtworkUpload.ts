@@ -43,7 +43,6 @@ export const galleryArtworkUploadStore = create<GalleryArtworkUploadTypes>(
       artwork_description: "",
       framing: "",
       signature: "",
-      carrier: "",
     },
     updateArtworkUploadData: (label: string, value: string) => {
       const data: Record<string, any> = get().artworkUploadData;
@@ -77,7 +76,6 @@ export const galleryArtworkUploadStore = create<GalleryArtworkUploadTypes>(
           artwork_description: "",
           framing: "",
           signature: "",
-          carrier: "",
         },
       });
       set({ image: null });

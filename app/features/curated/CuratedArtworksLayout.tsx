@@ -44,8 +44,6 @@ export default function CuratedArtworksLayout({
                   likeIds={artwork.like_IDs}
                   sessionId={sessionId}
                   art_id={artwork.art_id}
-                  medium={artwork.medium}
-                  rarity={artwork.rarity}
                 />
               );
             })}

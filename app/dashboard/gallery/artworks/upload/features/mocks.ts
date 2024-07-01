@@ -125,13 +125,6 @@ export const uploadArtworkPriceInputMocks = [
     required: true,
     options: ["Yes", "No"],
   },
-  {
-    name: "carrier",
-    type: "select",
-    label: "Preferred shipping carrier",
-    required: true,
-    options: ["USPS", "UPS", "FedEx", "Maersk", "DHL", "CMA CGM"],
-  },
 ];
 
 export const uploadArtistDetailsInputMocks = [

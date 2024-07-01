@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { LoadSmall } from "@/components/loader/Load";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function UploadArtworkImage() {
   const imagePickerRef = useRef<HTMLInputElement>(null);
@@ -27,6 +28,8 @@ export default function UploadArtworkImage() {
   const router = useRouter();
 
   const acceptedFileTypes = ["jpg", "jpeg", "png"];
+
+  const queryClient = useQueryClient();
 
   async function handleArtworkUpload(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -66,8 +69,9 @@ export default function UploadArtworkImage() {
         } else {
           setLoading(false);
           toast.success(upload_response!.body.message);
+          queryClient.invalidateQueries({ queryKey: ["fetch_artworks_by_id"] });
           clearData();
-          router.back();
+          router.replace("/dashboard/gallery/artworks");
         }
       }
     } else {
@@ -89,7 +93,7 @@ export default function UploadArtworkImage() {
         ) : (
           <button
             type="button"
-            className="w-[300px] h-[300px] border border-dark/30 rounded-md outline-none p-5 focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 hover:border-dark"
+            className="w-[400px] h-[400px] border border-[#E0E0E0] bg-white rounded-sm text-xs outline-none p-5 focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 hover:border-dark"
             onClick={() => {
               imagePickerRef.current?.click();
             }}
@@ -123,10 +127,10 @@ export default function UploadArtworkImage() {
           }}
         />
       </div>
-      <div className="mt-4 flex justify-end">
+      <div className="mt-4 flex w-full text-xs">
         <button
           disabled={loading || !image}
-          className="inline-flex justify-center rounded-md border border-transparent disabled:bg-dark/30 bg-primary px-4 py-2 font-light hover:bg-primary foucs:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2  disabled:text-gray-300 disabled:cursor-not-allowed text-white "
+          className={`bg-dark rounded-sm disabled:cursor-not-allowed disabled:bg-[#E0E0E0] text-white h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80 w-full`}
           type="submit"
         >
           {loading ? <LoadSmall /> : "Upload artwork"}

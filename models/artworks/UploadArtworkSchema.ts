@@ -30,7 +30,6 @@ const artworkUpload = new Schema<ArtworkSchemaTypes>(
     artwork_description: { type: String },
     framing: { type: String, required: true },
     signature: { type: String, required: true },
-    carrier: { type: String, required: true },
     should_show_on_sub_active: {
       type: Boolean,
       default: () => true,

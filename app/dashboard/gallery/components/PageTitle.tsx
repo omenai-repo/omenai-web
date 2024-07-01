@@ -1,7 +1,9 @@
 "use client";
+import { IoAdd } from "react-icons/io5";
 
 import { usePathname } from "next/navigation";
 import { IoMdArrowDropright } from "react-icons/io";
+import Link from "next/link";
 
 export default function PageTitle({ title }: { title: string }) {
   const navigation = usePathname();
@@ -39,9 +41,19 @@ export default function PageTitle({ title }: { title: string }) {
   });
 
   return (
-    <div className="w-full flex flex-col gap-y-1 mt-5 mb-12">
-      <h1 className="font-medium text-md text-dark">{title}</h1>
-      <p className="text-base flex">{breadcrumbs}</p>
+    <div className="flex justify-between items-center w-full">
+      <div className="w-full flex flex-col gap-y-1 mt-5">
+        <h1 className="font-medium text-md text-dark">{title}</h1>
+        <p className="text-base flex">{breadcrumbs}</p>
+      </div>
+      {title === "My Artworks" && (
+        <Link href={"/dashboard/gallery/artworks/upload"} className="w-fit">
+          <button className="bg-dark rounded-sm w-fit whitespace-nowrap text-white text-xs h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+            <span>Upload Artwork</span>
+            <IoAdd className="text-sm" />
+          </button>
+        </Link>
+      )}
     </div>
   );
 }

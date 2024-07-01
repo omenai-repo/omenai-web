@@ -1,9 +1,10 @@
+import PageTitle from "../../../components/PageTitle";
 import UploadArtworkImage from "../features/UploadArtworkImage";
 
 export default function page() {
   return (
     <div className="p-5">
-      <h1 className="text-dark font-medium text-sm+">Upload artwork image</h1>
+      <PageTitle title="Upload artwork Image" />
       <div className="my-12">
         <UploadArtworkImage />
       </div>
