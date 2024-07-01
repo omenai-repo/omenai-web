@@ -29,6 +29,11 @@ export const navMockData: NavMockData = {
     { title: "Overview", icon: overview, url: "/dashboard/gallery/overview" },
     { title: "Orders", icon: order, url: "/dashboard/gallery/orders" },
     {
+      title: "My artworks",
+      icon: album,
+      url: "/dashboard/gallery/artworks",
+    },
+    {
       title: "Subscription",
       icon: subscription,
       url: "/dashboard/gallery/subscription",
@@ -37,16 +42,6 @@ export const navMockData: NavMockData = {
       title: "My Wallet",
       icon: wallet,
       url: "/dashboard/gallery/wallet",
-    },
-    {
-      title: "Upload artwork",
-      icon: upload,
-      url: "/dashboard/gallery/upload",
-    },
-    {
-      title: "My artworks",
-      icon: album,
-      url: "/dashboard/gallery/artworks",
     },
   ],
   account: [

@@ -20,7 +20,7 @@ export default function UploadArtworkDetails() {
     if (!allKeysEmpty(errorFields)) toast.error("Invalid field inputs...");
     else {
       toast.success("Processing...please wait");
-      router.push("/dashboard/gallery/upload/image");
+      router.push("/dashboard/gallery/artworks/upload/image");
     }
   }
   return (
@@ -31,13 +31,13 @@ export default function UploadArtworkDetails() {
         <ArtistInfoInputGroup />
         <ArtworkDimensionsInputGroup />
         <ArtworkPriceInputGroup />
-        <div className="w-full flex justify-end mt-2">
+        <div className="w-full flex my-4 text-xs">
           <button
             type="submit"
-            className="rounded-full bg-primary disabled:bg-dark disabled:cursor-not-allowed text-white px-4 py-2 flex gap-2 items-center justify-center hover:bg-primary/70"
+            className="w-full bg-dark rounded-sm text-white h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
           >
             <>
-              Next
+              Proceed
               <BsArrowRight />
             </>
           </button>

@@ -98,7 +98,6 @@ type ArtworkSchemaTypes = {
   artwork_description?: string;
   framing: string;
   signature: string;
-  carrier: string;
   should_show_on_sub_active?: boolean;
 };
 
@@ -139,7 +138,6 @@ type ArtworkUploadStateTypes = {
   artwork_description?: string;
   framing: string;
   signature: string;
-  carrier: string;
 };
 
 type CreateOrderModelTypes = {

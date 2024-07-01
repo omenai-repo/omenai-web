@@ -20,13 +20,13 @@ export default function ArtworkSelectInput({
   ]);
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="text-dark/80 font-normal text-[0.95rem]">
+      <label htmlFor={name} className="text-dark/80 font-normal text-xs">
         {label}
       </label>
       <select
         onChange={(e) => updateArtworkUploadData(name, e.target.value)}
         required={required}
-        className="border-0 border-b bg-transparent ring-0  border-b-dark/20 w-full p-2 focus:border-b-dark focus:ring-0 placeholder:font-light placeholder:text-dark text-dark"
+        className="border px-2 ring-0 text-xs text-[#858585] border-[#E0E0E0] w-full py-2 focus:border-none focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-[#858585] "
       >
         <option value="">Select</option>
         {items!.map((item, index) => {

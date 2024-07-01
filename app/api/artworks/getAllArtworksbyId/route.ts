@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     const allArtworks = await Artworkuploads.find(
       { gallery_id: id },
-      "artist title url art_id"
+      "artist title url art_id like_IDs pricing"
     ).exec();
 
     return NextResponse.json(

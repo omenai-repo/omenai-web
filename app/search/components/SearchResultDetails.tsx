@@ -53,8 +53,6 @@ export default function SearchResultDetails({
                     impressions={artwork.impressions as number}
                     likeIds={artwork.like_IDs as string[]}
                     sessionId={sessionId}
-                    medium={artwork.medium}
-                    rarity={artwork.rarity}
                   />
                 );
               })}
