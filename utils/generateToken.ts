@@ -9,7 +9,12 @@ export default function generateString() {
   return result;
 }
 
-export const generateDigit = async (length: number) => {
+export const generateDigit = (length: number) => {
+  const token = cryptoRandomString({ length, type: "numeric" });
+
+  return token;
+};
+export const generateAlphaDigit = (length: number) => {
   const token = cryptoRandomString({ length, type: "alphanumeric" });
 
   return token;

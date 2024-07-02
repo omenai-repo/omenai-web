@@ -73,18 +73,18 @@ export default function LogoPickerModal() {
     <>
       <Modal show={modal} onClose={() => updateModal(false)}>
         <div className="p-5">
-          <p className="text-sm font-normal">Select logo image</p>
+          <p className="text-base font-normal">Upload logo image</p>
         </div>
 
         <div className="w-full flex justify-center h-full p-5">
-          <div className="w-[300px] h-[20vh]">
+          <div className="w-[300px] h-[200px]">
             {logo ? (
               <Image
                 src={URL.createObjectURL(logo)}
                 alt="uploaded image"
                 width={300}
                 height={200}
-                className="w-full h-[20vh] object-cover mt-2 filter hover:grayscale transition-all duration-200 rounded-lg cursor-not-allowed"
+                className="w-full h-[200px] object-cover mt-2 filter hover:grayscale transition-all duration-200 rounded-lg cursor-not-allowed"
                 onClick={() => {
                   setLogo(null);
                 }}
@@ -92,7 +92,7 @@ export default function LogoPickerModal() {
             ) : (
               <button
                 type="button"
-                className="w-full h-full border border-dark/10 rounded-md outline-none p-5 focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 hover:border-dark"
+                className="w-full text-xs h-full border border-dark/10 rounded-md outline-none p-5 focus-visible:ring-2 focus-visible:ring-dark focus-visible:ring-offset-2 hover:border-dark"
                 onClick={() => {
                   logoPickerRef.current?.click();
                 }}
@@ -127,10 +127,10 @@ export default function LogoPickerModal() {
             />
           </div>
         </div>
-        <div className="flex justify-end px-5 py-8">
-          <div className="flex gap-4">
+        <div className=" w-full px-5 py-8 text-xs">
+          <div className="w-full items-center gap-x-2 flex">
             <button
-              className="px-3 py-2 bg-dark hover:bg-dark/40 duration-200 rounded-lg text-white font-normal text-base"
+              className="w-full disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
               onClick={() => updateModal(false)}
             >
               Cancel
@@ -138,7 +138,7 @@ export default function LogoPickerModal() {
             <button
               onClick={handleLogoUpdate}
               disabled={loading || !logo}
-              className="px-3 py-2 bg-primary rounded-lg disabled:grayscale disabled:cursor-not-allowed text-white font-normal text-base hover:grayscale duration-200"
+              className="w-full disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
             >
               {loading ? <LoadSmall /> : "Upload logo"}
             </button>

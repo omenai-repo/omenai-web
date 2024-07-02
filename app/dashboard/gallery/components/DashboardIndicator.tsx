@@ -21,7 +21,7 @@ export default function DashboardIndicator({
   const pathname = usePathname().split("/");
   return (
     <div className="w-full flex justify-between items-center">
-      <div className="text-[14px]">
+      <div className="text-xs">
         <p className="font-normal text-dark">
           Welcome back, <strong>{gallery_name}</strong>
         </p>
@@ -35,7 +35,7 @@ export default function DashboardIndicator({
       {/* Request verification */}
       {!gallery_verified ? (
         <div className="" id="gallery-verification">
-          <button className=" h-[50px] px-4 bg-dark text-white rounded-md text-[14px] hover:bg-dark/90">
+          <button className=" w-full text-xs disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
             Request gallery verification
           </button>
         </div>

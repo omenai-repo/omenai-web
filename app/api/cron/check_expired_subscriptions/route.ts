@@ -1,7 +1,7 @@
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
-import generateString, { generateDigit } from "@/utils/generateToken";
+import generateString, { generateAlphaDigit } from "@/utils/generateToken";
 import { NextResponse } from "next/server";
 export const revalidate = 0;
 export const dynamic = "force-dynamic";

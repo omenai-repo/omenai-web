@@ -1,5 +1,5 @@
 import { getApiUrl } from "@/config";
-import { generateDigit } from "@/utils/generateToken";
+import { generateAlphaDigit } from "@/utils/generateToken";
 
 export const purchase_artwork = async (
   email: string,
@@ -18,7 +18,7 @@ export const purchase_artwork = async (
       },
 
       body: JSON.stringify({
-        tx_ref: await generateDigit(8),
+        tx_ref: generateAlphaDigit(8),
         currency: "USD",
         amount: "50",
         redirect_url: `${url}/payment/verifyTransaction`,

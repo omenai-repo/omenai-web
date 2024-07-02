@@ -11,7 +11,7 @@ import { limiter } from "@/lib/auth/limiter";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { VerificationCodes } from "@/models/auth/verification/codeTimeoutSchema";
-import generateString, { generateDigit } from "@/utils/generateToken";
+import generateString, { generateAlphaDigit } from "@/utils/generateToken";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
         "This action is not permitted. Account already verified"
       );
 
-    const email_token = await generateDigit(6);
+    const email_token = generateAlphaDigit(6);
 
     const isVerificationTokenActive = await VerificationCodes.findOne({
       author,

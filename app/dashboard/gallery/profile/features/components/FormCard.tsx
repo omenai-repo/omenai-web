@@ -42,32 +42,38 @@ export const FormCard = () => {
 
   return (
     <form onSubmit={handleSubmit} className="p-5 space-y-8 lg:px-2">
-      <InputCard
-        label="Gallery name"
-        value={user?.name}
-        onChange={() => {}}
-        labelText="gallery"
-      />
-      <InputCard
-        label="Email address"
-        value={user?.email}
-        labelText="email"
-        rightComponent={
-          <div>
-            {user?.verified ? (
-              <p className="text-green-400">Verified</p>
-            ) : (
-              <p className="text-red-500">Verify</p>
-            )}
-          </div>
-        }
-      />
-      <InputCard
-        label="Location"
-        defaultValue={user?.location}
-        labelText="location"
-      />
-      <InputCard label="Admin" defaultValue={user?.admin} labelText="admin" />
+      <div className="grid grid-cols-2 items-center">
+        <InputCard
+          label="Gallery name"
+          value={user?.name}
+          onChange={() => {}}
+          labelText="gallery"
+        />
+        <InputCard
+          label="Gallery Email address"
+          value={user?.email}
+          labelText="email"
+          rightComponent={
+            <div>
+              {user?.verified ? (
+                <p className="text-green-400">Verified</p>
+              ) : (
+                <p className="text-red-500">Verify</p>
+              )}
+            </div>
+          }
+        />
+      </div>
+
+      <div className="grid grid-cols-2 items-center">
+        <InputCard
+          label="Location"
+          defaultValue={user?.location}
+          labelText="location"
+        />
+        <InputCard label="Admin" defaultValue={user?.admin} labelText="admin" />
+      </div>
+
       <TextareaCard
         label="Gallery description"
         rows={2}
@@ -84,7 +90,7 @@ export const FormCard = () => {
             !updateData.description) ||
           isLoading
         }
-        className="disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center px-8 py-2 bg-primary hover:bg-primary/50 rounded-full text-white text-base"
+        className="w-full disabled:cursor-not-allowed disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
       >
         {isLoading ? <LoadSmall /> : "Save edit data"}
       </button>
