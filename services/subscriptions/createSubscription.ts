@@ -1,5 +1,5 @@
 import { getApiUrl } from "@/config";
-import { generateDigit } from "@/utils/generateToken";
+import { generateAlphaDigit } from "@/utils/generateToken";
 
 export const createSubscription = async (email: string, name: string) => {
   const url = getApiUrl();
@@ -13,7 +13,7 @@ export const createSubscription = async (email: string, name: string) => {
       },
 
       body: JSON.stringify({
-        tx_ref: await generateDigit(8),
+        tx_ref: generateAlphaDigit(8),
         payment_plan: process.env.FLW_PAYMENT_PLAN_ID,
         currency: "USD",
         amount: "20",

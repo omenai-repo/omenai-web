@@ -64,7 +64,7 @@ export default function QuoteForm() {
     200
   );
   return (
-    <div>
+    <div className="my-5">
       <div className="w-full py-3 px-4 bg-white">
         <h1 className="text-base text-dark font-medium">
           Provide shipping quote

@@ -4,6 +4,12 @@ import JoyRide, { ACTIONS, EVENTS, STATUS } from "react-joyride";
 // Tour steps
 const TOUR_STEPS = [
   {
+    target: "#tour-highlights",
+    content:
+      "Welcome to your dashboard. You can find quick highlights about the perfomance of your account on the platform here",
+    disableBeacon: true,
+  },
+  {
     target: "#tour-search",
     content:
       "Welcome to your dashboard. Once your artworks starts gaining popularity, we'll be sure to show you your top-rated artworks amongst our users.",
@@ -15,11 +21,6 @@ const TOUR_STEPS = [
       "You can view your sales progress from this chart here, it keeps track of and shows how much revenue you've made from successful artwork sales.",
   },
   {
-    target: "#tour-external-links",
-    content:
-      "We serve you the best and latest editorial articles here. Take a good read.",
-  },
-  {
     target: "#tour-footer",
     content:
       "This is where you can view the most recent list of orders made for various artworks you've uploaded.",
@@ -29,16 +30,11 @@ const TOUR_STEPS = [
     content:
       "You can switch between your dashboard links or navigate to another dashboard page from here",
   },
-  {
-    target: "#expand",
-    content:
-      "You can expand or clam up the navigation bar by clicking this icon here.",
-  },
-  {
-    target: "#gallery-verification",
-    content:
-      "Your account is in a pending state as it's being verified. You can expedite this process by clicking this button and an agent will reach out to you within 24 hours.",
-  },
+  // {
+  //   target: "#gallery-verification",
+  //   content:
+  //     "Your account is in a pending state as it's being verified. You can expedite this process by clicking this button and an agent will reach out to you within 24 hours.",
+  // },
 ];
 
 // Tour component

@@ -20,16 +20,17 @@ export const TextareaCard = (props: Props) => {
 
   return (
     <div className="flex flex-col">
-      <label htmlFor={id} className="text-base font-light text-dark">
+      <label htmlFor={id} className="text-xs  text-dark">
         {label}
       </label>
       <div className={clsx("flex items-center justify-between py-1")}>
         <textarea
+          rows={8}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             handleChange(name, e.target.value)
           }
           className={clsx(
-            "w-full border-0 border-b text-dark border-b-dark/20 focus:ring-0 focus:outline-none focus:border-b-dark ring-0 placeholder:text-dark/40 ",
+            "disabled:cursor-not-allowed border px-2 ring-0 text-xs text-dark border-[#E0E0E0] w-full py-2 focus:border-none focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-dark ",
             className
           )}
           {...rest}

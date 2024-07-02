@@ -13,19 +13,21 @@ export default function OverviewPage() {
     <div className="w-full">
       <Tour />
       <PageTitle title={"Overview"} />
-      <Highlight />
-      <Suspense fallback={<Load />}>
-        <ActivityWrapper />
-      </Suspense>
-
-      <div className="grid lg:grid-cols-2 gap-x-[1rem] pb-4">
+      <div className="my-5">
+        <Highlight />
         <Suspense fallback={<Load />}>
-          <Orders />
+          <ActivityWrapper />
         </Suspense>
 
-        <Suspense fallback={<Load />}>
-          <PopularArtworks />
-        </Suspense>
+        <div className="grid lg:grid-cols-2 gap-x-[1rem] pb-4">
+          <Suspense fallback={<Load />}>
+            <Orders />
+          </Suspense>
+
+          <Suspense fallback={<Load />}>
+            <PopularArtworks />
+          </Suspense>
+        </div>
       </div>
     </div>
   );

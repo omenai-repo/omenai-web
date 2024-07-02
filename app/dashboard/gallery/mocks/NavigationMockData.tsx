@@ -38,11 +38,6 @@ export const navMockData: NavMockData = {
       icon: subscription,
       url: "/dashboard/gallery/subscription",
     },
-    {
-      title: "My Wallet",
-      icon: wallet,
-      url: "/dashboard/gallery/wallet",
-    },
   ],
   account: [
     {

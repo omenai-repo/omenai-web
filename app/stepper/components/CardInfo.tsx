@@ -24,7 +24,7 @@ function CardInfo() {
   async function handleCardInputSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setCardInputLoading(true);
-    // const ref = await generateDigit(8);
+    // const ref = generateAlphaDigit(8);
     const response = await initiateDirectCharge({
       ...cardInput,
       tx_ref: "hello",

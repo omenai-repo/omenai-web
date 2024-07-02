@@ -7,6 +7,8 @@ import NoMobileView from "./components/NoMobileView";
 import { OrderActionModal } from "./modals/OrderActionModal";
 import { UploadTrackingIDModal } from "./modals/ProvideTrackingIDModal";
 import { UploadOrderRejectionReason } from "./modals/ProvideOrderRejectionReason";
+import { DeleteAccountConfirmationModal } from "./modals/DeleteAccountConfirmationMdal";
+import { UpdatePasswordModal } from "./modals/UpdatePasswordModal";
 export default function GalleryDashboardLayout({
   children,
 }: {
@@ -32,6 +34,9 @@ export default function GalleryDashboardLayout({
                 <OrderActionModal />
                 <UploadTrackingIDModal />
                 <UploadOrderRejectionReason />
+                <UpdatePasswordModal />
+                <DeleteAccountConfirmationModal />
+
                 {children}
               </div>
             </div>

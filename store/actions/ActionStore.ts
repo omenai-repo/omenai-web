@@ -46,6 +46,10 @@ type ActionStoreTypes = {
   clearGalleryOrderActionModalData: () => void;
   current_order_id: string;
   update_current_order_id: (id: string) => void;
+  deletGalleryAccountModal: boolean;
+  updateDeleteGalleryAccountModalPopup: (value: boolean) => void;
+  passwordModalPopup: boolean;
+  updatePasswordModalPopup: (value: boolean) => void;
 };
 
 export const actionStore = create<ActionStoreTypes>((set, get) => ({
@@ -179,5 +183,13 @@ export const actionStore = create<ActionStoreTypes>((set, get) => ({
   current_order_id: "",
   update_current_order_id: (id: string) => {
     set({ current_order_id: id });
+  },
+  deletGalleryAccountModal: false,
+  updateDeleteGalleryAccountModalPopup: (value: boolean) => {
+    set({ deletGalleryAccountModal: value });
+  },
+  passwordModalPopup: false,
+  updatePasswordModalPopup: (value: boolean) => {
+    set({ passwordModalPopup: value });
   },
 }));
