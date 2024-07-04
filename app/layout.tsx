@@ -11,6 +11,7 @@ import Providers from "@/react-query-provider/Provider";
 import LoginModal from "@/components/modal/LoginModal";
 import RecoveryModal from "@/components/modal/RecoveryModal";
 import { OrderReceivedModal } from "@/components/modal/OrderConfirmedModal";
+import { ThemeProvider } from "./material_tailwind/MaterialTailwindExports";
 
 const nunito_sans = Nunito_Sans({
   subsets: ["latin"],
@@ -35,12 +36,14 @@ export default async function RootLayout({
         <NextTopLoader color="#1A1A1A" height={6} />
         <Toaster richColors position="top-center" visibleToasts={1} />
         <AuthProvider session={session}>
-          <Providers>
-            <LoginModal />
-            <RecoveryModal />
-            <OrderReceivedModal />
-            {children}
-          </Providers>
+          <ThemeProvider>
+            <Providers>
+              <LoginModal />
+              <RecoveryModal />
+              <OrderReceivedModal />
+              {children}
+            </Providers>
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>
