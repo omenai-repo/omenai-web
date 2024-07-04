@@ -34,9 +34,9 @@ export const navMockData: NavMockData = {
       url: "/dashboard/gallery/artworks",
     },
     {
-      title: "Subscription",
+      title: "Subscription & Billing",
       icon: subscription,
-      url: "/dashboard/gallery/subscription",
+      url: "/dashboard/gallery/billing",
     },
   ],
   account: [

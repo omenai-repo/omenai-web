@@ -10,6 +10,7 @@
     "test": "next ./tests/main.ts"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.1.9",
     "@react-email/components": "^0.0.14",
     "@react-email/render": "0.0.12",
     "@splidejs/react-splide": "^0.7.12",
