@@ -42,7 +42,7 @@ export default function Plan({
                   {benefits.map((benefit, index) => {
                     return (
                       <li key={index} className="flex items-start">
-                        <div className="flex-shrink-0">
+                        <span className="flex-shrink-0">
                           <svg
                             className="h-4 w-4 text-dark"
                             xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ export default function Plan({
                               d="M4.5 12.75l6 6 9-13.5"
                             ></path>
                           </svg>
-                        </div>
+                        </span>
                         <p className="ml-3 text-[14px] leading-6 text-[#858585]">
                           {benefit}
                         </p>

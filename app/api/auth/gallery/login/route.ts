@@ -45,12 +45,13 @@ export async function POST(request: Request) {
       role,
       logo,
       subscription_active,
+      connected_account_id,
     } = user;
 
     return res.json(
       {
         message: "Login successfu",
-        id: gallery_id,
+        gallery_id,
         verified,
         admin,
         description,
@@ -61,6 +62,7 @@ export async function POST(request: Request) {
         role,
         logo,
         subscription_active,
+        connected_account_id,
       },
       { status: 200 }
     );

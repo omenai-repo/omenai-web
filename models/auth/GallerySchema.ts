@@ -67,6 +67,10 @@ const gallerySignupSchema = new Schema<GallerySchemaTypes>(
       type: String,
       default: () => "active",
     },
+    connected_account_id: {
+      type: String,
+      default: () => null,
+    },
   },
   { timestamps: true }
 );
