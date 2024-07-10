@@ -8,7 +8,7 @@ export async function createCheckoutSession(
     trans_type: string;
     user_id: string;
     user_email: string;
-    order_id: string;
+    art_id: string;
   }
 ) {
   try {
