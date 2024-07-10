@@ -32,7 +32,8 @@ export async function handlePaymentIntentSucceeded(paymentIntent: any) {
   };
   const updateOrderPaymentInfo = await CreateOrder.updateOne(
     {
-      order_id: meta.order_id,
+      "buyer.email": meta.user_email,
+      "artwork_data.art_id": meta.art_id,
     },
     {
       $set: {

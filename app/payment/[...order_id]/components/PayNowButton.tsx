@@ -59,7 +59,7 @@ export default function PayNowButton({
         trans_type: "purchase_payout",
         user_id: session.data!.user.id,
         user_email: session.data!.user.email,
-        order_id,
+        art_id,
       }
     );
 
