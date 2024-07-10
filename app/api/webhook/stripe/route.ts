@@ -5,7 +5,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const secretHash = process.env.STRIPE_WEBHOOK_SECRET!;
-  const req = await request.json();
+  const rawBody = await request.text();
+
   let event;
   // Only verify the event if you have an endpoint secret defined.
   // Otherwise use the basic event deserialized with JSON.parse
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
     const signature = request.headers.get("stripe-signature");
     try {
       event = await stripe.webhooks.constructEvent(
-        request.body,
+        rawBody,
         signature,
         secretHash
       );
