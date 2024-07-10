@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     // Get the signature sent by Stripe
     const signature = request.headers.get("stripe-signature");
     try {
-      event = stripe.webhooks.constructEvent(
+      event = await stripe.webhooks.constructEvent(
         request.body,
         signature,
         secretHash
