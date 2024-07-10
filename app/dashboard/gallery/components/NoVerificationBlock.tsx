@@ -3,7 +3,7 @@ import { BsShieldLock } from "react-icons/bs";
 export default function NoVerificationBlock() {
   return (
     <div
-      className={`w-full h-[75vh] grid place-items-center bg-dark mt-10 rounded-lg`}
+      className={`w-full h-[78vh] grid place-items-center bg-dark mt-10 rounded-lg`}
     >
       <div className="flex flex-col gap-4 items-center">
         <BsShieldLock className="text-2xl text-white" />

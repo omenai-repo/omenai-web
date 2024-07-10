@@ -27,7 +27,7 @@ export default function RefreshStripe() {
           isSubmitted: response.details_submitted,
         };
       } else {
-        toast.error("Something went wrong. Please refresh the page");
+        throw new Error("Something went wrong, Please refresh the page");
       }
     },
   });

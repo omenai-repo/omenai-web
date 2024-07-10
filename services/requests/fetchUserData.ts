@@ -8,10 +8,9 @@ export async function fetchUserData(id: string) {
       body: JSON.stringify({ accountId: id }),
     });
 
-    if (!res.ok) return undefined;
     const result = await res.json();
 
-    return result;
+    return { isOk: res.ok, message: result.message, data: result.data };
   } catch (error: any) {
     console.log(error);
   }
