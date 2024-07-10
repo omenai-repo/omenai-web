@@ -2,6 +2,7 @@
 import { LoadSmall } from "@/components/loader/Load";
 import { generateStripeLoginLink } from "@/services/stripe/generateStripeLoginLink";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
+import { formatPrice } from "@/utils/priceFormatter";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
@@ -24,6 +25,7 @@ export default function BalanceBox({
       setGeneratingLoginLink(true);
     } else router.replace(loginLink.url);
   }
+  const currency = getCurrencySymbol(balance.available[0].currency);
 
   return (
     <div className="bg-[#FAFAFA] border border-[#E0E0E0] p-6 w-[500px] rounded-lg">
@@ -31,18 +33,21 @@ export default function BalanceBox({
         <p className="text-[14px]">Stripe Available Balance</p>
 
         <h1 className="text-md font-bold">
-          {getCurrencySymbol(balance.available[0].currency)}
-          {balance.available[0].amount}
+          {formatPrice(balance.available[0].amount / 100, currency)}
         </h1>
 
         <p className="text-[14px]">
-          Balance pending on Stripe:{" "}
-          {getCurrencySymbol(balance.pending[0].currency)}
-          <span className="font-bold">{balance.pending[0].amount}</span>
+          Balance pending on Stripe:
+          <span className="font-bold">
+            {formatPrice(balance.pending[0].amount / 100, currency)}
+          </span>
         </p>
 
         <div className="mt-10 w-full flex space-x-2">
-          <button className="h-[50px] text-xs font-medium disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-dark text-white cursor-pointer grid place-items-center">
+          <button
+            disabled={balance.available[0].amount / 100 === 0}
+            className="h-[50px] text-xs font-medium disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-dark text-white cursor-pointer grid place-items-center"
+          >
             Payout Balance
           </button>
           <button

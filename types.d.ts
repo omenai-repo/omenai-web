@@ -249,11 +249,13 @@ type WalletModelSchemaTypes = {
 };
 
 type TransactionModelSchemaTypes = {
+  trans_id: string;
   trans_reference: string;
-  trans_amount: number;
+  trans_amount: string;
   trans_owner_id: string;
-  trans_wallet_id: string;
-  trans_type: "deposit" | "withdrawal";
+  trans_owner_role: "user" | "gallery";
+  trans_gallery_id: string;
+  trans_type: "purchase_payout" | "subscription";
   trans_date: Date;
 };
 
