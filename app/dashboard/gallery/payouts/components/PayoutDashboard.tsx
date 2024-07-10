@@ -18,11 +18,11 @@ export default function PayoutDashboard() {
     queryFn: async () => {
       const acc = await getAccountId(session.data!.user.email);
       if (!acc?.isOk) {
-        toast.error("Something went wrong, Please refresh the page");
+        throw new Error("Something went wrong, Please refresh the page");
       }
       const balance = await retrieveBalance(acc!.data.connected_account_id);
       if (!balance?.isOk) {
-        toast.error("Something went wrong, Please refresh the page");
+        throw new Error("Something went wrong, Please refresh the page");
       }
       const response = await checkIsStripeOnboarded(
         acc!.data.connected_account_id
@@ -35,14 +35,14 @@ export default function PayoutDashboard() {
           balance: balance?.data,
         };
       } else {
-        toast.error("Something went wrong. Please refresh the page");
+        throw new Error("Something went wrong, Please refresh the page");
       }
     },
   });
 
   if (isLoading) {
     return (
-      <div className="h-[85vh] w-full grid place-items-center">
+      <div className="h-[78vh] w-full grid place-items-center">
         <Load />
       </div>
     );

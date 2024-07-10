@@ -31,7 +31,6 @@ export default function GetStartedWithStripe() {
       customer_id: session.data!.user.id,
       country: countrySelect,
     };
-    console.log(customer);
     const response = await createConnectedAccount(customer);
 
     if (response?.isOk) {

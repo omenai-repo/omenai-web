@@ -49,7 +49,11 @@ export default function PurchaseComponentWrapper({
       setIsLoggedIn(true);
       const fetchUser = async () => {
         const user = await fetchUserData(session.data!.user.id);
-        setAddress(user.data.address);
+        if (user?.isOk) {
+          setAddress(user.data.address);
+        } else {
+          toast.error(user?.message);
+        }
       };
 
       fetchUser();

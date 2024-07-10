@@ -15,7 +15,6 @@ export default function AcceptConfirmationPopupModal() {
       const accept_gallery = await acceptGalleryVerification(
         acceptConfirmationPopup.gallery_id
       );
-      console.log(accept_gallery);
       if (accept_gallery?.isOk) {
         toast.success(accept_gallery.message);
       } else {

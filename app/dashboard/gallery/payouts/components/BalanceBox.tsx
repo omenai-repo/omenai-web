@@ -1,9 +1,7 @@
 "use client";
 import { LoadSmall } from "@/components/loader/Load";
 import { generateStripeLoginLink } from "@/services/stripe/generateStripeLoginLink";
-import { retrieveBalance } from "@/services/stripe/retrieveBalance";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
