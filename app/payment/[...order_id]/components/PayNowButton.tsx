@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { LoadSmall } from "@/components/loader/Load";
 import { purchase_artwork } from "@/services/purchase_artwork/purchase_artwork";
 import { useLocalStorage } from "usehooks-ts";
+import { createCheckoutSession } from "@/services/stripe/createCheckoutSession";
 
 export default function PayNowButton({
   art_id,
@@ -22,7 +23,7 @@ export default function PayNowButton({
 }: {
   art_id: string;
   artwork: string;
-  amount: string;
+  amount: number;
   gallery_id: string;
   order_id: string;
 }) {
@@ -35,53 +36,41 @@ export default function PayNowButton({
     oid: "",
   });
 
-  useEffect(() => {
-    const checkLock = async () => {
-      const lock_status = await checkLockStatus(art_id, session.data!.user.id);
-      if (lock_status?.isOk) {
-        setLocked(lock_status.data.locked);
-      } else {
-        throw new Error("Something went wrong, please try again");
-      }
-    };
+  // useEffect(() => {
+  //   const checkLock = async () => {
+  //     const lock_status = await checkLockStatus(art_id, session.data!.user.id);
+  //     if (lock_status?.isOk) {
+  //       setLocked(lock_status.data.locked);
+  //     } else {
+  //       throw new Error("Something went wrong, please try again");
+  //     }
+  //   };
 
-    checkLock();
-  }, [art_id, session.data]);
+  //   checkLock();
+  // }, [art_id, session.data]);
 
   async function handleClickPayNow() {
     setLoading(true);
-    const lock = await createOrderLock(art_id, session.data!.user.id);
-    if (lock?.isOk) {
-      if (lock.data.lock_data.user_id === session.data!.user.id) {
-        const response = await fetch("/api/purchase", {
-          method: "POST",
-          body: JSON.stringify({
-            email: session.data!.user.email,
-            name: session.data!.user.name,
-            artwork,
-            amount,
-          }),
-        });
-        const result = await response.json();
-
-        if (response.ok) {
-          setLoading(false);
-          set_pur_gid({ gid: gallery_id, oid: order_id });
-          toast.success("Payment link generated");
-          router.replace(result.data.link);
-        } else {
-          setLoading(false);
-          toast.error(result.message);
-        }
-      } else {
-        toast.error(
-          "A user is currently processing a purchase transaction on this artwork. Please check back in a few minutes for a status update"
-        );
+    const checkout_session = await createCheckoutSession(
+      artwork,
+      amount,
+      gallery_id,
+      {
+        trans_type: "purchase_payout",
+        user_id: session.data!.user.id,
+        user_email: session.data!.user.email,
+        order_id,
       }
-      setLoading(false);
+    );
+
+    if (!checkout_session?.isOk) {
+      toast.error("Something went wrong, please try again or contact support");
     } else {
-      throw new Error("An error has occured");
+      console.log(checkout_session);
+      router.replace(checkout_session.url);
     }
+
+    setLoading(false);
   }
 
   return (

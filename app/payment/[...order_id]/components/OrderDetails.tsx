@@ -7,7 +7,10 @@ import { formatPrice } from "@/utils/priceFormatter";
 import { useQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import PayNowButton from "./PayNowButton";
-import { calculatePurchaseGrandTotal } from "@/utils/calculatePurchaseGrandTotal";
+import {
+  calculatePurchaseGrandTotal,
+  calculatePurchaseGrandTotalNumber,
+} from "@/utils/calculatePurchaseGrandTotal";
 
 export default function OrderDetails({ order_id }: { order_id: string }) {
   const { data: order, isLoading } = useQuery({
@@ -36,13 +39,18 @@ export default function OrderDetails({ order_id }: { order_id: string }) {
     order.shipping_quote.shipping_fees,
     order.shipping_quote.taxes
   );
+  const total_price_number = calculatePurchaseGrandTotalNumber(
+    order.artwork_data.pricing.price,
+    order.shipping_quote.shipping_fees,
+    order.shipping_quote.taxes
+  );
   return (
     <div className="grid-cols-1 grid md:grid-cols-2 xl:grid-cols-3 my-[3rem] p-5 gap-4">
       <div className="col-span-1 xl:col-span-2">
         <PayNowButton
           art_id={order.artwork_data.art_id}
           artwork={order.artwork_data.title}
-          amount={"500"}
+          amount={total_price_number}
           gallery_id={order.gallery_id}
           order_id={order_id}
         />

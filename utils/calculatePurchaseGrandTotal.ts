@@ -14,3 +14,16 @@ export function calculatePurchaseGrandTotal(
 
   return totalString;
 }
+export function calculatePurchaseGrandTotalNumber(
+  price: number,
+  fees: string,
+  taxes: string
+): number {
+  const taxesValue: number = parseFloat(taxes.replace(/[^0-9.]/g, ""));
+  const feesValue: number = parseFloat(fees.replace(/[^0-9.]/g, ""));
+
+  // Calculate total
+  const total: number = price + taxesValue + feesValue;
+
+  return total;
+}
