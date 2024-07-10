@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
     const { accountId } = await request.json();
 
-    const user = AccountIndividual.findOne({ uer_id: accountId }, "address");
+    const user = AccountIndividual.findOne({ user_id: accountId }, "address");
 
     if (!user) throw new NotFoundError("User account does not exist");
 
