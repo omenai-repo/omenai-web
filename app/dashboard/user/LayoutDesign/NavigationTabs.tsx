@@ -18,12 +18,12 @@ const NavigationChipTabs = () => {
 
   return (
     <div className=" pb-[0.90rem] pt-14 grid grid-cols-4 items-center w-full border-b border-b-dark/10">
-      {tabs.map((tab) => (
+      {tabs.map((tab, index) => (
         <Chip
           text={tab}
           selectedTab={selected === tab.toLowerCase()}
           setSelectedTab={setSelected}
-          key={tab}
+          key={index}
         />
       ))}
     </div>

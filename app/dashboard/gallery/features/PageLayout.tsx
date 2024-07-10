@@ -1,7 +1,7 @@
 "use client";
 import { IndividualLogo } from "@/components/logo/Logo";
 import { BsArrowLeftShort } from "react-icons/bs";
-import { navMockData } from "../mocks/NavigationMockData";
+import { navMockData } from "../navigations/NavigationMockData";
 import NavigationItem from "../components/NavigationItem";
 import { galleryNavigationActions } from "@/store/gallery/gallery_navigation/GalleryNavigation";
 import { signOut } from "next-auth/react";

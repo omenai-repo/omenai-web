@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { PiSealWarning } from "react-icons/pi";
 import { useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
 export default function QuoteForm() {
   const [galleryOrderActionModalData, clearGalleryOrderActionModalData] =
@@ -63,6 +64,9 @@ export default function QuoteForm() {
     galleryOrderActionModalData.artwork.url,
     200
   );
+
+  const session = useSession();
+  // session.data?.user.
   return (
     <div className="my-5">
       <div className="w-full py-3 px-4 bg-white">

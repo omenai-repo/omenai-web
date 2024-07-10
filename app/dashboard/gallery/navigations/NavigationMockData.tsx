@@ -41,11 +41,17 @@ export const navMockData: NavMockData = {
   ],
   account: [
     {
+      title: "Payout with Stripe",
+      icon: settings,
+      url: "/dashboard/gallery/payouts",
+    },
+    {
       title: "Profile management",
       icon: profile,
       url: "/dashboard/gallery/profile",
     },
     { title: "Settings", icon: settings, url: "/dashboard/gallery/settings" },
+
     { title: "Sign out", icon: logout, url: "/" },
   ],
 };

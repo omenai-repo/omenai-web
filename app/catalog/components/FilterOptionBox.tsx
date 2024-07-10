@@ -51,7 +51,7 @@ export default function FilterOptionBox({
           {filters.map((filter, index) => {
             return (
               <li key={index}>
-                <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                <span className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                   <input
                     id={filter.option}
                     type="checkbox"
@@ -66,7 +66,7 @@ export default function FilterOptionBox({
                   >
                     {filter.option}
                   </label>
-                </div>
+                </span>
               </li>
             );
           })}

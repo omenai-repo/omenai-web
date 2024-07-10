@@ -1,7 +1,7 @@
 "use client";
 import { IndividualLogo } from "@/components/logo/Logo";
 import NavigationItem from "../components/NavigationItem";
-import { navMockData } from "../mocks/NavigationMockData";
+import { navMockData } from "../navigations/NavigationMockData";
 import { galleryNavigationActions } from "@/store/gallery/gallery_navigation/GalleryNavigation";
 import { TfiClose } from "react-icons/tfi";
 

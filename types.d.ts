@@ -56,6 +56,7 @@ type GallerySchemaTypes = {
   logo?: string;
   subscription_active: boolean;
   status: "active" | "blocked";
+  connected_account_id: string | null;
 };
 
 type IndividualSchemaTypes = {

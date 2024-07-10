@@ -17,12 +17,11 @@ export default function EditorialsGrid({
     return sortedEditorial;
   });
 
-
   return (
     <>
       <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:gap-x-4">
-        {sortedEditorials.map((editorial) => {
-          return <EditorialGridItemLarge editorial={editorial} />;
+        {sortedEditorials.map((editorial, index) => {
+          return <EditorialGridItemLarge key={index} editorial={editorial} />;
         })}
       </div>
     </>
