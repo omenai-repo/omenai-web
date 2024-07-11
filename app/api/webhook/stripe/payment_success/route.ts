@@ -33,7 +33,10 @@ export async function POST(request: Request) {
     }
   }
 
-  if (event.type === "checkout.session.async_payment_succeeded") {
+  if (
+    event.type === "checkout.session.async_payment_succeeded" ||
+    event.type === "checkout.session.completed"
+  ) {
     const paymentIntent = event.data.object;
     // Then define and call a method to handle the successful payment intent.
     if (

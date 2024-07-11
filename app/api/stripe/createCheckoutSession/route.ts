@@ -1,3 +1,4 @@
+import { getApiUrl } from "@/config";
 import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
@@ -8,6 +9,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     // Create Checkout Sessions from body params.
+    const url = getApiUrl();
     await connectMongoDB();
     const { item, amount, gallery_id, meta } = await request.json();
 
@@ -42,8 +44,8 @@ export async function POST(request: Request) {
       },
       expires_at: futureTimestamp,
       mode: "payment",
-      success_url: `http://localhost:3000/payment/success`,
-      cancel_url: `http://localhost:3000/payment/cancel`,
+      success_url: `${url}/payment/success`,
+      cancel_url: `${url}/payment/cancel`,
     });
     if (!session) throw new ServerError("Something went wrong, try again");
     return NextResponse.json({
