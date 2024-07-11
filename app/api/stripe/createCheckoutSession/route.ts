@@ -17,6 +17,9 @@ export async function POST(request: Request) {
     );
 
     const commission = Math.round(amount * 0.3 * 100);
+    const currentTimestampSeconds = Math.floor(Date.now() / 1000);
+    const thirtyMinutesOffset = 30 * 60;
+    const futureTimestamp = currentTimestampSeconds + thirtyMinutesOffset;
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -37,10 +40,10 @@ export async function POST(request: Request) {
           destination: gallery.connected_account_id,
         },
       },
-      expires_at: 1800,
+      expires_at: futureTimestamp,
       mode: "payment",
-      success_url: `http://localhost:3000/success`,
-      cancel_url: `http://localhost:3000/cancel`,
+      success_url: `http://localhost:3000/payment/success`,
+      cancel_url: `http://localhost:3000/payment/cancel`,
     });
     if (!session) throw new ServerError("Something went wrong, try again");
     return NextResponse.json({
