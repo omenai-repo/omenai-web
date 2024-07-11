@@ -69,10 +69,10 @@ export default function OrderActionModalForm() {
           <div className="flex flex-col">
             <p className="text-[#858585]">Buyer address</p>
             <p>
-              {galleryOrderActionModalData.shipping_address.address_line},
-              {galleryOrderActionModalData.shipping_address.city},
-              {galleryOrderActionModalData.shipping_address.state},
-              {galleryOrderActionModalData.shipping_address.country},
+              {galleryOrderActionModalData.shipping_address.address_line},{" "}
+              {galleryOrderActionModalData.shipping_address.city},{" "}
+              {galleryOrderActionModalData.shipping_address.state},{" "}
+              {galleryOrderActionModalData.shipping_address.country},{" "}
               {galleryOrderActionModalData.shipping_address.zip}
             </p>
           </div>

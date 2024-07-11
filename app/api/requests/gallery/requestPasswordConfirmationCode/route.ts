@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       gallery_id,
     });
     if (!account) throw new ServerError("Something went wrong");
-    const token = generateDigit(6);
+    const token = generateDigit(7);
 
     const check_code_existence = await VerificationCodes.findOne({
       author: account.gallery_id,

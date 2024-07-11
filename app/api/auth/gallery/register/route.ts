@@ -9,7 +9,7 @@ import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { RejectedGallery } from "@/models/auth/RejectedGalleryScema";
 import { VerificationCodes } from "@/models/auth/verification/codeTimeoutSchema";
-import { generateAlphaDigit } from "@/utils/generateToken";
+import { generateDigit } from "@/utils/generateToken";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
 
     const parsedData = await parseRegisterData(data);
 
-    const email_token = generateAlphaDigit(6);
+    const email_token = generateDigit(7);
 
     const saveData = await AccountGallery.create({
       ...parsedData,

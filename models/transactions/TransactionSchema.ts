@@ -1,9 +1,9 @@
+import { generateDigit } from "@/utils/generateToken";
 import mongoose, { Schema } from "mongoose";
-import { v4 as uuidv4 } from "uuid";
 
 const transactions = new Schema<TransactionModelSchemaTypes>(
   {
-    trans_id: { type: String, default: () => uuidv4() },
+    trans_id: { type: String, default: () => `PAY_OM_${generateDigit(7)}` },
     trans_reference: { type: String, required: true },
     trans_amount: { type: String, required: true },
     trans_date: { type: Date, required: true },

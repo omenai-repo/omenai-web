@@ -37,6 +37,7 @@ export async function POST(request: Request) {
           destination: gallery.connected_account_id,
         },
       },
+      expires_at: 1800,
       mode: "payment",
       success_url: `http://localhost:3000/success`,
       cancel_url: `http://localhost:3000/cancel`,

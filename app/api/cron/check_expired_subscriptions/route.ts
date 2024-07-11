@@ -1,7 +1,7 @@
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
-import generateString, { generateAlphaDigit } from "@/utils/generateToken";
+import { generateAlphaDigit } from "@/utils/generateToken";
 import { NextResponse } from "next/server";
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
@@ -36,7 +36,7 @@ export async function GET() {
   const user_token_data = expired_user_emails.map((doc) => {
     // Handle the expired document (e.g., update a field)
     // Update the necessary field for the expired document
-    const tx_ref = generateString();
+    const tx_ref = generateAlphaDigit(7);
     return {
       token: doc.sub_card_info.token,
       email: doc.customer.email,

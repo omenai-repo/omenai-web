@@ -1,6 +1,3 @@
-import { fetchUserData } from "@/services/requests/fetchUserData";
-import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/lib/auth/next-auth-options";
 import { fetchSingleArtworkOnPurchase } from "@/services/artworks/fetchSingleArtworkOnPurchase";
 import PurchaseComponentWrapper from "./components/PurchaseComponentWrapper";
 

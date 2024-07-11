@@ -1,6 +1,5 @@
-import { generateAlphaDigit } from "@/utils/generateToken";
+import { generateDigit } from "@/utils/generateToken";
 import mongoose, { Schema } from "mongoose";
-import { v4 as uuidv4 } from "uuid";
 
 const createOrder = new Schema<CreateOrderModelTypes>(
   {
@@ -9,7 +8,7 @@ const createOrder = new Schema<CreateOrderModelTypes>(
     gallery_id: { type: String, required: true },
     order_id: {
       type: String,
-      default: () => generateAlphaDigit(6),
+      default: () => generateDigit(7),
       unique: true,
     },
     status: { type: String, required: true, default: "pending" },
