@@ -4,7 +4,6 @@ import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { Wallet } from "@/models/wallet/WalletSchema";
 import { NextResponse } from "next/server";
 import { Transactions } from "@/models/transactions/TransactionSchema";
-import { generateAlphaDigit } from "@/utils/generateToken";
 import { getCurrentMonthAndYear } from "@/utils/getCurrentMonthAndYear";
 import { SalesActivity } from "@/models/sales/SalesActivity";
 import { CreateOrder } from "@/models/orders/CreateOrderSchema";

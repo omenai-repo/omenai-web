@@ -66,7 +66,7 @@ export default function PayNowButton({
     if (!checkout_session?.isOk) {
       toast.error("Something went wrong, please try again or contact support");
     } else {
-      console.log(checkout_session);
+      toast.success("Checkout session initiated...Redirecting!");
       router.replace(checkout_session.url);
     }
 
@@ -75,23 +75,23 @@ export default function PayNowButton({
 
   return (
     <div className="w-full grid place-items-center h-full">
-      <div className="space-y-4 text-center w-full flex flex-col items-center">
+      <div className="space-y-8 text-center w-full flex flex-col items-center">
         <div className="w-fit relative">
           <Tooltip
             content={
-              "Another user has initiated a payment transaction on this artwork. Please refresh your page in a few minutes to check status"
+              "Another user has initiated a payment transaction on this artwork. Please refresh your page in a few minutes to confirm the availability of this artwork."
             }
             style="dark"
             animation="duration-500"
             trigger="hover"
-            className={`w-[400px] bg-dark text-[0.9rem] text-white p-2 relative ${
+            className={`w-[400px] bg-dark text-xs text-white p-2 relative ${
               !locked && "hidden"
             }`}
           >
             <button
               onClick={handleClickPayNow}
               disabled={locked || loading}
-              className="w-fit h-[50px] px-4 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark text-white text-base hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
+              className="w-fit h-[50px] px-4 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark text-white text-[14px] hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
             >
               {loading ? <LoadSmall /> : "Proceed to payment"}
             </button>
@@ -99,17 +99,18 @@ export default function PayNowButton({
           {locked && <CiLock className="absolute right-[-15px] top-[-5px]" />}
         </div>
 
-        <p className="font-medium text-red-600 lg:w-1/2">
-          <span className="text-[1.15rem] uppercase underline">
+        <p className="font-medium text-red-600 lg:w-1/2 mt-6 leading-6">
+          <span className="text-base font-bold uppercase underline">
             Please note:
           </span>
-          <br /> In order to prevent multiple transaction attempts for this
-          artwork, we have implemented a queueing system and lock mechanism
-          which prevents other users from accessing the payment portal if a user
-          is currently in the process of paying for the artwork. In a case where
-          you are unable to access the payment portal, please refresh your page
-          after a few minutes and we&apos;ll let you know if the artwork is
-          still available for purchase.
+          <br /> To safeguard your purchase and prevent accidental duplicate
+          transactions for this artwork, we utilize a secure queuing system.
+          This system allows only one buyer to finalize payment at a time.
+          <br />
+          In the rare instance you encounter an issue accessing the payment
+          portal, you can refresh your page shortly. We&apos;ll inform you of
+          the artwork's availability if the purchase process hasn't been
+          completed by another buyer.
         </p>
       </div>
     </div>

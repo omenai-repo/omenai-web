@@ -13,7 +13,11 @@ import { getApiUrl } from "@/config";
 import Load from "@/components/loader/Load";
 import { toast } from "sonner";
 import OrderDetails from "./OrderDetails";
-export default function ComponentWrapper({ order_id }: { order_id: string }) {
+export default function ComponentWrapper({
+  order,
+}: {
+  order: CreateOrderModelTypes & { createdAt: string; updatedAt: string };
+}) {
   const router = useRouter();
   const session = useSession();
   const route = usePathname();
@@ -27,7 +31,8 @@ export default function ComponentWrapper({ order_id }: { order_id: string }) {
   const user_id_key = searchParams.get("id_key");
 
   useEffect(() => {
-    if (user_id_key === "" || undefined) return notFound();
+    if (user_id_key === "" || undefined) notFound();
+    if (order.buyer.user_id !== user_id_key) notFound();
     if (
       session.data?.user === undefined ||
       session.data?.user.id !== user_id_key
@@ -40,6 +45,7 @@ export default function ComponentWrapper({ order_id }: { order_id: string }) {
     } else {
       setIsLoggedIn(true);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.data?.user, user_id_key]);
 
@@ -49,7 +55,7 @@ export default function ComponentWrapper({ order_id }: { order_id: string }) {
         <>
           <DesktopNavbar />
           <div className="">
-            <OrderDetails order_id={order_id} />
+            <OrderDetails order={order} />
           </div>
         </>
       ) : (

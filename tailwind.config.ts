@@ -14,7 +14,7 @@ const config: Config = withMT({
       center: true,
     },
     fontSize: {
-      xs: "0.8125rem",
+      xs: "0.875rem",
       base: "1rem",
       sm: "1.2rem",
       md: "1.44rem",

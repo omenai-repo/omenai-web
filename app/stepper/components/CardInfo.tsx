@@ -5,6 +5,7 @@ import { useStepperStore } from "@/store/stepper/stepperStore";
 import { FormEvent, useState } from "react";
 import { initiateDirectCharge } from "@/services/subscriptions/subscribeUser/initiateDirectCharge";
 import { toast } from "sonner";
+import { generateAlphaDigit } from "@/utils/generateToken";
 
 type CardInputTypes = {
   // value: ChangeEvent<HTMLInputElement>,
@@ -24,10 +25,10 @@ function CardInfo() {
   async function handleCardInputSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setCardInputLoading(true);
-    // const ref = generateAlphaDigit(8);
+    const ref = generateAlphaDigit(7);
     const response = await initiateDirectCharge({
       ...cardInput,
-      tx_ref: "hello",
+      tx_ref: ref,
     });
     if (response?.isOk) {
       if (response.data.status === "error") {
