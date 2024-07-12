@@ -37,7 +37,7 @@ const PaymentSuccessfulMail = (
               className="mx-auto mt-10"
             />
 
-            <Heading className="text-black text-[20px] font-normal text-center p-0 mb-[40px] mx-0">
+            <Heading className="text-black text-[20px] font-normal  p-0 mb-[40px] mx-0">
               ARTWORK PURCHASE SUCCESSFUL
             </Heading>
             <Text className="text-black text-[14px] leading-[24px]">
@@ -45,10 +45,10 @@ const PaymentSuccessfulMail = (
             </Text>
             <Text className="text-black text-[14px] leading-[24px]">
               We're thrilled to inform you that we have received your payment
-              for <strong>(Order #{order_id})</strong>
+              for <strong>(Order ID #{order_id})</strong>
             </Text>
-            <Container className="w-fit p-5 bg-black text-white border border-t-8 border-t-white flex justify-center">
-              <Container className="text-center">
+            <div className="w-fit p-5 bg-black text-white border border-t-8 border-t-white flex">
+              <div className="">
                 <Text className="font-bold">Receipt from Omenai Inc.</Text>
                 <Text>
                   Your payment was successful and has been received by Omenai
@@ -58,35 +58,35 @@ const PaymentSuccessfulMail = (
 
                 <Hr className="border-[#FAFAFA] my-5" />
 
-                <Container className="w-fit">
-                  <Text className="uppercase">PAYMENT DETAILS</Text>
+                <div className="w-full">
+                  <Text className="uppercase text-center">PAYMENT DETAILS</Text>
 
-                  <Container className="p-4 w-fit flex justify-center">
-                    <Container className="flex justify-between items-center text-center">
+                  <div className="py-2 w-full">
+                    <div className="flex gap-x-1 items-center">
                       <Text>Artwork Name:</Text>
                       <Text className="font-bold">{artwork}</Text>
-                    </Container>
-                    <Container className="flex justify-between items-center text-center">
+                    </div>
+                    <div className="flex gap-x-1 items-center">
                       <Text>Amount Paid:</Text>
                       <Text className="font-bold">{price}</Text>
-                    </Container>
-                    <Container className="flex justify-between items-center text-center">
+                    </div>
+                    <div className="flex gap-x-1 items-center">
                       <Text>Transaction ID:</Text>
                       <Text className="font-bold">{transaction_Id}</Text>
-                    </Container>
-                    <Container className="flex justify-between items-center text-center">
+                    </div>
+                    <div className="flex gap-x-1 items-center">
                       <Text>Date:</Text>
                       <Text className="font-bold">{order_date}</Text>
-                    </Container>
-                  </Container>
-                </Container>
+                    </div>
+                  </div>
+                </div>
                 <Hr className="border-[#FAFAFA] my-5" />
-              </Container>
-            </Container>
+              </div>
+            </div>
 
-            <Container>
+            <div>
               <Text className="font-bold">What happens next:</Text>
-              <ul className="space-y-4 text-[14px] leading-[24px]">
+              <ul className="gap-y-4 text-[14px] leading-[24px]">
                 <li>
                   You can track your order status by visiting your{" "}
                   <Link
@@ -101,7 +101,7 @@ const PaymentSuccessfulMail = (
                   order ships.{" "}
                 </li>
               </ul>
-            </Container>
+            </div>
 
             <Text className="text-black text-[14px] leading-[24px]">
               As always, if you have any questions, feedback, or concerns
