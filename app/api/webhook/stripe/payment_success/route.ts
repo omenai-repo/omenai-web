@@ -118,14 +118,16 @@ export async function POST(request: Request) {
       "artwork_data order_id createdAt buyer"
     );
 
+    const price = formatPrice(paymentIntent.amount_total / 100, currency);
+    const transaction_Id = createTransaction.trans_id;
     await sendPaymentSuccessMail({
       email: meta.user_email,
-      // name: email_order_info.buyer.name,
-      // artwork: email_order_info.artwork_data.title,
-      // order_id: email_order_info.order_id,
-      // order_date: email_order_info.createdAt,
-      // transaction_Id: createTransaction.trans_id,
-      // price: formatPrice(paymentIntent.amount_total / 100, currency),
+      name: email_order_info.buyer.name,
+      artwork: email_order_info.artwork_data.title,
+      order_id: email_order_info.order_id,
+      order_date: email_order_info.createdAt,
+      transaction_Id,
+      price,
     });
   }
   // Return a 200 response to acknowledge receipt of the event

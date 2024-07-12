@@ -107,24 +107,25 @@ export async function POST(request: Request) {
 
     if (!addSalesData) return NextResponse.json({ status: 400 });
 
-    // const email_order_info = await CreateOrder.findOne(
-    //   {
-    //     "buyer.email": meta.user_email,
-    //     "artwork_data.art_id": meta.art_id,
-    //   },
-    //   "artwork_data order_id createdAt buyer"
-    // );
+    const email_order_info = await CreateOrder.findOne(
+      {
+        "buyer.email": meta.user_email,
+        "artwork_data.art_id": meta.art_id,
+      },
+      "artwork_data order_id createdAt buyer"
+    );
 
+    const price = formatPrice(paymentIntent.amount_total / 100, currency);
+    const transaction_Id = createTransaction.trans_id;
     await sendPaymentSuccessMail({
       email: meta.user_email,
-      // name: email_order_info.buyer.name,
-      // artwork: email_order_info.artwork_data.title,
-      // order_id: email_order_info.order_id,
-      // order_date: email_order_info.createdAt,
-      // transaction_Id: createTransaction.trans_id,
-      // price: formatPrice(paymentIntent.amount_total / 100, currency),
+      name: email_order_info.buyer.name,
+      artwork: email_order_info.artwork_data.title,
+      order_id: email_order_info.order_id,
+      order_date: email_order_info.createdAt,
+      transaction_Id,
+      price,
     });
-    //   await sendPaymentSuccessMail({  });
   }
 
   // Return a 200 response to acknowledge receipt of the event
