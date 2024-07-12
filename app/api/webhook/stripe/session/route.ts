@@ -95,35 +95,35 @@ export async function POST(request: Request) {
 
     //   Add transaction to sales activity
 
-    // const { month, year } = getCurrentMonthAndYear();
-    // const activity = {
-    //   month,
-    //   year,
-    //   value: paymentIntent.amount_total / 100,
-    //   gallery_id: meta.gallery_id,
-    // };
+    const { month, year } = getCurrentMonthAndYear();
+    const activity = {
+      month,
+      year,
+      value: paymentIntent.amount_total / 100,
+      gallery_id: meta.gallery_id,
+    };
 
-    // const addSalesData = await SalesActivity.create({ ...activity });
+    const addSalesData = await SalesActivity.create({ ...activity });
 
-    // if (!addSalesData) return NextResponse.json({ status: 400 });
+    if (!addSalesData) return NextResponse.json({ status: 400 });
 
-    const email_order_info = await CreateOrder.findOne(
-      {
-        "buyer.email": meta.user_email,
-        "artwork_data.art_id": meta.art_id,
-      },
-      "artwork_data order_id createdAt buyer"
-    );
+    // const email_order_info = await CreateOrder.findOne(
+    //   {
+    //     "buyer.email": meta.user_email,
+    //     "artwork_data.art_id": meta.art_id,
+    //   },
+    //   "artwork_data order_id createdAt buyer"
+    // );
 
-    await sendPaymentSuccessMail({
-      email: meta.user_email,
-      name: email_order_info.buyer.name,
-      artwork: email_order_info.artwork_data.title,
-      order_id: email_order_info.order_id,
-      order_date: email_order_info.createdAt,
-      transaction_Id: createTransaction.trans_id,
-      price: formatPrice(paymentIntent.amount_total / 100, currency),
-    });
+    // await sendPaymentSuccessMail({
+    //   email: meta.user_email,
+    //   name: email_order_info.buyer.name,
+    //   artwork: email_order_info.artwork_data.title,
+    //   order_id: email_order_info.order_id,
+    //   order_date: email_order_info.createdAt,
+    //   transaction_Id: createTransaction.trans_id,
+    //   price: formatPrice(paymentIntent.amount_total / 100, currency),
+    // });
     //   await sendPaymentSuccessMail({  });
   }
 
