@@ -1,3 +1,4 @@
+import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
 import { stripe } from "@/lib/payments/stripe/stripe";
 import { CreateOrder } from "@/models/orders/CreateOrderSchema";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
@@ -122,7 +123,7 @@ export async function POST(request: Request) {
       name: email_order_info.buyer.name,
       artwork: email_order_info.artwork_data.title,
       order_id: email_order_info.order_id,
-      order_date: email_order_info.createdAt,
+      order_date: formatIntlDateTime(email_order_info.createdAt),
       transaction_Id,
       price,
     });
