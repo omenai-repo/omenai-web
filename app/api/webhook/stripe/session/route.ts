@@ -115,15 +115,15 @@ export async function POST(request: Request) {
     //   "artwork_data order_id createdAt buyer"
     // );
 
-    // await sendPaymentSuccessMail({
-    //   email: meta.user_email,
-    //   name: email_order_info.buyer.name,
-    //   artwork: email_order_info.artwork_data.title,
-    //   order_id: email_order_info.order_id,
-    //   order_date: email_order_info.createdAt,
-    //   transaction_Id: createTransaction.trans_id,
-    //   price: formatPrice(paymentIntent.amount_total / 100, currency),
-    // });
+    await sendPaymentSuccessMail({
+      email: meta.user_email,
+      // name: email_order_info.buyer.name,
+      // artwork: email_order_info.artwork_data.title,
+      // order_id: email_order_info.order_id,
+      // order_date: email_order_info.createdAt,
+      // transaction_Id: createTransaction.trans_id,
+      // price: formatPrice(paymentIntent.amount_total / 100, currency),
+    });
     //   await sendPaymentSuccessMail({  });
   }
 
