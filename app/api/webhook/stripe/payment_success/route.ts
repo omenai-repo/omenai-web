@@ -1,4 +1,3 @@
-import { handlePaymentIntentSucceeded } from "@/lib/events/checkoutCompleted";
 import { stripe } from "@/lib/payments/stripe/stripe";
 import { CreateOrder } from "@/models/orders/CreateOrderSchema";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
