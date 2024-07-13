@@ -45,7 +45,7 @@ export default function ArtworkCard({
               alt={name + " image"}
               // height={400}
               // width={400}
-              className="min-w-[220px] max-h-[400px] w-full h-auto object-top cursor-pointer"
+              className="min-w-[200px] max-h-[400px] w-full h-auto object-top cursor-pointer"
             />
             {!availability && (
               <div className="absolute top-0 left-0">

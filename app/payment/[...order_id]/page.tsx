@@ -1,49 +1,67 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
 import ComponentWrapper from "./components/ComponentWrapper";
-import { getSingleOrder } from "@/services/orders/getSingleOrder";
-import Load from "@/components/loader/Load";
-import { notFound } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { checkLockStatus } from "@/services/orders/checkLockStatus";
+
+import { getServerSession } from "next-auth";
+import { nextAuthOptions } from "@/lib/auth/next-auth-options";
+import { signOut, useSession } from "next-auth/react";
+import {
+  notFound,
+  redirect,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
+import { toast } from "sonner";
+import { useLocalStorage } from "usehooks-ts";
+import { useEffect, useState } from "react";
+import { getApiUrl } from "@/config";
 
 export default function OrderPayment({
   params,
 }: {
   params: { order_id: string };
 }) {
+  const router = useRouter();
+  const route = usePathname();
+  const url = getApiUrl();
+  const [redirect_uri, set_redirect_uri] = useLocalStorage(
+    "redirect_uri_on_login",
+    ""
+  );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const searchParams = useSearchParams();
+  const user_id_key = searchParams.get("id_key");
+
   const session = useSession();
-  const { data, isLoading } = useQuery({
-    queryKey: ["load_order_purchase_data"],
-    queryFn: async () => {
-      const data = await getSingleOrder(params.order_id);
 
-      if (data?.isOk) {
-        const lock_status = await checkLockStatus(
-          data.data.artwork_data.art_id,
-          session.data!.user.id
-        );
+  useEffect(() => {
+    if (session.data === null) {
+      toast.error("Please login");
+      router.replace("/auth/login");
+    }
+    if (user_id_key === "" || undefined) notFound();
+    if (
+      session.data === null ||
+      session!.data.user === undefined ||
+      session!.data.user.id !== user_id_key
+    ) {
+      toast.error(
+        "Unauthorized access detected. Please login to the appropriate account to view this page"
+      );
+      set_redirect_uri(`${url}${route}?id_key=${user_id_key}`);
+      router.replace("/auth/login/");
+    } else {
+      setIsLoggedIn(true);
+    }
 
-        return { order: data.data, locked: lock_status?.data.locked };
-      } else {
-        throw new Error("Uh oh! Something went wrong!");
-      }
-    },
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (isLoading) {
-    return (
-      <div className="w-full h-[80vh] grid place-items-center">
-        <Load />
-      </div>
-    );
-  }
-  if (data!.order === null) throw new Error("Something went wrong");
-  if (
-    data!.order.payment_information.status === "completed" ||
-    data!.order.order_accepted.status === "" ||
-    data!.order.order_accepted.status === "declined"
-  )
-    notFound();
-  return <ComponentWrapper order={data!.order} lock_status={data!.locked} />;
+  return (
+    <ComponentWrapper
+      order_id={params.order_id}
+      session={session.data}
+      isLoggedIn={isLoggedIn}
+    />
+  );
 }

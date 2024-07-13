@@ -37,7 +37,7 @@ export default function ArtCatalog() {
         </div>
       ) : (
         <div className="w-full mb-12">
-          <div className="grid lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 gap-y-12 w-full items-end ">
+          <div className="grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-3 gap-y-12 w-full items-end ">
             {reversedArtworks.map((art: ArtworkResultTypes, index: number) => {
               return (
                 <div key={index}>

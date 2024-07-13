@@ -10,8 +10,8 @@ export async function createCheckoutSession(
     user_email: string;
     art_id: string;
   },
-  cancel_url: string,
-  success_url: string
+  success_url: string,
+  cancel_url: string
 ) {
   try {
     const url = getApiUrl();

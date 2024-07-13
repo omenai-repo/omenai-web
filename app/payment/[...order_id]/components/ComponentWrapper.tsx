@@ -1,55 +1,60 @@
 "use client";
 import DesktopNavbar from "@/components/navbar/desktop/DesktopNavbar";
-import React, { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import {
-  useSearchParams,
-  usePathname,
-  useRouter,
-  notFound,
-} from "next/navigation";
-import { useLocalStorage } from "usehooks-ts";
-import { getApiUrl } from "@/config";
+import { useState } from "react";
+import { useSearchParams, notFound } from "next/navigation";
+
 import Load from "@/components/loader/Load";
-import { toast } from "sonner";
 import OrderDetails from "./OrderDetails";
+import { checkLockStatus } from "@/services/orders/checkLockStatus";
+import { getSingleOrder } from "@/services/orders/getSingleOrder";
+import { useQuery } from "@tanstack/react-query";
+import { Session } from "next-auth";
 export default function ComponentWrapper({
-  order,
-  lock_status,
+  order_id,
+  session,
+  isLoggedIn,
 }: {
-  order: CreateOrderModelTypes & { createdAt: string; updatedAt: string };
-  lock_status: boolean;
+  order_id: string;
+  session: Session | null;
+  isLoggedIn: boolean;
 }) {
-  const router = useRouter();
-  const session = useSession();
-  const route = usePathname();
-  const url = getApiUrl();
-  const [redirect_uri, set_redirect_uri] = useLocalStorage(
-    "redirect_uri_on_login",
-    ""
-  );
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const searchParams = useSearchParams();
   const user_id_key = searchParams.get("id_key");
 
-  useEffect(() => {
-    if (user_id_key === "" || undefined) notFound();
-    if (order.buyer.user_id !== user_id_key) notFound();
-    if (
-      session.data?.user === undefined ||
-      session.data?.user.id !== user_id_key
-    ) {
-      toast.error(
-        "Unauthorized access detected. Please login to the appropriate account to view this page"
-      );
-      set_redirect_uri(`${url}${route}?id_key=${user_id_key}`);
-      router.replace("/auth/login/");
-    } else {
-      setIsLoggedIn(true);
-    }
+  const { data, isLoading } = useQuery({
+    queryKey: ["load_order_purchase_data"],
+    queryFn: async () => {
+      const data = await getSingleOrder(order_id);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session.data?.user, user_id_key]);
+      if (data?.isOk) {
+        const lock_status = await checkLockStatus(
+          data.data.artwork_data.art_id,
+          session!.user.id
+        );
+
+        return { order: data.data, locked: lock_status?.data.locked };
+      } else {
+        throw new Error("Uh oh! Something went wrong!");
+      }
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-[80vh] grid place-items-center">
+        <Load />
+      </div>
+    );
+  }
+  if (data!.order.buyer.user_id !== user_id_key) notFound();
+
+  if (data!.order === null) throw new Error("Something went wrong");
+  if (
+    data!.order.payment_information.status === "completed" ||
+    data!.order.order_accepted.status === "" ||
+    data!.order.order_accepted.status === "declined"
+  )
+    notFound();
 
   return (
     <div className="w-full h-screen">
@@ -57,7 +62,7 @@ export default function ComponentWrapper({
         <>
           <DesktopNavbar />
           <div className="">
-            <OrderDetails order={order} lock_status={lock_status} />
+            <OrderDetails order={data!.order} lock_status={data!.locked} />
           </div>
         </>
       ) : (
