@@ -1,8 +1,6 @@
 "use client";
-import Load from "@/components/loader/Load";
-import { checkLockStatus } from "@/services/orders/checkLockStatus";
+
 import { createOrderLock } from "@/services/orders/createOrderLock";
-import { useQuery } from "@tanstack/react-query";
 import { Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,42 +17,19 @@ export default function PayNowButton({
   artwork,
   amount,
   gallery_id,
-  order_id,
+  lock_status,
 }: {
   art_id: string;
   artwork: string;
   amount: number;
   gallery_id: string;
-  order_id: string;
+  lock_status: boolean;
 }) {
   const router = useRouter();
   const session = useSession();
   const [loading, setLoading] = useState(false);
-  const [locked, setLocked] = useState(false);
   const url = getApiUrl();
 
-  const { data: lock, isLoading } = useQuery({
-    queryKey: ["get_initial_lock_status"],
-    queryFn: async () => {
-      const lock_status = await checkLockStatus(art_id, session.data!.user.id);
-
-      if (lock_status?.isOk) {
-        return lock_status.data.locked;
-      } else {
-        throw new Error("Something went wrong, please try again");
-      }
-    },
-  });
-
-  if (isLoading) {
-    return (
-      <div className="h-[85vh] w-full grid place-items-center">
-        <Load />
-      </div>
-    );
-  }
-
-  setLocked(lock);
   async function handleClickPayNow() {
     setLoading(true);
     const get_purchase_lock = await createOrderLock(
@@ -108,18 +83,20 @@ export default function PayNowButton({
             animation="duration-500"
             trigger="hover"
             className={`w-[400px] bg-dark text-xs text-white p-2 relative ${
-              !locked && "hidden"
+              !lock_status && "hidden"
             }`}
           >
             <button
               onClick={handleClickPayNow}
-              disabled={locked || loading}
+              disabled={lock_status || loading}
               className="w-fit h-[50px] px-4 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark text-white text-[14px] hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
             >
               {loading ? <LoadSmall /> : "Proceed to payment"}
             </button>
           </Tooltip>
-          {locked && <CiLock className="absolute right-[-15px] top-[-5px]" />}
+          {lock_status && (
+            <CiLock className="absolute right-[-15px] top-[-5px]" />
+          )}
         </div>
 
         <p className="font-medium text-red-600 lg:w-1/2 mt-6 leading-6">

@@ -15,8 +15,10 @@ import { toast } from "sonner";
 import OrderDetails from "./OrderDetails";
 export default function ComponentWrapper({
   order,
+  lock_status,
 }: {
   order: CreateOrderModelTypes & { createdAt: string; updatedAt: string };
+  lock_status: boolean;
 }) {
   const router = useRouter();
   const session = useSession();
@@ -55,7 +57,7 @@ export default function ComponentWrapper({
         <>
           <DesktopNavbar />
           <div className="">
-            <OrderDetails order={order} />
+            <OrderDetails order={order} lock_status={lock_status} />
           </div>
         </>
       ) : (
