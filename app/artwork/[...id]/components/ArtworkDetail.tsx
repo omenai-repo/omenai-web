@@ -96,7 +96,7 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
       <hr className="border-dark/10" />
       <div className="flex flex-col gap-y-2">
         <span className="text-[14px] font-light">Price</span>
-        <h1 className=" text-base font-normal">
+        <h1 className=" text-sm font-bold">
           {data.pricing.shouldShowPrice === "Yes"
             ? formatPrice(data.pricing.price)
             : "Price on request"}
@@ -106,14 +106,20 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
 
       <div className="flex flex-col gap-2 font-normal w-full text-[14px]">
         <button
-          disabled={loading}
+          disabled={loading || !data.availability}
           onClick={handleBuyButtonClick}
           className="w-full bg-dark h-[50px] px-4  text-white hover:bg-dark/80 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:text-white hover:duration-200 grid place-items-center group"
         >
           {loading ? (
             <LoadSmall />
           ) : data.pricing.shouldShowPrice === "Yes" ? (
-            "Purchase artwork"
+            !data.availability ? (
+              "Artwork Sold"
+            ) : (
+              "Purchase artwork"
+            )
+          ) : !data.availability ? (
+            "Artwork Sold"
           ) : (
             "Request price"
           )}

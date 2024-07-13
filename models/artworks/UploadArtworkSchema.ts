@@ -9,6 +9,7 @@ const artworkUpload = new Schema<ArtworkSchemaTypes>(
     medium: { type: String, required: true },
     rarity: { type: String, required: true },
     materials: { type: String, required: true },
+    availability: { type: Boolean, default: () => true },
     dimensions: {
       height: { type: String, required: true },
       width: { type: String, required: true },

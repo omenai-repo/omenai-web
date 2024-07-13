@@ -11,7 +11,8 @@ export async function POST(request: Request) {
     // Create Checkout Sessions from body params.
     const url = getApiUrl();
     await connectMongoDB();
-    const { item, amount, gallery_id, meta } = await request.json();
+    const { item, amount, gallery_id, meta, success_url, cancel_url } =
+      await request.json();
 
     const gallery = await AccountGallery.findOne(
       { gallery_id },
@@ -44,8 +45,8 @@ export async function POST(request: Request) {
       },
       expires_at: futureTimestamp,
       mode: "payment",
-      success_url: `${url}/payment/success`,
-      cancel_url: `${url}/payment/cancel`,
+      success_url,
+      cancel_url,
     });
     if (!session) throw new ServerError("Something went wrong, try again");
     return NextResponse.json({

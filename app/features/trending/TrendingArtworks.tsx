@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import TrendingArtworkCard from "./TrendingArtCard";
 import { fetchAllArtworkImpressions } from "@/services/artworks/fetchArtworkImpressions";
 import Load from "@/components/loader/Load";
+import NotFoundData from "@/components/notFound/NotFoundData";
 
 export default function TrendingArtworks({
   sessionId,
@@ -25,6 +26,11 @@ export default function TrendingArtworks({
     );
   return (
     <>
+      {artworks.length === 0 && (
+        <div className="h-[500px] w-full place-items-center grid">
+          <NotFoundData />
+        </div>
+      )}
       {artworks.length > 0 && (
         <div className="py-4 md:p-4 relative">
           <div className=" flex relative gap-x-4 overflow-x-scroll w-full">
@@ -42,6 +48,7 @@ export default function TrendingArtworks({
                   likeIds={artwork.like_IDs}
                   sessionId={sessionId}
                   art_id={artwork.art_id}
+                  availability={artwork.availability}
                 />
               );
             })}

@@ -1,23 +1,24 @@
+import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
-import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
+
+import { LockMechanism } from "@/models/lock/LockSchema";
+
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
 
-    const { id } = await request.json();
+    const { user_id, art_id } = await request.json();
+    const release_lock = await LockMechanism.deleteOne({ user_id, art_id });
 
-    const savedArtworks = await Artworkuploads.find(
-      { like_IDs: id },
-      "artist title url art_id like_IDs impressions pricing availability"
-    ).exec();
+    if (!release_lock)
+      throw new ServerError("Something went wrong, Please try again.");
 
     return NextResponse.json(
       {
-        message: "Successful",
-        data: savedArtworks,
+        message: "Lock released",
       },
       { status: 200 }
     );

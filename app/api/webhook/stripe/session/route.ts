@@ -10,6 +10,8 @@ import { getCurrentMonthAndYear } from "@/utils/getCurrentMonthAndYear";
 import { SalesActivity } from "@/models/sales/SalesActivity";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { sendPaymentSuccessMail } from "@/emails/models/payment/sendPaymentSuccessMail";
+import { releaseOrderLock } from "@/services/orders/releaseOrderLock";
+import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
 
 export async function POST(request: Request) {
   const secretHash = process.env.STRIPE_CHECKOUT_SESSION_WEBHOOK_SECRET!;
@@ -94,6 +96,14 @@ export async function POST(request: Request) {
 
     if (!createTransaction) return NextResponse.json({ status: 400 });
 
+    // Update Artwork Availability
+    const remove_artwork_availability = await Artworkuploads.updateOne(
+      { art_id: meta.art_id },
+      { $set: { availability: false } }
+    );
+
+    if (!remove_artwork_availability) return NextResponse.json({ status: 400 });
+
     //   Add transaction to sales activity
 
     const { month, year } = getCurrentMonthAndYear();
@@ -107,6 +117,13 @@ export async function POST(request: Request) {
     const addSalesData = await SalesActivity.create({ ...activity });
 
     if (!addSalesData) return NextResponse.json({ status: 400 });
+
+    const release_lock_status = await releaseOrderLock(
+      meta.art_id,
+      meta.user_id
+    );
+
+    if (!release_lock_status?.isOk) return NextResponse.json({ status: 400 });
 
     const email_order_info = await CreateOrder.findOne(
       {
@@ -127,6 +144,18 @@ export async function POST(request: Request) {
       transaction_Id,
       price,
     });
+  }
+
+  if (event.type === "checkout.session.expired") {
+    const paymentIntent = event.data.object;
+    const meta = paymentIntent.metadata;
+
+    const release_lock_status = await releaseOrderLock(
+      meta.art_id,
+      meta.user_id
+    );
+
+    if (!release_lock_status?.isOk) return NextResponse.json({ status: 400 });
   }
 
   // Return a 200 response to acknowledge receipt of the event

@@ -40,6 +40,7 @@ export default function SimilarArtworks({
                 art_id: string;
                 medium: string;
                 rarity: string;
+                availability: boolean;
               },
               index: any
             ) => {
@@ -54,6 +55,7 @@ export default function SimilarArtworks({
                   likeIds={art.like_IDs}
                   sessionId={sessionId}
                   art_id={art.art_id}
+                  availability={art.availability}
                 />
               );
             }

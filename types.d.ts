@@ -100,6 +100,7 @@ type ArtworkSchemaTypes = {
   framing: string;
   signature: string;
   should_show_on_sub_active?: boolean;
+  availability: boolean;
 };
 
 type ArtworkDimensions = {

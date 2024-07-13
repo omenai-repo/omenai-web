@@ -61,6 +61,7 @@ export default function AllArtworks({
                     impressions={art.impressions as number}
                     likeIds={art.like_IDs as string[]}
                     sessionId={sessionId}
+                    availability={art.availability}
                   />
                 </div>
               );

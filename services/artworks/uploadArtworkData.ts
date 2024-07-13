@@ -1,7 +1,7 @@
 import { getApiUrl } from "@/config";
 
 export async function uploadArtworkData(
-  data: Omit<ArtworkSchemaTypes, "art_id">
+  data: Omit<ArtworkSchemaTypes, "art_id" | "availability">
 ) {
   try {
     const url = getApiUrl();

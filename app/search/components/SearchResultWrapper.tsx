@@ -23,6 +23,7 @@ export default function SearchResultWrapper() {
         | "like_IDs"
         | "medium"
         | "rarity"
+        | "availability"
       > & { _id: string })[]
     | []
     | "pending"

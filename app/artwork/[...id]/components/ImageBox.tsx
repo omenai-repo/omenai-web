@@ -1,18 +1,18 @@
 "use client";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
 import Image from "next/image";
-import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
 
 type ImageBoxProps = {
   url: string;
   title: string;
+  availability: boolean;
 };
-export default function ImageBox({ url, title }: ImageBoxProps) {
+export default function ImageBox({ url, title, availability }: ImageBoxProps) {
   const image_href = getImageFileView(url, 800);
 
   return (
-    <div className="w-auto h-full max-h-[1000px]">
+    <div className="w-auto h-full max-h-[1000px] relative">
       <Image
         src={image_href}
         alt={`${title} image`}
@@ -20,6 +20,16 @@ export default function ImageBox({ url, title }: ImageBoxProps) {
         height={500}
         className="min-w-[300px] aspect-auto object-top object-cover cursor-pointer"
       />
+      {!availability && (
+        <div className="absolute top-0 left-0">
+          <Image
+            src={"/images/sold.png"}
+            height={200}
+            width={200}
+            alt="sold icon"
+          />
+        </div>
+      )}
     </div>
   );
 }

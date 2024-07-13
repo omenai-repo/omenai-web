@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "A user is currently processing a transaction on this artwork. Please refersh your page after a few minutes to check on the status",
+            "A user is currently processing a transaction on this artwork. Please refersh your page after a few a while to check on the availability of the artwork",
           data: { lock_data: checkIfLockActive },
         },
         { status: 200 }
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        message: "Lock acquired",
+        message: "Purchase Lock acquired",
         data: { lock_data: getLock },
       },
       { status: 200 }

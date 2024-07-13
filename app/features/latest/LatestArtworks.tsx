@@ -3,6 +3,7 @@ import Load from "@/components/loader/Load";
 import ArtworkCard from "../../../components/artworks/ArtworkCard";
 import { fetchAllArtworks } from "@/services/artworks/fetchAllArtworks";
 import { useQuery } from "@tanstack/react-query";
+import NotFoundData from "@/components/notFound/NotFoundData";
 
 export default function LatestArtworks({
   sessionId,
@@ -26,6 +27,11 @@ export default function LatestArtworks({
 
   return (
     <>
+      {artworks.length === 0 && (
+        <div className="h-[500px] w-full place-items-center grid">
+          <NotFoundData />
+        </div>
+      )}
       {artworks.length > 0 && (
         <div className="py-4 md:p-4 relative">
           <div className="flex items-end relative gap-x-2 overflow-x-scroll w-full">
@@ -41,6 +47,7 @@ export default function LatestArtworks({
                   likeIds={artwork.like_IDs}
                   sessionId={sessionId}
                   art_id={artwork.art_id}
+                  availability={artwork.availability}
                 />
               );
             })}
