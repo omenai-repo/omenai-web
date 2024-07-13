@@ -1,28 +1,20 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import Load from "@/components/loader/Load";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
-import { getSingleOrder } from "@/services/orders/getSingleOrder";
 import { formatPrice } from "@/utils/priceFormatter";
-import { useQuery } from "@tanstack/react-query";
-import { notFound } from "next/navigation";
+
 import PayNowButton from "./PayNowButton";
-import {
-  calculatePurchaseGrandTotal,
-  calculatePurchaseGrandTotalNumber,
-} from "@/utils/calculatePurchaseGrandTotal";
+import { calculatePurchaseGrandTotalNumber } from "@/utils/calculatePurchaseGrandTotal";
 
 export default function OrderDetails({
   order,
+  lock_status,
 }: {
   order: CreateOrderModelTypes & { createdAt: string; updatedAt: string };
+  lock_status: boolean;
 }) {
   const image_href = getImageFileView(order.artwork_data.url, 200);
-  const total = calculatePurchaseGrandTotal(
-    order.artwork_data.pricing.price,
-    order.shipping_quote.shipping_fees,
-    order.shipping_quote.taxes
-  );
+
   const total_price_number = calculatePurchaseGrandTotalNumber(
     order.artwork_data.pricing.price,
     order.shipping_quote.shipping_fees,
@@ -36,7 +28,7 @@ export default function OrderDetails({
           artwork={order.artwork_data.title}
           amount={total_price_number}
           gallery_id={order.gallery_id}
-          order_id={order.order_id}
+          lock_status={lock_status}
         />
       </div>
 
@@ -98,7 +90,9 @@ export default function OrderDetails({
 
               <div className="flex justify-between items-center font-normal text-base mt-10">
                 <p>Grand total</p>
-                <p className="text-sm font-bold">${total}</p>
+                <p className="text-sm font-bold">
+                  {formatPrice(total_price_number)}
+                </p>
               </div>
               <p className="my-3 text-[#858585] italic text-xs">
                 *Additional duties and taxes may apply at import
