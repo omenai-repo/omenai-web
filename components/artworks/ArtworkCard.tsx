@@ -18,6 +18,7 @@ export default function ArtworkCard({
   sessionId,
   art_id,
   isDashboard = false,
+  availability,
 }: {
   image: string;
   artist: string;
@@ -31,13 +32,14 @@ export default function ArtworkCard({
     shouldShowPrice: "Yes" | "No" | string;
   };
   isDashboard?: boolean;
+  availability: boolean;
 }) {
   const image_href = getImageFileView(image, 300);
   return (
     <div className="my-2 md:my-4 w-full p-4 xxm:p-0">
       <div className="flex flex-col min-w-[220px] max-w-full justify-end">
         <div className="relative w-full">
-          <Link href={`/artwork/${name}`}>
+          <Link href={`/artwork/${name}`} className="relative">
             <img
               src={image_href}
               alt={name + " image"}
@@ -45,6 +47,16 @@ export default function ArtworkCard({
               // width={400}
               className="min-w-[220px] max-h-[400px] w-full h-auto object-top cursor-pointer"
             />
+            {!availability && (
+              <div className="absolute top-0 left-0">
+                <Image
+                  src={"/images/sold.png"}
+                  height={150}
+                  width={150}
+                  alt="sold icon"
+                />
+              </div>
+            )}
           </Link>
           {isDashboard ? null : (
             <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">

@@ -77,6 +77,7 @@ export default function PurchaseComponentWrapper({
           <div className="col-span-1 xl:col-span-2 border border-dark/10 px-5 pt-12">
             <DeliveryMethod />
             <AddressForm
+              availabiity={artwork.availability}
               userAddress={address}
               gallery_id={artwork.gallery_id}
               art_id={artwork.art_id}

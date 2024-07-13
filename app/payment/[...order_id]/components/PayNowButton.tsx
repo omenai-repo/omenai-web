@@ -2,17 +2,17 @@
 import Load from "@/components/loader/Load";
 import { checkLockStatus } from "@/services/orders/checkLockStatus";
 import { createOrderLock } from "@/services/orders/createOrderLock";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Tooltip } from "flowbite-react";
-import { notFound, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { CiLock } from "react-icons/ci";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { LoadSmall } from "@/components/loader/Load";
-import { purchase_artwork } from "@/services/purchase_artwork/purchase_artwork";
-import { useLocalStorage } from "usehooks-ts";
+
 import { createCheckoutSession } from "@/services/stripe/createCheckoutSession";
+import { getApiUrl } from "@/config";
 
 export default function PayNowButton({
   art_id,
@@ -31,43 +31,66 @@ export default function PayNowButton({
   const session = useSession();
   const [loading, setLoading] = useState(false);
   const [locked, setLocked] = useState(false);
-  const [pur_gid, set_pur_gid] = useLocalStorage("pur_gid", {
-    gid: "",
-    oid: "",
+  const url = getApiUrl();
+
+  const { data: lock, isLoading } = useQuery({
+    queryKey: ["get_initial_lock_status"],
+    queryFn: async () => {
+      const lock_status = await checkLockStatus(art_id, session.data!.user.id);
+
+      if (lock_status?.isOk) {
+        return lock_status.data.locked;
+      } else {
+        throw new Error("Something went wrong, please try again");
+      }
+    },
   });
 
-  // useEffect(() => {
-  //   const checkLock = async () => {
-  //     const lock_status = await checkLockStatus(art_id, session.data!.user.id);
-  //     if (lock_status?.isOk) {
-  //       setLocked(lock_status.data.locked);
-  //     } else {
-  //       throw new Error("Something went wrong, please try again");
-  //     }
-  //   };
+  if (isLoading) {
+    return (
+      <div className="h-[85vh] w-full grid place-items-center">
+        <Load />
+      </div>
+    );
+  }
 
-  //   checkLock();
-  // }, [art_id, session.data]);
-
+  setLocked(lock);
   async function handleClickPayNow() {
     setLoading(true);
-    const checkout_session = await createCheckoutSession(
-      artwork,
-      amount,
-      gallery_id,
-      {
-        trans_type: "purchase_payout",
-        user_id: session.data!.user.id,
-        user_email: session.data!.user.email,
-        art_id,
-      }
+    const get_purchase_lock = await createOrderLock(
+      art_id,
+      session.data!.user.id
     );
 
-    if (!checkout_session?.isOk) {
-      toast.error("Something went wrong, please try again or contact support");
-    } else {
-      toast.success("Checkout session initiated...Redirecting!");
-      router.replace(checkout_session.url);
+    if (get_purchase_lock?.isOk) {
+      if (get_purchase_lock.data.lock_data.user_id === session.data!.user.id) {
+        const checkout_session = await createCheckoutSession(
+          artwork,
+          amount,
+          gallery_id,
+          {
+            trans_type: "purchase_payout",
+            user_id: session.data!.user.id,
+            user_email: session.data!.user.email,
+            art_id,
+          },
+          `${url}/payment/success`,
+          `${url}/payment/cancel?a_id=${art_id}&u_id=${session.data!.user.id}`
+        );
+
+        if (!checkout_session?.isOk) {
+          toast.error(
+            "Something went wrong, please try again or contact support"
+          );
+        } else {
+          toast.success("Checkout session initiated...Redirecting!");
+          router.replace(checkout_session.url);
+        }
+      } else {
+        toast.error(
+          "A user is currently processing a purchase transaction on this artwork. Please check back in a few minutes for a status update"
+        );
+      }
     }
 
     setLoading(false);

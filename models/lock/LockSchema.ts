@@ -10,7 +10,6 @@ const LockSchema = new Schema<LockModelTypes>(
     user_id: {
       type: String,
       required: true,
-      unique: true,
     },
     art_id: {
       type: String,

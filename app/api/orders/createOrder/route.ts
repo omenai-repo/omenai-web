@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     const artwork = await Artworkuploads.findOne(
       { art_id },
-      "title artist pricing url art_id"
+      "title artist pricing url art_id availaility"
     ).exec();
 
     if (!buyerData || !artwork)

@@ -9,13 +9,22 @@ export async function createCheckoutSession(
     user_id: string;
     user_email: string;
     art_id: string;
-  }
+  },
+  cancel_url: string,
+  success_url: string
 ) {
   try {
     const url = getApiUrl();
     const res = await fetch(`${url}/api/stripe/createCheckoutSession`, {
       method: "POST",
-      body: JSON.stringify({ item, amount, gallery_id, meta }),
+      body: JSON.stringify({
+        item,
+        amount,
+        gallery_id,
+        meta,
+        cancel_url,
+        success_url,
+      }),
     });
 
     const result = await res.json();

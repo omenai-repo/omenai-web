@@ -52,6 +52,7 @@ export default function ArtCatalog() {
                     likeIds={art.like_IDs as string[]}
                     sessionId={sessionId}
                     isDashboard={true}
+                    availability={art.availability}
                   />
                 </div>
               );

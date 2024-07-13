@@ -14,6 +14,7 @@ type SearchResultDetailsProps = {
         | "like_IDs"
         | "medium"
         | "rarity"
+        | "availability"
       > & { _id: string })[]
     | "pending";
   searchTerm: string;
@@ -53,6 +54,7 @@ export default function SearchResultDetails({
                     impressions={artwork.impressions as number}
                     likeIds={artwork.like_IDs as string[]}
                     sessionId={sessionId}
+                    availability={artwork.availability}
                   />
                 );
               })}

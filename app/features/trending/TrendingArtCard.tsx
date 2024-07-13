@@ -15,6 +15,7 @@ export default function TrendingArtworkCard({
   likeIds,
   sessionId,
   art_id,
+  availability,
 }: {
   image: string;
   artist: string;
@@ -25,6 +26,7 @@ export default function TrendingArtworkCard({
   likeIds: string[];
   sessionId: string | undefined;
   art_id: string;
+  availability: boolean;
 }) {
   const image_href = getImageFileView(image, 300);
 
@@ -32,7 +34,7 @@ export default function TrendingArtworkCard({
     <div>
       <div className="flex flex-col w-auto h-full max-h-[500px] justify-end">
         <div className="relative">
-          <Link href={`/artwork/${name}`}>
+          <Link href={`/artwork/${name}`} className="relative">
             <Image
               src={image_href}
               alt={name + " image"}
@@ -40,6 +42,16 @@ export default function TrendingArtworkCard({
               width={220}
               className="min-w-[220px] aspect-auto object-top object-cover cursor-pointer"
             />
+            {!availability && (
+              <div className="absolute top-0 left-0">
+                <Image
+                  src={"/images/sold.png"}
+                  height={100}
+                  width={100}
+                  alt="sold icon"
+                />
+              </div>
+            )}
           </Link>
           <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent

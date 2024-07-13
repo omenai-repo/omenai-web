@@ -17,11 +17,13 @@ type AddressFormTypes = {
   userAddress: IndividualAddressTypes;
   gallery_id: string;
   art_id: string;
+  availabiity: boolean;
 };
 export default function AddressForm({
   userAddress,
   gallery_id,
   art_id,
+  availabiity,
 }: AddressFormTypes) {
   const [address] = orderStore((state) => [state.address]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -37,24 +39,29 @@ export default function AddressForm({
   async function handleOrderSubmission(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
-    let shipping_address;
-    if (userAddress.address_line === "") shipping_address = address;
-    else shipping_address = userAddress;
-
-    const createdShippingOrder = await createShippingOrder(
-      session.data!.user.id,
-      art_id,
-      gallery_id,
-      save_shipping_address,
-      shipping_address
-    );
-
-    if (!createdShippingOrder!.isOk) {
-      toast.error(createdShippingOrder!.message);
+    if (!availabiity) {
+      toast.error("This artwork is not available for purchase");
       setLoading(false);
     } else {
-      toggleOrderReceivedModal(true);
-      setLoading(false);
+      let shipping_address;
+      if (userAddress.address_line === "") shipping_address = address;
+      else shipping_address = userAddress;
+
+      const createdShippingOrder = await createShippingOrder(
+        session.data!.user.id,
+        art_id,
+        gallery_id,
+        save_shipping_address,
+        shipping_address
+      );
+
+      if (!createdShippingOrder!.isOk) {
+        toast.error(createdShippingOrder!.message);
+        setLoading(false);
+      } else {
+        toggleOrderReceivedModal(true);
+        setLoading(false);
+      }
     }
   }
 
