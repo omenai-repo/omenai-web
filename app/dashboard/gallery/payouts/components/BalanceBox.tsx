@@ -37,13 +37,13 @@ export default function BalanceBox({
         </h1>
 
         <p className="text-[14px]">
-          Balance pending on Stripe:
-          <span className="font-bold">
+          Balance pending on Stripe:{" "}
+          <span className="font-bold text-base">
             {formatPrice(balance.pending[0].amount / 100, currency)}
           </span>
         </p>
 
-        <div className="mt-10 w-full flex space-x-2">
+        <div className="mt-16 w-full flex space-x-2">
           <button
             disabled={balance.available[0].amount / 100 === 0}
             className="h-[50px] text-xs font-medium disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-dark text-white cursor-pointer grid place-items-center"

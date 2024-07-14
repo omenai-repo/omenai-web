@@ -12,6 +12,13 @@ import {
   Area,
 } from "recharts";
 
+function CustomTooltip() {
+  return (
+    <div className="custom-tooltip">
+      <p className="desc">Anything you want can be displayed here.</p>
+    </div>
+  );
+}
 export function SalesActivity({ activityData }: any) {
   return (
     <div

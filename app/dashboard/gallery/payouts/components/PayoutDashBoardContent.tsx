@@ -15,9 +15,6 @@ export default function PayoutDashBoardContent({
   return (
     <div>
       <BalanceBox account={account} balance={balance} />
-      <div className="mt-6">
-        <TransactionTable />
-      </div>
     </div>
   );
 }
