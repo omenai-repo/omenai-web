@@ -9,10 +9,15 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import PayoutDashBoardContent from "./PayoutDashBoardContent";
 import { retrieveBalance } from "@/services/stripe/retrieveBalance";
+import { TransactionTable } from "./TransactionTable";
+import { fetchTransactions } from "@/services/transactions/fetchTransactions";
 
 export default function PayoutDashboard() {
   const session = useSession();
   const router = useRouter();
+  if (session.data === null || session.data === undefined)
+    router.replace("/auth/login");
+
   const { data: isConfirmed, isLoading } = useQuery({
     queryKey: ["check_stripe_onboarded"],
     queryFn: async () => {
@@ -21,6 +26,7 @@ export default function PayoutDashboard() {
         throw new Error("Something went wrong, Please refresh the page");
       }
       const balance = await retrieveBalance(acc!.data.connected_account_id);
+
       if (!balance?.isOk) {
         throw new Error("Something went wrong, Please refresh the page");
       }
@@ -28,11 +34,17 @@ export default function PayoutDashboard() {
         acc!.data.connected_account_id
       );
 
+      const table = await fetchTransactions(session.data!.user.id);
+
+      if (!table?.isOk)
+        throw new Error("Something went wrong, Please refresh the page");
+
       if (response?.isOk) {
         return {
           isSubmitted: response.details_submitted,
-          id: acc?.data.connected_account_id,
-          balance: balance?.data,
+          id: acc.data.connected_account_id,
+          balance: balance.data,
+          table_data: table.data,
         };
       } else {
         throw new Error("Something went wrong, Please refresh the page");
@@ -67,6 +79,9 @@ export default function PayoutDashboard() {
             account={isConfirmed.id}
             balance={isConfirmed.balance}
           />
+          <div className="mt-6">
+            <TransactionTable table={isConfirmed.table_data} />
+          </div>
         </div>
       )}
     </div>

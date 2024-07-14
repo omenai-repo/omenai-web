@@ -1,47 +1,45 @@
 "use client";
-import {
-  Card,
-  Typography,
-} from "@/app/material_tailwind/MaterialTailwindExports";
+import { Card } from "@/app/material_tailwind/MaterialTailwindExports";
 
-const TABLE_HEAD = ["Transaction", "Transaction Date", "Amount", "Status"];
+import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
+import { formatPrice } from "@/utils/priceFormatter";
+import { convertPriceStringToNumber } from "@/utils/priceStringToNumberConverter";
+import { FiArrowDownLeft } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi";
 
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-    status: "Paid",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-    status: "Paid",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-    status: "Paid",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-    status: "Paid",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-    status: "Paid",
-  },
+const TABLE_HEAD = [
+  "Transaction ID",
+  "Date",
+  "Gross amount",
+  "Net amount",
+  "Transaction type",
+  "Status",
 ];
 
-export function TransactionTable() {
+export function TransactionTable({
+  table,
+}: {
+  table: TransactionModelSchemaTypes & { createdAt: any; updatedAt: any }[];
+}) {
+  const transaction_table_data = table.map((transaction: any) => {
+    const priceNumber =
+      convertPriceStringToNumber(transaction.trans_amount) * 0.7;
+    const table = {
+      id: transaction.trans_id,
+      date: formatIntlDateTime(transaction.trans_date),
+      gross: transaction.trans_amount,
+      net: formatPrice(priceNumber),
+      type: "Incoming",
+      status: "Completed",
+    };
+
+    return table;
+  });
   return (
-    <Card placeholder="" className="h-full w-full overflow-scroll">
+    <Card
+      placeholder=""
+      className="max-h-[500px] h-full w-full overflow-scroll"
+    >
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
@@ -56,23 +54,32 @@ export function TransactionTable() {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, job, date, status }, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+          {transaction_table_data.map((data: any, index: number) => {
+            const isLast = index === transaction_table_data.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
             return (
-              <tr key={name}>
-                <td className={classes}>
-                  <p className="font-normal text-[14px]">{name}</p>
+              <tr key={index}>
+                <td className={`${classes}`}>
+                  <p className="font-bold text-[14px]">{data.id}</p>
                 </td>
-                <td className={classes}>
-                  <p className="font-normal text-[14px]">{job}</p>
+                <td className={`${classes}`}>
+                  <p className="font-bold text-[14px]">{data.date}</p>
                 </td>
-                <td className={classes}>
-                  <p className="font-notmal text-[14px]">{date}</p>
+                <td className={`${classes}`}>
+                  <p className="font-bold text-[14px]">{data.gross}</p>
                 </td>
-                <td className={classes}>
-                  <p className="font-normal text-[14px]">{status}</p>
+                <td className={`${classes}`}>
+                  <p className="font-bold text-[14px]">{data.net}</p>
+                </td>
+                <td className={`${classes} flex items-center space-x-2`}>
+                  <p className="font-bold text-[14px]">{data.type}</p>
+                  <FiArrowDownLeft className="text-green-600" />
+                </td>
+                <td className={`${classes}`}>
+                  <p className="font-bold text-[14px] px-4 py-1 rounded-full text-white bg-green-600 w-fit">
+                    {data.status}
+                  </p>
                 </td>
               </tr>
             );
