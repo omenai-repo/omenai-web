@@ -51,7 +51,7 @@ export default function Orders() {
                   title={order.artwork_data.title}
                   artist={order.artwork_data.artist}
                   buyer={order.buyer.name}
-                  price={order.artwork_data.pricing.price}
+                  price={order.artwork_data.pricing.usd_price}
                   order_date={formatIntlDateTime(order.createdAt)}
                   status={order.status}
                 />

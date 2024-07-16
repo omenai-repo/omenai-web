@@ -19,7 +19,7 @@ export default function PageTitle({ title }: { title: string }) {
 
     // Render breadcrumb item - conditionally add separator (>)
     return (
-      <p key={link} className="flex items-center gap-x-1 text-xs">
+      <span key={link} className="flex items-center gap-x-1 text-xs">
         {index !== 0 && index < pathSegments.length && (
           <IoMdArrowDropright className="ml-3" />
         )}
@@ -36,7 +36,7 @@ export default function PageTitle({ title }: { title: string }) {
             {capitalizedSegment}
           </a>
         )}
-      </p>
+      </span>
     );
   });
 

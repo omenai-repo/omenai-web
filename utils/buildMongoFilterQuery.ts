@@ -23,7 +23,7 @@ export function buildMongoQuery(selectedFilters: SelectedFilter): object {
         }));
       } else if (category === "price") {
         query["$or"] = selectedValues.map((range: any) => ({
-          "pricing.price": { $gte: range.min, $lte: range.max }, // Adjust field name if different
+          "pricing.usd_price": { $gte: range.min, $lte: range.max }, // Adjust field name if different
         }));
       } else {
         // Handle other filter categories (e.g., medium)

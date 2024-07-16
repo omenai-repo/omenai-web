@@ -216,7 +216,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                   {formatIntlDateTime(artwork.createdAt)}
                 </td>
                 {/* <td className="px-1 py-4 text-xs font-normal text-dark">
-                  {formatPrice(artwork.artwork_data.pricing.price)}
+                  {formatPrice(artwork.artwork_data.pricing.usd_price)}
                 </td> */}
                 <td className="px-2.5 py-4 text-xs font-normal text-dark">
                   {construct_status(

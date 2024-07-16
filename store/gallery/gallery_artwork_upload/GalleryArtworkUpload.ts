@@ -35,6 +35,7 @@ export const galleryArtworkUploadStore = create<GalleryArtworkUploadTypes>(
       height: "",
       weight: "",
       price: 0,
+      usd_price: 0,
       shouldShowPrice: "",
       depth: "",
       artist_birthyear: "",
@@ -43,6 +44,7 @@ export const galleryArtworkUploadStore = create<GalleryArtworkUploadTypes>(
       artwork_description: "",
       framing: "",
       signature: "",
+      currency: "",
     },
     updateArtworkUploadData: (label: string, value: string) => {
       const data: Record<string, any> = get().artworkUploadData;
@@ -67,6 +69,7 @@ export const galleryArtworkUploadStore = create<GalleryArtworkUploadTypes>(
           width: "",
           height: "",
           price: 0,
+          usd_price: 0,
           weight: "",
           shouldShowPrice: "",
           depth: "",
@@ -76,6 +79,7 @@ export const galleryArtworkUploadStore = create<GalleryArtworkUploadTypes>(
           artwork_description: "",
           framing: "",
           signature: "",
+          currency: "",
         },
       });
       set({ image: null });

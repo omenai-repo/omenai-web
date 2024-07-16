@@ -36,7 +36,9 @@ export default function ProductItem({
         <div className="text-[14px]">
           <div className="flex justify-between items-center  my-3 text-dark/70">
             <p>Price</p>
-            <p className="font-medium">{formatPrice(artwork.pricing.price)}</p>
+            <p className="font-medium">
+              {formatPrice(artwork.pricing.usd_price)}
+            </p>
           </div>
           <div className="flex justify-between items-center text-dark/70 my-3">
             <p>Shipping</p>

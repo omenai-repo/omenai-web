@@ -174,7 +174,9 @@ export default function QuoteForm() {
             <div className="flex flex-col">
               <p className="text-[#858585]">Price</p>
               <p>
-                {formatPrice(galleryOrderActionModalData.artwork.pricing.price)}
+                {formatPrice(
+                  galleryOrderActionModalData.artwork.pricing.usd_price
+                )}
               </p>
             </div>
             <div className="flex flex-col">

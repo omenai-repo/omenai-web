@@ -34,7 +34,7 @@ export default function PendingOrders({
                     url={order.artwork_data.url}
                     title={order.artwork_data.title}
                     artist={order.artwork_data.artist}
-                    price={order.artwork_data.pricing.price}
+                    price={order.artwork_data.pricing.usd_price}
                     order_date={formatIntlDateTime(order.createdAt)}
                     status={order.status}
                     order_id={order.order_id}

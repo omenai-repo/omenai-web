@@ -29,6 +29,7 @@ export default function ArtworkCard({
   art_id: string;
   pricing?: {
     price: number;
+    usd_price: number;
     shouldShowPrice: "Yes" | "No" | string;
   };
   isDashboard?: boolean;
@@ -36,7 +37,7 @@ export default function ArtworkCard({
 }) {
   const image_href = getImageFileView(image, 300);
   return (
-    <div className="my-2 md:my-4 w-full p-4 xxm:p-0">
+    <div className="my-2 md:my-4 w-fit p-4 xxm:p-0">
       <div className="flex flex-col min-w-[220px] max-w-full justify-end">
         <div className="relative w-full">
           <Link href={`/artwork/${name}`} className="relative">
@@ -47,16 +48,6 @@ export default function ArtworkCard({
               // width={400}
               className="min-w-[200px] max-h-[400px] w-full h-auto object-top cursor-pointer"
             />
-            {!availability && (
-              <div className="absolute top-0 left-0">
-                <Image
-                  src={"/images/sold.png"}
-                  height={150}
-                  width={150}
-                  alt="sold icon"
-                />
-              </div>
-            )}
           </Link>
           {isDashboard ? null : (
             <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
@@ -82,10 +73,17 @@ export default function ArtworkCard({
               {artist.substring(0, 20)}
               {artist.length > 20 && "..."}
             </p>
+
             {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
-              <p className="font-normal text-xs text-dark">
-                {formatPrice(pricing.price)}
-              </p>
+              !availability ? (
+                <p className="font-medium text-xs text-dark">Sold</p>
+              ) : (
+                <p className="font-normal text-xs text-dark">
+                  {formatPrice(pricing.usd_price)}
+                </p>
+              )
+            ) : !availability ? (
+              <p className="font-medium text-xs text-dark">Sold</p>
             ) : (
               <p className="font-normal underline text-xs">On request</p>
             )}

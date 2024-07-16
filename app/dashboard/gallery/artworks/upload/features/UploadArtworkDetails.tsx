@@ -11,12 +11,13 @@ import { allKeysEmpty } from "@/utils/checkIfObjectEmpty";
 import ArtistInfoInputGroup from "./components/ArtistInfoInputGroup";
 export default function UploadArtworkDetails() {
   const router = useRouter();
-  const [errorFields] = galleryArtworkUploadStore((state) => [
-    state.errorFields,
-  ]);
+  const [errorFields, artworkUploadData] = galleryArtworkUploadStore(
+    (state) => [state.errorFields, state.artworkUploadData]
+  );
 
   function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log(artworkUploadData);
     if (!allKeysEmpty(errorFields)) toast.error("Invalid field inputs...");
     else {
       toast.success("Processing...please wait");

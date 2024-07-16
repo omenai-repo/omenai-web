@@ -1,5 +1,6 @@
 "use client";
 import { Card } from "@/app/material_tailwind/MaterialTailwindExports";
+import NotFoundData from "@/components/notFound/NotFoundData";
 
 import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
 import { formatPrice } from "@/utils/priceFormatter";
@@ -53,6 +54,7 @@ export function TransactionTable({
             ))}
           </tr>
         </thead>
+
         <tbody>
           {transaction_table_data.map((data: any, index: number) => {
             const isLast = index === transaction_table_data.length - 1;
@@ -86,6 +88,11 @@ export function TransactionTable({
           })}
         </tbody>
       </table>
+      {transaction_table_data.length === 0 && (
+        <div className="h-[35vh] w-full grid place-items-center">
+          <NotFoundData />
+        </div>
+      )}
     </Card>
   );
 }

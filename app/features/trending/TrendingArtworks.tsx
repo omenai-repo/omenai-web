@@ -24,6 +24,7 @@ export default function TrendingArtworks({
         <Load />
       </div>
     );
+  console.log(artworks);
   return (
     <>
       {artworks.length === 0 && (
