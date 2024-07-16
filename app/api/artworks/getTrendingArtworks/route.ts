@@ -10,7 +10,9 @@ export async function GET() {
   try {
     await connectMongoDB();
 
-    const allTrendingArtworks = await Artworkuploads.find().sort({
+    const allTrendingArtworks = await Artworkuploads.find({
+      impressions: { $gt: 0 },
+    }).sort({
       impressions: -1,
     });
 

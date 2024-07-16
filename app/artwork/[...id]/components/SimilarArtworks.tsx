@@ -33,6 +33,7 @@ export default function SimilarArtworks({
                 _id: string;
                 pricing: {
                   price: number;
+                  usd_price: number;
                   shouldShowPrice: "Yes" | "No" | string;
                 };
                 impressions: number;

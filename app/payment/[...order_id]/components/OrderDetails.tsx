@@ -16,7 +16,7 @@ export default function OrderDetails({
   const image_href = getImageFileView(order.artwork_data.url, 200);
 
   const total_price_number = calculatePurchaseGrandTotalNumber(
-    order.artwork_data.pricing.price,
+    order.artwork_data.pricing.usd_price,
     order.shipping_quote.shipping_fees,
     order.shipping_quote.taxes
   );
@@ -74,7 +74,7 @@ export default function OrderDetails({
               <div className="flex justify-between items-center  my-3 text-[#858585]">
                 <p>Price</p>
                 <p className="font-bold">
-                  {formatPrice(order.artwork_data.pricing.price)}
+                  {formatPrice(order.artwork_data.pricing.usd_price)}
                 </p>
               </div>
               <div className="flex justify-between items-center text-[#858585] my-3">

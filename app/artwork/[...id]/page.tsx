@@ -20,7 +20,11 @@ export default async function page({ params }: { params: { id: string } }) {
         data: ArtworkResultTypes;
       }
     | undefined = await fetchSingleArtwork(decodeURIComponent(params.id));
+
+  console.log(artworkDetails);
+  if (!artworkDetails?.isOk) throw new Error("Something went wrong");
   if (artworkDetails === undefined) return notFound();
+  if (artworkDetails.data === null) return notFound();
   const artworksByCriteria = await fetchArtworksByCriteria(
     artworkDetails.data.medium
   );

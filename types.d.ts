@@ -112,6 +112,7 @@ type ArtworkDimensions = {
 
 type ArtworkPricing = {
   price: number;
+  usd_price: number;
   shouldShowPrice: "Yes" | "No" | string;
 };
 
@@ -133,6 +134,7 @@ type ArtworkUploadStateTypes = {
   depth?: string;
   weight: string;
   price: number;
+  usd_price: number;
   shouldShowPrice: "Yes" | "No" | string;
   artist_birthyear: string;
   artist_country_origin: string;
@@ -140,6 +142,7 @@ type ArtworkUploadStateTypes = {
   artwork_description?: string;
   framing: string;
   signature: string;
+  currency: string;
 };
 
 type CreateOrderModelTypes = {

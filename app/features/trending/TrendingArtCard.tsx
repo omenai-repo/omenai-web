@@ -42,16 +42,6 @@ export default function TrendingArtworkCard({
               width={220}
               className="min-w-[220px] aspect-auto object-top object-cover cursor-pointer"
             />
-            {!availability && (
-              <div className="absolute top-0 left-0">
-                <Image
-                  src={"/images/sold.png"}
-                  height={100}
-                  width={100}
-                  alt="sold icon"
-                />
-              </div>
-            )}
           </Link>
           <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent

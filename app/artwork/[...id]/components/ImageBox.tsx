@@ -20,16 +20,6 @@ export default function ImageBox({ url, title, availability }: ImageBoxProps) {
         height={500}
         className="min-w-[300px] aspect-auto object-top object-cover cursor-pointer"
       />
-      {!availability && (
-        <div className="absolute top-0 left-0">
-          <Image
-            src={"/images/sold.png"}
-            height={200}
-            width={200}
-            alt="sold icon"
-          />
-        </div>
-      )}
     </div>
   );
 }

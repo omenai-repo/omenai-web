@@ -19,6 +19,7 @@ type ArtworkImageProps = {
   art_id: string;
   pricing?: {
     price: number;
+    usd_price: number;
     shouldShowPrice: "Yes" | "No" | string;
   };
 };
@@ -63,7 +64,7 @@ export const ArtworkImage = ({
           {pricing?.price &&
             (pricing?.price && pricing.shouldShowPrice === "Yes" ? (
               <span className="font-medium text-xs text-white">
-                {formatPrice(pricing.price)}
+                {formatPrice(pricing.usd_price)}
               </span>
             ) : (
               <span className="underline font-normal text-xs">

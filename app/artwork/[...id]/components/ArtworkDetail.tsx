@@ -97,8 +97,10 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
       <div className="flex flex-col gap-y-2">
         <span className="text-[14px] font-light">Price</span>
         <h1 className=" text-sm font-bold">
-          {data.pricing.shouldShowPrice === "Yes"
-            ? formatPrice(data.pricing.price)
+          {!data.availability
+            ? "Sold"
+            : data.pricing.shouldShowPrice === "Yes"
+            ? formatPrice(data.pricing.usd_price)
             : "Price on request"}
         </h1>
       </div>

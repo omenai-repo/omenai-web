@@ -86,7 +86,9 @@ const RequestPriceEmail = (
                 <li>
                   <Text className="text-black text-[14px] leading-[24px]">
                     Base price:{" "}
-                    <strong>{formatPrice(artwork_data.pricing.price)}</strong>
+                    <strong>
+                      {formatPrice(artwork_data.pricing.usd_price)}
+                    </strong>
                   </Text>
                 </li>
               </ul>
