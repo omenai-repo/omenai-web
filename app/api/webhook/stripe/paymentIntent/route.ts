@@ -12,6 +12,8 @@ import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { sendPaymentSuccessMail } from "@/emails/models/payment/sendPaymentSuccessMail";
 import { releaseOrderLock } from "@/services/orders/releaseOrderLock";
 import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
+import { sendPaymentPendingMail } from "@/emails/models/payment/sendPaymentPendingMail";
+import { sendPaymentFailedMail } from "@/emails/models/payment/sendPaymentFailedMail";
 
 export async function POST(request: Request) {
   const secretHash = process.env.STRIPE_PAYMENT_INTENT_WEBHOOK_SECRET!;
@@ -36,8 +38,20 @@ export async function POST(request: Request) {
   }
   console.log(event);
 
+  const paymentIntent = event.data.object;
+  const meta = paymentIntent.metadata;
+
+  const client = await connectMongoDB();
+
+  const email_order_info = await CreateOrder.findOne(
+    {
+      "buyer.email": meta.user_email,
+      "artwork_data.art_id": meta.art_id,
+    },
+    "artwork_data order_id createdAt buyer"
+  );
+
   if (event.type === "payment_intent.succeeded") {
-    const paymentIntent = event.data.object;
     // Then define and call a method to handle the successful payment intent.
     if (paymentIntent.status !== "succeeded") {
       return NextResponse.json({ status: 400 });
@@ -46,7 +60,6 @@ export async function POST(request: Request) {
     let transaction_id;
 
     // Retrieve the MongoDB Client
-    const client = await connectMongoDB();
 
     // Create a session with the initialized MongoClient
     const session = await client.startSession();
@@ -54,8 +67,6 @@ export async function POST(request: Request) {
     const currency = getCurrencySymbol(paymentIntent.currency.toUpperCase());
     const formatted_date = getFormattedDateTime();
     const date = new Date();
-
-    const meta = paymentIntent.metadata;
 
     try {
       // Create a session transaction to group multiple database operations
@@ -146,14 +157,6 @@ export async function POST(request: Request) {
 
     // Catch error above
 
-    const email_order_info = await CreateOrder.findOne(
-      {
-        "buyer.email": meta.user_email,
-        "artwork_data.art_id": meta.art_id,
-      },
-      "artwork_data order_id createdAt buyer"
-    );
-
     const price = formatPrice(paymentIntent.amount_received / 100, currency);
 
     await sendPaymentSuccessMail({
@@ -167,18 +170,26 @@ export async function POST(request: Request) {
     });
   }
 
-  if (event.type === "payment_intent.failed") {
-    const paymentIntent = event.data.object;
-    const meta = paymentIntent.metadata;
-
-    const release_lock_status = await releaseOrderLock(
-      meta.art_id,
-      meta.user_id
-    );
-
-    if (!release_lock_status?.isOk) return NextResponse.json({ status: 400 });
+  if (event.type === "payment_intent.processing") {
+    await sendPaymentPendingMail({
+      email: meta.user_email,
+      name: email_order_info.buyer.name,
+      artwork: email_order_info.artwork_data.title,
+    });
   }
 
+  if (event.type === "payment_intent.failed") {
+    await sendPaymentFailedMail({
+      email: meta.user_email,
+      name: email_order_info.buyer.name,
+      artwork: email_order_info.artwork_data.title,
+      order_id: email_order_info.order_id,
+    });
+  }
+
+  const release_lock_status = await releaseOrderLock(meta.art_id, meta.user_id);
+
+  if (!release_lock_status?.isOk) return NextResponse.json({ status: 400 });
   // Return a 200 response to acknowledge receipt of the event
   return NextResponse.json({ status: 200 });
 }
