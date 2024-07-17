@@ -45,85 +45,105 @@ export async function POST(request: Request) {
       return NextResponse.json({ status: 400 });
     }
 
-    await connectMongoDB();
-    //   Update Order Payment Information
+    let transaction_id;
+
+    // Retrieve the MongoDB Client
+    const client = await connectMongoDB();
+
+    // Create a session with the initialized MongoClient
+    const session = await client.startSession();
+
     const currency = getCurrencySymbol(paymentIntent.currency.toUpperCase());
     const formatted_date = getFormattedDateTime();
     const date = new Date();
 
     const meta = paymentIntent.metadata;
 
-    // Create the update info
-    const payment_information = {
-      status: "completed",
-      transaction_value: formatPrice(
-        paymentIntent.amount_total / 100,
-        currency
-      ),
-      transaction_date: formatted_date,
-      transaction_reference: paymentIntent.id,
-    };
+    try {
+      // Create a session transaction to group multiple database operations
+      // A session transaction ensures that all operations are successful before it it being commited to the DB, if a single error occurs in any operation,
+      // the updates are rolled back and the entire process is aborted.
 
-    // Apply update to CreateOrder collection
-    const updateOrderPaymentInfo = await CreateOrder.updateOne(
-      {
-        "buyer.email": meta.user_email,
-        "artwork_data.art_id": meta.art_id,
-      },
-      {
-        $set: {
-          payment_information,
+      session.startTransaction();
+
+      //   Update Order Payment Information
+
+      // Create the update info
+      const payment_information = {
+        status: "completed",
+        transaction_value: formatPrice(
+          paymentIntent.amount_total / 100,
+          currency
+        ),
+        transaction_date: formatted_date,
+        transaction_reference: paymentIntent.id,
+      };
+
+      // Apply update to CreateOrder collection
+      await CreateOrder.updateOne(
+        {
+          "buyer.email": meta.user_email,
+          "artwork_data.art_id": meta.art_id,
         },
-      }
-    );
+        {
+          $set: {
+            payment_information,
+          },
+        }
+      );
 
-    if (!updateOrderPaymentInfo) return NextResponse.json({ status: 400 });
+      // Update transaction collection
+      const data: Omit<TransactionModelSchemaTypes, "trans_id"> = {
+        trans_amount: formatPrice(paymentIntent.amount_total / 100, currency),
+        trans_date: date,
+        trans_gallery_id: meta.gallery_id,
+        trans_owner_id: meta.user_id,
+        trans_owner_role: "user",
+        trans_reference: paymentIntent.id,
+        trans_type: "purchase_payout",
+      };
 
-    //TODO: Update artwork tag to 'SOLD'
+      const create_transaction = await Transactions.create(data);
 
-    // Update transaction collection
-    const data: Omit<TransactionModelSchemaTypes, "trans_id"> = {
-      trans_amount: formatPrice(paymentIntent.amount_total / 100, currency),
-      trans_date: date,
-      trans_gallery_id: meta.gallery_id,
-      trans_owner_id: meta.user_id,
-      trans_owner_role: "user",
-      trans_reference: paymentIntent.id,
-      trans_type: "purchase_payout",
-    };
+      // Update Artwork Availability to false
+      await Artworkuploads.updateOne(
+        { art_id: meta.art_id },
+        { $set: { availability: false } }
+      );
 
-    const createTransaction = await Transactions.create(data);
+      // Add this transaction to sales activity for revenue representation
+      const { month, year } = getCurrentMonthAndYear();
+      const activity = {
+        month,
+        year,
+        value: paymentIntent.amount_total / 100,
+        gallery_id: meta.gallery_id,
+      };
 
-    if (!createTransaction) return NextResponse.json({ status: 400 });
+      await SalesActivity.create({ ...activity });
 
-    // Update Artwork Availability
-    const remove_artwork_availability = await Artworkuploads.updateOne(
-      { art_id: meta.art_id },
-      { $set: { availability: false } }
-    );
+      // Clear the order lock on the artwork
+      await releaseOrderLock(meta.art_id, meta.user_id);
 
-    if (!remove_artwork_availability) return NextResponse.json({ status: 400 });
+      transaction_id = create_transaction.trans_id;
 
-    //   Add transaction to sales activity
+      // Once all operations are run with no errors, commit the transaction
+      await session.commitTransaction();
 
-    const { month, year } = getCurrentMonthAndYear();
-    const activity = {
-      month,
-      year,
-      value: paymentIntent.amount_total / 100,
-      gallery_id: meta.gallery_id,
-    };
+      console.log("Transaction committed.");
+    } catch (error) {
+      console.log("An error occurred during the transaction:" + error);
 
-    const addSalesData = await SalesActivity.create({ ...activity });
+      // If any errors are encountered, abort the transaction process, this rolls back all updates and ensures that the DB isn't written to.
+      await session.abortTransaction();
+      // Exit the webhook
+      return NextResponse.json({ status: 400 });
+    } finally {
+      // End the session to avoid reusing the same Mongoclient for different transactions
+      await session.endSession();
+    }
 
-    if (!addSalesData) return NextResponse.json({ status: 400 });
-
-    const release_lock_status = await releaseOrderLock(
-      meta.art_id,
-      meta.user_id
-    );
-
-    if (!release_lock_status?.isOk) return NextResponse.json({ status: 400 });
+    // Catch error above
 
     const email_order_info = await CreateOrder.findOne(
       {
@@ -134,14 +154,14 @@ export async function POST(request: Request) {
     );
 
     const price = formatPrice(paymentIntent.amount_total / 100, currency);
-    const transaction_Id = createTransaction.trans_id;
+
     await sendPaymentSuccessMail({
       email: meta.user_email,
       name: email_order_info.buyer.name,
       artwork: email_order_info.artwork_data.title,
       order_id: email_order_info.order_id,
       order_date: formatIntlDateTime(email_order_info.createdAt),
-      transaction_Id,
+      transaction_Id: transaction_id,
       price,
     });
   }
