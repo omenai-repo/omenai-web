@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const { amount, gallery_id, user_id, meta } = await request.json();
+    const { amount, gallery_id, meta } = await request.json();
     const gallery = await AccountGallery.findOne(
       { gallery_id },
       "connected_account_id"
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100),
       currency: "usd",
-      metadata: { ...meta, user_id, gallery_id },
+      metadata: { ...meta, gallery_id },
       // In the latest version of the API, specifying the `automatic_payment_methods` parameter
       // is optional because Stripe enables its functionality by default.
       automatic_payment_methods: {
@@ -34,12 +34,11 @@ export async function POST(request: Request) {
       },
     });
 
-    NextResponse.json({
+    return NextResponse.json({
       paymentIntent: paymentIntent.client_secret,
       publishableKey: process.env.STRIPE_PK!,
     });
   } catch (error) {
-    console.log(error);
     const error_response = handleErrorEdgeCases(error);
 
     return NextResponse.json(
