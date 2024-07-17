@@ -34,6 +34,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ status: 400 });
     }
   }
+  console.log(event.data.object);
 
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object;
