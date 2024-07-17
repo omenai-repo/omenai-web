@@ -178,7 +178,7 @@ export async function POST(request: Request) {
     });
   }
 
-  if (event.type === "payment_intent.failed") {
+  if (event.type === "payment_intent.payment_failed") {
     await sendPaymentFailedMail({
       email: meta.user_email,
       name: email_order_info.buyer.name,
