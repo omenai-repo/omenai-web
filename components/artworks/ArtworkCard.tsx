@@ -38,7 +38,7 @@ export default function ArtworkCard({
   const image_href = getImageFileView(image, 300);
   return (
     <div className="my-2 md:my-4 w-fit p-4 xxm:p-0">
-      <div className="flex flex-col min-w-[220px] max-w-full justify-end">
+      <div className="flex flex-col min-w-[200px] max-w-full justify-end">
         <div className="relative w-full">
           <Link href={`/artwork/${name}`} className="relative">
             <img

@@ -23,6 +23,7 @@ export async function POST(request: Request) {
     const currentTimestampSeconds = Math.floor(Date.now() / 1000);
     const thirtyMinutesOffset = 30 * 60;
     const futureTimestamp = currentTimestampSeconds + thirtyMinutesOffset;
+
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
