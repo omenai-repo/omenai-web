@@ -7,25 +7,6 @@ import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
 import { NextResponse } from "next/server";
 
-function isValidArtworkPriceFilterData(
-  data: unknown
-): data is ArtworkPriceFilterData {
-  if (typeof data !== "object" || data === null) {
-    return false;
-  }
-
-  const { pricing } = data as Record<string, any>;
-
-  return (
-    typeof pricing === "object" &&
-    pricing !== null &&
-    typeof pricing.price === "number" &&
-    typeof pricing.usd_price === "number" &&
-    (pricing.shouldShowPrice === undefined ||
-      typeof pricing.shouldShowPrice === "string")
-  );
-}
-
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
@@ -35,8 +16,8 @@ export async function POST(request: Request) {
       art_id: string;
     } = await request.json();
 
-    if (!isValidArtworkPriceFilterData(data.filter))
-      throw new ConflictError("Wrong input data sent");
+    if (data === null || data === undefined)
+      throw new ConflictError("Invalid input data");
 
     const updateArtworkPrice = await Artworkuploads.updateOne(
       { art_id: data.art_id },

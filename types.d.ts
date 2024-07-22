@@ -113,13 +113,15 @@ type ArtworkDimensions = {
 type ArtworkPricing = {
   price: number;
   usd_price: number;
+  currency: string;
   shouldShowPrice: "Yes" | "No" | string;
 };
 
 type ArtworkPriceFilterData = {
   "pricing.price": number;
   "pricing.usd_price": number;
-  "pricing.shouldShowPrice"?: string;
+  "pricing.shouldShowPrice": string;
+  "pricing.currency": string;
 };
 
 type ArtworkResultTypes = ArtworkSchemaTypes & {
