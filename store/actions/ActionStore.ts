@@ -133,7 +133,7 @@ export const actionStore = create<ActionStoreTypes>((set, get) => ({
     artwork: {
       title: "",
       url: "",
-      pricing: { price: 0, usd_price: 0, shouldShowPrice: "" },
+      pricing: { price: 0, usd_price: 0, shouldShowPrice: "", currency: "" },
       artist: "",
     },
     status: "",
@@ -171,7 +171,12 @@ export const actionStore = create<ActionStoreTypes>((set, get) => ({
         artwork: {
           title: "",
           url: "",
-          pricing: { price: 0, usd_price: 0, shouldShowPrice: "" },
+          pricing: {
+            price: 0,
+            usd_price: 0,
+            shouldShowPrice: "",
+            currency: "",
+          },
           artist: "",
         },
         status: "",

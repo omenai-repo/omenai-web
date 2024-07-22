@@ -80,7 +80,7 @@ export default function ArtworkCard({
             ) : !availability ? (
               <p className="font-medium text-xs text-dark">Sold</p>
             ) : (
-              <p className="font-normal underline text-xs">On request</p>
+              <p className="font-normal text-xs">Price on request</p>
             )}
           </div>
           <div className="flex justify-between items-center">
@@ -90,7 +90,7 @@ export default function ArtworkCard({
             </p>
             {/* <HiPencil /> */}
             {isDashboard && (
-              <Link href={`/dashboard/gallery/artworks/edit?id=${art_id}`}>
+              <Link href={`/dashboard/gallery/artworks/edit?id=${name}`}>
                 <button
                   className={`disabled:cursor-not-allowed disabled:text-dark/20 text-xs font-medium underline cursor-pointer`}
                 >

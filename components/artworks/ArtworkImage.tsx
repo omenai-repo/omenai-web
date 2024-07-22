@@ -67,9 +67,7 @@ export const ArtworkImage = ({
                 {formatPrice(pricing.usd_price)}
               </span>
             ) : (
-              <span className="underline font-normal text-xs">
-                Price on request
-              </span>
+              <span className=" font-normal text-xs">Price on request</span>
             ))}
         </div>
       </div>

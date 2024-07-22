@@ -101,7 +101,7 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
             ? "Sold"
             : data.pricing.shouldShowPrice === "Yes"
             ? formatPrice(data.pricing.usd_price)
-            : "Price on request"}
+            : "Price Price on request"}
         </h1>
       </div>
       <hr className="border-dark/10" />

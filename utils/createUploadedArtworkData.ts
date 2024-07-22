@@ -19,6 +19,7 @@ export function createUploadedArtworkData(
         price: +data.price,
         usd_price: +data.usd_price,
         shouldShowPrice: data.shouldShowPrice,
+        currency: data.currency,
       },
       materials: data.materials,
       medium: data.medium,
