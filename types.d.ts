@@ -116,6 +116,12 @@ type ArtworkPricing = {
   shouldShowPrice: "Yes" | "No" | string;
 };
 
+type ArtworkPriceFilterData = {
+  "pricing.price": number;
+  "pricing.usd_price": number;
+  "pricing.shouldShowPrice"?: string;
+};
+
 type ArtworkResultTypes = ArtworkSchemaTypes & {
   _id: string;
   updatedAt: string;

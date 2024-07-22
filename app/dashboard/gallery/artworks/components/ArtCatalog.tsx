@@ -30,7 +30,7 @@ export default function ArtCatalog() {
     );
   const reversedArtworks = [...artworks].reverse();
   return (
-    <div className="py-4 xxm:px-4 my-4 w-full">
+    <div className="py-4 mt-10 xxm:px-4 my-4 w-full">
       {artworks.length === 0 ? (
         <div className="w-full h-full grid place-items-center">
           <NotFoundData />
