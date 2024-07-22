@@ -7,10 +7,10 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const { gallery_id } = await request.json();
+    const { id } = await request.json();
 
-    const delete_account = await AccountGallery.findOneAndDelete({
-      gallery_id,
+    const delete_account = await AccountGallery.deleteOne({
+      gallery_id: id,
     });
     if (!delete_account) throw new ServerError("Something went wrong");
 

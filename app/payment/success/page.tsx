@@ -26,7 +26,7 @@ export default function OrderCompletedPage() {
           <div className="flex space-x-2 items-center">
             <Link
               href="/"
-              className="flex items-center whitespace-nowrap justify-center space-x-2 h-[50px] px-4 w-full bg-black text-white cursor-pointer mt-[50px] transition duration-150"
+              className="flex items-center whitespace-nowrap justify-center space-x-2 h-[40px] px-4 w-full bg-black text-white cursor-pointer mt-[50px] transition duration-150"
               title="Return Home"
             >
               <svg
@@ -45,7 +45,7 @@ export default function OrderCompletedPage() {
             </Link>
             <Link
               href="/dashboard/user/orders"
-              className="flex items-center whitespace-nowrap justify-center space-x-2 h-[50px] px-4 w-full bg-black text-white cursor-pointer mt-[50px] transition duration-150"
+              className="flex items-center whitespace-nowrap justify-center space-x-2 h-[40px] px-4 w-full bg-black text-white cursor-pointer mt-[50px] transition duration-150"
               title="Return Home"
             >
               <svg

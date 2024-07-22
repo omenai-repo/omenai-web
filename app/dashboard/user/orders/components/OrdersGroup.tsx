@@ -4,6 +4,7 @@ import PendingOrders from "./PendingOrders";
 import OrdersTab from "./OrdersTab";
 import { ObjectId } from "mongoose";
 import Load from "@/components/loader/Load";
+import CompletedOrders from "./CompletedOrders";
 
 export default function OrdersGroup({
   orders,
@@ -16,22 +17,33 @@ export default function OrdersGroup({
 }) {
   const [tab, setTab] = useState("pending");
 
+  const pending_orders = orders.filter(
+    (order: CreateOrderModelTypes) => !order.delivery_confirmed
+  ) as CreateOrderModelTypes[] & {
+    createdAt: string;
+    updatedAt: string;
+    _id: ObjectId;
+  };
+
+  const completed_orders = orders.filter(
+    (order: CreateOrderModelTypes) => order.delivery_confirmed
+  );
+
   return (
     <>
-      <div className="w-full p-10 grid place-items-center">
-        {/* <OrdersTab tab={tab} setTab={setTab} />
+      <div className="w-full p-5 grid place-items-center container">
+        <OrdersTab tab={tab} setTab={setTab} />
       </div>
       <div className="w-full h-full grid place-items-center container">
         {tab === "pending" ? (
           <Suspense fallback={<Load />}>
-            <PendingOrders orders={orders} />
+            <PendingOrders orders={pending_orders} />
           </Suspense>
         ) : (
           <Suspense fallback={<Load />}>
-            <OrderHistory orders={orders} />
+            <CompletedOrders orders={completed_orders} />
           </Suspense>
-        )} */}
-        <p>ello</p>
+        )}
       </div>
     </>
   );

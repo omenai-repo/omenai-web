@@ -1,7 +1,7 @@
 "use client";
 
 import { LoadSmall } from "@/components/loader/Load";
-import { deleteGalleryAccount } from "@/services/requests/deleteGalleryAccount";
+import { deleteAccount } from "@/services/requests/deleteGalleryAccount";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { IoWarning } from "react-icons/io5";
@@ -12,7 +12,7 @@ export default function DeleteAccountConfirmationModalForm() {
 
   async function handleDeleteGalleryAccount() {
     setLoading(true);
-    const response = await deleteGalleryAccount();
+    const response = await deleteAccount("gallery");
 
     if (response?.isOk) {
       toast.success(response.message);
@@ -54,7 +54,7 @@ export default function DeleteAccountConfirmationModalForm() {
           disabled={loading}
           type="button"
           onClick={handleDeleteGalleryAccount}
-          className="h-[50px] px-4 w-full text-base text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-500 bg-red-600 duration-300 grid place-items-center"
+          className="h-[40px] px-4 w-full text-base text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-500 bg-red-600 duration-300 grid place-items-center"
         >
           {loading ? <LoadSmall /> : "I understand, delete this account"}
         </button>

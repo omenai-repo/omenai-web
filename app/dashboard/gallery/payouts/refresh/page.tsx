@@ -113,7 +113,7 @@ export default function RefreshStripe() {
             </>
             <button
               disabled={accountLinkCreatePending}
-              className="h-[50px] text-[14px] font-medium disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-black text-white cursor-pointer mt-5 grid place-items-center"
+              className="h-[40px] text-[14px] font-medium disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-black text-white cursor-pointer mt-5 grid place-items-center"
               onClick={handleAccountLink}
             >
               {accountLinkCreatePending ? (

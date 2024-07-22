@@ -33,7 +33,7 @@ export default function RecoveryModalEmailInputField() {
       <button
         type="submit"
         disabled={loading}
-        className=" disabled:cursor-not-allowed grid disabled:bg-white disabled:border disabled:border-dark place-items-center w-full h-[50px]  bg-dark hover:bg-dark/80 hover:text-white rounded-sm text-white text-xs "
+        className=" disabled:cursor-not-allowed grid disabled:bg-white disabled:border disabled:border-dark place-items-center w-full h-[40px]  bg-dark hover:bg-dark/80 hover:text-white rounded-sm text-white text-xs "
       >
         {!loading ? "Send reset link" : <LoadSmall />}
       </button>

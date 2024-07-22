@@ -114,7 +114,7 @@ export default function PasswordForm({ id }: IdProps) {
         <div className="self-end">
           <button
             disabled={isLoading}
-            className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-md bg-dark h-[50px] px-4 text-white hover:bg-dark/90"
+            className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-md bg-dark h-[40px] px-4 text-white hover:bg-dark/90"
           >
             {isLoading ? <LoadSmall /> : "Update"}
           </button>

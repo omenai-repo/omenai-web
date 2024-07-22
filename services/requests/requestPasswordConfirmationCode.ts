@@ -1,15 +1,15 @@
 import { getApiUrl } from "@/config";
 import { getSession } from "next-auth/react";
 
-export async function requestPasswordConfirmationCode() {
+export async function requestPasswordConfirmationCode(route: RouteIdentifier) {
   const session = await getSession();
   try {
     const url = getApiUrl();
     const res = await fetch(
-      `${url}/api/requests/gallery/requestPasswordConfirmationCode`,
+      `${url}/api/requests/${route}/requestPasswordConfirmationCode`,
       {
         method: "POST",
-        body: JSON.stringify({ gallery_id: session?.user.id }),
+        body: JSON.stringify({ id: session?.user.id }),
       }
     );
 

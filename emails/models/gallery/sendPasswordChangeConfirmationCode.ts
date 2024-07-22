@@ -6,7 +6,7 @@ import { render } from "@react-email/render";
 type EmailData = {
   username: string;
   token: string;
-  gallery_name: string;
+  gallery_name?: string;
   email: string;
 };
 export const sendPasswordConfirmationCodeMail = async ({

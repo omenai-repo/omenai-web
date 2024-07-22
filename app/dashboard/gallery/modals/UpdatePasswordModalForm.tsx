@@ -3,7 +3,7 @@
 import { LoadSmall } from "@/components/loader/Load";
 import { validate } from "@/lib/validations/validatorGroup";
 import { requestPasswordConfirmationCode } from "@/services/requests/requestPasswordConfirmationCode";
-import { updateGalleryPassword } from "@/services/requests/updateGalleryPassword";
+import { updatePassword } from "@/services/requests/updateGalleryPassword";
 import { actionStore } from "@/store/actions/ActionStore";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { MdError } from "react-icons/md";
@@ -25,7 +25,7 @@ export default function UpdatePasswordModalForm() {
 
   async function requestConfirmationCode() {
     setCodeLoading(true);
-    const response = await requestPasswordConfirmationCode();
+    const response = await requestPasswordConfirmationCode("gallery");
     if (response?.isOk) toast.success(response.message);
     else toast.error(response?.message);
     setCodeLoading(false);
@@ -48,7 +48,7 @@ export default function UpdatePasswordModalForm() {
   async function handlePasswordUpdate(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    const response = await updateGalleryPassword(info.password, info.code);
+    const response = await updatePassword(info.password, info.code, "gallery");
 
     if (response?.isOk) {
       toast.success(response.message);
@@ -72,10 +72,10 @@ export default function UpdatePasswordModalForm() {
             <input
               onChange={handleInputChange}
               name="password"
-              type="text"
+              type="password"
               required
               placeholder="Enter a new password"
-              className="h-[50px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
+              className="h-[40px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
             />
           </div>
         </div>
@@ -87,10 +87,10 @@ export default function UpdatePasswordModalForm() {
             <input
               onChange={handleInputChange}
               name="confirmPassword"
-              type="text"
+              type="password"
               placeholder="Confirm your password"
               required
-              className="h-[50px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xs"
+              className="h-[40px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xs"
             />
           </div>
         </div>
@@ -106,11 +106,11 @@ export default function UpdatePasswordModalForm() {
               type="text"
               placeholder="Enter confirmation code"
               required
-              className="h-[50px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xs"
+              className="h-[40px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xs"
             />
           </div>
 
-          <div className="absolute right-0 translate-y-[25%] top-1">
+          <div className="absolute right-0 translate-y-[25%] top-[6px]">
             <button
               type="button"
               onClick={requestConfirmationCode}
@@ -121,38 +121,37 @@ export default function UpdatePasswordModalForm() {
                 info.password === "" ||
                 codeLoading
               }
-              className="h-[50px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
+              className="h-[40px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
             >
-              Get code
+              {codeLoading ? <LoadSmall /> : "Get code"}
             </button>
           </div>
         </div>
+        {errorList.length > 0 &&
+          errorList.map((error, index) => {
+            return (
+              <div key={index} className="flex items-center gap-x-2 my-2">
+                <MdError className="text-red-600" />
+                <p className="text-red-600 text-xs">{error}</p>
+              </div>
+            );
+          })}
+        <div className="w-full mt-5 flex items-center gap-x-2">
+          <button
+            disabled={
+              loading ||
+              errorList.length > 0 ||
+              info.code === "" ||
+              info.confirmPassword === "" ||
+              info.password === ""
+            }
+            type="submit"
+            className="h-[40px] px-4 w-full text-xs text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
+          >
+            {loading ? <LoadSmall /> : "Update Password"}
+          </button>
+        </div>
       </form>
-
-      {errorList.length > 0 &&
-        errorList.map((error, index) => {
-          return (
-            <div key={index} className="flex items-center gap-x-2 my-2">
-              <MdError className="text-red-600" />
-              <p className="text-red-600 text-xs">{error}</p>
-            </div>
-          );
-        })}
-      <div className="w-full mt-5 flex items-center gap-x-2">
-        <button
-          disabled={
-            loading ||
-            errorList.length > 0 ||
-            info.code === "" ||
-            info.confirmPassword === "" ||
-            info.password === ""
-          }
-          type="submit"
-          className="h-[50px] px-4 w-full text-xs text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
-        >
-          {loading ? <LoadSmall /> : "Update Password"}
-        </button>
-      </div>
     </div>
   );
 }

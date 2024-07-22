@@ -51,7 +51,7 @@ export default function GalleryDashboardLayout({
         <NoMobileView />
       ) : (
         <div className=" w-full h-full">
-          <NextTopLoader color="#6246EA" height={6} />
+          <NextTopLoader color="#1A1A1A" height={6} />
           <main className="flex h-full">
             <PageLayout />
 

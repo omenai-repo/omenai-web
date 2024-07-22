@@ -74,7 +74,7 @@ export default function PasswordForm({ id }: IdProps) {
             placeholder="Enter a new password"
             onChange={handleInputChange}
             required
-            className="ring-1 ring-black focus:ring-primary ease-linear duration-150 transition-all  h-[50px] px-4 rounded-sm text-xs italic placeholder:text-gray-400"
+            className="ring-1 ring-black focus:ring-primary ease-linear duration-150 transition-all  h-[40px] px-4 rounded-sm text-xs italic placeholder:text-gray-400"
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -87,7 +87,7 @@ export default function PasswordForm({ id }: IdProps) {
             placeholder="Confirm new password"
             required
             onChange={handleInputChange}
-            className="ring-1 ring-black focus:ring-primary ease-linear duration-150 transition-all  h-[50px] px-4 rounded-sm text-xs italic placeholder:text-gray-400"
+            className="ring-1 ring-black focus:ring-primary ease-linear duration-150 transition-all  h-[40px] px-4 rounded-sm text-xs italic placeholder:text-gray-400"
           />
 
           {errorList.length > 0 &&
@@ -103,7 +103,7 @@ export default function PasswordForm({ id }: IdProps) {
         <div className="self-end">
           <button
             disabled={isLoading}
-            className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-md bg-dark h-[50px] px-4 text-white hover:bg-dark/90"
+            className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-md bg-dark h-[40px] px-4 text-white hover:bg-dark/90"
           >
             {isLoading ? <LoadSmall /> : "Update"}
           </button>

@@ -35,7 +35,7 @@ export default function DashboardIndicator({
       {/* Request verification */}
       {!gallery_verified ? (
         <div className="" id="gallery-verification">
-          <button className=" w-full text-xs disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[50px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+          <button className=" w-full text-xs disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
             Request gallery verification
           </button>
         </div>

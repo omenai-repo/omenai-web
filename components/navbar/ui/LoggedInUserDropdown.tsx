@@ -29,7 +29,7 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
           onClick={() => setOpen((pv) => !pv)}
           className="flex items-center gap-1 pl-3 py-2 rounded-sm text-dark transition-colors"
         >
-          <span className="block font-normal text-[0.9rem]">{user}</span>
+          <span className="block font-normal text-xs">{user}</span>
           <MdAccountCircle className="text-md" />
 
           <motion.span variants={iconVariants}>
@@ -41,7 +41,7 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
           initial={wrapperVariants.closed}
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-100%" }}
-          className="flex flex-col gap-2 p-2 rounded-lg text-dark bg-white shadow-xl absolute top-[120%] left-[140%] md:left-[100%] w-48 overflow-hidden z-40 ring-1 ring-dark/20"
+          className="flex flex-col gap-2 py-2 px-4 text-dark bg-white shadow-xl absolute top-[120%] left-[140%] md:left-[100%] w-48 overflow-hidden z-40 ring-1 ring-dark/20"
         >
           <Option
             setSelectedTab={setSelected}
@@ -102,7 +102,7 @@ const Option = ({
           <motion.li
             variants={itemVariants}
             onClick={handleSignout}
-            className="flex items-center gap-2 w-full p-2 text-base font-normal whitespace-nowrap rounded-md hover:bg-dark text-slate-700 hover:text-white transition-colors cursor-pointer"
+            className="flex items-center gap-2 w-full p-3 text-xs font-normal whitespace-nowrap hover:bg-dark text-slate-700 hover:text-white transition-colors cursor-pointer"
           >
             <motion.span variants={actionIconVariants}>
               <Icon />
@@ -118,7 +118,7 @@ const Option = ({
               setSelectedTab(text.toLowerCase());
               setOpen(false);
             }}
-            className="flex items-center gap-2 w-full p-2 text-base font-normal whitespace-nowrap rounded-md hover:bg-dark text-slate-700 hover:text-white transition-colors cursor-pointer"
+            className="flex items-center gap-2 w-full p-3 text-xs font-normal whitespace-nowrap hover:bg-dark text-slate-700 hover:text-white transition-colors cursor-pointer"
           >
             <motion.span variants={actionIconVariants}>
               <Icon />
@@ -138,14 +138,14 @@ const wrapperVariants = {
     scaleY: 1,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
   closed: {
     scaleY: 0,
     transition: {
       when: "afterChildren",
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
     },
   },
 };

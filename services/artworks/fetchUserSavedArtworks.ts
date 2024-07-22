@@ -1,9 +1,10 @@
 import { getApiUrl } from "@/config";
 import { nextAuthOptions } from "@/lib/auth/next-auth-options";
 import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 
 export async function fetchUserSaveArtworks() {
-  const session = await getServerSession(nextAuthOptions);
+  const session = await getSession();
   try {
     const url = getApiUrl();
     const response = await fetch(`${url}/api/artworks/getUserSavedArtworks`, {

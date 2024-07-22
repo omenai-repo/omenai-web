@@ -1,13 +1,13 @@
 import { getApiUrl } from "@/config";
 import { getSession } from "next-auth/react";
 
-export async function deleteGalleryAccount() {
+export async function deleteAccount(route: RouteIdentifier) {
   const session = await getSession();
   try {
     const url = getApiUrl();
-    const res = await fetch(`${url}/api/requests/gallery/deleteAccount`, {
+    const res = await fetch(`${url}/api/requests/${route}/deleteAccount`, {
       method: "POST",
-      body: JSON.stringify({ gallery_id: session?.user.id }),
+      body: JSON.stringify({ id: session?.user.id }),
     });
 
     const result = await res.json();

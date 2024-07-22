@@ -42,6 +42,8 @@ export default function PendingOrders({
                     payment_information={order.payment_information}
                     tracking_information={order.tracking_information}
                     shipping_quote={order.shipping_quote}
+                    delivery_confirmed={order.delivery_confirmed}
+                    order_accepted={order.order_accepted}
                   />
                   <hr className="h-px my-2 bg-dark/10 border-0 dark:bg-gray-700" />
                 </>
@@ -50,7 +52,6 @@ export default function PendingOrders({
           </div>
         )}
       </motion.div>
-      ;
     </AnimatePresence>
   );
 }
