@@ -31,16 +31,8 @@ export async function POST(request: Request) {
         },
       },
       tos_acceptance: {
-        service_agreement: "recipient",
+        service_agreement: customer.country === "US" ? null : "recipient",
       },
-      // settings: {
-      //   payouts: {
-      //     schedule: {
-      //       interval: "manual",
-      //       delay_days: "minimum",
-      //     },
-      //   },
-      // },
     });
 
     if (!account)
