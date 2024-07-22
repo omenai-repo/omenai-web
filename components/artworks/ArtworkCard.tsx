@@ -4,10 +4,11 @@ import { formatPrice } from "@/utils/priceFormatter";
 
 import Link from "next/link";
 import LikeComponent from "../likes/LikeComponent";
-import Image from "next/image";
-import { blurHash } from "@/utils/blurhash";
+
 import { getImageFileView } from "@/lib/storage/getImageFileView";
-import ArtworkCardTags from "./ArtworkCardTags";
+
+import { HiPencil } from "react-icons/hi";
+
 export default function ArtworkCard({
   image,
   artist,
@@ -46,7 +47,7 @@ export default function ArtworkCard({
               alt={name + " image"}
               // height={400}
               // width={400}
-              className="min-w-[200px] max-h-[400px] w-full h-auto object-top cursor-pointer"
+              className="min-w-[200px] max-h-[400px] w-fit h-auto object-top cursor-pointer"
             />
           </Link>
           {isDashboard ? null : (
@@ -64,14 +65,8 @@ export default function ArtworkCard({
         <div className=" bg-[#FAFAFA] border border-[#E0E0E0] p-3 w-full">
           <div className="flex justify-between items-center my-2">
             <p className="font-normal text-[14px] text-dark ">
-              {name.substring(0, 20)}
-              {name.length > 20 && "..."}
-            </p>
-          </div>
-          <div className="flex justify-between items-center">
-            <p className="font-normal text-dark text-xs">
-              {artist.substring(0, 20)}
-              {artist.length > 20 && "..."}
+              {name.substring(0, 30)}
+              {name.length > 30 && "..."}
             </p>
 
             {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
@@ -88,11 +83,22 @@ export default function ArtworkCard({
               <p className="font-normal underline text-xs">On request</p>
             )}
           </div>
-          {/* <hr className="border-dark/10 my-5" /> */}
-          {/* <div className="flex flex-wrap gap-2 mb-2 items-center">
-            <ArtworkCardTags tag={medium} />
-            <ArtworkCardTags tag={rarity} />
-          </div> */}
+          <div className="flex justify-between items-center">
+            <p className="font-normal text-dark text-xs">
+              {artist.substring(0, 30)}
+              {artist.length > 30 && "..."}
+            </p>
+            {/* <HiPencil /> */}
+            {isDashboard && (
+              <Link href={`/dashboard/gallery/artworks/edit?id=${art_id}`}>
+                <button
+                  className={`disabled:cursor-not-allowed disabled:text-dark/20 text-xs font-medium underline cursor-pointer`}
+                >
+                  Edit artwork
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

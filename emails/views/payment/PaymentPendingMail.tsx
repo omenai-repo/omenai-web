@@ -30,7 +30,7 @@ const PaymentPendingMail = (name: string, artwork: string) => {
               className="mx-auto mt-10"
             />
 
-            <Heading className="text-black text-[20px] font-normal  p-0 mb-[40px] mx-0">
+            <Heading className="text-black text-[20px] font-normal text-center p-0 mb-[40px] mx-0">
               PURCHASE PAYMENT PROCESSING
             </Heading>
             <Text className="text-black text-[14px] leading-[24px]">

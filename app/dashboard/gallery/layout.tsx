@@ -56,7 +56,7 @@ export default function GalleryDashboardLayout({
             <PageLayout />
 
             <div
-              className={`w-full xl:ml-[19rem] md:ml-[15rem] bg-[#FAFAFA] rounded-xl relative duration-200`}
+              className={`w-full xl:ml-[19rem] md:ml-[15rem]  rounded-xl relative duration-200`}
             >
               <Appbar />
               <div className="h-auto rounded-lg relative my-5 px-5">
