@@ -50,6 +50,10 @@ type ActionStoreTypes = {
   updateDeleteGalleryAccountModalPopup: (value: boolean) => void;
   passwordModalPopup: boolean;
   updatePasswordModalPopup: (value: boolean) => void;
+  deleteUserAccountModal: boolean;
+  updateDeleteUserAccountModalPopup: (value: boolean) => void;
+  userPasswordModalPopup: boolean;
+  userUpdatePasswordModalPopup: (value: boolean) => void;
 };
 
 export const actionStore = create<ActionStoreTypes>((set, get) => ({
@@ -196,5 +200,14 @@ export const actionStore = create<ActionStoreTypes>((set, get) => ({
   passwordModalPopup: false,
   updatePasswordModalPopup: (value: boolean) => {
     set({ passwordModalPopup: value });
+  },
+
+  deleteUserAccountModal: false,
+  updateDeleteUserAccountModalPopup: (value: boolean) => {
+    set({ deleteUserAccountModal: value });
+  },
+  userPasswordModalPopup: false,
+  userUpdatePasswordModalPopup: (value: boolean) => {
+    set({ userPasswordModalPopup: value });
   },
 }));

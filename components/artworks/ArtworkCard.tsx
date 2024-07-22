@@ -36,10 +36,10 @@ export default function ArtworkCard({
   isDashboard?: boolean;
   availability: boolean;
 }) {
-  const image_href = getImageFileView(image, 300);
+  const image_href = getImageFileView(image, 200);
   return (
     <div className="my-2 md:my-4 w-fit p-4 xxm:p-0">
-      <div className="flex flex-col min-w-[200px] max-w-full justify-end">
+      <div className="flex flex-col min-w-[250px] max-w-full justify-end">
         <div className="relative w-full">
           <Link href={`/artwork/${name}`} className="relative">
             <img
@@ -47,7 +47,7 @@ export default function ArtworkCard({
               alt={name + " image"}
               // height={400}
               // width={400}
-              className="min-w-[200px] max-h-[400px] w-fit h-auto object-top cursor-pointer"
+              className="min-w-[250px] max-h-[400px] w-fit h-auto object-top cursor-pointer"
             />
           </Link>
           {isDashboard ? null : (
@@ -64,29 +64,29 @@ export default function ArtworkCard({
 
         <div className=" bg-[#FAFAFA] border border-[#E0E0E0] p-3 w-full">
           <div className="flex justify-between items-center my-2">
-            <p className="font-normal text-[14px] text-dark ">
-              {name.substring(0, 30)}
-              {name.length > 30 && "..."}
+            <p className="font-semibold text-[14px] text-dark ">
+              {name.substring(0, 20)}
+              {name.length > 20 && "..."}
             </p>
 
             {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
               !availability ? (
-                <p className="font-medium text-xs text-dark">Sold</p>
+                <p className="font-semibold text-xs text-dark">Sold</p>
               ) : (
-                <p className="font-normal text-xs text-dark">
+                <p className="font-semibold text-xs text-dark">
                   {formatPrice(pricing.usd_price)}
                 </p>
               )
             ) : !availability ? (
-              <p className="font-medium text-xs text-dark">Sold</p>
+              <p className="font-semibold text-xs text-dark">Sold</p>
             ) : (
-              <p className="font-normal text-xs">Price on request</p>
+              <p className="font-semibold text-xs">Price on request</p>
             )}
           </div>
           <div className="flex justify-between items-center">
             <p className="font-normal text-dark text-xs">
-              {artist.substring(0, 30)}
-              {artist.length > 30 && "..."}
+              {artist.substring(0, 20)}
+              {artist.length > 20 && "..."}
             </p>
             {/* <HiPencil /> */}
             {isDashboard && (

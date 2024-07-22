@@ -145,7 +145,7 @@ export default function QuoteForm() {
             <button
               disabled={loading}
               type="submit"
-              className="h-[50px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
+              className="h-[40px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
             >
               {loading ? <LoadSmall /> : " Accept order request"}
             </button>

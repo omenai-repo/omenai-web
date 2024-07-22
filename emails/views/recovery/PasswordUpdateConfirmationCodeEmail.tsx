@@ -17,7 +17,7 @@ import {
 const PasswordUpdateConfirmationCodeEmail = (
   username: string,
   token: string,
-  gallery_name: string
+  gallery_name?: string
 ) => {
   return (
     <Html>

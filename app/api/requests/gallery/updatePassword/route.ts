@@ -14,11 +14,11 @@ export async function POST(request: Request) {
   try {
     await connectMongoDB();
 
-    const { gallery_id, password, code } = await request.json();
+    const { id, password, code } = await request.json();
 
     const account = await AccountGallery.findOne(
       {
-        gallery_id,
+        gallery_id: id,
       },
       "password"
     );
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     const hashedPassword = await hashPassword(password);
 
     const updatePassword = await AccountGallery.updateOne(
-      { gallery_id },
+      { gallery_id: id },
       { $set: { password: hashedPassword } }
     );
 

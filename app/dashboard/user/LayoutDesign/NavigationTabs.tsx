@@ -17,7 +17,7 @@ const NavigationChipTabs = () => {
   const lastPath = pathname.at(-1);
 
   return (
-    <div className=" pb-[0.90rem] pt-14 grid grid-cols-4 items-center w-full border-b border-b-dark/10">
+    <div className=" pb-[0.90rem] pt-6 grid grid-cols-4 items-center w-full border-b border-b-dark/10">
       {tabs.map((tab, index) => (
         <Chip
           text={tab}
@@ -43,7 +43,7 @@ const Chip = ({
     <Link
       href={`/dashboard/user/${text.toLowerCase()}`}
       onClick={() => setSelectedTab(text.toLowerCase())}
-      className={`hover:text-primary hover:underline text-xs xs:text-base transition-colors py-0.5 relative text-center`}
+      className={`hover:text-dark hover:underline text-xs font-medium transition-colors py-0.5 relative text-center`}
     >
       <span className="relative z-10">{text}</span>
       {selectedTab && (

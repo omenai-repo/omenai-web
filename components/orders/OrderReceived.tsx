@@ -21,7 +21,7 @@ export default function OrderReceived() {
       <Link
         onClick={() => toggleOrderReceivedModal(false)}
         href={"/"}
-        className="h-[50px] px-4 w-full bg-black grid place-items-center text-white cursor-pointer mt-[50px]"
+        className="h-[40px] px-4 w-full bg-black grid place-items-center text-white cursor-pointer mt-[50px]"
       >
         Continue shopping
       </Link>

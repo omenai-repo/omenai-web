@@ -40,7 +40,7 @@ export const ArtworkImage = ({
     <Link href={`/artwork/${title}`}>
       <div className="relative flex items-end max-w-[350px] w-auto rounded-md mb-4">
         {pricing?.price && (
-          <div className="absolute top-5 right-5 z-10">
+          <div className="absolute top-4 right-4 z-10 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent
               impressions={impressions}
               likeIds={likeIds}
@@ -55,9 +55,9 @@ export const ArtworkImage = ({
           className="w-auto max-w-[350px] rounded-md"
         />
 
-        <div className="absolute bottom-0 flex justify-between items-center gap-y-[0.1rem] text-white px-2 py-1 z-10 bg-dark/50 w-full rounded-md cursor-pointer">
+        <div className="absolute bottom-0 flex justify-between items-center gap-y-[0.1rem] text-white px-2 py-4 z-10 bg-dark/30 w-full rounded-md cursor-pointer">
           <div className="flex-col flex gap-y-[0.1rem]">
-            <span className="font-medium text-base">{title}</span>
+            <span className="font-medium text-[14px]">{title}</span>
             <span className="text-xs text-[#fafafa]">{author}</span>
           </div>
 

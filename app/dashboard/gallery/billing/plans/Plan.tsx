@@ -69,7 +69,7 @@ export default function Plan({
                 <div className="mt-8">
                   <Link
                     href="/dashboard/gallery/billing/plans/checkout"
-                    className="h-[50px] px-4 w-full text-[14px] text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
+                    className="h-[40px] px-4 w-full text-[14px] text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
                     aria-describedby="tier-team"
                   >
                     Get started today

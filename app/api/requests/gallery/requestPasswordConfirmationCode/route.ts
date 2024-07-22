@@ -13,10 +13,10 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const { gallery_id } = await request.json();
+    const { id } = await request.json();
 
     const account = await AccountGallery.findOne({
-      gallery_id,
+      gallery_id: id,
     });
     if (!account) throw new ServerError("Something went wrong");
     const token = generateDigit(7);

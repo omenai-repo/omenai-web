@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="w-full grid md:grid-cols-2 gap-8 items-center bg-[#fafafa]">
         <div>
           <img
-            className="w-full max-h-[450px] h-auto"
+            className="w-full max-h-[500px] h-auto"
             src="/images/hero.jpg"
             alt="hero image"
           />

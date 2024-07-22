@@ -1,13 +1,17 @@
 import { getApiUrl } from "@/config";
 import { getSession } from "next-auth/react";
 
-export async function updateGalleryPassword(password: string, code: string) {
+export async function updatePassword(
+  password: string,
+  code: string,
+  route: RouteIdentifier
+) {
   const session = await getSession();
   try {
     const url = getApiUrl();
-    const res = await fetch(`${url}/api/requests/gallery/updatePassword`, {
+    const res = await fetch(`${url}/api/requests/${route}/updatePassword`, {
       method: "POST",
-      body: JSON.stringify({ gallery_id: session?.user.id, password, code }),
+      body: JSON.stringify({ id: session?.user.id, password, code }),
     });
 
     const result = await res.json();

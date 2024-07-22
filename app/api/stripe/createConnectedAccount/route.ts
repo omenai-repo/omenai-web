@@ -33,6 +33,14 @@ export async function POST(request: Request) {
       tos_acceptance: {
         service_agreement: "recipient",
       },
+      // settings: {
+      //   payouts: {
+      //     schedule: {
+      //       interval: "manual",
+      //       delay_days: "minimum",
+      //     },
+      //   },
+      // },
     });
 
     if (!account)

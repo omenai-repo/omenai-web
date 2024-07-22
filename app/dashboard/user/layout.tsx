@@ -2,6 +2,8 @@ import DesktopNavbar from "@/components/navbar/desktop/DesktopNavbar";
 import NextTopLoader from "nextjs-toploader";
 import Banner from "./LayoutDesign/Banner";
 import NavigationChipTabs from "./LayoutDesign/NavigationTabs";
+import { UpdatePasswordModal } from "./modals/UpdatePasswordModal";
+import { DeleteAccountConfirmationModal } from "./modals/DeleteAccountConfirmationMdal";
 
 export default function UserLayout({
   children,
@@ -10,15 +12,17 @@ export default function UserLayout({
 }) {
   return (
     <div className="">
-      <NextTopLoader color="#6246EA" height={6} />
+      <NextTopLoader color="#1A1A1A" height={6} />
 
       <DesktopNavbar />
 
-      <main className="">
+      <main className="relative">
         <div className="sticky top-0 left-0 bg-white z-20">
           <Banner />
           <NavigationChipTabs />
         </div>
+        <UpdatePasswordModal />
+        <DeleteAccountConfirmationModal />
 
         {children}
       </main>
