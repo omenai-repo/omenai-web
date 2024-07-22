@@ -5,7 +5,6 @@ import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { stripe } from "@/lib/payments/stripe/stripe";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { CreateOrder } from "@/models/orders/CreateOrderSchema";
-import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
 import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
 
