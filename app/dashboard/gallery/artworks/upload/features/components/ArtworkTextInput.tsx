@@ -96,7 +96,7 @@ export default function ArtworkTextInput({
       {errorList.length > 0 &&
         errorList.map((error, index) => {
           return (
-            <p key={index} className="text-red-600 text-xs">
+            <p key={`${error}-error_list`} className="text-red-600 text-xs">
               {error}
             </p>
           );

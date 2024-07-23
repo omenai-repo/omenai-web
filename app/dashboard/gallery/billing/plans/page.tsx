@@ -31,7 +31,7 @@ export default function PlanWrapper() {
         {plan_details.map((plan, index) => {
           return (
             <Plan
-              key={index}
+              key={plan.name}
               name={plan.name}
               monthly_price={plan.monthly_price}
               yearly_price={plan.yearly_price}

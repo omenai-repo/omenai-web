@@ -54,7 +54,7 @@ export default function AddressSelectInput({
             items.map((item, index) => {
               return (
                 <option
-                  key={index}
+                  key={item}
                   value={item}
                   className="p-3 font-light text-dark text-xs"
                 >
@@ -78,7 +78,7 @@ export default function AddressSelectInput({
             countryStates.map((state, index) => {
               return (
                 <option
-                  key={index}
+                  key={state}
                   value={state}
                   className="p-3 font-light text-dark text-xs"
                 >

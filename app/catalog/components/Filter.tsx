@@ -87,8 +87,8 @@ export default function Filter() {
       {selectedFilters.length > 0 && (
         <>
           <div className="flex flex-wrap gap-2 items-center p-4 cursor-pointer">
-            {selectedFilters.map((filter, index) => {
-              return <FilterPill key={index} filter={filter.name} />;
+            {selectedFilters.map((filter) => {
+              return <FilterPill key={filter.name} filter={filter.name} />;
             })}
             <div
               onClick={handleClearAll}

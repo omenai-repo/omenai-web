@@ -10,7 +10,7 @@ export default function Recovery() {
   ]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={6}>
       <motion.div
         className={` ${
           recoveryModal.value ? "fixed" : "hidden"

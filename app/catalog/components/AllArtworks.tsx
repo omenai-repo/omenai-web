@@ -50,9 +50,9 @@ export default function AllArtworks({
           <div className="grid grid-row-auto xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 gap-y-12 w-full items-end ">
             {artworks.map((art: ArtworkResultTypes, index: number) => {
               return (
-                <div key={index}>
+                <div key={art.art_id}>
                   <ArtworkCard
-                    key={index}
+                    key={art.art_id}
                     image={art.url}
                     name={art.title}
                     artist={art.artist}

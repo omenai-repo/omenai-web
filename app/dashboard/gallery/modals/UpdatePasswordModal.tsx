@@ -9,7 +9,7 @@ export const UpdatePasswordModal = () => {
   );
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={13}>
       {passwordModalPopup && (
         <motion.div
           initial={{ opacity: 0 }}

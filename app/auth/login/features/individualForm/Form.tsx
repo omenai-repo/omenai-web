@@ -8,7 +8,7 @@ import { IndividualLogo } from "@/components/logo/Logo";
 
 export default function Form() {
   return (
-    <AnimatePresence>
+    <AnimatePresence key={4}>
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}

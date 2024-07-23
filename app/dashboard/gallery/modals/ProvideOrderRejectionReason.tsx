@@ -10,7 +10,7 @@ export const UploadOrderRejectionReason = () => {
   );
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={11}>
       {openDeclineOrderModal && (
         <motion.div
           initial={{ opacity: 0 }}

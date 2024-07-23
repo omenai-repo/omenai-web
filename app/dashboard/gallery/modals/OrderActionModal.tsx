@@ -15,7 +15,7 @@ export const OrderActionModal = () => {
   ]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={10}>
       {openGalleryOrderActionModal && (
         <motion.div
           initial={{ opacity: 0 }}

@@ -130,7 +130,10 @@ export default function UpdatePasswordModalForm() {
         {errorList.length > 0 &&
           errorList.map((error, index) => {
             return (
-              <div key={index} className="flex items-center gap-x-2 my-2">
+              <div
+                key={`${error}-error_list`}
+                className="flex items-center gap-x-2 my-2"
+              >
                 <MdError className="text-red-600" />
                 <p className="text-red-600 text-xs">{error}</p>
               </div>

@@ -8,7 +8,7 @@ function SelectSection() {
   const { updateCurrent } = useLoginStore();
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={5}>
       <motion.div
         initial={{ x: -300, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}

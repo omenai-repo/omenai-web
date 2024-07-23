@@ -59,7 +59,7 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
             setSelectedTab={setSelected}
             setOpen={setOpen}
             Icon={CgProfile}
-            text="Bids"
+            text="Profile"
           />
           <Option
             setSelectedTab={setSelected}

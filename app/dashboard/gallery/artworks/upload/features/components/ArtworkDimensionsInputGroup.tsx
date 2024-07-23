@@ -11,7 +11,7 @@ export default function ArtworkDimensionsInputGroup() {
         {uploadArtworkDimensionInputMocks.map((input, index) => {
           return (
             <ArtworkTextInput
-              key={index}
+              key={input.name}
               label={input.label}
               placeholder={input.placeholder}
               name={input.name}

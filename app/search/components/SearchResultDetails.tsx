@@ -45,7 +45,7 @@ export default function SearchResultDetails({
               {data.map((artwork, index) => {
                 return (
                   <ArtworkCard
-                    key={index}
+                    key={artwork.art_id}
                     image={artwork.url}
                     name={artwork.title}
                     artist={artwork.artist}

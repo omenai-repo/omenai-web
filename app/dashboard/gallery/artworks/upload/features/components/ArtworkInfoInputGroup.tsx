@@ -11,7 +11,7 @@ export default function ArtworkInfoInputGroup() {
           if (input.type === "text" || input.type === "textarea") {
             return (
               <ArtworkTextInput
-                key={index}
+                key={input.name}
                 label={input.label}
                 placeholder={input.placeholder}
                 name={input.name}
@@ -22,7 +22,7 @@ export default function ArtworkInfoInputGroup() {
           } else {
             return (
               <ArtworkSelectInput
-                key={index}
+                key={input.name}
                 label={input.label}
                 items={input.options}
                 name={input.name}

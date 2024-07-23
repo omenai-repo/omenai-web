@@ -203,7 +203,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
           {orders.map((artwork: any, index: number) => {
             return (
               <tr
-                key={index}
+                key={artwork.order_id}
                 className="cursor-pointer bg-white ring-1 ring-[#EFEFEF] duration-200 my-2"
               >
                 <td className=" py-4 pl-3 text-xs font-normal text-dark">

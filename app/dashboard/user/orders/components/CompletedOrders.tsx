@@ -5,7 +5,7 @@ import OrdersCard from "./OrdersCard";
 
 export default function CompletedOrders({ orders }: { orders: any }) {
   return (
-    <AnimatePresence key={1}>
+    <AnimatePresence key={19}>
       <motion.div
         initial={{ y: 300, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -21,7 +21,7 @@ export default function CompletedOrders({ orders }: { orders: any }) {
               return (
                 <>
                   <OrdersCard
-                    key={index}
+                    key={order.order_id}
                     url={order.artwork_data.url}
                     title={order.artwork_data.title}
                     artist={order.artwork_data.artist}

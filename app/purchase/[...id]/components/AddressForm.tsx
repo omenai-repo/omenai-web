@@ -76,7 +76,7 @@ export default function AddressForm({
             {userDetails.map((detail, index) => {
               return (
                 <AddressTextInput
-                  key={index}
+                  key={detail.name}
                   placeholder={detail.placeholder}
                   label={detail.label}
                   name={detail.name}
@@ -97,7 +97,7 @@ export default function AddressForm({
               if (location.type === "select" && !location.placeholder) {
                 return (
                   <AddressSelectInput
-                    key={index}
+                    key={location.name}
                     label={location.label}
                     name={location.name}
                     required={location.required}
@@ -107,7 +107,7 @@ export default function AddressForm({
               } else if (location.placeholder) {
                 return (
                   <AddressTextInput
-                    key={index}
+                    key={location.name}
                     placeholder={location.placeholder}
                     label={location.label}
                     name={location.name}

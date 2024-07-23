@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function MonthlyPricingPlan() {
   return (
-    <AnimatePresence key={1}>
+    <AnimatePresence key={22}>
       <motion.div
         initial={{ y: 300, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -15,7 +15,7 @@ export default function MonthlyPricingPlan() {
         {monthlyPricingDetails.map((pricing, index) => {
           return (
             <PricingCardItem
-              key={index}
+              key={pricing.plan}
               plan={pricing.plan}
               price={pricing.price}
               features={pricing.features}

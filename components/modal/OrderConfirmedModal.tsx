@@ -9,7 +9,7 @@ export const OrderReceivedModal = () => {
   );
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={28}>
       {openOrderReceivedModal && (
         <motion.div
           initial={{ opacity: 0 }}

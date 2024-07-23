@@ -4,10 +4,8 @@ import { useIndividualAuthStore } from "@/store/auth/register/IndividualAuthStor
 
 type PillProps = {
   text: string;
-  selected?: boolean;
-  onClick?: () => void;
 };
-export default function Pill({ text, selected = false, onClick }: PillProps) {
+export default function Pill({ text }: PillProps) {
   const [preferences, updatePreference] = useIndividualAuthStore((state) => [
     state.preferences,
     state.updatePreference,

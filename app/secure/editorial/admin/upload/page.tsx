@@ -98,7 +98,7 @@ export default function Admin() {
                 if (data.type === "file") {
                   return (
                     <>
-                      <Timeline.Item key={index}>
+                      <Timeline.Item key={data.name}>
                         <Timeline.Point />
                         <Timeline.Content>
                           <div className="flex flex-col gap-3">
@@ -125,7 +125,7 @@ export default function Admin() {
                         description={data.description}
                         placeholder={data.placeholder}
                         type={data.type}
-                        key={index}
+                        key={data.name}
                         register={register}
                         name={data.name}
                         required={data.required}

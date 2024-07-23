@@ -11,7 +11,7 @@ export const UploadTrackingIDModal = () => {
     ]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={12}>
       {openUploadTrackingInfoModal && (
         <motion.div
           initial={{ opacity: 0 }}

@@ -50,7 +50,7 @@ export default function PageLayout() {
                   <NavigationItem
                     title={item.title}
                     icon={item.icon}
-                    key={index}
+                    key={item.title}
                     url={item.url}
                     mobile={false}
                   />

@@ -39,7 +39,7 @@ export default function TrendingArtworks({
               if (artwork.impressions === 0) return null;
               return (
                 <TrendingArtworkCard
-                  key={index}
+                  key={artwork.art_id}
                   name={artwork.title}
                   image={artwork.url}
                   artist={artwork.artist}

@@ -17,7 +17,7 @@ export default async function EditorialAdmin() {
             {editorials!.map((data, index) => {
               return (
                 <ArticleCard
-                  key={index}
+                  key={data.id}
                   image={data.image}
                   date={data.date}
                   title={data.title}

@@ -41,7 +41,7 @@ export default function PopularArtworks() {
               {popularArtworks.map((artwork: any, index: number) => {
                 return (
                   <PopulartArtworkCard
-                    key={index}
+                    key={artwork.title}
                     url={artwork.url}
                     title={artwork.title}
                     artist={artwork.artist}
