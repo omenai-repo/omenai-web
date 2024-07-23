@@ -47,7 +47,7 @@ export default function ArtworkSelectInput({
             {currency_items!.map((item: CurrencyItems, index) => {
               return (
                 <option
-                  key={index}
+                  key={item.code}
                   value={item.code}
                   className="px-3 py-5 my-5 font-normal text-[14px] text-dark"
                 >
@@ -61,7 +61,7 @@ export default function ArtworkSelectInput({
             {items!.map((item, index) => {
               return (
                 <option
-                  key={index}
+                  key={item}
                   value={item}
                   className="px-3 py-5 my-5 font-normal text-[14px] text-dark"
                 >

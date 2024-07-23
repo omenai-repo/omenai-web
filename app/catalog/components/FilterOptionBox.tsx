@@ -48,9 +48,9 @@ export default function FilterOptionBox({
           className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="dropdownBgHoverButton"
         >
-          {filters.map((filter, index) => {
+          {filters.map((filter) => {
             return (
-              <li key={index}>
+              <li key={filter.option}>
                 <span className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                   <input
                     id={filter.option}

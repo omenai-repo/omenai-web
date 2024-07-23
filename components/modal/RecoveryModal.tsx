@@ -12,7 +12,7 @@ const RecoveryModal = () => {
     ]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={29}>
       {openLoginModalRecoveryForm && (
         <motion.div
           initial={{ opacity: 0 }}

@@ -36,7 +36,7 @@ export default function MobilePageLayout() {
                     <NavigationItem
                       title={item.title}
                       icon={item.icon}
-                      key={index}
+                      key={item.title}
                       url={item.url}
                       mobile={true}
                       onClick={() => setOpenMobileNav()}
@@ -54,7 +54,7 @@ export default function MobilePageLayout() {
                     <NavigationItem
                       title={item.title}
                       icon={item.icon}
-                      key={index}
+                      key={item.title}
                       url={item.url}
                       mobile={true}
                       onClick={() => setOpenMobileNav()}

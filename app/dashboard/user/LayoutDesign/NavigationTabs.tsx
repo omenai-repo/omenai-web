@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const tabs = ["Saves", "Orders", "Bids", "Settings"];
+const tabs = ["Saves", "Orders", "Profile", "Settings"];
 
 const NavigationChipTabs = () => {
   //   const [selected, setSelected] = useState(tabs[0]);
@@ -23,7 +23,7 @@ const NavigationChipTabs = () => {
           text={tab}
           selectedTab={selected === tab.toLowerCase()}
           setSelectedTab={setSelected}
-          key={index}
+          key={tab}
         />
       ))}
     </div>

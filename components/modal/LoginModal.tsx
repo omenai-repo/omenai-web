@@ -10,7 +10,7 @@ const LoginModal = () => {
   ]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={27}>
       {openLoginModal && (
         <motion.div
           initial={{ opacity: 0 }}

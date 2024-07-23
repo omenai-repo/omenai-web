@@ -136,7 +136,7 @@ export default function EditArtworkWrapper({
                   {currencies!.map((item, index) => {
                     return (
                       <option
-                        key={index}
+                        key={item.code}
                         value={item.code}
                         className="px-3 py-5 my-5 font-normal text-[14px] text-dark"
                       >

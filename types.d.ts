@@ -214,6 +214,10 @@ type GalleryProfileUpdateData = {
   admin?: string;
   description?: string;
 };
+type IndividualProfileUpdateData = {
+  name?: string;
+  preferences?: string[];
+};
 
 type InputData = {
   author: string;

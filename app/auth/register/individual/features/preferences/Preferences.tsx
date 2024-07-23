@@ -31,7 +31,7 @@ function Preferences() {
     state.isLoading,
   ]);
   return (
-    <AnimatePresence>
+    <AnimatePresence key={7}>
       <div className="container">
         <p className="text-xs font-normal text-center">
           We would like understand your art interests, please select up to 5
@@ -49,7 +49,7 @@ function Preferences() {
         >
           <div className="flex flex-wrap justify-center gap-y-[1rem] gap-x-[0.5rem]">
             {artTypes.map((art, index) => {
-              return <Pill key={index} text={art} />;
+              return <Pill key={art} text={art} />;
             })}
           </div>
           {/* Submit */}

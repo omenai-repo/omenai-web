@@ -47,7 +47,7 @@ export default function SimilarArtworks({
             ) => {
               return (
                 <ArtworkCard
-                  key={index}
+                  key={art.art_id}
                   image={art.url}
                   name={art.title}
                   artist={art.artist}

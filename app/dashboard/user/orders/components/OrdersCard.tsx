@@ -1,11 +1,11 @@
 "use client";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
-import { actionStore } from "@/store/actions/ActionStore";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { GoIssueClosed } from "react-icons/go";
 import { IoClose } from "react-icons/io5";
 import { MdInfo, MdOutlineCallToAction } from "react-icons/md";
@@ -33,21 +33,19 @@ export default function OrdersCard({
   url,
   status,
   order_id,
-  state,
   payment_information,
   tracking_information,
-  shipping_quote,
   delivery_confirmed,
   order_accepted,
 }: OverviewOrdersCardProps) {
   const image_url = getImageFileView(url, 200);
 
-  // const [toggleUserTrackingInfoModal] = actionStore((state) => [
-  //   state.toggleUserTrackingInfoModal,
-  // ]);
-
   const currency = getCurrencySymbol("USD");
   const session = useSession();
+  const router = useRouter();
+
+  if (session.data === null || session.data === undefined)
+    router.replace("/auth/login");
 
   function construct_status(
     status: string,
@@ -173,9 +171,11 @@ export default function OrdersCard({
         {payment_information.status === "pending" &&
           status !== "completed" &&
           order_accepted.status === "accepted" && (
-            <button className="whitespace-nowrap bg-dark rounded-sm text-white disabled:bg-[#E0E0E0] disabled:text-[#858585] w-full disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
-              <span>Pay for this artwork</span>
-            </button>
+            <Link href={`/payment/${order_id}?id_key=${session.data!.user.id}`}>
+              <button className="whitespace-nowrap bg-dark rounded-sm text-white disabled:bg-[#E0E0E0] disabled:text-[#858585] w-full disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+                <span>Pay for this artwork</span>
+              </button>
+            </Link>
           )}
         <div className="w-full sm:flex-row flex-col flex items-center gap-2">
           {payment_information.status === "completed" &&

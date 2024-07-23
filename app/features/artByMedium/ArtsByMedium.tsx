@@ -10,7 +10,11 @@ export default function ArtsByMedium() {
       <div className="flex overflow-x-scroll w-full space-x-2">
         {medium_arts.map((medium, index) => {
           return (
-            <ArtsByMediumCard key={index} name={medium.name} tag={medium.tag} />
+            <ArtsByMediumCard
+              key={medium.tag}
+              name={medium.name}
+              tag={medium.tag}
+            />
           );
         })}
       </div>

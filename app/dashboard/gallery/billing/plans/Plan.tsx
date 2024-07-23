@@ -41,7 +41,7 @@ export default function Plan({
                 <ul role="list" className="space-y-4">
                   {benefits.map((benefit, index) => {
                     return (
-                      <li key={index} className="flex items-start">
+                      <li key={benefit} className="flex items-start">
                         <span className="flex-shrink-0">
                           <svg
                             className="h-4 w-4 text-dark"

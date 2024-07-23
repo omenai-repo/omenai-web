@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 
 export async function updateProfile(
   route: RouteIdentifier,
-  payload: GalleryProfileUpdateData,
+  payload: GalleryProfileUpdateData | IndividualProfileUpdateData,
   id: string
 ) {
   const url = getApiUrl();

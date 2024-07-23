@@ -34,7 +34,7 @@ export default function VerifiedGalleryList() {
     );
   }
   return (
-    <AnimatePresence key={1}>
+    <AnimatePresence key={2}>
       <motion.div
         initial={{ y: 300, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -47,7 +47,7 @@ export default function VerifiedGalleryList() {
             (gallery: AdminGalleryListItemTypes, index: number) => {
               return (
                 <GalleryListItem
-                  key={index}
+                  key={gallery._id}
                   name={gallery.name}
                   location={gallery.location}
                   description={gallery.description}

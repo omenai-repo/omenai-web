@@ -51,7 +51,7 @@ export default function EditorialsWrapper({
             {editorials!.slice(0, pageCount).map((data: any, index: any) => {
               return (
                 <EditorialArticleCard
-                  key={index}
+                  key={data.id}
                   title={data.title}
                   date={data.date}
                   author={data.author}

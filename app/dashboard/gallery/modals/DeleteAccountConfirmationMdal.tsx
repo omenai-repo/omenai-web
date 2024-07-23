@@ -11,7 +11,7 @@ export const DeleteAccountConfirmationModal = () => {
     ]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={8}>
       {deletGalleryAccountModal && (
         <motion.div
           initial={{ opacity: 0 }}

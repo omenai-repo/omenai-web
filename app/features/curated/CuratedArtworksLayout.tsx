@@ -42,7 +42,7 @@ export default function CuratedArtworksLayout({
               return (
                 <ArtworkCard
                   image={artwork.url}
-                  key={index}
+                  key={artwork.art_id}
                   artist={artwork.artist}
                   name={artwork.title}
                   pricing={artwork.pricing}

@@ -15,7 +15,7 @@ export default function CompletedOrders({
   };
 }) {
   return (
-    <AnimatePresence key={1}>
+    <AnimatePresence key={14}>
       <motion.div
         initial={{ y: 300, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

@@ -40,9 +40,8 @@ export default function ArtCatalog() {
           <div className="grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-3 gap-y-12 w-full items-end ">
             {reversedArtworks.map((art: ArtworkResultTypes, index: number) => {
               return (
-                <div key={index}>
+                <div key={art.art_id}>
                   <ArtworkCard
-                    key={index}
                     image={art.url}
                     name={art.title}
                     artist={art.artist}

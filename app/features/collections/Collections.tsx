@@ -22,7 +22,7 @@ export default function Collections() {
       <div className="flex relative gap-x-4 overflow-x-scroll w-full">
         {collections.map((collection, index) => {
           return (
-            <div key={index}>
+            <div key={collection.title}>
               <ArtCollectionCard
                 title={collection.title}
                 url={collection.url}

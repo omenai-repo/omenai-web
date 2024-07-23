@@ -48,7 +48,7 @@ export default function GalleryList() {
             (gallery: AdminGalleryListItemTypes, index: number) => {
               return (
                 <GalleryListItem
-                  key={index}
+                  key={gallery._id}
                   name={gallery.name}
                   location={gallery.location}
                   description={gallery.description}

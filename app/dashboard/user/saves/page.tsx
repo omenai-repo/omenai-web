@@ -39,9 +39,8 @@ export default function Saves() {
         <div className="flex flex-wrap items-end relative gap-x-2 overflow-x-scroll w-full">
           {artworks.map((art: ArtworkResultTypes, index: number) => {
             return (
-              <div key={index}>
+              <div key={art.art_id}>
                 <ArtworkCard
-                  key={index}
                   image={art.url}
                   name={art.title}
                   artist={art.artist}

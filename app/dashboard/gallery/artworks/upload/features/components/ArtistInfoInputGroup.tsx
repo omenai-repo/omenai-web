@@ -16,7 +16,7 @@ export default function ArtistInfoInputGroup() {
           if (input.type === "text") {
             return (
               <ArtworkTextInput
-                key={index}
+                key={input.name}
                 label={input.label}
                 placeholder={input.placeholder}
                 name={input.name}
@@ -26,7 +26,7 @@ export default function ArtistInfoInputGroup() {
           } else {
             return (
               <ArtworkSelectInput
-                key={index}
+                key={input.name}
                 label={input.label}
                 items={input.options}
                 name={input.name}

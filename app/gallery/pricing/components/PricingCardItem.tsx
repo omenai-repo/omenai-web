@@ -113,7 +113,7 @@ export default function PricingCardItem({
             {features.map((feature, index) => {
               return (
                 <PricingCardFeatureListItem
-                  key={index}
+                  key={feature}
                   feature_title={feature}
                 />
               );

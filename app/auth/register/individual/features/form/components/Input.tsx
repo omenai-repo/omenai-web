@@ -50,7 +50,7 @@ export default function Input({
   };
 
   return (
-    <AnimatePresence key={id}>
+    <AnimatePresence key={`${id}-individual`}>
       <motion.div
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -75,7 +75,10 @@ export default function Input({
         {errorList.length > 0 &&
           errorList.map((error, index) => {
             return (
-              <div key={index} className="flex items-center gap-x-2">
+              <div
+                key={`${index}-error_list`}
+                className="flex items-center gap-x-2"
+              >
                 <MdError className="text-red-600" />
                 <p className="text-red-600 text-xs">{error}</p>
               </div>

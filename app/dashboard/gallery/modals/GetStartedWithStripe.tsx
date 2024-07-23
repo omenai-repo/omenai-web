@@ -57,7 +57,7 @@ export default function GetStartedWithStripe() {
   }
 
   return (
-    <AnimatePresence>
+    <AnimatePresence key={9}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -131,7 +131,7 @@ export default function GetStartedWithStripe() {
                       <option
                         className="p-3 font-light text-dark"
                         value={country.key}
-                        key={index}
+                        key={country.key}
                       >
                         {country.name}
                       </option>

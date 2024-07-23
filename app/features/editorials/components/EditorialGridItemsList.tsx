@@ -10,7 +10,7 @@ export default function EditorialGridItemsList({
       {editorials.map((editorial, index) => {
         return (
           <EditorialItem
-            key={index}
+            key={editorial.id}
             title={editorial.title}
             date={editorial.date}
             minutes={editorial.minutes}

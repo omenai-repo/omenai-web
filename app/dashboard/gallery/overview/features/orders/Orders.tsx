@@ -46,7 +46,7 @@ export default function Orders() {
             {limitedOrders.slice(0, 2).map((order: any, index: number) => {
               return (
                 <OverviewOrdersCard
-                  key={index}
+                  key={order.order_id}
                   url={order.artwork_data.url}
                   title={order.artwork_data.title}
                   artist={order.artwork_data.artist}
