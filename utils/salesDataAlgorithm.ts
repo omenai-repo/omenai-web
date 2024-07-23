@@ -1,3 +1,7 @@
+import { getCurrencySymbol } from "./getCurrencySymbol";
+import { formatPrice } from "./priceFormatter";
+
+const currency = getCurrencySymbol("USD");
 export const salesDataAlgorithm = (salesData: any) => {
   const groupedData = salesData.reduce(
     (accumulator: any, currentValue: any) => {
@@ -12,7 +16,8 @@ export const salesDataAlgorithm = (salesData: any) => {
     const revenue = groupedData[month] || 0;
     return {
       name: month,
-      Revenue: revenue,
+      value: formatPrice(revenue, currency),
+      revenue,
     };
   });
 
