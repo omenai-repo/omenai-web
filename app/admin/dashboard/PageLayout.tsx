@@ -51,7 +51,7 @@ export default function PageLayout() {
                   <NavigationItem
                     title={item.title}
                     icon={item.icon}
-                    key={item.title}
+                    key={index}
                     url={item.url}
                     mobile={false}
                   />
@@ -68,7 +68,7 @@ export default function PageLayout() {
                   <NavigationItem
                     title={item.title}
                     icon={item.icon}
-                    key={item.title}
+                    key={index}
                     url={item.url}
                     mobile={false}
                     onClick={() => item.title === "Sign out" && handleSignout()}

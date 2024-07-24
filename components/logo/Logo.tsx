@@ -29,6 +29,30 @@ export const GalleryLogo = ({ className, theme = "dark" }: LogoProps) => {
     </>
   );
 };
+export const AdminLogo = ({ className, theme = "dark" }: LogoProps) => {
+  return (
+    <>
+      <Link
+        href={"/"}
+        className="flex flex-col xxs:flex-row xxs:gap-1 items-end relative"
+      >
+        <Image
+          src={"/omenai_logo.png"}
+          alt="omenai logo"
+          width={130}
+          height={50}
+        />
+        <span
+          className={`font-normal text-xs relative xxs:top-1 ${
+            theme === "light" ? "text-white" : "text-black"
+          } ${className}`}
+        >
+          Admin
+        </span>
+      </Link>
+    </>
+  );
+};
 
 export const IndividualLogo = ({ className }: LogoProps) => {
   return (

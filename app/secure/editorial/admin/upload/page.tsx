@@ -149,7 +149,7 @@ export default function Admin() {
                     <label htmlFor="label_description" className=" text-dark">
                       Write your editorial content!
                     </label>
-                    {/* <Editor /> */}
+                    <Editor />
                   </div>
                 </Timeline.Content>
               </Timeline.Item>

@@ -21,7 +21,7 @@ export default function GalleryList() {
 
   if (isLoading) {
     return (
-      <div className="h-[85vh] w-full grid place-items-center">
+      <div className="h-[75vh] w-full grid place-items-center">
         <Load />
       </div>
     );
@@ -29,7 +29,7 @@ export default function GalleryList() {
 
   if (galleries.length === 0) {
     return (
-      <div className="h-[85vh] w-full grid place-items-center">
+      <div className="h-[65vh] w-full grid place-items-center">
         <NotFoundData />
       </div>
     );
