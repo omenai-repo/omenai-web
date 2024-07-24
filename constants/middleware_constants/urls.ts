@@ -6,4 +6,5 @@ export const URLS = {
   galleryDashboard: "/dashboard/gallery/overview",
   userDashboard: "/dashboard/user",
   root: "/",
+  adminLogin: "/auth/login/secure/admin",
 };

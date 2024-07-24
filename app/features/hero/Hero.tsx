@@ -1,28 +1,86 @@
 "use client";
-import SearchInput from "@/components/navbar/ui/SearchInput";
 
-export default function Hero() {
+import React, { useCallback, useEffect, useState } from "react";
+
+import useEmblaCarousel from "embla-carousel-react";
+import SingleSlide from "./components/SingleSlide";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+
+export default function Hero({ promotionals }: any) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    watchDrag: false,
+  });
+  const [scroll, setScroll] = useState<number>(1);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) {
+      emblaApi.scrollPrev();
+      setScroll((prev) => (prev === 2 ? 1 : 2));
+    }
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) {
+      emblaApi.scrollNext();
+      setScroll((prev) => (prev === 2 ? 1 : 2));
+    }
+  }, [emblaApi]);
+
   return (
-    <section className="w-full md:p-0">
-      <div className="w-full grid md:grid-cols-2 gap-8 items-center bg-[#fafafa]">
-        <div>
-          <img
-            className="w-full max-h-[500px] h-auto"
-            src="/images/hero.jpg"
-            alt="hero image"
+    <div className="embla mx-4" ref={emblaRef}>
+      <div className="embla__container">
+        {/* <div className="embla__slide">
+          <DefaultHeroSlides />
+        </div> */}
+        {promotionals.map((promotional: any) => {
+          return (
+            <div className="embla__slide">
+              <SingleSlide
+                headline={promotional.headline}
+                subheadline={promotional.subheadline}
+                cta={promotional.cta}
+                image={promotional.image}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="w-full flex gap-x-4 items-center my-3 px-6">
+        <div className="w-full h-[4px] bg-[#fafafa] flex justify-center space-x-2 items-center">
+          {/* User */}
+          <div
+            onClick={scrollPrev}
+            className={`h-[2px] w-full rounded-full duration-500 cursor-pointer ${
+              scroll === 1 ? "bg-dark" : "bg-transparent text-dark"
+            } `}
+          />
+          <div
+            onClick={scrollNext}
+            className={`h-[2px] w-full rounded-full duration-500 cursor-pointer ${
+              scroll === 2 ? "bg-dark" : "bg-transparent text-dark"
+            } `}
           />
         </div>
-        <div className="w-full flex flex-col gap-y-4 container pb-8 px-4 mx-auto justify-center lg:w-7/8 xl:w-3/4 sm:w-full">
-          <div className="w-full flex justify-center ">
-            <h1 className="text-md sm:text-lg lg:text-xl xl:text-2xl md:w-full my-5 md:my-0 font-normal text-center md:text-left leading-tight drop-shadow-2xl">
-              Shop your Favorite artworks and collections
-            </h1>
-          </div>
 
-          <SearchInput />
+        <div className="flex items-center justify-center w-fit space-x-2">
+          <button
+            onClick={scrollPrev}
+            className="h-[40px] w-[40px] rounded-full border border-[#e0e0e0] bg-transparent hover:border-dark duration-300 grid place-items-center"
+          >
+            <MdOutlineKeyboardArrowLeft />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="h-[40px] w-[40px] rounded-full border border-[#e0e0e0] bg-transparent hover:border-dark duration-300 grid place-items-center"
+          >
+            <MdOutlineKeyboardArrowRight />
+          </button>
         </div>
       </div>
-      <hr className="border-dark/10" />
-    </section>
+      {/* <p>{scroll}</p> */}
+    </div>
   );
 }

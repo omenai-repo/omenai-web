@@ -18,6 +18,12 @@ type IndividualSignupData = {
   password: string;
   confirmPassword: string;
 };
+type AdminSignupData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 type GallerySignupData = {
   name: string;
@@ -324,4 +330,20 @@ type AdminGalleryListItemTypes = {
   logo: string;
   gallery_id: string;
   status: "active" | "blocked";
+};
+
+type PromotionalSchemaTypes = {
+  headline: string;
+  subheadline: string;
+  image: string;
+  cta: string;
+};
+
+type AccountAdminSchemaTypes = {
+  name: string;
+  email: string;
+  password: string;
+  admin_id: string;
+  verified: boolean;
+  role: string;
 };

@@ -2,7 +2,8 @@ import { hashPassword } from "@/lib/hash/hashPassword";
 
 type data =
   | Omit<IndividualRegisterData, "confirmPassword">
-  | Omit<GallerySignupData, "confirmPassword">;
+  | Omit<GallerySignupData, "confirmPassword">
+  | Omit<AdminSignupData, "confirmPassword">;
 
 export async function parseRegisterData(data: data) {
   // Validate data before extracting password

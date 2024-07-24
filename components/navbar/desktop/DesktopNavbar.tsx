@@ -7,6 +7,7 @@ import MobileNavbar from "../mobile/MobileNavbar";
 import { actionStore } from "@/store/actions/ActionStore";
 import { useSession } from "next-auth/react";
 import LoggedInUser from "../ui/LoggedInUser";
+import SearchInput from "../ui/SearchInput";
 export default function DesktopNavbar() {
   const [updateOpenSideNav] = actionStore((state) => [state.updateOpenSideNav]);
   const session = useSession();
@@ -14,7 +15,7 @@ export default function DesktopNavbar() {
   return (
     <div className="sticky top-0 z-30 bg-white">
       <nav
-        className="px-4 py-5 lg:py-4 lg:px-8 text-base text-black font-normal "
+        className="px-4 pt-5 pb-2 text-base text-black font-normal "
         id="navbar"
       >
         <MobileNavbar />
@@ -42,12 +43,14 @@ export default function DesktopNavbar() {
               link={"/articles"}
             />
           </ul>
+
           {session.status === "authenticated" &&
             session.data.user.role === "user" && (
               <div className="md:flex hidden">
                 <LoggedInUser user={session.data?.user.name} />
               </div>
             )}
+
           {((session.data && session.data.user.role === "gallery") ||
             session.status === "unauthenticated") && (
             <div className="md:flex hidden">
@@ -66,7 +69,10 @@ export default function DesktopNavbar() {
           <NavbarInput />
 \        </div> */}
       </nav>
-      <hr className="border-dark/10 " />
+      <nav className="px-4 pt-2 pb-5 relative flex gap-x-2">
+        <SearchInput />
+      </nav>
+      <hr className="border-dark/10 mx-4" />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { AdminLoginProvider } from "@/services/login/AdminLogin";
 import { GalleryLoginProvider } from "@/services/login/GalleryLogin";
 import { IndividualLoginProvider } from "@/services/login/IndividualLogin";
 import { NextAuthOptions, getServerSession } from "next-auth";
@@ -5,7 +6,11 @@ import { NextAuthOptions, getServerSession } from "next-auth";
 export const nextAuthOptions: NextAuthOptions = {
   session: { strategy: "jwt", maxAge: 3600 },
   secret: process.env.NEXTAUTH_SECRET,
-  providers: [IndividualLoginProvider, GalleryLoginProvider],
+  providers: [
+    IndividualLoginProvider,
+    GalleryLoginProvider,
+    AdminLoginProvider,
+  ],
   pages: {
     signIn: "/",
   },
