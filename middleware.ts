@@ -15,6 +15,7 @@ export async function middleware(request: NextRequest) {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
+
   if (request.nextUrl.pathname.startsWith("/admin")) {
     if (!token || token.role !== "admin") {
       // Handle unauthenticated requests
@@ -29,6 +30,7 @@ export async function middleware(request: NextRequest) {
     const isPaymentPage = paymentPageRegex.test(request.url);
 
     if (token) {
+      console.log(token);
       switch (token.role) {
         case "user":
           if (isGalleryDashboard) {
@@ -39,6 +41,7 @@ export async function middleware(request: NextRequest) {
           if (isUserDashboard || isPurchasePage || isPaymentPage) {
             return redirect(URLS.userLogin, request);
           }
+          break;
         case "admin":
           if (
             isGalleryDashboard ||
@@ -48,6 +51,7 @@ export async function middleware(request: NextRequest) {
           ) {
             return redirect(URLS.userLogin, request);
           }
+          break;
       }
     } else {
       if (

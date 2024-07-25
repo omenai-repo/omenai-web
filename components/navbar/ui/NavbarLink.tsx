@@ -7,8 +7,14 @@ type NavbarLinkProps = {
   disabled: boolean;
   text: string;
   link: string;
+  onClick?: () => void;
 };
-export default function NavbarLink({ disabled, text, link }: NavbarLinkProps) {
+export default function NavbarLink({
+  disabled,
+  text,
+  link,
+  onClick,
+}: NavbarLinkProps) {
   const [updateOpenSideNav] = actionStore((state) => [state.updateOpenSideNav]);
 
   return (

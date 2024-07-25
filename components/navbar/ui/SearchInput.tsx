@@ -18,7 +18,7 @@ export default function SearchInput() {
     else router.push(`/search?searchTerm=${searchTerm}`);
   };
   return (
-    <div className="relative flex w-full justify-between gap-x-5 items-center px-3 py-2 rounded-sm border bg-transparent border-dark/30">
+    <div className="relative flex w-full justify-between gap-x-5 items-center p-1 rounded-sm border bg-transparent border-dark/30">
       <input
         type="text"
         className="w-full py-[0.3rem] bg-transparent px-3 border-none rounded-sm placeholder:text-xs placeholder:font-normal focus:border-none focus:ring-0 focus:border-0"

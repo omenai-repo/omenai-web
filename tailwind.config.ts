@@ -38,12 +38,18 @@ const config: Config = withMT({
         line: "#DEDEDE",
         authSideDark: "#1A1A1A",
       },
+      gridTemplateColumns: {
+        "3cols": "repeat(3, minmax(0, 1fr))",
+        // Add more custom grid templates as needed
+      },
       screens: {
         xs: "460px",
         xxm: "380px",
         xxs: "320px",
         xl: "1280px",
+        "2lg": "1024px",
         "2xl": "1440px",
+        "3xl": "1560px",
       },
       fontFamily: {
         sans: ["var(--font-nunito_sans)"],

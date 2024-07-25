@@ -33,7 +33,7 @@ export default function AllArtworks({
 
   if (loading || isLoading) {
     return (
-      <div className="h-[85vh] w-full grid place-items-center">
+      <div className="h-[75vh] w-full grid place-items-center">
         <Load />
       </div>
     );
@@ -47,23 +47,21 @@ export default function AllArtworks({
         </div>
       ) : (
         <div className="w-full mb-12">
-          <div className="grid grid-row-auto xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 gap-y-12 w-full items-end ">
-            {artworks.map((art: ArtworkResultTypes, index: number) => {
+          <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center gap-4 items-end">
+            {artworks.map((art: ArtworkResultTypes) => {
               return (
-                <div key={art.art_id}>
-                  <ArtworkCard
-                    key={art.art_id}
-                    image={art.url}
-                    name={art.title}
-                    artist={art.artist}
-                    art_id={art.art_id}
-                    pricing={art.pricing}
-                    impressions={art.impressions as number}
-                    likeIds={art.like_IDs as string[]}
-                    sessionId={sessionId}
-                    availability={art.availability}
-                  />
-                </div>
+                <ArtworkCard
+                  key={art.art_id}
+                  image={art.url}
+                  name={art.title}
+                  artist={art.artist}
+                  art_id={art.art_id}
+                  pricing={art.pricing}
+                  impressions={art.impressions as number}
+                  likeIds={art.like_IDs as string[]}
+                  sessionId={sessionId}
+                  availability={art.availability}
+                />
               );
             })}
           </div>

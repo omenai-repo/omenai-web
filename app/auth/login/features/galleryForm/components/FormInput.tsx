@@ -12,7 +12,6 @@ export default function FormInput() {
   const router = useRouter();
 
   //simple state to show password visibility
-  const [hidePassword, setHidePassword] = useState(true);
 
   const [redirect_uri, set_redirect_uri] = useLocalStorage(
     "redirect_uri_on_login",
@@ -49,8 +48,8 @@ export default function FormInput() {
             if (url === "" || url === null) {
               set_redirect_uri("");
               toast.success("Login successful...redirecting!");
-              router.refresh();
               router.replace("/dashboard/gallery/overview");
+              router.refresh();
             } else {
               toast.success("Login successful...Please proceed!");
               router.replace(url);
