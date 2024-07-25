@@ -21,39 +21,42 @@ export default function MobileNavbar() {
       } duration-300`}
     >
       <div className="flex justify-between items-center py-6 px-4">
-        <IndividualLogo />
+        <div onClick={() => updateOpenSideNav(false)}>
+          <IndividualLogo />
+        </div>
+
         <div className="lg:hidden block">
           <TfiClose onClick={() => updateOpenSideNav(false)} />
         </div>
       </div>
       <div className="my-4">
         <ul className="flex flex-col space-y-4 px-4">
-          <NavbarLink disabled={false} text={"Catalogue"} link={"/catalog"} />
+          <NavbarLink
+            onClick={() => updateOpenSideNav(false)}
+            disabled={false}
+            text={"Catalogue"}
+            link={"/catalog"}
+          />
 
           <NavbarLink
+            onClick={() => updateOpenSideNav(false)}
             disabled={false}
             text={"Pricing"}
             link={"/gallery/pricing"}
           />
           <NavbarLink
+            onClick={() => updateOpenSideNav(false)}
             disabled={false}
             text={"Omenai shop"}
             link={"https://omenai.shop"}
           />
-          <NavbarLink disabled={false} text={"Editorials"} link={"/articles"} />
+          <NavbarLink
+            onClick={() => updateOpenSideNav(false)}
+            disabled={false}
+            text={"Editorials"}
+            link={"/articles"}
+          />
         </ul>
-        <hr className="border-dark/20 my-4" />
-        {session.status === "authenticated" &&
-          session.data.user.role === "user" && (
-            <div className="block sm:hidden">
-              <LoggedInUser user={session.data!.user.name} />
-            </div>
-          )}
-        {session.status === "unauthenticated" && (
-          <div className=" block">
-            <NavbarActionButtons />
-          </div>
-        )}
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ const HomeLoader = () => {
         className="pl"
       >
         <circle
-          stroke-dashoffset="-376.4"
-          stroke-dasharray="377 377"
+          strokeDashoffset="-376.4"
+          strokeDasharray="377 377"
           strokeLinecap="round"
           transform="rotate(-90,64,64)"
           strokeWidth="8"
@@ -23,8 +23,8 @@ const HomeLoader = () => {
           className="pl__ring1"
         ></circle>
         <circle
-          stroke-dashoffset="-329.3"
-          stroke-dasharray="329.9 329.9"
+          strokeDashoffset="-329.3"
+          strokeDasharray="329.9 329.9"
           strokeLinecap="round"
           transform="rotate(-90,64,64)"
           strokeWidth="7"
@@ -36,8 +36,8 @@ const HomeLoader = () => {
           className="pl__ring2"
         ></circle>
         <circle
-          stroke-dashoffset="-288.6"
-          stroke-dasharray="289 289"
+          strokeDashoffset="-288.6"
+          strokeDasharray="289 289"
           strokeLinecap="round"
           transform="rotate(-90,64,64)"
           strokeWidth="6"
@@ -49,8 +49,8 @@ const HomeLoader = () => {
           className="pl__ring3"
         ></circle>
         <circle
-          stroke-dashoffset="-254"
-          stroke-dasharray="254.5 254.5"
+          strokeDashoffset="-254"
+          strokeDasharray="254.5 254.5"
           strokeLinecap="round"
           transform="rotate(-90,64,64)"
           strokeWidth="5"
@@ -62,8 +62,8 @@ const HomeLoader = () => {
           className="pl__ring4"
         ></circle>
         <circle
-          stroke-dashoffset="-225.8"
-          stroke-dasharray="226.2 226.2"
+          strokeDashoffset="-225.8"
+          strokeDasharray="226.2 226.2"
           strokeLinecap="round"
           transform="rotate(-90,64,64)"
           strokeWidth="4"
@@ -75,8 +75,8 @@ const HomeLoader = () => {
           className="pl__ring5"
         ></circle>
         <circle
-          stroke-dashoffset="-203.9"
-          stroke-dasharray="204.2 204.2"
+          strokeDashoffset="-203.9"
+          strokeDasharray="204.2 204.2"
           strokeLinecap="round"
           transform="rotate(-90,64,64)"
           strokeWidth="3"

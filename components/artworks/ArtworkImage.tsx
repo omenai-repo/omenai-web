@@ -37,8 +37,8 @@ export const ArtworkImage = ({
   const image_href = getImageFileView(url, 400);
 
   return (
-    <Link href={`/artwork/${title}`}>
-      <div className="relative flex items-end max-w-[350px] w-auto rounded-md mb-4">
+    <Link href={`/artwork/${title}`} className="w-[250px]">
+      <div className="relative flex items-end max-w-[250px] w-fit rounded-md mb-4">
         {pricing?.price && (
           <div className="absolute top-4 right-4 z-10 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
             <LikeComponent
@@ -52,10 +52,10 @@ export const ArtworkImage = ({
         <img
           src={image_href}
           alt="artwork image"
-          className="w-auto max-w-[350px] rounded-md"
+          className="w-fit max-w-[250px] rounded-sm"
         />
 
-        <div className="absolute bottom-0 flex justify-between items-center gap-y-[0.1rem] text-white px-2 py-4 z-10 bg-dark/30 w-full rounded-md cursor-pointer">
+        <div className="absolute bottom-0 flex justify-between items-center gap-y-[0.1rem] text-white px-2 py-4 z-10 bg-dark/30 w-full rounded-sm cursor-pointer">
           <div className="flex-col flex gap-y-[0.1rem]">
             <span className="font-medium text-[14px]">{title}</span>
             <span className="text-xs text-[#fafafa]">{author}</span>

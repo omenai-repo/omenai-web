@@ -1,4 +1,5 @@
 import LoggedInUserDropDown from "./LoggedInUserDropdown";
+import { BiUser } from "react-icons/bi";
 
 export default function LoggedInUser({ user }: { user: string | undefined }) {
   return (

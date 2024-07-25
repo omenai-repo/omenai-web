@@ -8,6 +8,8 @@ import { actionStore } from "@/store/actions/ActionStore";
 import { useSession } from "next-auth/react";
 import LoggedInUser from "../ui/LoggedInUser";
 import SearchInput from "../ui/SearchInput";
+import { SlMenu } from "react-icons/sl";
+
 export default function DesktopNavbar() {
   const [updateOpenSideNav] = actionStore((state) => [state.updateOpenSideNav]);
   const session = useSession();
@@ -21,9 +23,6 @@ export default function DesktopNavbar() {
         <MobileNavbar />
         <div className="w-full flex justify-between items-center">
           <IndividualLogo />
-          <div className="md:hidden block">
-            <CiMenuFries onClick={() => updateOpenSideNav(true)} />
-          </div>
 
           <ul className="md:flex space-x-6 hidden">
             <NavbarLink disabled={false} text={"Catalogue"} link={"/catalog"} />
@@ -44,19 +43,22 @@ export default function DesktopNavbar() {
             />
           </ul>
 
-          {session.status === "authenticated" &&
-            session.data.user.role === "user" && (
-              <div className="md:flex hidden">
+          <div className="flex items-center space-x-4">
+            {session.status === "authenticated" &&
+              session.data.user.role === "user" && (
                 <LoggedInUser user={session.data?.user.name} />
-              </div>
-            )}
-
-          {((session.data && session.data.user.role === "gallery") ||
-            session.status === "unauthenticated") && (
-            <div className="md:flex hidden">
-              <NavbarActionButtons />
+              )}
+            {((session.data &&
+              (session.data.user.role === "gallery" ||
+                session.data?.user.role === "admin")) ||
+              session.status === "unauthenticated") && <NavbarActionButtons />}
+            <div className="md:hidden block">
+              <SlMenu
+                className="text-sm"
+                onClick={() => updateOpenSideNav(true)}
+              />
             </div>
-          )}
+          </div>
         </div>
         {/* <div className="flex items-center justify-between my-2">
           <ul className="hidden lg:flex space-x-6 w-fit">

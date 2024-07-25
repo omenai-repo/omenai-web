@@ -2,6 +2,8 @@ import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { PromotionalModel } from "@/models/promotionals/PromotionalSchema";
 import { NextResponse } from "next/server";
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
