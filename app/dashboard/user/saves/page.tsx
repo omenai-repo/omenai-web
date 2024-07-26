@@ -30,13 +30,13 @@ export default function Saves() {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       {artworks.length === 0 ? (
         <div className="w-full h-[50vh] grid place-items-center">
           <p>Like an artwork to add it here.</p>
         </div>
       ) : (
-        <div className="flex flex-wrap items-end relative gap-x-2 overflow-x-scroll w-full">
+        <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center md:space-y-16 md:gap-x-4 gap-x-2 items-end">
           {artworks.map((art: ArtworkResultTypes, index: number) => {
             return (
               <div key={art.art_id}>

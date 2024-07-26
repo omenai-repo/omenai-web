@@ -40,8 +40,8 @@ export default function SearchResultDetails({
             </h1>
           </div>
           <hr className=" border-dark/10" />
-          <div className="p-4">
-            <div className="grid grid-row-auto xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 gap-y-12 w-full items-end ">
+          <div className="p-2">
+            <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center md:space-y-4 md:gap-x-4 gap-x-2 items-end">
               {data.map((artwork, index) => {
                 return (
                   <ArtworkCard
