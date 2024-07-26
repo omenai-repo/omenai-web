@@ -30,7 +30,6 @@ export async function middleware(request: NextRequest) {
     const isPaymentPage = paymentPageRegex.test(request.url);
 
     if (token) {
-      console.log(token);
       switch (token.role) {
         case "user":
           if (isGalleryDashboard) {

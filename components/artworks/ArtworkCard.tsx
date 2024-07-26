@@ -38,8 +38,8 @@ export default function ArtworkCard({
 }) {
   const image_href = getImageFileView(image, 200);
   return (
-    <div className="my-2 md:my-4 w-fit p-4 xxm:p-0">
-      <div className="flex flex-col w-[250px] xxm:w-fit xxm:min-w-[200px] md:min-w-[250px] max-w-[220px] md:max-w-full justify-end">
+    <div className="my-2 w-fit p-4 xxm:p-0 max-h-[500px]">
+      <div className="flex flex-col min-w-[180px] w-[180px] xxl:w-[200px] md:min-w-[250px] h-full md:w-[250px] justify-end">
         <div className="relative w-full">
           <Link href={`/artwork/${name}`} className="relative">
             <img
@@ -47,7 +47,7 @@ export default function ArtworkCard({
               alt={name + " image"}
               // height={400}
               // width={400}
-              className="min-w-[200px] w-[250px] md:min-w-[250px] max-h-[400px] xxm:w-fit h-auto object-top cursor-pointer"
+              className="min-w-[180px] w-[180px] xxl:w-[200px] md:min-w-[250px] max-h-[400px] md:w-[250px] h-auto aspect-auto object-contain object-center cursor-pointer"
             />
           </Link>
           {isDashboard ? null : (
@@ -62,7 +62,7 @@ export default function ArtworkCard({
           )}
         </div>
 
-        <div className=" bg-[#FAFAFA] border border-[#E0E0E0] p-3 w-full">
+        <div className=" bg-[#FAFAFA] border border-[#E0E0E0] px-3 y-2 w-full">
           <div className="flex flex-col space--y-1 my-2">
             <p className="font-semibold text-[14px] text-dark ">
               {name}

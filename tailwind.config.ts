@@ -44,6 +44,7 @@ const config: Config = withMT({
       },
       screens: {
         xs: "460px",
+        xxl: "400px",
         xxm: "380px",
         xxs: "320px",
         xl: "1280px",
