@@ -31,6 +31,8 @@ type GallerySignupData = {
   password: string;
   confirmPassword: string;
   location: string;
+  country: string;
+  state: string;
   admin: string;
   description: string;
 };
