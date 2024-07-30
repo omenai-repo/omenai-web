@@ -18,9 +18,24 @@ export default function FormInput() {
 
     setIsLoading();
 
-    const { name, email, password, admin, location, description } =
-      gallerySignupData;
-    const payload = { name, email, password, admin, location, description };
+    const {
+      name,
+      email,
+      password,
+      admin,
+      address,
+      description,
+      state,
+      country,
+    } = gallerySignupData;
+    const payload = {
+      name,
+      email,
+      password,
+      admin,
+      location: { address, state, country },
+      description,
+    };
 
     const response = await registerAccount(payload, "gallery");
 

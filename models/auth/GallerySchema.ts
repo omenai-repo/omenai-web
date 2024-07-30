@@ -11,9 +11,8 @@ const gallerySignupSchema = new Schema<GallerySchemaTypes>(
     },
 
     location: {
-      type: String,
+      type: Schema.Types.Mixed,
       required: true,
-      min: 3,
     },
     description: {
       type: String,

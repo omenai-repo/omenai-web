@@ -30,18 +30,29 @@ type GallerySignupData = {
   email: string;
   password: string;
   confirmPassword: string;
-  location: string;
+  address: string;
   country: string;
   state: string;
   admin: string;
   description: string;
 };
 
+type GalleryLocation = {
+  address: string;
+  state: string;
+  country: string;
+};
+
 type IndividualRegisterData = Omit<IndividualSignupData, "confirmPassword"> & {
   preferences: string[];
 };
 
-type GalleryRegisterData = Omit<GallerySignupData, "confirmPassword">;
+type GalleryRegisterData = Pick<
+  GallerySignupData,
+  "name" | "admin" | "email" | "password" | "description"
+> & {
+  location: GalleryLocation;
+};
 
 type RouteIdentifier = "individual" | "gallery";
 
@@ -56,7 +67,7 @@ type GallerySchemaTypes = {
   password: string;
   gallery_id: string;
   admin: string;
-  location: string;
+  location: GalleryLocation;
   description: string;
   gallery_verified: boolean;
   verified: boolean;

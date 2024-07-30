@@ -1,4 +1,6 @@
-export const inputProperties: Omit<InputProps, "prev" | "onClickPrev">[] = [
+import { country_codes } from "@/json/country_alpha_2_codes";
+
+export const inputProperties: any = [
   {
     label: "What's the gallery name?",
     type: "text",
@@ -16,18 +18,20 @@ export const inputProperties: Omit<InputProps, "prev" | "onClickPrev">[] = [
     type: "select",
     placeholder: "Select option",
     labelText: "country",
+    items: country_codes,
   },
   {
     label: "State of operation",
     type: "select",
     placeholder: "Select option",
-    labelText: "country",
+    labelText: "state",
+    items: [],
   },
   {
     label: "Business address",
     type: "text",
     placeholder: "e.g 79, example street, London, England",
-    labelText: "location",
+    labelText: "address",
   },
 
   {
