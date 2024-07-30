@@ -6,7 +6,25 @@ export const inputProperties: Omit<InputProps, "prev" | "onClickPrev">[] = [
     labelText: "name",
   },
   {
-    label: "What's the gallery location?",
+    label: "What email can we reach you on?",
+    type: "email",
+    placeholder: "Louvre museum",
+    labelText: "email",
+  },
+  {
+    label: "Country of operation",
+    type: "select",
+    placeholder: "Select option",
+    labelText: "country",
+  },
+  {
+    label: "State of operation",
+    type: "select",
+    placeholder: "Select option",
+    labelText: "country",
+  },
+  {
+    label: "Business address",
     type: "text",
     placeholder: "e.g 79, example street, London, England",
     labelText: "location",
@@ -24,12 +42,7 @@ export const inputProperties: Omit<InputProps, "prev" | "onClickPrev">[] = [
     placeholder: "Jack bauer",
     labelText: "admin",
   },
-  {
-    label: "What email can we reach you on?",
-    type: "email",
-    placeholder: "Louvre museum",
-    labelText: "email",
-  },
+
   {
     label: "Setup a password to secure your account",
     type: "password",
