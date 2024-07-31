@@ -4,6 +4,7 @@ import ArtworkCard from "../../../components/artworks/ArtworkCard";
 import { fetchAllArtworks } from "@/services/artworks/fetchAllArtworks";
 import { useQuery } from "@tanstack/react-query";
 import NotFoundData from "@/components/notFound/NotFoundData";
+import Link from "next/link";
 
 export default function LatestArtworks({
   sessionId,
@@ -13,8 +14,9 @@ export default function LatestArtworks({
   const { data: artworks, isLoading } = useQuery({
     queryKey: ["latest"],
     queryFn: async () => {
-      const data = await fetchAllArtworks();
-      return data.data;
+      const data = await fetchAllArtworks(1);
+      if (!data?.isOk) throw new Error("Something went wrong");
+      else return data.data;
     },
   });
 
@@ -34,7 +36,7 @@ export default function LatestArtworks({
       )}
       {artworks.length > 0 && (
         <div className="py-4 md:p-4 relative">
-          <div className="flex items-end relative gap-x-2 overflow-x-scroll w-full">
+          <div className="flex items-end relative space-x-4 overflow-x-scroll w-full">
             {artworks.map((artwork: any, index: number) => {
               return (
                 <ArtworkCard
@@ -51,6 +53,15 @@ export default function LatestArtworks({
                 />
               );
             })}
+            {artworks.length >= 20 && (
+              <div className="h-[400px] w-[250px] grid place-items-center mx-10">
+                <Link href={""}>
+                  <button className="whitespace-nowrap border border-dark rounded-full bg-transparent text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585]  w-full text-dark disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark hover:text-white duration-300">
+                    View all recent artworks
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}

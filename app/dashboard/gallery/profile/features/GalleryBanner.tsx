@@ -31,7 +31,7 @@ export const UserBanner = () => {
               {session.data?.user.name}
             </p>
             <p className="text-dark text-xs font-light">
-              {session.data?.user.location}
+              {session.data?.user.location.address}
             </p>
           </div>
         </div>

@@ -63,7 +63,7 @@ export default function Input({
         </label>
         <input
           type={type}
-          className=" border-0 focus:ring-0 border-b-[1px] px-0 border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-2"
+          className=" focus:ring-1 focus:border-0 border px-2 ring-0 text-[14px] text-dark border-[#E0E0E0] w-full py-2 focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-[#858585]"
           placeholder={`e.g ${placeholder}`}
           disabled={disabled}
           onChange={onChange}

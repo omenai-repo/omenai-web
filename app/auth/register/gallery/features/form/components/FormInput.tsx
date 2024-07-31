@@ -18,22 +18,14 @@ export default function FormInput() {
 
     setIsLoading();
 
-    const {
-      name,
-      email,
-      password,
-      admin,
-      address,
-      description,
-      state,
-      country,
-    } = gallerySignupData;
+    const { name, email, password, admin, address, description, country } =
+      gallerySignupData;
     const payload = {
       name,
       email,
       password,
       admin,
-      location: { address, state, country },
+      location: { address, country },
       description,
     };
 

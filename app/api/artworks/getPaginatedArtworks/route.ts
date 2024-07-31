@@ -18,12 +18,12 @@ export async function POST(request: Request) {
 
     // Apply filters if present
     if (Object.keys(data.filters).length === 0) {
-      artworks = await Artworkuploads.find().skip(skip).limit(10);
+      artworks = await Artworkuploads.find().skip(skip).limit(20);
       total = await Artworkuploads.countDocuments();
     } else {
       const builtFilters = buildMongoQuery(data.filters);
 
-      artworks = await Artworkuploads.find(builtFilters).skip(skip).limit(10);
+      artworks = await Artworkuploads.find(builtFilters).skip(skip).limit(20);
       total = await Artworkuploads.countDocuments(builtFilters);
     }
 

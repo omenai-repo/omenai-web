@@ -32,14 +32,12 @@ type GallerySignupData = {
   confirmPassword: string;
   address: string;
   country: string;
-  state: string;
   admin: string;
   description: string;
 };
 
 type GalleryLocation = {
   address: string;
-  state: string;
   country: string;
 };
 
@@ -335,7 +333,7 @@ type CardInputTypes = {
 
 type AdminGalleryListItemTypes = {
   name: string;
-  location: string;
+  location: GalleryLocation;
   description: string;
   _id: string;
   email: string;

@@ -10,30 +10,31 @@ export async function POST(request: Request) {
   try {
     await connectMongoDB();
 
-    const { page } = await request.json();
+    const { page, preferences } = await request.json();
 
     const skip = (page - 1) * 10;
 
-    const allTrendingArtworks = await Artworkuploads.find({
-      impressions: { $gt: 0 },
+    const userCuratedArtworks = await Artworkuploads.find({
+      medium: { $in: preferences },
     })
       .skip(skip)
       .limit(20)
       .sort({
-        impressions: -1,
+        createdAt: -1,
       });
 
-    if (!allTrendingArtworks) throw new ServerError("An error was encountered");
+    if (!userCuratedArtworks) throw new ServerError("An error was encountered");
 
     return NextResponse.json(
       {
         message: "Successful",
-        data: allTrendingArtworks,
+        data: userCuratedArtworks,
       },
       { status: 200 }
     );
   } catch (error) {
     const error_response = handleErrorEdgeCases(error);
+    console.log(error);
 
     return NextResponse.json(
       { message: error_response?.message },

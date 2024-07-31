@@ -1,7 +1,7 @@
 export const checkLabel = (label: string) => {
   if (
     label === "admin" ||
-    label === "location" ||
+    label === "address" ||
     label === "description" ||
     label === "code"
   ) {

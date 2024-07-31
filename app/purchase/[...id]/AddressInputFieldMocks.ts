@@ -1,4 +1,4 @@
-import { country_and_states } from "./countryAndStateList";
+import { country_and_states } from "@/json/countryAndStateList";
 
 const countryList = country_and_states.map((country) => {
   return country.country;

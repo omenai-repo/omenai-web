@@ -21,7 +21,7 @@ export default function GalleryDetailPopupModal() {
         <div className="flex flex-col gap-y-2 text-xs">
           <p>Name: {singleGalleryListItemData.name}</p>
           <p>Email: {singleGalleryListItemData.email}</p>
-          <p>Location: {singleGalleryListItemData.location}</p>
+          <p>Location: {singleGalleryListItemData.location.address}</p>
           <p>Admin: {singleGalleryListItemData.admin}</p>
           <p>Description: {singleGalleryListItemData.description}</p>
         </div>
