@@ -37,9 +37,9 @@ export const navMockData: NavMockData = {
       url: "/admin/dashboard/upload_home_advert",
     },
     {
-      title: "Manage editors",
+      title: "Manage promo contents",
       icon: album,
-      url: "/admin/dashboard/manage_editors",
+      url: "/admin/dashboard/manage_promo_contents",
     },
   ],
   account: [

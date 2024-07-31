@@ -4,8 +4,9 @@ import NextTopLoader from "nextjs-toploader";
 import { useWindowSize } from "usehooks-ts";
 import NoMobileView from "./NoMobileView";
 import PageLayout from "./PageLayout";
-import Appbar from "./Appbar";
 import { adminNavigationActions } from "@/store/admin/AdminNavigationStore";
+import Appbar from "./Appbar";
+import { UpdatePromotionalModal } from "./modal/UpdatePromotionalModal";
 export default function GalleryDashboardLayout({
   children,
 }: {
@@ -33,6 +34,7 @@ export default function GalleryDashboardLayout({
             >
               <Appbar />
               <div className="h-auto rounded-lg relative my-5 px-5">
+                <UpdatePromotionalModal />
                 {children}
               </div>
             </div>

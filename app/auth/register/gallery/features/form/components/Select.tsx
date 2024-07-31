@@ -47,7 +47,7 @@ export default function SelectInput({
   };
 
   const handleClick = () => {
-    if ((gallerySignupData as Record<string, string>)[labelText] === "")
+    if ((gallerySignupData as Record<string, any>)[labelText] === "")
       setErrorList(["Please select an option from the dropdown"]);
     else {
       setErrorList([]);
@@ -55,10 +55,6 @@ export default function SelectInput({
     }
   };
 
-  const getStates = () => {
-    if (labelText === 'state') {
-    }
-  }
   return (
     <AnimatePresence key={`${currentGallerySignupFormIndex}-gallery`}>
       <motion.div
@@ -73,7 +69,7 @@ export default function SelectInput({
             {label}
           </label>
           <select
-            value={(gallerySignupData as Record<string, string>)[labelText]}
+            value={(gallerySignupData as Record<string, any>)[labelText]}
             onChange={handleChange}
             required={required}
             className="border px-2 ring-0 text-[14px] text-dark border-[#E0E0E0] w-full py-2 focus:border-none focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-[#858585] "

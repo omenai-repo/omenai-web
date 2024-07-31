@@ -37,12 +37,10 @@ export default function Home() {
     );
   }
 
-  const promotional_Array: PromotionalSchemaTypes = promotionals as any;
-
   return (
     <main>
       <DesktopNavbar />
-      <Hero promotionals={promotional_Array} />
+      <Hero promotionals={promotionals.slice(0, 2)} />
       <ArtworkSlides />
       <Collections />
       <Editorials />

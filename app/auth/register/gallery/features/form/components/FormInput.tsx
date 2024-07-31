@@ -5,6 +5,8 @@ import { useGalleryAuthStore } from "@/store/auth/register/GalleryAuthStore";
 import { registerAccount } from "@/services/register/registerAccount";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import uploadGalleryLogoContent from "../../uploadGalleryLogo";
+import { gallery_logo_storage } from "@/appwrite";
 
 export default function FormInput() {
   const [gallerySignupData, setIsLoading, clearData] = useGalleryAuthStore(
@@ -18,27 +20,51 @@ export default function FormInput() {
 
     setIsLoading();
 
-    const { name, email, password, admin, address, description, country } =
-      gallerySignupData;
-    const payload = {
+    const {
       name,
       email,
       password,
       admin,
-      location: { address, country },
+      address,
       description,
-    };
+      country,
+      logo,
+    } = gallerySignupData;
 
-    const response = await registerAccount(payload, "gallery");
+    if (logo === null) return;
 
-    if (response.isOk) {
-      toast.success(response.body.message + " redirecting...");
-      router.push(`/verify/gallery/${response.body.data}`);
-      clearData();
-    } else {
-      toast.error(response.body.message);
+    const fileUploaded = await uploadGalleryLogoContent(logo);
+
+    if (fileUploaded) {
+      let file: { bucketId: string; fileId: string } = {
+        bucketId: fileUploaded.bucketId,
+        fileId: fileUploaded.$id,
+      };
+      const payload = {
+        name,
+        email,
+        password,
+        admin,
+        location: { address, country },
+        description,
+        logo: file.fileId,
+      };
+
+      const response = await registerAccount(payload, "gallery");
+
+      if (response.isOk) {
+        toast.success(response.body.message + " redirecting...");
+        router.push(`/verify/gallery/${response.body.data}`);
+        clearData();
+      } else {
+        await gallery_logo_storage.deleteFile(
+          process.env.NEXT_PUBLIC_APPWRITE_GALLERY_LOGO_BUCKET_ID!,
+          file.fileId
+        );
+        toast.error(response.body.message);
+      }
+      setIsLoading();
     }
-    setIsLoading();
   };
   return (
     <div className="container">

@@ -53,4 +53,10 @@ export const inputProperties: any = [
     placeholder: "********",
     labelText: "confirmPassword",
   },
+  {
+    label: "Upload Gallery logo",
+    type: "logo",
+    placeholder: "********",
+    labelText: "Logo",
+  },
 ];

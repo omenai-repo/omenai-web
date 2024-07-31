@@ -55,7 +55,7 @@ const gallerySignupSchema = new Schema<GallerySchemaTypes>(
     },
     logo: {
       type: String,
-      default: "",
+      required: true,
     },
     subscription_active: {
       type: Boolean,
