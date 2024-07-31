@@ -6,6 +6,7 @@ import { Nunito_Sans } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Providers from "@/react-query-provider/Provider";
 import LoginModal from "@/components/modal/LoginModal";
@@ -42,6 +43,7 @@ export default async function RootLayout({
               <RecoveryModal />
               <OrderReceivedModal />
               {children}
+              <SpeedInsights />
             </Providers>
           </ThemeProvider>
         </AuthProvider>
