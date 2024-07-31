@@ -50,7 +50,7 @@ export default function LogoPickerModal() {
 
           const { isOk, body } = await updateLogo({
             id: session.data!.user.id,
-            url: fileData.href,
+            url: file.bucketId,
           });
 
           if (!isOk) toast.error(body.message);

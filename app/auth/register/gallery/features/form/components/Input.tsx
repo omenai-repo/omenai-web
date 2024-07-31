@@ -81,7 +81,7 @@ export default function Input({
           onChange={onChange}
           onKeyDown={handleKeyPress}
           name={labelText}
-          value={(gallerySignupData as Record<string, string>)[labelText]}
+          value={(gallerySignupData as Record<string, any>)[labelText]}
         />
         {errorList.length > 0 &&
           errorList.map((error, index) => {
@@ -110,7 +110,7 @@ export default function Input({
             type={"button"}
             onClick={() =>
               handleClick(
-                (gallerySignupData as Record<string, string>)[labelText],
+                (gallerySignupData as Record<string, any>)[labelText],
                 labelText
               )
             }

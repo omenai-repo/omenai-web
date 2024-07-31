@@ -6,6 +6,7 @@ import { useGalleryAuthStore } from "@/store/auth/register/GalleryAuthStore";
 import { ChangeEvent } from "react";
 import FormConfirm from "../../formConfirm/FormConfirm";
 import SelectInput from "./Select";
+import ImageUpload from "./ImageUpload";
 
 export default function FormController() {
   const [currentGallerySignupFormIndex, updateGallerySignupData] =
@@ -32,6 +33,8 @@ export default function FormController() {
             required={false}
             labelText={form.labelText}
           />
+        ) : form.type === "logo" ? (
+          <ImageUpload />
         ) : (
           <Input
             label={form.label}

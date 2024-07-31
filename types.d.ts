@@ -34,6 +34,7 @@ type GallerySignupData = {
   country: string;
   admin: string;
   description: string;
+  logo: File | null;
 };
 
 type GalleryLocation = {
@@ -50,6 +51,7 @@ type GalleryRegisterData = Pick<
   "name" | "admin" | "email" | "password" | "description"
 > & {
   location: GalleryLocation;
+  logo: string;
 };
 
 type RouteIdentifier = "individual" | "gallery";
@@ -348,6 +350,11 @@ type PromotionalSchemaTypes = {
   subheadline: string;
   image: string;
   cta: string;
+};
+type PromotionalDataUpdateTypes = {
+  headline?: string;
+  subheadline?: string;
+  cta?: string;
 };
 
 type AccountAdminSchemaTypes = {

@@ -47,7 +47,7 @@ export default function AllArtworks({
         </div>
       ) : (
         <div className="w-full mb-12">
-          <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center md:space-y-4 md:gap-x-4 gap-x-2 items-end">
+          <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center md:space-y-4 space-x-2 items-end">
             {artworks.map((art: ArtworkResultTypes) => {
               return (
                 <ArtworkCard

@@ -48,23 +48,23 @@ export default function Pagination() {
   }
   return (
     <div className="w-full grid place-items-center mt-12">
-      <p className="text-xs font-normal mb-4">
+      <p className="text-[14px] font-medium my-5">
         Showing page {paginationCount} of {pageCount}
       </p>
-      <div className="flex gap-x-8">
+      <div className="flex gap-x-4 w-full">
         <button
           disabled={paginationCount === 1}
           onClick={() => handlePaginationArtworkFetch("dec")}
-          className="bg-dark text-xs rounded-sm text-white h-[40px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
+          className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
-          Previous
+          Previous page
         </button>
         <button
           disabled={paginationCount === pageCount}
           onClick={() => handlePaginationArtworkFetch("inc")}
-          className="bg-dark text-xs rounded-sm text-white h-[40px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
+          className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
-          Next
+          Next page
         </button>
       </div>
     </div>

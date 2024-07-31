@@ -1,16 +1,16 @@
 "use client";
-import Image from "next/image";
 import { FormCard } from "./components/FormCard";
 import LogoPickerModal from "./components/LogoPickerModal";
 import { galleryLogoUpdate } from "@/store/gallery/gallery_logo_upload/GalleryLogoUpload";
 import { useSession } from "next-auth/react";
+import { getGalleryLogoFileView } from "@/lib/storage/getGalleryLogoFileView";
 export default function GalleryInfo() {
   const [updateModal] = galleryLogoUpdate((state) => [state.updateModal]);
   const session = useSession();
   let logo;
 
   if (session.data!.user.logo === "") logo = "/icons/profile.png";
-  else logo = session.data!.user.logo;
+  else logo = getGalleryLogoFileView(session.data!.user.logo, 80);
   return (
     <div>
       <LogoPickerModal />

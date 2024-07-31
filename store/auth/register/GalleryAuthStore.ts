@@ -5,7 +5,7 @@ type GalleryAuthStoreTypes = {
   incrementCurrentGallerySignupFormIndex: () => void;
   decrementCurrentGallerySignupFormIndex: () => void;
   gallerySignupData: GallerySignupData;
-  updateGallerySignupData: (label: string, value: string) => void;
+  updateGallerySignupData: (label: string, value: string | File | null) => void;
   isLoading: boolean;
   setIsloading: () => void;
   clearData: () => void;
@@ -43,13 +43,14 @@ export const useGalleryAuthStore = create<GalleryAuthStoreTypes>(
       admin: "",
       description: "",
       country: "",
+      logo: null,
     },
 
     // UPDATE SIGNUP FORM DATA ON INPUT CHANGE
     // please note: The form fields are mounted on the DOM separately
     // hence why we have an update function to update the object fields individually.
-    updateGallerySignupData: (label: string, value: string) => {
-      const data: Record<string, string> = get().gallerySignupData;
+    updateGallerySignupData: (label: string, value: string | File | null) => {
+      const data: Record<string, any> = get().gallerySignupData;
 
       if (label in data) {
         const updatedData = { ...data, [label]: value };
@@ -74,6 +75,7 @@ export const useGalleryAuthStore = create<GalleryAuthStoreTypes>(
           admin: "",
           description: "",
           country: "",
+          logo: null,
         },
         currentGallerySignupFormIndex: 0,
       });
