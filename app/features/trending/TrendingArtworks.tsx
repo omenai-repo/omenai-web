@@ -4,6 +4,7 @@ import TrendingArtworkCard from "./TrendingArtCard";
 import { fetchAllArtworkImpressions } from "@/services/artworks/fetchArtworkImpressions";
 import Load from "@/components/loader/Load";
 import NotFoundData from "@/components/notFound/NotFoundData";
+import Link from "next/link";
 
 export default function TrendingArtworks({
   sessionId,
@@ -13,7 +14,9 @@ export default function TrendingArtworks({
   const { data: artworks, isLoading } = useQuery({
     queryKey: ["trending"],
     queryFn: async () => {
-      const data = await fetchAllArtworkImpressions();
+      const data = await fetchAllArtworkImpressions(1);
+
+      if (!data?.isOk) throw new Error("Something went wrong");
       return data.data;
     },
   });
@@ -34,7 +37,7 @@ export default function TrendingArtworks({
       )}
       {artworks.length > 0 && (
         <div className="py-4 md:p-4 relative">
-          <div className=" flex relative gap-x-4 overflow-x-scroll w-full">
+          <div className=" flex relative overflow-x-scroll w-full space-x-4">
             {artworks.map((artwork: any, index: number) => {
               if (artwork.impressions === 0) return null;
               return (
@@ -53,6 +56,15 @@ export default function TrendingArtworks({
                 />
               );
             })}
+            {artworks.length >= 20 && (
+              <div className="h-[400px] w-[250px] grid place-items-center mx-10">
+                <Link href={""}>
+                  <button className="whitespace-nowrap border border-dark rounded-full bg-transparent text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585]  w-full text-dark disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark hover:text-white duration-300">
+                    View all trending artworks
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}

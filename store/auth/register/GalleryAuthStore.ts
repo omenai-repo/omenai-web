@@ -43,7 +43,6 @@ export const useGalleryAuthStore = create<GalleryAuthStoreTypes>(
       admin: "",
       description: "",
       country: "",
-      state: "",
     },
 
     // UPDATE SIGNUP FORM DATA ON INPUT CHANGE
@@ -75,7 +74,6 @@ export const useGalleryAuthStore = create<GalleryAuthStoreTypes>(
           admin: "",
           description: "",
           country: "",
-          state: "",
         },
         currentGallerySignupFormIndex: 0,
       });

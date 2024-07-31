@@ -20,13 +20,7 @@ export const inputProperties: any = [
     labelText: "country",
     items: country_codes,
   },
-  {
-    label: "State of operation",
-    type: "select",
-    placeholder: "Select option",
-    labelText: "state",
-    items: [],
-  },
+
   {
     label: "Business address",
     type: "text",

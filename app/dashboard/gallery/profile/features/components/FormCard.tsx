@@ -67,8 +67,8 @@ export const FormCard = () => {
 
       <div className="grid grid-cols-2 items-center">
         <InputCard
-          label="Location"
-          defaultValue={user?.location}
+          label="location"
+          defaultValue={user?.location.address}
           labelText="location"
         />
         <InputCard label="Admin" defaultValue={user?.admin} labelText="admin" />

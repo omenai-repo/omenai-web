@@ -1,4 +1,4 @@
-import { country_and_states } from "@/app/purchase/[...id]/countryAndStateList";
+import { country_and_states } from "@/json/countryAndStateList";
 import { create } from "zustand";
 
 type ActionStoreTypes = {

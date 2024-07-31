@@ -1,18 +1,16 @@
 import { getApiUrl } from "@/config";
 
-export async function fetchAllArtworkImpressions() {
+export async function fetchAllArtworkImpressions(page: number) {
   try {
     const url = getApiUrl();
-    const response = await fetch(`${url}/api/artworks/getTrendingArtworks`, {
-      method: "GET",
-    }).then(async (res) => {
-      if (!res.ok) return undefined;
-      const result = await res.json();
-
-      return result;
+    const res = await fetch(`${url}/api/artworks/getTrendingArtworks`, {
+      method: "POST",
+      body: JSON.stringify({ page }),
     });
 
-    return response;
+    const result = await res.json();
+
+    return { isOk: res.ok, message: result.message, data: result.data };
   } catch (error: any) {
     console.log(error);
   }

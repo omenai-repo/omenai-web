@@ -5,6 +5,7 @@ import NotFoundData from "@/components/notFound/NotFoundData";
 import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function CuratedArtworksLayout({
   sessionId,
@@ -15,9 +16,9 @@ export default function CuratedArtworksLayout({
   const { data: userCuratedArtworks, isLoading } = useQuery({
     queryKey: ["curated"],
     queryFn: async () => {
-      const data = await fetchCuratedArtworks(session);
+      const data = await fetchCuratedArtworks(session, 1);
       if (data?.isOk) return data.data;
-      else return [];
+      else throw new Error("Something went wrong");
     },
   });
 
@@ -36,8 +37,8 @@ export default function CuratedArtworksLayout({
         </div>
       )}
       {userCuratedArtworks !== undefined && userCuratedArtworks.length > 0 && (
-        <div className="py-4 md:p-4 relative mt-5">
-          <div className="flex items-end relative overflow-x-scroll w-full space-x-2">
+        <div className="py-4 md:p-4 relative">
+          <div className="flex items-end relative overflow-x-scroll w-full space-x-4">
             {userCuratedArtworks.map((artwork: any, index: number) => {
               return (
                 <ArtworkCard
@@ -54,6 +55,15 @@ export default function CuratedArtworksLayout({
                 />
               );
             })}
+            {userCuratedArtworks.length >= 20 && (
+              <div className="h-[400px] w-[250px] grid place-items-center mx-16">
+                <Link href={""}>
+                  <button className="whitespace-nowrap border border-dark rounded-full bg-transparent text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585]  w-full text-dark disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark hover:text-white duration-300">
+                    View more
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -46,7 +46,7 @@ export const adminModals = create<AdminModalsStore>((set, get) => ({
   },
   singleGalleryListItemData: {
     name: "",
-    location: "",
+    location: { country: "", address: "" },
     description: "",
     _id: "",
     email: "",
