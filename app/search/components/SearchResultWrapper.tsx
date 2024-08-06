@@ -26,17 +26,19 @@ export default function SearchResultWrapper() {
         | "availability"
       > & { _id: string })[]
     | []
-    | "pending"
-  >("pending");
+  >([]);
+
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   useEffect(() => {
-    setSearchResults("pending");
+    setIsPending(true);
     const getResults = async () => {
       const data = await fetchSearchKeyWordResults(searchTerm as string);
       if (data !== undefined) setSearchResults(data.data);
 
       if (data === undefined)
         toast.error("An error has occured, please try again");
+      setIsPending(false);
     };
 
     getResults();
@@ -58,6 +60,7 @@ export default function SearchResultWrapper() {
                 ? session?.data.user.user_id
                 : undefined
             }
+            isPending={isPending}
           />
         )}
       </div>

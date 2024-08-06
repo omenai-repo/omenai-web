@@ -14,16 +14,16 @@ export async function POST(request: Request) {
 
     const data = await request.json();
 
-    const skip = (data.page - 1) * 10;
+    const skip = (data.page - 1) * 30;
 
     // Apply filters if present
     if (Object.keys(data.filters).length === 0) {
-      artworks = await Artworkuploads.find().skip(skip).limit(20);
+      artworks = await Artworkuploads.find().skip(skip).limit(30);
       total = await Artworkuploads.countDocuments();
     } else {
       const builtFilters = buildMongoQuery(data.filters);
 
-      artworks = await Artworkuploads.find(builtFilters).skip(skip).limit(20);
+      artworks = await Artworkuploads.find(builtFilters).skip(skip).limit(30);
       total = await Artworkuploads.countDocuments(builtFilters);
     }
 
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         message: "Artworks fetched successfully",
         data: artworks,
         page: data.page,
-        pageCount: Math.ceil(total / 10),
+        pageCount: Math.ceil(total / 30),
       },
       { status: 200 }
     );

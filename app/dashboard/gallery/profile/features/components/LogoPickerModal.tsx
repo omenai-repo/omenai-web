@@ -130,7 +130,7 @@ export default function LogoPickerModal() {
         <div className=" w-full px-5 py-8 text-xs">
           <div className="w-full items-center gap-x-2 flex">
             <button
-              className="w-full disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+              className="w-full disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
               onClick={() => updateModal(false)}
             >
               Cancel
@@ -138,7 +138,7 @@ export default function LogoPickerModal() {
             <button
               onClick={handleLogoUpdate}
               disabled={loading || !logo}
-              className="w-full disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+              className="w-full disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
             >
               {loading ? <LoadSmall /> : "Upload logo"}
             </button>

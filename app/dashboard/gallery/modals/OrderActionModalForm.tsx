@@ -94,7 +94,7 @@ export default function OrderActionModalForm() {
         <div className="my-4 flex items-center justify-center gap-x-2 w-full text-[13px]">
           <button
             onClick={handleDeclineOrderRequest}
-            className="border border-[#E0E0E0] h-[40px] px-4 w-full"
+            className="border border-[#E0E0E0] h-[35px] px-4 w-full"
           >
             Decline Order
           </button>
@@ -104,7 +104,7 @@ export default function OrderActionModalForm() {
           >
             <button
               onClick={routeToQuote}
-              className="bg-dark h-[40px] px-4 w-full text-white"
+              className="bg-dark h-[35px] px-4 w-full text-white"
             >
               Provide shipping quote
             </button>

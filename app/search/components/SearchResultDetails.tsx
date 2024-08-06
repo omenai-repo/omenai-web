@@ -1,5 +1,10 @@
+"use client";
+import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
 import ArtworkCard from "@/components/artworks/ArtworkCard";
 import Load from "@/components/loader/Load";
+import NotFoundData from "@/components/notFound/NotFoundData";
+import { catalogChunk } from "@/utils/createCatalogChunks";
+import { useWindowSize } from "usehooks-ts";
 
 type SearchResultDetailsProps = {
   data:
@@ -15,19 +20,26 @@ type SearchResultDetailsProps = {
         | "medium"
         | "rarity"
         | "availability"
-      > & { _id: string })[]
-    | "pending";
+      > & { _id: string })[];
   searchTerm: string;
   sessionId: string | undefined;
+  isPending: boolean;
 };
 export default function SearchResultDetails({
   data,
   searchTerm,
   sessionId,
+  isPending,
 }: SearchResultDetailsProps) {
+  const { width } = useWindowSize();
+
+  const arts = catalogChunk(
+    data,
+    width < 400 ? 1 : width < 768 ? 2 : width < 1280 ? 3 : 4
+  );
   return (
     <div>
-      {data === "pending" ? (
+      {isPending ? (
         <div className="h-[80vh] w-full grid place-items-center">
           <Load />
         </div>
@@ -38,24 +50,36 @@ export default function SearchResultDetails({
               {data.length} result(s) found for term{" "}
               <span className="text-blue-600">&apos;{searchTerm}&apos;</span>
             </h1>
+            {!data ||
+              (data.length === 0 && (
+                <div className="w-full h-full grid place-items-center">
+                  <NotFoundData />
+                </div>
+              ))}
           </div>
           <hr className=" border-dark/10" />
-          <div className="p-2">
-            <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center md:space-y-4 md:gap-x-4 gap-x-2 items-end">
-              {data.map((artwork, index) => {
+          <div className="w-full mb-5 p-5">
+            <div className="flex flex-wrap gap-x-4 justify-center">
+              {arts.map((artworks: any[], index) => {
                 return (
-                  <ArtworkCard
-                    key={artwork.art_id}
-                    image={artwork.url}
-                    name={artwork.title}
-                    artist={artwork.artist}
-                    art_id={artwork.art_id}
-                    pricing={artwork.pricing}
-                    impressions={artwork.impressions as number}
-                    likeIds={artwork.like_IDs as string[]}
-                    sessionId={sessionId}
-                    availability={artwork.availability}
-                  />
+                  <div className="flex-1 gap-4 space-y-12" key={index}>
+                    {artworks.map((art: any) => {
+                      return (
+                        <ArtworkCanvas
+                          key={art.art_id}
+                          image={art.url}
+                          name={art.title}
+                          artist={art.artist}
+                          art_id={art.art_id}
+                          pricing={art.pricing}
+                          impressions={art.impressions as number}
+                          likeIds={art.like_IDs as string[]}
+                          sessionId={sessionId}
+                          availability={art.availability}
+                        />
+                      );
+                    })}
+                  </div>
                 );
               })}
             </div>

@@ -71,7 +71,7 @@ export default function UploadTrackingInformationModalForm() {
               type="text"
               required
               placeholder="Please provide a link to track this order"
-              className="h-[40px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
+              className="h-[35px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
             />
           </div>
         </div>
@@ -86,7 +86,7 @@ export default function UploadTrackingInformationModalForm() {
               type="text"
               placeholder="Please provide a tracking ID for this package"
               required
-              className="h-[40px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
+              className="h-[35px] px-4 border border-dark/20 w-full text-xs focus:border-none focus:ring-1 focus:ring-dark focus:outline-none placeholder:text-xse"
             />
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function UploadTrackingInformationModalForm() {
           <button
             disabled={loading}
             type="submit"
-            className="h-[40px] px-4 w-full text-xs text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
+            className="h-[35px] px-4 w-full text-xs text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
           >
             {loading ? <LoadSmall /> : " Submit tracking information"}
           </button>

@@ -54,7 +54,7 @@ export default function DeleteAccountConfirmationModalForm() {
           disabled={loading}
           type="button"
           onClick={handleDeleteGalleryAccount}
-          className="h-[40px] px-4 w-full text-base text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-500 bg-red-600 duration-300 grid place-items-center"
+          className="h-[35px] px-4 w-full text-base text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-500 bg-red-600 duration-300 grid place-items-center"
         >
           {loading ? <LoadSmall /> : "I understand, delete this account"}
         </button>

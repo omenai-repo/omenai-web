@@ -21,15 +21,15 @@ export default function NavbarLink({
     <>
       {disabled ? (
         <>
-          <li className="relative text-[0.9rem] text-dark/40 font-normal">
-            <p className="cursor-not-allowed" aria-disabled>
+          <li className="relative text-xs text-dark/40 font-medium">
+            <p className="cursor-not-allowed whitespace-nowrap" aria-disabled>
               {text}
             </p>
             <CiLock className="absolute right-[-15px] top-[-5px]" />
           </li>
         </>
       ) : (
-        <li className="text-xs w-fit text-black font-normal flex flex-col group">
+        <li className="text-xs w-fit text-black whitespace-nowrap font-medium flex flex-col group">
           <Link href={link} onClick={() => updateOpenSideNav(false)}>
             {text}
           </Link>

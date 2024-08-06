@@ -25,7 +25,7 @@ export default function VerifyTransaction({
         <button
           onClick={handleClick}
           type="button"
-          className="h-[40px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
+          className="h-[35px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
         >
           Finish transaction
         </button>

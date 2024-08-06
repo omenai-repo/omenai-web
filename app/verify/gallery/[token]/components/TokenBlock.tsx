@@ -75,7 +75,7 @@ export default function TokenBlock({ token }: TokenProps) {
       >
         <input
           type="text"
-          className=" h-[40px] px-4 ring-1 ring-dark rounded-md w-full md:w-1/3"
+          className=" h-[35px] px-4 ring-1 ring-dark rounded-md w-full md:w-1/3"
           placeholder="Verification token"
           required
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -84,7 +84,7 @@ export default function TokenBlock({ token }: TokenProps) {
         />
         <button
           disabled={isLoading}
-          className=" disabled:bg-gray-400 grid place-items-center disabled:cursor-not-allowed  h-[40px] px-4 bg-black text-white rounded-md transition-all ease-linear duration-200"
+          className=" disabled:bg-gray-400 grid place-items-center disabled:cursor-not-allowed  h-[35px] px-4 bg-black text-white rounded-md transition-all ease-linear duration-200"
           type={"submit"}
         >
           {isLoading ? <LoadSmall /> : "Submit"}

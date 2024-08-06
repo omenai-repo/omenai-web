@@ -14,14 +14,17 @@ import { toast } from "sonner";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { useRouter } from "next/navigation";
+import { FaCheckCircle } from "react-icons/fa";
+import { useWindowSize } from "usehooks-ts";
 import { MdClear } from "react-icons/md";
 
 export default function Filter() {
   const [showFilterBlock, setShowFilterBlock] = useState(false);
+  const { width } = useWindowSize();
+
   const { filterOptions, selectedFilters, clearAllFilters } = filterStore();
   const { paginationCount, updatePaginationCount } = artworkActionStore();
   const { setArtworks, setIsLoading, setPageCount } = artworkStore();
-  const router = useRouter();
 
   async function handleSubmitFilter() {
     updatePaginationCount("reset");
@@ -58,17 +61,21 @@ export default function Filter() {
   };
 
   return (
-    <div className="sticky top-[63px] px-0 lg:px-4 z-20 bg-white border-b border-b-dark/10">
-      <div className="w-full flex justify-between items-center py-4 px-4">
+    <div className="sticky top-[38px] sm:top-[50px] lg:top-[73px] px-0 lg:px-4 z-20 py-3 bg-white">
+      <div
+        className={`w-full ${
+          width > 960 ? "hidden" : "flex"
+        } justify-between items-center py-4 px-4`}
+      >
         <button
           className={`${
             showFilterBlock
-              ? "bg-dark text-white rounded-sm"
-              : "border-dark/10 border rounded-sm bg-white text-dark"
-          } duration-200 h-[40px] px-4  flex space-x-2 items-center w-fit cursor-pointer`}
+              ? "bg-dark text-white"
+              : "border-dark/10 border bg-white text-dark"
+          } duration-200 border px-3 py-1 border-dark/10 rounded-full  flex gap-x-2 items-center text-[13px] font-normal w-fit cursor-pointer`}
           onClick={() => setShowFilterBlock(!showFilterBlock)}
         >
-          <span className="text-xs font-normal">Filters</span>
+          <span className="text-[13px] font-normal">Filters</span>
           {showFilterBlock ? (
             <MdClear />
           ) : (
@@ -76,13 +83,6 @@ export default function Filter() {
           )}
         </button>
         <div />
-        <button
-          disabled={isEmptyFilter(filterOptions)}
-          className=" disabled:bg-dark/30 disabled:cursor-not-allowed rounded-sm h-[40px] px-4 bg-dark flex space-x-2 items-center w-fit cursor-pointer"
-          onClick={handleSubmitFilter}
-        >
-          <span className="text-xs font-normal text-white">Apply filters</span>
-        </button>
       </div>
       {selectedFilters.length > 0 && (
         <>
@@ -92,25 +92,35 @@ export default function Filter() {
             })}
             <div
               onClick={handleClearAll}
-              className="px-3 py-1 border border-dark/10 rounded-full flex gap-x-2 items-center text-xs font-normal"
+              className="px-3 py-1 border border-dark/10 rounded-full hover:bg-dark duration-200 hover:text-white flex gap-x-2 items-center text-[13px] font-normal"
             >
-              <span>Clear all </span>
+              <span>Clear all selections</span>
               <ImBin2 />
             </div>
+            <button
+              onClick={handleSubmitFilter}
+              disabled={isEmptyFilter(filterOptions)}
+              className="px-3 py-1 border border-dark/10 hover:bg-dark duration-200 hover:text-white rounded-full flex gap-x-2 items-center text-[13px] font-normal"
+            >
+              <span>Apply filters </span>
+              <FaCheckCircle />
+            </button>
           </div>
         </>
       )}
 
       <div
         className={`${
-          showFilterBlock ? "grid" : "hidden"
-        } duration-200 sm:grid-cols-2 lg:grid-cols-4 gap-x-2 items-center px-2`}
+          width >= 960 || showFilterBlock ? "grid" : "hidden"
+        } duration-200 sm:grid-cols-2 lg:grid-cols-4 gap-x-2 items-center px-0`}
       >
         <PriceFilter />
         <YearFilter />
         <MediumFilter />
         <RarityFilter />
       </div>
+
+      <hr className="border-dark/10" />
     </div>
   );
 }
