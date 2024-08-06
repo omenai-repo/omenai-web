@@ -28,12 +28,12 @@ export default function SubscriptionStatus({
 
       <div className="mt-6">
         {sub_status === "canceled" ? (
-          <button className=" h-[40px] px-4 rounded-md w-fit bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
+          <button className=" h-[35px] px-4 rounded-md w-fit bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
             Reactivate Subscription
           </button>
         ) : (
           <button
-            className=" h-[40px] px-4 rounded-md w-fit bg-red-600 flex gap-2 items-center"
+            className=" h-[35px] px-4 rounded-md w-fit bg-red-600 flex gap-2 items-center"
             onClick={() => updateOpenModal()}
           >
             <RxCross1 className="text-sm text-white" />

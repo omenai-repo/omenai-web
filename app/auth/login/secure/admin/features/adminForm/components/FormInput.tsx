@@ -85,7 +85,7 @@ export default function FormInput() {
           <button
             disabled={isLoading}
             type="submit"
-            className="h-[40px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs font-medium"
+            className="h-[35px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs font-medium"
           >
             {isLoading ? <LoadSmall /> : "Login"}{" "}
             {!isLoading && <GoArrowRight className="text-md opacity-70" />}

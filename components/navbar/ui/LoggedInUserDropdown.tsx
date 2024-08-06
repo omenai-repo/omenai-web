@@ -9,7 +9,6 @@ import { RiAuctionLine } from "react-icons/ri";
 import { CiSettings } from "react-icons/ci";
 import Link from "next/link";
 import { UserDashboardNavigationStore } from "@/store/user/navigation/NavigationStore";
-import { MdAccountCircle } from "react-icons/md";
 import { signOut } from "next-auth/react";
 import { toast } from "sonner";
 import { BiUser } from "react-icons/bi";
@@ -30,7 +29,9 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
           onClick={() => setOpen((pv) => !pv)}
           className="flex items-center gap-1 pl-3 py-2 rounded-sm text-dark transition-colors"
         >
-          <span className="md:block font-normal text-xs hidden">{user}</span>
+          <span className="md:block font-medium whitespace-nowrap text-xs hidden">
+            {user}
+          </span>
           <BiUser className="text-sm" />
 
           <motion.span variants={iconVariants}>

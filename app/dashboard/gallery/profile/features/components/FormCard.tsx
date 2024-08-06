@@ -90,7 +90,7 @@ export const FormCard = () => {
             !updateData.description) ||
           isLoading
         }
-        className="w-full disabled:cursor-not-allowed disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+        className="w-full disabled:cursor-not-allowed disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
       >
         {isLoading ? <LoadSmall /> : "Save edit data"}
       </button>

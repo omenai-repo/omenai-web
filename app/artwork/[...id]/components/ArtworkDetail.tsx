@@ -110,7 +110,7 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
         <button
           disabled={loading || !data.availability}
           onClick={handleBuyButtonClick}
-          className="w-full bg-dark h-[40px] px-4  text-white hover:bg-dark/80 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:text-white hover:duration-200 grid place-items-center group"
+          className="w-full bg-dark h-[35px] px-4  text-white hover:bg-dark/80 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-dark/50 hover:text-white hover:duration-200 grid place-items-center group"
         >
           {loading ? (
             <LoadSmall />
@@ -131,7 +131,7 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
           (sessionId && !likedState.ids.includes(sessionId))) && (
           <button
             onClick={() => handleLike(true)}
-            className="w-full h-[40px] px-4 justify-center flex items-center gap-2  text-dark hover:bg-dark/10 hover:text-dark border border-dark/10 duration-300 group"
+            className="w-full h-[35px] px-4 justify-center flex items-center gap-2  text-dark hover:bg-dark/10 hover:text-dark border border-dark/10 duration-300 group"
           >
             <span>Save artwork</span>
             <IoHeartOutline />
@@ -140,7 +140,7 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
         {sessionId !== undefined && likedState.ids.includes(sessionId) && (
           <button
             onClick={() => handleLike(false)}
-            className="w-full h-[40px] px-4 rounded-md border flex justify-center items-center gap-2 hover:bg-dark/10 duration-200 border-dark/10 text-dark text-base group"
+            className="w-full h-[35px] px-4 rounded-md border flex justify-center items-center gap-2 hover:bg-dark/10 duration-200 border-dark/10 text-dark text-base group"
           >
             <span>Remove from saved</span>
             <GiCheckMark />

@@ -168,7 +168,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
       <div className="mt-1 mb-8 w-fit h-fit relative pl-1">
         <input
           type="text"
-          className="h-[40px] px-4 pl-10 w-[500px] border border-[#E0E0E0] text-xs placeholder:text-[#858585] placeholder:text-xs bg-transparent focus:border-none focus:ring-1 focus:ring-dark/80 duration-300 focus:outline-none"
+          className="h-[35px] px-4 pl-10 w-[500px] border border-[#E0E0E0] text-xs placeholder:text-[#858585] placeholder:text-xs bg-transparent focus:border-none focus:ring-1 focus:ring-dark/80 duration-300 focus:outline-none"
           placeholder="Search by order ID, artwork name or buyer name"
           onChange={handleSearchChange}
         />
@@ -237,7 +237,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                     artwork.order_accepted.status === "accepted" && (
                       <button
                         disabled
-                        className=" bg-dark rounded-sm disabled:bg-[#E0E0E0] text-[#858585] disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                        className=" bg-dark rounded-sm disabled:bg-[#E0E0E0] text-[#858585] disabled:cursor-not-allowed h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
                       >
                         <span>No action required</span>
                       </button>
@@ -248,7 +248,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                     artwork.tracking_information.tracking_link !== "" && (
                       <button
                         disabled
-                        className=" bg-dark disabled:bg-[#E0E0E0] rounded-sm text-[#858585] disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                        className=" bg-dark disabled:bg-[#E0E0E0] rounded-sm text-[#858585] disabled:cursor-not-allowed h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
                       >
                         <span>No action required</span>
                       </button>
@@ -263,7 +263,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                               artwork.order_id
                             )
                           }
-                          className=" bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                          className=" bg-dark rounded-sm text-white h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
                         >
                           <MdOutlineCallToAction />
                           <span>Upload tracking information</span>
@@ -283,7 +283,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                             artwork.artwork_data
                           )
                         }
-                        className=" bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                        className=" bg-dark rounded-sm text-white h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
                       >
                         <MdOutlineCallToAction />
                         <span>Take action</span>
@@ -302,7 +302,7 @@ export default function OrdersTable({ data, tab }: OrdersTableProps) {
                             artwork.artwork_data
                           )
                         }
-                        className=" bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                        className=" bg-dark rounded-sm text-white h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
                       >
                         <VscEye />
                         <span>View</span>

@@ -17,6 +17,7 @@ export const GalleryLogo = ({ className, theme = "dark" }: LogoProps) => {
           alt="omenai logo"
           width={130}
           height={50}
+          priority={true}
         />
         <span
           className={`font-normal text-xs relative xxs:top-1 ${
@@ -41,6 +42,7 @@ export const AdminLogo = ({ className, theme = "dark" }: LogoProps) => {
           alt="omenai logo"
           width={130}
           height={50}
+          priority={true}
         />
         <span
           className={`font-normal text-xs relative xxs:top-1 ${
@@ -63,6 +65,7 @@ export const IndividualLogo = ({ className }: LogoProps) => {
           alt="omenai logo"
           width={130}
           height={50}
+          priority={true}
         />
       </Link>
     </>

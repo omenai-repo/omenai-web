@@ -69,7 +69,7 @@ export const FormCard = () => {
       <button
         type="submit"
         disabled={isLoading}
-        className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] text-xs rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+        className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] text-xs rounded-sm w-full text-white disabled:cursor-not-allowed h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
       >
         {isLoading ? <LoadSmall /> : "Save edit data"}
       </button>

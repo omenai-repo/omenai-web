@@ -18,7 +18,7 @@ export default function RarityFilter() {
     <div className="p-2 relative w-full">
       <div
         onClick={() => setOpenDropdown(!openDropdown)}
-        className="border border-dark/10 font-normal text-xs text-dark flex justify-between items-center p-3 hover:bg-[#FAFAFA] hover:border-dark"
+        className="border border-dark/10 font-normal text-[13px] text-dark flex justify-between items-center px-3 h-[45px] hover:bg-[#FAFAFA] hover:border-dark"
       >
         <p className="flex gap-x-2 items-center">
           <span>Filter by Rarity</span>

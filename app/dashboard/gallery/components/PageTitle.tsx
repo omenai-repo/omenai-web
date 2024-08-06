@@ -48,7 +48,7 @@ export default function PageTitle({ title }: { title: string }) {
       </div>
       {title === "My Artworks" && (
         <Link href={"/dashboard/gallery/artworks/upload"} className="w-fit">
-          <button className="bg-dark rounded-sm w-fit whitespace-nowrap text-white text-xs h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+          <button className="bg-dark rounded-sm w-fit whitespace-nowrap text-white text-xs h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
             <span>Upload Artwork</span>
             <IoAdd className="text-sm" />
           </button>

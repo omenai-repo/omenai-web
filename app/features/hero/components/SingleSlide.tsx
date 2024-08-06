@@ -28,7 +28,7 @@ export default function SingleSlide({
             </h1>
             <p className="text-xs md:text-base">{subheadline}</p>
             <Link href={cta} className="hidden lg:block">
-              <button className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm bg-dark h-[40px] px-4 text-xs text-white hover:bg-dark/90">
+              <button className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm bg-dark h-[35px] px-4 text-xs text-white hover:bg-dark/90">
                 View resource
               </button>
             </Link>

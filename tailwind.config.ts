@@ -11,10 +11,13 @@ const config: Config = withMT({
   ],
   theme: {
     container: {
+      padding: {
+        DEFAULT: "1rem",
+      },
       center: true,
     },
     fontSize: {
-      xs: "0.8125rem",
+      xs: "0.875rem",
       base: "1rem",
       sm: "1.2rem",
       md: "1.44rem",
@@ -47,6 +50,7 @@ const config: Config = withMT({
         xxl: "400px",
         xxm: "380px",
         xxs: "320px",
+        md: "768px",
         xl: "1280px",
         "2lg": "1024px",
         "2xl": "1440px",
