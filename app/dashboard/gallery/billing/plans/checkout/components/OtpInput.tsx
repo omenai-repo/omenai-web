@@ -57,7 +57,7 @@ export default function OtpInput({
       className=" max-w-full flex flex-col space-y-6"
       onSubmit={handleSubmit}
     >
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-2">
         <h1 className="text-xs font-medium">OTP verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />
