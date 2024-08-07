@@ -58,7 +58,7 @@ export default function CuratedArtworksLayout({
             {userCuratedArtworks.length >= 20 && (
               <div className="h-[400px] w-[250px] grid place-items-center mx-16">
                 <Link href={""}>
-                  <button className="whitespace-nowrap border border-dark rounded-full bg-transparent text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585]  w-full text-dark disabled:cursor-not-allowed h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark hover:text-white duration-300">
+                  <button className="whitespace-nowrap border border-dark rounded-full bg-transparent text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585]  w-full text-dark disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark hover:text-white duration-300">
                     View more
                   </button>
                 </Link>

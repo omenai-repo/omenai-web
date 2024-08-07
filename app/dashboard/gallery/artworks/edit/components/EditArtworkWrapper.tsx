@@ -221,7 +221,7 @@ export default function EditArtworkWrapper({
             <button
               disabled={loading}
               type="submit"
-              className="h-[35px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
+              className="h-[40px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
             >
               {loading ? <LoadSmall /> : " Update pricing details"}
             </button>
@@ -232,7 +232,7 @@ export default function EditArtworkWrapper({
               onClick={deleteUploadArtwork}
               disabled={deleteLoading}
               type="button"
-              className="h-[35px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-600/80 text-xs bg-red-600 duration-200 grid place-items-center"
+              className="h-[40px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-600/80 text-xs bg-red-600 duration-200 grid place-items-center"
             >
               {deleteLoading ? <LoadSmall /> : " Delete ths artwork"}
             </button>

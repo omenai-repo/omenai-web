@@ -13,10 +13,10 @@ export async function POST(request: Request) {
       expiry_year: data.year,
       currency: "USD",
       amount: "50",
-      email: "annieumana1@gmail.com",
-      fullname: "Aniebiet Umana",
+      email: data.customer.email,
+      fullname: data.customer.name,
       tx_ref: data.tx_ref,
-      redirect_url: "https://example_company.com/success",
+      redirect_url: data.redirect,
       meta: {
         type: "subscription",
       },

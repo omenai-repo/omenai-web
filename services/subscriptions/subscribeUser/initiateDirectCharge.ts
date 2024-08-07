@@ -1,12 +1,6 @@
 import { getApiUrl } from "@/config";
 
-export async function initiateDirectCharge(data: {
-  card: string;
-  cvv: string;
-  month: string;
-  year: string;
-  tx_ref: string;
-}) {
+export async function initiateDirectCharge(data: FLWDirectChargeDataTypes) {
   try {
     const url = getApiUrl();
     const res = await fetch(

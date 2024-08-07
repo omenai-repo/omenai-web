@@ -130,7 +130,7 @@ export default function UploadArtworkImage() {
       <div className="mt-4 flex w-full text-xs">
         <button
           disabled={loading || !image}
-          className={`bg-dark rounded-sm disabled:cursor-not-allowed disabled:bg-[#E0E0E0] text-white h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80 w-full`}
+          className={`bg-dark rounded-sm disabled:cursor-not-allowed disabled:bg-[#E0E0E0] text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80 w-full`}
           type="submit"
         >
           {loading ? <LoadSmall /> : "Upload artwork"}

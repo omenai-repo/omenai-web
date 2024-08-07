@@ -3,6 +3,7 @@ export type PlanProps = {
   monthly_price: { value: number; text: string };
   yearly_price: { value: number; text: string };
   benefits: string[];
+  plan_id: string;
 };
 export const plan_details: PlanProps[] = [
   {
@@ -15,6 +16,7 @@ export const plan_details: PlanProps[] = [
       "International payment management",
       "Custom tailored Performance dashboard",
     ],
+    plan_id: process.env.NEXT_PUBLIC_BASIC_PLAN!,
   },
   {
     name: "Pro",
@@ -26,6 +28,7 @@ export const plan_details: PlanProps[] = [
       "Unlimited artwork uploads monthly",
       "Priority customer support",
     ],
+    plan_id: process.env.NEXT_PUBLIC_PRO_PLAN!,
   },
   {
     name: "Premium",
@@ -37,5 +40,6 @@ export const plan_details: PlanProps[] = [
       "`Price on demand` feature on artworks",
       "Priority feature on hompage",
     ],
+    plan_id: process.env.NEXT_PUBLIC_PREMIUM_PLAN!,
   },
 ];
