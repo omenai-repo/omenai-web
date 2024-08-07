@@ -17,6 +17,7 @@ import {
 } from "react";
 import { IoIosLock } from "react-icons/io";
 import { toast } from "sonner";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function AvsNoauthInput({
   handleClick,
@@ -43,6 +44,11 @@ export default function AvsNoauthInput({
 
   const { flw_charge_payload, update_flw_charge_payload_data } = stepperStore();
 
+  const [transaction_id, set_transaction_id] = useLocalStorage(
+    "flw_trans_id",
+    ""
+  );
+
   const [selectStates, setSelectStates] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
@@ -65,6 +71,10 @@ export default function AvsNoauthInput({
       (country) => country.name === address_info.country
     );
     const updated_address_info = { ...address_info, country: countryCode?.key };
+    if (hasEmptyString(updated_address_info)) {
+      toast.error("Invalid input parameters");
+      return;
+    }
     const ref = generateAlphaDigit(7);
 
     const data: FLWDirectChargeDataTypes & {
@@ -92,7 +102,8 @@ export default function AvsNoauthInput({
           {} as FLWDirectChargeDataTypes & { name: string }
         );
         if (response.data.meta.authorization.mode === "redirect") {
-          console.log("User needs to be redirected");
+          toast.success("Redirecting to authentication portal...Please wait");
+          set_transaction_id(response.data.data.id);
           router.replace(response.data.meta.authorization.redirect);
           // redirect user
         } else {

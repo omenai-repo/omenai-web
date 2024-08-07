@@ -24,7 +24,7 @@ export default function VerifyTransaction({
   });
   return (
     <div className="grid place-items-center">
-      <div className="flex justify-between items-center mb-2">
+      <div className="flex justify-between items-center mb-2 w-full">
         <h1 className="text-xs font-medium">Transaction verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />
@@ -32,13 +32,13 @@ export default function VerifyTransaction({
         </p>
       </div>
       {isLoading ? (
-        <>
+        <div className="w-full flex flex-col justify-center items-center gap-y-4">
           <Load />
           <p className="text-xs">Verification in progress...please wait</p>
-        </>
+        </div>
       ) : (
-        <>
-          <div className="space-y-2 grid place-items-center">
+        <div className=" mt-6 w-full flex flex-col gap-y-4">
+          <div className="space-y-3 grid place-items-center">
             <Image
               src={"/images/verified.png"}
               height={100}
@@ -58,7 +58,7 @@ export default function VerifyTransaction({
               Go home
             </Link>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

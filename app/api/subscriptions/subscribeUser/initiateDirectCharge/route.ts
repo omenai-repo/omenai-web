@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       expiry_month: data.month,
       expiry_year: data.year,
       currency: "USD",
-      amount: "50",
+      amount: data.amount,
       email: data.customer.email,
       fullname: data.customer.name,
       tx_ref: data.tx_ref,

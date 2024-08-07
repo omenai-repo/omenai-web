@@ -12,6 +12,7 @@ import {
 } from "react";
 import { IoIosLock } from "react-icons/io";
 import { toast } from "sonner";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function AuthPinInput({
   handleClick,
@@ -34,6 +35,11 @@ export default function AuthPinInput({
     pin: "",
   });
 
+  const [transaction_id, set_transaction_id] = useLocalStorage(
+    "flw_trans_id",
+    ""
+  );
+
   const handlePinChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -44,6 +50,10 @@ export default function AuthPinInput({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (auth_data.pin === "" || auth_data.pin.length < 4) {
+      toast.error("Invalid input parameter");
+      return;
+    }
     const ref = generateAlphaDigit(7);
 
     const data: FLWDirectChargeDataTypes & {
@@ -71,7 +81,8 @@ export default function AuthPinInput({
         );
         if (response.data.meta.authorization.mode === "redirect") {
           // redirect user
-          console.log("User needs to be redirected");
+          toast.success("Redirecting to authentication portal...Please wait");
+          set_transaction_id(response.data.data.id);
           router.replace(response.data.meta.authorization.redirect);
         } else {
           set_flw_ref(response.data.data.flw_ref);

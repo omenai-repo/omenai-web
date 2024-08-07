@@ -1,0 +1,66 @@
+"use client";
+import Image from "next/image";
+import { notFound, useSearchParams } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import { verifyFlwTransaction } from "@/services/subscriptions/verifyFlwTransaction";
+import Link from "next/link";
+import Load from "@/components/loader/Load";
+import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
+import PageTitle from "@/app/dashboard/gallery/components/PageTitle";
+export default function TransactionVerification() {
+  const searchParams = useSearchParams();
+  const response = searchParams.get("response");
+  const transaction_id = useReadLocalStorage("flw_trans_id") as string;
+  if (!response || transaction_id === undefined || transaction_id === "")
+    return notFound();
+
+  const { data: verified, isLoading } = useQuery({
+    queryKey: ["verify_subscription_payment_on_redirect"],
+    queryFn: async () => {
+      const response = await verifyFlwTransaction({ transaction_id });
+      if (!response?.isOk) throw new Error("Something went wrong");
+      else {
+        return { message: response.message, data: response.data };
+      }
+    },
+  });
+
+  return (
+    <>
+      <PageTitle title="Verifying your transaction" />
+      <div className="grid place-items-center w-full h-[65vh]">
+        {isLoading ? (
+          <div className=" w-[20vw] flex flex-col items-center justify-center space-y-6">
+            <Load />
+            <p className="text-xs font-medium">
+              Verification in progress...please wait
+            </p>
+          </div>
+        ) : (
+          <div className=" w-[20vw] flex-flex-col space-y-6">
+            <div className="space-y-2 grid place-items-center">
+              <Image
+                src={"/images/verified.png"}
+                height={100}
+                width={100}
+                alt="verification icon"
+                className="text-center"
+              />
+              <p className="text-xs font-bold">{verified?.message}</p>
+            </div>
+
+            <div className=" mt-5">
+              <Link
+                href={"/dashboard/gallery/billing"}
+                type="button"
+                className="h-[40px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
+              >
+                View my subscription
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
