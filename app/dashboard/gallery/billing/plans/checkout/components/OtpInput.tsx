@@ -11,7 +11,7 @@ import {
 import { IoIosLock } from "react-icons/io";
 import { toast } from "sonner";
 
-export default function OtpInput({
+export default function Oput({
   handleClick,
   set_id,
 }: {
@@ -29,12 +29,13 @@ export default function OtpInput({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+    if (otp === "" || otp.length < 4) {
+      toast.error("Invalid input parameter");
+      return;
+    }
     setIsLoading(true);
 
     const data = { otp, flw_ref };
-
-    console.log(data);
 
     const response = await validateCharge(data);
     if (response?.isOk) {
@@ -76,6 +77,7 @@ export default function OtpInput({
           type="text"
           required
           onChange={handleOtpChange}
+          minLength={4}
           placeholder="Enter OTP"
           className="h-[40px] border border-[#E0E0E0] text-[13px] placeholder:text-[#858585] placeholder:text-[13px] bg-white  w-full focus:border-none focus:ring-1 focus:ring-dark focus:outline-none"
         />

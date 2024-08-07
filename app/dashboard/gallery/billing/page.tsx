@@ -4,7 +4,15 @@ import NoSubscriptionTheme from "./features/NoSubscriptionTheme";
 import SubscriptionActiveTheme from "./features/SubscriptionActiveTheme";
 import { useSession } from "next-auth/react";
 import PageTitle from "../components/PageTitle";
+import { useLocalStorage } from "usehooks-ts";
+import { useEffect } from "react";
 export default function Subscription() {
+  const [trans_id, set_trans_id] = useLocalStorage("flw_trans_id", "");
+
+  useEffect(() => {
+    set_trans_id("");
+  }, []);
+
   const session = useSession();
 
   return (

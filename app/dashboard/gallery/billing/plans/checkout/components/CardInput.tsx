@@ -20,6 +20,7 @@ import { LoadSmall } from "@/components/loader/Load";
 import { hasEmptyString } from "@/utils/hasEmptyString";
 import { stepperStore } from "@/store/stepper/stepperStore";
 import { IoIosLock } from "react-icons/io";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function CardInput({
   updateAuthorization,
@@ -39,6 +40,10 @@ export default function CardInput({
 
   const searchParams = useSearchParams();
   const interval = searchParams.get("interval");
+  const [transaction_id, set_transaction_id] = useLocalStorage(
+    "flw_trans_id",
+    ""
+  );
 
   const [card_info, set_card_info] = useState<CardInputTypes>({
     card: "",
@@ -78,7 +83,7 @@ export default function CardInput({
           name: session.data!.user.name,
           email: session.data!.user.email,
         },
-        redirect: `${url}/dashboard/gallery/billing`,
+        redirect: `${url}/dashboard/gallery/billing/plans/checkout/verification`,
       };
 
       const response = await initiateDirectCharge(data);
@@ -89,7 +94,8 @@ export default function CardInput({
         } else {
           console.log(response.data);
           if (response.data.meta.authorization.mode === "redirect") {
-            console.log("User needs to be redirected");
+            toast.success("Redirecting to authentication portal...Please wait");
+            set_transaction_id(response.data.data.id);
             router.replace(response.data.meta.authorization.redirect);
             // redirect user
           } else {
