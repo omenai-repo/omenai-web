@@ -23,7 +23,9 @@ export default function AvsNoauthInput({
   updateFinalAuthorization,
 }: {
   handleClick: () => void;
-  updateFinalAuthorization: Dispatch<SetStateAction<"otp" | "redirect" | "">>;
+  updateFinalAuthorization: Dispatch<
+    SetStateAction<"" | "redirect" | "pin" | "avs_noauth" | "otp">
+  >;
 }) {
   const [address_info, set_address_info] = useState<{
     city: string;
@@ -117,7 +119,7 @@ export default function AvsNoauthInput({
       className="flex flex-col space-y-3 w-full"
       onSubmit={submitAddressInfo}
     >
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-2">
         <h1 className="text-xs font-medium">Address verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />

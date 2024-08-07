@@ -18,7 +18,9 @@ export default function AuthPinInput({
   updateFinalAuthorization,
 }: {
   handleClick: () => void;
-  updateFinalAuthorization: Dispatch<SetStateAction<"otp" | "redirect" | "">>;
+  updateFinalAuthorization: Dispatch<
+    SetStateAction<"" | "redirect" | "pin" | "avs_noauth" | "otp">
+  >;
 }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -87,7 +89,7 @@ export default function AuthPinInput({
       className="max-w-full flex flex-col space-y-6"
       onSubmit={handleSubmit}
     >
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-2">
         <h1 className="text-xs font-medium">Pin Verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />

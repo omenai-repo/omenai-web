@@ -22,14 +22,12 @@ import { stepperStore } from "@/store/stepper/stepperStore";
 import { IoIosLock } from "react-icons/io";
 
 export default function CardInput({
-  isFirstStep,
   updateAuthorization,
   handleClick,
   plan,
 }: {
-  isFirstStep: boolean;
   updateAuthorization: Dispatch<
-    SetStateAction<"redirect" | "avs_noauth" | "pin" | "">
+    SetStateAction<"" | "redirect" | "pin" | "avs_noauth" | "otp">
   >;
   handleClick: () => void;
   plan: SubscriptionPlanDataTypes & { createdAt: string; updatedAt: string };

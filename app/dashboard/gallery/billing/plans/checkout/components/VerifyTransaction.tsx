@@ -4,6 +4,7 @@ import { verifyFlwTransaction } from "@/services/subscriptions/verifyFlwTransact
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
+import { IoIosLock } from "react-icons/io";
 
 export default function VerifyTransaction({
   transaction_id,
@@ -23,6 +24,13 @@ export default function VerifyTransaction({
   });
   return (
     <div className="grid place-items-center">
+      <div className="flex justify-between items-center mb-2">
+        <h1 className="text-xs font-medium">Transaction verification</h1>
+        <p className="text-[13px] flex items-center gap-x-1 font-bold">
+          <IoIosLock />
+          <span className="text-[13px]">Secure form</span>
+        </p>
+      </div>
       {isLoading ? (
         <>
           <Load />
