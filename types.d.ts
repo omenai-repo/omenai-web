@@ -331,6 +331,7 @@ type CardInputTypes = {
   cvv: string;
   month: string;
   year: string;
+  name: string;
 };
 
 type AdminGalleryListItemTypes = {
@@ -364,4 +365,43 @@ type AccountAdminSchemaTypes = {
   admin_id: string;
   verified: boolean;
   role: string;
+};
+
+type FLWDirectChargeDataTypes = CardInputTypes & {
+  card: string;
+  cvv: string;
+  month: string;
+  year: string;
+  tx_ref: string;
+  amount: string;
+  customer: {
+    name: string;
+    email: string;
+  };
+  redirect: string;
+};
+
+type SubscriptionPlanDataTypes = {
+  name: string;
+  pricing: {
+    annual_price: string;
+    monthly_price: string;
+  };
+  plan_id: string;
+  currency: string;
+  benefits: string[];
+};
+
+type PinAuthorizationData = {
+  mode: "pin";
+  pin: string;
+};
+
+type AvsAuthorizationData = {
+  mode: "avs_noauth";
+  country?: string;
+  state?: string;
+  city?: string;
+  zip?: string;
+  address?: string;
 };

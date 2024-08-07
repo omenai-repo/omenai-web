@@ -89,7 +89,7 @@ export default function PayNowButton({
             <button
               onClick={handleClickPayNow}
               disabled={lock_status || loading}
-              className="w-fit h-[35px] px-4 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark text-white text-[14px] hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
+              className="w-fit h-[40px] px-4 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-dark disabled:border-dark bg-dark text-white text-[14px] hover:bg-white hover:text-dark disabled:hover:border-none hover:border-dark hover:border duration-150 grid place-items-center group"
             >
               {loading ? <LoadSmall /> : "Proceed to payment"}
             </button>

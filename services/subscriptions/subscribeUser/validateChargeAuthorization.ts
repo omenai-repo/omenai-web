@@ -1,13 +1,10 @@
 import { getApiUrl } from "@/config";
 
-export async function validateChargeAuthorization(data: {
-  card: string;
-  cvv: string;
-  month: string;
-  year: string;
-  authorization: { mode: string; pin: any };
-  tx_ref: string;
-}) {
+export async function validateChargeAuthorization(
+  data: FLWDirectChargeDataTypes & {
+    authorization: PinAuthorizationData | AvsAuthorizationData;
+  }
+) {
   try {
     const url = getApiUrl();
     const res = await fetch(

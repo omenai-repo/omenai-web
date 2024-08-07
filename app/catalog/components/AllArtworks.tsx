@@ -18,7 +18,7 @@ export default function AllArtworks({
   sessionId: string | undefined;
 }) {
   const { paginationCount } = artworkActionStore();
-  const { isLoading, setPageCount } = artworkStore();
+  const { isLoading, setPageCount, setArtworks, artworks } = artworkStore();
   const { filterOptions } = filterStore();
   const { width } = useWindowSize();
 
@@ -31,6 +31,7 @@ export default function AllArtworks({
       );
       if (response?.isOk) {
         setPageCount(response.count);
+        setArtworks(response.data);
         return response.data;
       } else throw new Error("Failed to fetch artworks");
     },
@@ -54,7 +55,7 @@ export default function AllArtworks({
   }
 
   const arts = catalogChunk(
-    artworksArray,
+    artworks,
     width < 400 ? 1 : width < 768 ? 2 : width < 1280 ? 3 : 4
   );
 

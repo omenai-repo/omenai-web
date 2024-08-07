@@ -13,7 +13,7 @@ export default function NoSubscriptionBlock() {
           </p>
         </div>
         <Link href={"/dashboard/gallery/billing/plans"} className="">
-          <button className=" h-[35px] px-4 bg-white text-dark rounded-sm ">
+          <button className=" h-[40px] px-4 bg-white text-dark rounded-sm ">
             Activate Subscription
           </button>
         </Link>

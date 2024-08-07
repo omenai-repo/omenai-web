@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import { PulseLoader } from "react-spinners";
 export default function Load() {
   return (
-    <div className="max-w-[100px] max-h-[100px]">
+    <div className="max-w-[80px] max-h-[80px]">
       <Lottie animationData={animationData} loop autoPlay />
     </div>
   );

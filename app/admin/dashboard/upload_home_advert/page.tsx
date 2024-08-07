@@ -168,7 +168,7 @@ export default function Upload() {
                 <button
                   disabled={loading}
                   type="submit"
-                  className={`whitespace-nowrap bg-dark text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[35px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80 `}
+                  className={`whitespace-nowrap bg-dark text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80 `}
                 >
                   {loading ? <LoadSmall /> : "Upload promotional content"}
                 </button>

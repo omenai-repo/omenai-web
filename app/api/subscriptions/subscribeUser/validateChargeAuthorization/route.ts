@@ -4,26 +4,24 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const payload = await request.json();
+    const data = await request.json();
 
     const payload_data = {
-      card_number: payload.card,
-      cvv: payload.cvv,
-      expiry_month: payload.month,
-      expiry_year: payload.year,
+      card_number: data.card,
+      cvv: data.cvv,
+      expiry_month: data.month,
+      expiry_year: data.year,
       currency: "USD",
       amount: "50",
-      email: "annieumana1@gmail.com",
-      fullname: "Aniebiet Umana",
-      tx_ref: payload.tx_ref,
-      redirect_url: "https://example_company.com/success",
-      authorization: {
-        mode: payload.authorization.mode,
-        pin: payload.authorization.pin,
-      },
+      email: data.customer.email,
+      fullname: data.customer.name,
+      tx_ref: data.tx_ref,
+      redirect_url: data.redirect,
       meta: {
         type: "subscription",
+        // customer: data.customer,
       },
+      authorization: data.authorization,
     };
     const encrypted_payload = encryptPayload(
       process.env.FLW_TEST_ENCRYPTION_KEY!,
