@@ -7,14 +7,11 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const { email } = await request.json();
+    const { gallery_id } = await request.json();
 
-    const subscription_data = await Subscriptions.findOne(
-      {
-        "customer.email": email,
-      },
-      "sub_start_date sub_expiry_date sub_card_info customer sub_status id"
-    );
+    const subscription_data = await Subscriptions.findOne({
+      customer: gallery_id,
+    }).populate("plan_details");
 
     if (!subscription_data)
       throw new NotFoundError("Subscription data not found");

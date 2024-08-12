@@ -8,6 +8,10 @@ const subscriptions = new Schema<SubscriptionModelSchemaTypes>(
     card: { type: Schema.Types.Mixed, required: true },
     customer: { type: String, required: true },
     status: { type: String, required: true },
+    plan_details: {
+      type: Schema.Types.Mixed,
+      required: true,
+    },
   },
 
   { timestamps: true }
