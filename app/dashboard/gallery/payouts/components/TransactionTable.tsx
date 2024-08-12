@@ -20,7 +20,8 @@ const TABLE_HEAD = [
 export function TransactionTable({
   table,
 }: {
-  table: TransactionModelSchemaTypes & { createdAt: any; updatedAt: any }[];
+  table: PurchaseTransactionModelSchemaTypes &
+    { createdAt: any; updatedAt: any }[];
 }) {
   const transaction_table_data = table.map((transaction: any) => {
     const priceNumber =

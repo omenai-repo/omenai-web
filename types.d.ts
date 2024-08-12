@@ -283,7 +283,7 @@ type WalletModelSchemaTypes = {
   withdrawable_balance: number;
 };
 
-type TransactionModelSchemaTypes = {
+type PurchaseTransactionModelSchemaTypes = {
   trans_id: string;
   trans_reference: string;
   trans_amount: string;
@@ -294,26 +294,30 @@ type TransactionModelSchemaTypes = {
   trans_date: Date;
 };
 
-type SubscriptionModelSchemaTypes = {
-  customer: SubscriptionCustomer;
-  sub_start_date: Date;
-  sub_expiry_date: Date;
-  sub_value: string;
-  sub_currency: string;
-  sub_status: "active" | "cancelled" | "expired";
-  sub_payment_type: string;
-  sub_tx_ref: string;
-  sub_flw_ref: string;
-  sub_payment_status: string;
-  sub_card_info: SubscriptionCardDetails;
+type SubscriptionTransactionModelSchemaTypes = {
+  trans_id: string;
+  reference: string;
+  amount: string;
+  gallery_id: string;
+  type: "purchase_payout" | "subscription";
+  date: Date;
 };
 
-type SubscriptionCustomer = {
-  created_at: string;
-  name: string;
-  email: string;
-  id: string;
-  phone_number: string;
+type SubscriptionModelSchemaTypes = {
+  customer: string;
+  start_date: Date;
+  expiry_date: Date;
+  status: "active" | "cancelled" | "expired";
+  card: SubscriptionCardDetails;
+  payment: SubscriptionPaymentTypes;
+};
+type SubscriptionPaymentTypes = {
+  status: string;
+  value: string;
+  trans_ref: string;
+  flw_ref: string;
+  currency: string;
+  type: string;
 };
 
 type SubscriptionCardDetails = {
@@ -377,6 +381,7 @@ type FLWDirectChargeDataTypes = CardInputTypes & {
   customer: {
     name: string;
     email: string;
+    gallery_id: string;
   };
   redirect: string;
 };

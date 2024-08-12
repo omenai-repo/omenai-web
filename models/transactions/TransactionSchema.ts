@@ -1,7 +1,7 @@
 import { generateDigit } from "@/utils/generateToken";
 import mongoose, { Schema } from "mongoose";
 
-const transactions = new Schema<TransactionModelSchemaTypes>(
+const purchase_transactions = new Schema<PurchaseTransactionModelSchemaTypes>(
   {
     trans_id: { type: String, default: () => `PAY_OM_${generateDigit(7)}` },
     trans_reference: { type: String, required: true },
@@ -15,5 +15,6 @@ const transactions = new Schema<TransactionModelSchemaTypes>(
   { timestamps: true }
 );
 
-export const Transactions =
-  mongoose.models.Transactions || mongoose.model("Transactions", transactions);
+export const PurchaseTransactions =
+  mongoose.models.PurchaseTransactions ||
+  mongoose.model("PurchaseTransactions", purchase_transactions);

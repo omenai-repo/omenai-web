@@ -5,13 +5,13 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { getFormattedDateTime } from "@/utils/getCurrentDateTime";
 import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
-import { Transactions } from "@/models/transactions/TransactionSchema";
 import { getCurrentMonthAndYear } from "@/utils/getCurrentMonthAndYear";
 import { SalesActivity } from "@/models/sales/SalesActivity";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { sendPaymentSuccessMail } from "@/emails/models/payment/sendPaymentSuccessMail";
 import { releaseOrderLock } from "@/services/orders/releaseOrderLock";
 import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
+import { PurchaseTransactions } from "@/models/transactions/TransactionSchema";
 
 export async function POST(request: Request) {
   const secretHash = process.env.STRIPE_CHECKOUT_SESSION_WEBHOOK_SECRET!;
@@ -93,7 +93,7 @@ export async function POST(request: Request) {
       );
 
       // Update transaction collection
-      const data: Omit<TransactionModelSchemaTypes, "trans_id"> = {
+      const data: Omit<PurchaseTransactionModelSchemaTypes, "trans_id"> = {
         trans_amount: formatPrice(paymentIntent.amount_total / 100, currency),
         trans_date: date,
         trans_gallery_id: meta.gallery_id,
@@ -103,7 +103,7 @@ export async function POST(request: Request) {
         trans_type: "purchase_payout",
       };
 
-      const create_transaction = await Transactions.create(data);
+      const create_transaction = await PurchaseTransactions.create(data);
 
       // Update Artwork Availability to false
       await Artworkuploads.updateOne(
