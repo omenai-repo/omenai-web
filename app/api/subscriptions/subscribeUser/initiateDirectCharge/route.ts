@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       tx_ref: data.tx_ref,
       redirect_url: data.redirect,
       meta: {
-        gallery_id: data.gallery_id,
+        gallery_id: data.customer.gallery_id,
       },
     };
 
