@@ -73,11 +73,15 @@ export async function POST(request: Request) {
 
         // Update transaction collection
         session.startTransaction();
+        const gallery_data = await AccountGallery.findOne(
+          { email: req.data.customer.email },
+          "gallery_id"
+        );
         const data: Omit<SubscriptionTransactionModelSchemaTypes, "trans_id"> =
           {
             amount: formatPrice(req.data.amount, "USD"),
             date,
-            gallery_id: req.meta_data.gallery_id,
+            gallery_id: gallery_data.gallery_id,
             reference: req.data.id,
             type: "subscription",
           };
@@ -109,7 +113,7 @@ export async function POST(request: Request) {
               status: req.data.status,
               trans_ref: create_transaction.trans_id,
             },
-            customer: req.data.meta_data.gallery_id,
+            customer: gallery_data.gallery_id,
           };
 
           await Subscriptions.create({
@@ -140,7 +144,7 @@ export async function POST(request: Request) {
                 status: req.data.status,
                 trans_ref: create_transaction.trans_id,
               },
-              customer: req.data.meta_data.gallery_id,
+              customer: gallery_data.gallery_id,
             },
           }
         );
