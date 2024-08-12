@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       redirect_url: data.redirect,
       meta: {
         gallery_id: data.customer.gallery_id,
+        type: "subscription",
       },
     };
 

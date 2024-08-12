@@ -1,12 +1,7 @@
-import {
-  ConflictError,
-  ServerError,
-} from "@/custom/errors/dictionary/errorDictionary";
+import { ConflictError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
-import { sendSubscriptionPaymentSuccessfulMail } from "@/emails/models/subscription/sendSubscriptionPaymentSuccessMail";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
-import { AccountGallery } from "@/models/auth/GallerySchema";
-import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
+
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {

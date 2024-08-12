@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       redirect_url: data.redirect,
       meta: {
         gallery_id: data.gallery_id,
-        // customer: data.customer,
+        type: "subscription",
       },
       authorization: data.authorization,
     };
