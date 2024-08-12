@@ -109,7 +109,7 @@ export async function POST(request: Request) {
               status: req.data.status,
               trans_ref: create_transaction.trans_id,
             },
-            customer: req.data.customer.email,
+            customer: req.data.meta_data.gallery_id,
           };
 
           await Subscriptions.create({
@@ -140,7 +140,7 @@ export async function POST(request: Request) {
                 status: req.data.status,
                 trans_ref: create_transaction.trans_id,
               },
-              customer: req.data.customer.email,
+              customer: req.data.meta_data.gallery_id,
             },
           }
         );
