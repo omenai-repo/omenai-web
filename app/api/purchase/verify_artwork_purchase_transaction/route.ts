@@ -3,10 +3,10 @@ import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { Wallet } from "@/models/wallet/WalletSchema";
 import { NextResponse } from "next/server";
-import { Transactions } from "@/models/transactions/TransactionSchema";
 import { getCurrentMonthAndYear } from "@/utils/getCurrentMonthAndYear";
 import { SalesActivity } from "@/models/sales/SalesActivity";
 import { CreateOrder } from "@/models/orders/CreateOrderSchema";
+import { PurchaseTransactions } from "@/models/transactions/TransactionSchema";
 
 export async function POST(request: Request) {
   try {
@@ -83,7 +83,7 @@ export async function POST(request: Request) {
         trans_date: currentDate,
       };
 
-      const update_transactions_db = await Transactions.create(
+      const update_transactions_db = await PurchaseTransactions.create(
         transaction_data
       );
 

@@ -1,16 +1,16 @@
 import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
-import { Transactions } from "@/models/transactions/TransactionSchema";
+import { PurchaseTransactions } from "@/models/transactions/TransactionSchema";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const data: Omit<TransactionModelSchemaTypes, "trans_reference"> =
+    const data: Omit<PurchaseTransactionModelSchemaTypes, "trans_reference"> =
       await request.json();
 
-    const createTransaction = await Transactions.create(data);
+    const createTransaction = await PurchaseTransactions.create(data);
 
     if (!createTransaction)
       throw new ServerError("An error was encountered. Please try again");

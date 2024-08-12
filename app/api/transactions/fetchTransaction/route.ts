@@ -1,7 +1,7 @@
 import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
-import { Transactions } from "@/models/transactions/TransactionSchema";
+import { PurchaseTransactions } from "@/models/transactions/TransactionSchema";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     await connectMongoDB();
     const { gallery_id } = await request.json();
 
-    const fetchTransactions = await Transactions.find({
+    const fetchTransactions = await PurchaseTransactions.find({
       trans_gallery_id: gallery_id,
       trans_type: "purchase_payout",
     });
