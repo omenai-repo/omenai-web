@@ -4,7 +4,6 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { getFormattedDateTime } from "@/utils/getCurrentDateTime";
 import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
-import { Transactions } from "@/models/transactions/TransactionSchema";
 import { getCurrentMonthAndYear } from "@/utils/getCurrentMonthAndYear";
 import { SalesActivity } from "@/models/sales/SalesActivity";
 import { connectMongoDB } from "../mongo_connect/mongoConnect";

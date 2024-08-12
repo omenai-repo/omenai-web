@@ -118,7 +118,7 @@ type ArtworkSchemaTypes = {
   artwork_description?: string;
   framing: string;
   signature: string;
-  should_show_on_active?: boolean;
+  should_show_on_sub_active?: boolean;
   availability: boolean;
 };
 
