@@ -75,7 +75,6 @@ export default function AuthPinInput({
         console.log(response.data);
         toast.error(response.data.message);
       } else {
-        console.log(response.data.data);
         update_flw_charge_payload_data(
           {} as FLWDirectChargeDataTypes & { name: string }
         );

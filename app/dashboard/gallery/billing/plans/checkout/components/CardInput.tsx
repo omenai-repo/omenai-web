@@ -82,6 +82,7 @@ export default function CardInput({
         customer: {
           name: session.data!.user.name,
           email: session.data!.user.email,
+          gallery_id: session.data!.user.gallery_id,
         },
         redirect: `${url}/dashboard/gallery/billing/plans/checkout/verification`,
       };
