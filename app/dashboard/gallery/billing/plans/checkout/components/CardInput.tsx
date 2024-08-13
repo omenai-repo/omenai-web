@@ -85,6 +85,7 @@ export default function CardInput({
           email: session.data!.user.email,
           gallery_id: session.data!.user.id,
           plan_id: plan_object_id!,
+          plan_interval: interval!,
         },
         redirect: `${url}/dashboard/gallery/billing/plans/checkout/verification`,
       };

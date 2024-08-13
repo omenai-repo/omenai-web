@@ -120,6 +120,7 @@ export async function POST(request: Request) {
               type: plan.name,
               value: plan.pricing,
               currency: plan.currency,
+              interval: req.meta_data.plan_interval,
             },
           };
 
@@ -156,6 +157,7 @@ export async function POST(request: Request) {
                 type: plan.name,
                 value: plan.pricing,
                 currency: plan.currency,
+                interval: req.meta_data.plan_interval,
               },
             },
           }

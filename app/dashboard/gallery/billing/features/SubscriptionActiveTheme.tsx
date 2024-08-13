@@ -9,6 +9,10 @@ import Load from "@/components/loader/Load";
 import { retrieveSubscriptionData } from "@/services/subscriptions/retrieveSubscriptionData";
 import { getApiUrl } from "@/config";
 import { useRouter } from "next/navigation";
+import TransactionTable from "./components/TransactionTable";
+import SubDetail from "./components/SubscriptionStatus";
+import UpcomingSub from "./components/UpcomingSub";
+import { fetchSubscriptionTransactions } from "@/services/transactions/fetchSubscriptionTransactions";
 
 export default function SubscriptionActiveTheme() {
   const session = useSession();
@@ -43,25 +47,48 @@ export default function SubscriptionActiveTheme() {
   }
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full grid grid-cols-2 gap-x-4 my-5">
       {/* Card */}
-      <div className="flex lg:flex-row flex-col gap-4 items-start">
-        <BillingCard
-          expiry={subscription_data.card.expiry}
-          first_6digits={subscription_data.card.first_6digits}
-          last_4digits={subscription_data.card.last_4digits}
-          type={subscription_data.card.type}
-        />
-        <BillingInfo
-          sub_start={subscription_data.sub_start_date}
-          sub_end={subscription_data.sub_expiry_date}
+      <div className="flex flex-col gap-4 items-start">
+        <div className="grid grid-cols-2 items-center gap-x-3 w-full">
+          <div className="flex flex-col gap-y-2">
+            <BillingCard
+              expiry={subscription_data.card.expiry}
+              first_6digits={subscription_data.card.first_6digits}
+              last_4digits={subscription_data.card.last_4digits}
+              type={subscription_data.card.type}
+            />
+          </div>
+
+          <SubDetail
+            sub_status={subscription_data.status}
+            plan_details={subscription_data.plan_details}
+            end_date={subscription_data.expiry_date}
+            payment={subscription_data.payment}
+          />
+        </div>
+
+        <div className="grid grid-cols-2 items-center gap-x-3 w-full">
+          <UpcomingSub
+            start_date={subscription_data.start_date}
+            sub_status={subscription_data.status}
+            plan_details={subscription_data.plan_details}
+            end_date={subscription_data.expiry_date}
+            payment={subscription_data.payment}
+          />
+
+          <BillingInfo
+            sub_start={subscription_data.start_date}
+            sub_end={subscription_data.expiry_date}
+          />
+        </div>
+
+        <CancelSubscriptionModal
+          sub_end={subscription_data.expiry_date}
+          id={subscription_data.customer}
         />
       </div>
-      <SubscriptionStatus sub_status={subscription_data.status} />
-      <CancelSubscriptionModal
-        sub_end={subscription_data.sub_expiry_date}
-        id={subscription_data.customer}
-      />
+      <TransactionTable />
     </div>
   );
 }

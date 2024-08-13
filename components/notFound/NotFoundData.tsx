@@ -6,9 +6,9 @@ export default function NotFoundData() {
     <div className="flex flex-col items-center gap-1">
       <Lottie
         animationData={animationData}
-        className="w-[150px] h-[150px] text-primary"
+        className="w-[150px] h-[150px] text-dark"
       />
-      <p className="text-dark font-light">No available data</p>
+      <p className="text-dark text-xs font-light">No available data</p>
     </div>
   );
 }

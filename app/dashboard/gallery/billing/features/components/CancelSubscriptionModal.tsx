@@ -3,8 +3,10 @@
 import { LoadSmall } from "@/components/loader/Load";
 import { cancelSubscription } from "@/services/subscriptions/cancelSubscription";
 import { galleryModalStore } from "@/store/gallery/gallery_modals/GalleryModals";
+import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
 import { formatISODate } from "@/utils/formatISODate";
 import { Modal } from "flowbite-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoWarning } from "react-icons/io5";
@@ -38,54 +40,80 @@ export default function CancelSubscriptionModal({
 
   return (
     <>
-      <Modal dismissible show={openModal}>
-        <div className=" p-10">
-          <div className="flex flex-col gap-4 font-normal text-[15px]">
-            <h2 className="text-red-600 text-md font-medium">
-              You are about to cancel your subscription.
-            </h2>
-            <p>
-              Your current subscription will remain active till{" "}
-              <span className="font-normal">{formatISODate(sub_end)}.</span> If
-              you would like to proceed with canceling your subscription, please
-              select “Cancel subscription” below.
-            </p>
+      <AnimatePresence key={8}>
+        {openModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => {
+              updateOpenModal();
+            }}
+            className="bg-slate-900/20 backdrop-blur py-8 px-2 fixed inset-0 z-50 grid place-items-center cursor-pointer"
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: "12.5deg" }}
+              animate={{ scale: 1, rotate: "0deg" }}
+              exit={{ scale: 0, rotate: "0deg" }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white text-dark p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative h-auto"
+            >
+              {/* Add modal form here */}
+              <div className="h-auto w-full">
+                <div className="flex flex-col gap-4 font-normal text-xs">
+                  <h2 className="text-red-600 text-sm font-medium">
+                    You are about to cancel your subscription.
+                  </h2>
+                  <p>
+                    Your current subscription will remain active till{" "}
+                    <span className="font-bold text-xs">
+                      {formatIntlDateTime(sub_end)}.
+                    </span>{" "}
+                    If you would like to proceed with canceling your
+                    subscription, please select “Cancel subscription” below.
+                  </p>
 
-            {/* Warning block */}
-            <div className="bg-[#FDF7EF] p-5 flex flex-col gap-3">
-              <IoWarning className="text-md text-[#FFA500]" />
-              <p>
-                Are you sure?, After{" "}
-                <span className="font-normal">{formatISODate(sub_end)}</span>,
-                you will be unable to upload artworks and events or use any of
-                the services provided by Omenai Inc. All artworks uploaded will
-                be suspended until your subscriptions are restarted.
-              </p>
-            </div>
-          </div>
+                  {/* Warning block */}
+                  <div className="bg-[#FDF7EF] p-5 flex flex-col gap-3 text-xs">
+                    <IoWarning className="text-md text-[#ff3434]" />
+                    <p>
+                      Are you sure? After{" "}
+                      <span className="font-bold">
+                        {formatIntlDateTime(sub_end)}
+                      </span>
+                      , you will be unable to upload artworks and events or use
+                      any of the services provided by Omenai Inc. All artworks
+                      uploaded will be suspended until your subscriptions are
+                      restarted.
+                    </p>
+                  </div>
+                </div>
 
-          {/* Footer */}
-          <div className="flex justify-end mt-8">
-            <div className="flex gap-3 text-[15px]">
-              <button
-                disabled={loading}
-                className=" h-[40px] px-4 text-white disabled:cursor-not-allowed bg-dark hover:bg-dark/60 duration-200"
-                onClick={() => updateOpenModal()}
-              >
-                Quit
-              </button>
-              <button
-                disabled={loading}
-                className=" h-[40px] px-4 text-white disabled:cursor-not-allowed bg-red-600 hover:bg-red-600/60 duration-200"
-                color="gray"
-                onClick={cancel_subscription}
-              >
-                {loading ? <LoadSmall /> : "Cancel Subscription"}
-              </button>
-            </div>
-          </div>
-        </div>
-      </Modal>
+                {/* Footer */}
+                <div className="flex justify-end mt-8">
+                  <div className="flex gap-3 text-[15px]">
+                    <button
+                      disabled={loading}
+                      className=" h-[40px] px-4 text-white disabled:cursor-not-allowed text-[13px] bg-dark hover:bg-dark/60 duration-200"
+                      onClick={() => updateOpenModal()}
+                    >
+                      Close
+                    </button>
+                    <button
+                      disabled={loading}
+                      className=" h-[40px] px-4 text-white disabled:cursor-not-allowed text-[13px] bg-red-600 hover:bg-red-600/60 duration-200"
+                      color="gray"
+                      onClick={cancel_subscription}
+                    >
+                      {loading ? <LoadSmall /> : "Cancel Subscription"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

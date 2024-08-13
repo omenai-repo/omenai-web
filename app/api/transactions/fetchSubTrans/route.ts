@@ -1,7 +1,7 @@
-import { NotFoundError } from "@/custom/errors/dictionary/errorDictionary";
+import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
-import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
+import { SubscriptionTransactions } from "@/models/transactions/SubscriptionTransactionSchema";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -9,22 +9,24 @@ export async function POST(request: Request) {
     await connectMongoDB();
     const { gallery_id } = await request.json();
 
-    const subscription_data = await Subscriptions.findOne({
-      customer: gallery_id,
-    });
+    const fetchTransactions = await SubscriptionTransactions.find({
+      gallery_id: gallery_id,
+    }).sort({ created_at: -1 });
 
-    if (!subscription_data)
-      throw new NotFoundError("Subscription data not found");
+    if (!fetchTransactions)
+      throw new ServerError("An error was encountered. Please try again");
 
     return NextResponse.json(
       {
-        message: "Successfully retrieved subscription data",
-        data: subscription_data,
+        message: "Transaction fetched",
+        data: fetchTransactions,
       },
       { status: 200 }
     );
   } catch (error) {
     const error_response = handleErrorEdgeCases(error);
+
+    console.log(error);
 
     return NextResponse.json(
       { message: error_response?.message },
