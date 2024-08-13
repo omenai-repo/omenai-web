@@ -105,7 +105,7 @@ export async function POST(request: Request) {
           const subscription_data = {
             card: req.data.card,
             start_date: date.toISOString(),
-            expiry_date,
+            expiry_date: expiry_date.toISOString(),
             status: "active",
             payment: {
               value: req.data.amount,
@@ -142,7 +142,7 @@ export async function POST(request: Request) {
             $set: {
               card: req.data.card,
               start_date: date.toISOString(),
-              expiry_date,
+              expiry_date: expiry_date.toISOString(),
               status: "active",
               payment: {
                 value: req.data.amount,
