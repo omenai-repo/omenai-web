@@ -6,7 +6,7 @@ export function getSubscriptionExpiryDate(interval: "monthly" | "yearly") {
     currentDate,
     interval === "monthly" ? { months: 1 } : { years: 1 }
   );
-  return format(futureDate, "yyyy-MM-ddTHH:mm:ss.SSSXXX");
+  return futureDate;
 }
 
 // Example usage:
