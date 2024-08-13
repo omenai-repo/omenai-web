@@ -7,7 +7,7 @@ import { salesDataAlgorithm } from "@/utils/salesDataAlgorithm";
 import { useQuery } from "@tanstack/react-query";
 import Load from "@/components/loader/Load";
 
-export default async function ActivityWrapper() {
+export default function ActivityWrapper() {
   const { data: sales, isLoading } = useQuery({
     queryKey: ["get_overview_sales_activity"],
     queryFn: async () => {

@@ -11,11 +11,5 @@ export const editorialNavMockData = [
     url: "/secure/editorial/admin/editorials",
   },
 
-  {
-    title: "Upload editorial",
-    icon: upload,
-    url: "/secure/editorial/admin/upload",
-  },
-
   { title: "Sign out", icon: logout, url: "/" },
 ];

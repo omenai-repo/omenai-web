@@ -384,6 +384,7 @@ type FLWDirectChargeDataTypes = CardInputTypes & {
     email: string;
     gallery_id: string;
     plan_id: string;
+    plan_interval: string;
   };
   redirect: string;
 };

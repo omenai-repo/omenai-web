@@ -13,7 +13,7 @@ export function formatIntlDateTime(inputDate: string | Date): string {
 
   // Extract day, month, and year
   const day = date.getDate();
-  const month = new Intl.DateTimeFormat("en-US", { month: "short" }).format(
+  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
     date
   );
   const year = date.getFullYear();
@@ -29,7 +29,7 @@ export function formatIntlDateTime(inputDate: string | Date): string {
   const formattedHour = formatHour(hour);
 
   // Construct the final formatted date string
-  const finalFormattedDate = `${dayWithSuffix} ${month}, ${year}`;
+  const finalFormattedDate = ` ${month} ${day}, ${year}`;
 
   //   at ${formattedHour}:${padZero(
   //     minute
