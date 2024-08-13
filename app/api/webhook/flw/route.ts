@@ -6,6 +6,7 @@ import { SubscriptionPlan } from "@/models/subscriptions/PlanSchema";
 import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
 import { SubscriptionTransactions } from "@/models/transactions/SubscriptionTransactionSchema";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
+import { getSubscriptionExpiryDate } from "@/utils/getSubscriptionExpiryDate";
 import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
 
@@ -95,22 +96,16 @@ export async function POST(request: Request) {
         });
         // Create new customer subscription
 
-        // Calculate subscription end date (current date and time + 30 days - 2 minutes)
-        var subscriptionEndDate = new Date(date);
-        subscriptionEndDate.setDate(
-          subscriptionEndDate.getDate() + req.meta_data.plan_interval ===
-            "monthly"
-            ? 30
-            : 365
+        const expiry_date = getSubscriptionExpiryDate(
+          req.meta_data.plan_interval
         );
-        subscriptionEndDate.setMinutes(subscriptionEndDate.getMinutes());
         const plan = await SubscriptionPlan.findById(req.meta_data.plan_id);
 
         if (!found_customer) {
           const subscription_data = {
             card: req.data.card,
             start_date: date.toISOString(),
-            expiry_date: subscriptionEndDate.toISOString(),
+            expiry_date,
             status: "active",
             payment: {
               value: req.data.amount,
@@ -147,7 +142,7 @@ export async function POST(request: Request) {
             $set: {
               card: req.data.card,
               start_date: date.toISOString(),
-              expiry_date: subscriptionEndDate.toISOString(),
+              expiry_date,
               status: "active",
               payment: {
                 value: req.data.amount,

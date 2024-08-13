@@ -1,18 +1,13 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
 import BillingCard from "./components/BillingCard";
 import BillingInfo from "./components/BillingInfo";
 import CancelSubscriptionModal from "./components/CancelSubscriptionModal";
-import SubscriptionStatus from "./components/SubscriptionStatus";
 import { useSession } from "next-auth/react";
-import Load from "@/components/loader/Load";
-import { retrieveSubscriptionData } from "@/services/subscriptions/retrieveSubscriptionData";
 import { getApiUrl } from "@/config";
 import { useRouter } from "next/navigation";
 import TransactionTable from "./components/TransactionTable";
 import SubDetail from "./components/SubscriptionStatus";
 import UpcomingSub from "./components/UpcomingSub";
-import { fetchSubscriptionTransactions } from "@/services/transactions/fetchSubscriptionTransactions";
 import { useLocalStorage } from "usehooks-ts";
 import { useEffect } from "react";
 
