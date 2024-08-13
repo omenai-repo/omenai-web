@@ -52,10 +52,12 @@ export default function SubDetail({
           </div>
         </div>
         <div className="flex flex-col">
-          <h1 className="text-sm font-bold">
+          <h1 className="text-base font-bold">
             {formatPrice(payment.value, currency_symbol)}{" "}
           </h1>
-          <p className="text-[13px] self-end">{plan_details.interval}</p>
+          <p className="text-[13px] self-end">
+            {plan_details.interval.replace(/^./, (char) => char.toUpperCase())}
+          </p>
         </div>
       </div>
       <div className="absolute bottom-5 left-4">

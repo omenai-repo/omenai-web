@@ -44,7 +44,7 @@ export default function TransactionTable() {
                   />
 
                   <div>
-                    <h2 className="font-bold text-base">
+                    <h2 className="font-bold text-xs">
                       {transaction.trans_id}
                     </h2>
                     <p className="text-[13px]">

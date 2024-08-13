@@ -97,7 +97,12 @@ export async function POST(request: Request) {
 
         // Calculate subscription end date (current date and time + 30 days - 2 minutes)
         var subscriptionEndDate = new Date(date);
-        subscriptionEndDate.setDate(subscriptionEndDate.getDate() + 30);
+        subscriptionEndDate.setDate(
+          subscriptionEndDate.getDate() + req.meta_data.plan_interval ===
+            "monthly"
+            ? 30
+            : 365
+        );
         subscriptionEndDate.setMinutes(subscriptionEndDate.getMinutes());
         const plan = await SubscriptionPlan.findById(req.meta_data.plan_id);
 

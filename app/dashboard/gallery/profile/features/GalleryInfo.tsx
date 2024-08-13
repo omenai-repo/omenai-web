@@ -6,11 +6,12 @@ import { useSession } from "next-auth/react";
 import { getGalleryLogoFileView } from "@/lib/storage/getGalleryLogoFileView";
 export default function GalleryInfo() {
   const [updateModal] = galleryLogoUpdate((state) => [state.updateModal]);
-  const session = useSession();
+  const { data: session } = useSession();
   let logo;
 
-  if (session.data!.user.logo === "") logo = "/icons/profile.png";
-  else logo = getGalleryLogoFileView(session.data!.user.logo, 80);
+  if (session!.user.logo === "") logo = "/icons/profile.png";
+  else logo = getGalleryLogoFileView(session!.user.logo, 80);
+
   return (
     <div>
       <LogoPickerModal />
@@ -21,8 +22,8 @@ export default function GalleryInfo() {
         <div className=" bg-[#eee] flex items-center justify-center">
           <img
             src={logo}
-            alt="icon"
-            className="w-auto max-w-[80px] h-auto max-h-[80px]"
+            alt="gallery logo"
+            className="w-auto max-w-[60px] h-auto max-h-[60px]"
           />
         </div>
         <p className="text-dark px-5 lg:px-2 text-xs">Edit profile logo</p>

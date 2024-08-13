@@ -46,19 +46,21 @@ export default function UpcomingSub({
           </div>
         </div>
         <div className="flex flex-col">
-          <h1 className="text-sm font-bold">
+          <h1 className="text-base font-bold">
             {formatPrice(payment.value, currency_symbol)}
           </h1>
-          <p className="text-[13px] self-end">{plan_details.interval}</p>
+          <p className="text-[13px] self-end">
+            {plan_details.interval.replace(/^./, (char) => char.toUpperCase())}
+          </p>
         </div>
       </div>
       <div className=" mt-5 w-full">
-        <div className="flex items-center gap-x-4 px-4 font-semibold py-1 rounded-full bg-[#fafafa] text-[13px] ring-1 ring-[#e0e0e0]">
-          <p>
+        <div className="flex flex-col gap-2 items-center justify-between px-4 font-semibold py-2 rounded-full bg-[#fafafa] text-[13px] ring-1 ring-[#e0e0e0]">
+          <p className="whitespace-nowrap">
             <span className="font-bold">From:</span>{" "}
             {formatIntlDateTime(end_date)}
           </p>
-          <p>
+          <p className="whitespace-nowrap">
             <span className="font-bold">To:</span>{" "}
             {getFutureDate(end_date, plan_details.interval)}
           </p>

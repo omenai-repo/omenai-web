@@ -1,25 +1,52 @@
 "use client";
-import { gallerySubscriptionStore } from "@/store/gallery/gallery_subscriptions/GallerySubscriptions";
 import NoSubscriptionTheme from "./features/NoSubscriptionTheme";
 import SubscriptionActiveTheme from "./features/SubscriptionActiveTheme";
-import { useSession } from "next-auth/react";
 import PageTitle from "../components/PageTitle";
-import { useLocalStorage } from "usehooks-ts";
-import { useEffect } from "react";
+
+import { getServerSession } from "next-auth";
+import { nextAuthOptions } from "@/lib/auth/next-auth-options";
+import { getApiUrl } from "@/config";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Load from "@/components/loader/Load";
 export default function Subscription() {
-  const [trans_id, set_trans_id] = useLocalStorage("flw_trans_id", "");
+  const { data: session } = useSession();
+  const router = useRouter();
+  const url = getApiUrl();
 
-  useEffect(() => {
-    set_trans_id("");
-  }, []);
+  if (!session) router.replace("/auth/login");
+  const { data: subscription_data, isLoading } = useQuery({
+    queryKey: ["get_sub_data"],
+    queryFn: async () => {
+      const res = await fetch(`${url}/api/subscriptions/retrieveSubData`, {
+        method: "POST",
+        body: JSON.stringify({ gallery_id: session!.user.id }),
+      });
 
-  const session = useSession();
+      const result = await res.json();
+
+      if (res?.ok) {
+        return result.data;
+      } else {
+        throw new Error("Something went wrong");
+      }
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div className="h-[85vh] w-full grid place-items-center">
+        <Load />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-full relative">
       <PageTitle title="Subscriptions & Billing" />
-      {session.data?.user.subscription_active ? (
-        <SubscriptionActiveTheme />
+      {subscription_data ? (
+        <SubscriptionActiveTheme subscription_data={subscription_data} />
       ) : (
         <NoSubscriptionTheme />
       )}

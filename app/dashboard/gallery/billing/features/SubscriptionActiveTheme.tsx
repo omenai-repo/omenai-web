@@ -13,44 +13,31 @@ import TransactionTable from "./components/TransactionTable";
 import SubDetail from "./components/SubscriptionStatus";
 import UpcomingSub from "./components/UpcomingSub";
 import { fetchSubscriptionTransactions } from "@/services/transactions/fetchSubscriptionTransactions";
+import { useLocalStorage } from "usehooks-ts";
+import { useEffect } from "react";
 
-export default function SubscriptionActiveTheme() {
+export default function SubscriptionActiveTheme({
+  subscription_data,
+}: {
+  subscription_data: any;
+}) {
   const session = useSession();
   const router = useRouter();
+
   if (session.data === null) router.replace("/auth/login");
   const url = getApiUrl();
 
-  const { data: subscription_data, isLoading } = useQuery({
-    queryKey: ["get_sub_data"],
-    queryFn: async () => {
-      const res = await fetch(`${url}/api/subscriptions/retrieveSubData`, {
-        method: "POST",
-        body: JSON.stringify({ gallery_id: session.data!.user.id }),
-      });
+  const [trans_id, set_trans_id] = useLocalStorage("flw_trans_id", "");
 
-      const result = await res.json();
-
-      if (res?.ok) {
-        return result.data;
-      } else {
-        throw new Error("Something went wrong");
-      }
-    },
-  });
-
-  if (isLoading) {
-    return (
-      <div className="h-[85vh] w-full grid place-items-center">
-        <Load />
-      </div>
-    );
-  }
+  useEffect(() => {
+    set_trans_id("");
+  }, []);
 
   return (
-    <div className="w-full h-full grid grid-cols-2 gap-x-4 my-5">
+    <div className="w-full h-full grid 2xl:grid-cols-3 grid-cols-2 gap-4 my-5">
       {/* Card */}
-      <div className="flex flex-col gap-4 items-start">
-        <div className="grid grid-cols-2 items-center gap-x-3 w-full">
+      <div className="flex flex-col gap-4 items-start col-span-1 2xl:col-span-2">
+        <div className="grid 2xl:grid-cols-2 items-center gap-3 w-full">
           <div className="flex flex-col gap-y-2">
             <BillingCard
               expiry={subscription_data.card.expiry}
@@ -68,7 +55,7 @@ export default function SubscriptionActiveTheme() {
           />
         </div>
 
-        <div className="grid grid-cols-2 items-center gap-x-3 w-full">
+        <div className="grid 2xl:grid-cols-2 items-center gap-3 w-full">
           <UpcomingSub
             start_date={subscription_data.start_date}
             sub_status={subscription_data.status}
@@ -77,10 +64,7 @@ export default function SubscriptionActiveTheme() {
             payment={subscription_data.payment}
           />
 
-          <BillingInfo
-            sub_start={subscription_data.start_date}
-            sub_end={subscription_data.expiry_date}
-          />
+          <BillingInfo />
         </div>
 
         <CancelSubscriptionModal
@@ -88,7 +72,10 @@ export default function SubscriptionActiveTheme() {
           id={subscription_data.customer}
         />
       </div>
-      <TransactionTable />
+
+      <div className="col-span-1">
+        <TransactionTable />
+      </div>
     </div>
   );
 }
