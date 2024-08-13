@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { galleryLogoUpdate } from "@/store/gallery/gallery_logo_upload/GalleryLogoUpload";
 import { LoadSmall } from "@/components/loader/Load";
-import { storage } from "@/appwrite";
+import { gallery_logo_storage, storage } from "@/appwrite";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ export default function LogoPickerModal() {
 
     try {
       if (logo) {
-        const logoUpdated = await storage.createFile(
+        const logoUpdated = await gallery_logo_storage.createFile(
           process.env.NEXT_PUBLIC_APPWRITE_GALLERY_LOGO_BUCKET_ID!,
           ID.unique(),
           logo
@@ -42,11 +42,6 @@ export default function LogoPickerModal() {
             bucketId: logoUpdated.bucketId,
             fileId: logoUpdated.$id,
           };
-
-          const fileData = storage.getFilePreview(
-            process.env.NEXT_PUBLIC_APPWRITE_GALLERY_LOGO_BUCKET_ID!,
-            file.fileId
-          );
 
           const { isOk, body } = await updateLogo({
             id: session.data!.user.id,
