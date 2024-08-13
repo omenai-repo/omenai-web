@@ -19,13 +19,10 @@ export default function SubscriptionActiveTheme() {
   const { data: subscription_data, isLoading } = useQuery({
     queryKey: ["get_sub_data"],
     queryFn: async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/subscriptions/retrieveSubData`,
-        {
-          method: "POST",
-          body: JSON.stringify({ gallery_id: session.data!.user.id }),
-        }
-      );
+      const res = await fetch(`${url}/api/subscriptions/retrieveSubData`, {
+        method: "POST",
+        body: JSON.stringify({ gallery_id: session.data!.user.id }),
+      });
 
       const result = await res.json();
 
