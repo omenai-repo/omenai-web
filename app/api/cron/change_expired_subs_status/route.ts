@@ -1,7 +1,8 @@
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
 import { NextResponse } from "next/server";
-
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 export async function GET() {
   await connectMongoDB();
   // Calculate the date that is three days ago
