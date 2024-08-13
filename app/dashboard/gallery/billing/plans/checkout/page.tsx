@@ -13,6 +13,7 @@ export default function SubscriptionCheckout() {
   const searchParams = useSearchParams();
   const plan_id = searchParams.get("plan_id");
   const interval = searchParams.get("interval");
+  const id = searchParams.get("id");
   const router = useRouter();
   const session = useSession();
 
@@ -23,7 +24,9 @@ export default function SubscriptionCheckout() {
     plan_id === null ||
     plan_id === undefined ||
     interval === null ||
-    interval === undefined
+    interval === undefined ||
+    id === null ||
+    id === undefined
   )
     return notFound();
 

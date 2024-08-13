@@ -2,8 +2,10 @@ import { sendSubscriptionPaymentFailedMail } from "@/emails/models/subscription/
 import { sendSubscriptionPaymentSuccessfulMail } from "@/emails/models/subscription/sendSubscriptionPaymentSuccessMail";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
+import { SubscriptionPlan } from "@/models/subscriptions/PlanSchema";
 import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
 import { SubscriptionTransactions } from "@/models/transactions/SubscriptionTransactionSchema";
+import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
 
@@ -65,6 +67,8 @@ export async function POST(request: Request) {
       // Create a session with the initialized MongoClient
       const session = await client.startSession();
 
+      const currency = getCurrencySymbol("USD");
+
       try {
         // Retrieve the MongoDB Client
         const date = new Date();
@@ -73,15 +77,12 @@ export async function POST(request: Request) {
 
         // Update transaction collection
         session.startTransaction();
-        const gallery_data = await AccountGallery.findOne(
-          { email: req.data.customer.email },
-          "gallery_id"
-        );
+
         const data: Omit<SubscriptionTransactionModelSchemaTypes, "trans_id"> =
           {
-            amount: formatPrice(req.data.amount, "USD"),
+            amount: formatPrice(req.data.amount, currency),
             date,
-            gallery_id: gallery_data.gallery_id,
+            gallery_id: req.meta_data.gallery_id,
             reference: req.data.id,
             type: "subscription",
           };
@@ -90,7 +91,7 @@ export async function POST(request: Request) {
 
         // Check DB to see if a subscription with this customer reference is present
         const found_customer = await Subscriptions.findOne({
-          "customer.email": req.data.customer.email,
+          customer: req.meta_data.gallery_id,
         });
         // Create new customer subscription
 
@@ -98,6 +99,7 @@ export async function POST(request: Request) {
         var subscriptionEndDate = new Date(date);
         subscriptionEndDate.setDate(subscriptionEndDate.getDate() + 30);
         subscriptionEndDate.setMinutes(subscriptionEndDate.getMinutes());
+        const plan = await SubscriptionPlan.findById(req.meta_data.plan_id);
 
         if (!found_customer) {
           const subscription_data = {
@@ -113,7 +115,12 @@ export async function POST(request: Request) {
               status: req.data.status,
               trans_ref: create_transaction.trans_id,
             },
-            customer: gallery_data.gallery_id,
+            customer: req.meta_data.gallery_id,
+            plan_details: {
+              type: plan.name,
+              value: plan.pricing,
+              currency: plan.currency,
+            },
           };
 
           await Subscriptions.create({
@@ -121,7 +128,7 @@ export async function POST(request: Request) {
           });
 
           await AccountGallery.updateOne(
-            { email: req.data.customer.email },
+            { gallery_id: req.meta_data.gallery_id },
             { $set: { subscription_active: true } }
           );
 
@@ -144,7 +151,12 @@ export async function POST(request: Request) {
                 status: req.data.status,
                 trans_ref: create_transaction.trans_id,
               },
-              customer: gallery_data.gallery_id,
+              customer: req.meta_data.gallery_id,
+              plan_details: {
+                type: plan.name,
+                value: plan.pricing,
+                currency: plan.currency,
+              },
             },
           }
         );

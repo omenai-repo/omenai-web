@@ -310,6 +310,7 @@ type SubscriptionModelSchemaTypes = {
   status: "active" | "cancelled" | "expired";
   card: SubscriptionCardDetails;
   payment: SubscriptionPaymentTypes;
+  plan_details: SubscriptionPlanDataTypes;
 };
 type SubscriptionPaymentTypes = {
   status: string;
@@ -382,6 +383,7 @@ type FLWDirectChargeDataTypes = CardInputTypes & {
     name: string;
     email: string;
     gallery_id: string;
+    plan_id: string;
   };
   redirect: string;
 };

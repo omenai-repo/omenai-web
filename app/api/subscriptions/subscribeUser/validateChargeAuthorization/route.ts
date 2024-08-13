@@ -20,6 +20,7 @@ export async function POST(request: Request) {
       meta: {
         gallery_id: data.customer.gallery_id,
         type: "subscription",
+        plan_id: data.customer.plan_id,
       },
       authorization: data.authorization,
     };

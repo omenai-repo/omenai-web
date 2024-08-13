@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
+import { ObjectId } from "mongoose";
 
 export default function Plan({
   name,
@@ -9,7 +10,8 @@ export default function Plan({
   benefits,
   tab,
   plan_id,
-}: SubscriptionPlanDataTypes & { tab: "monthly" | "yearly" }) {
+  id,
+}: SubscriptionPlanDataTypes & { tab: "monthly" | "yearly"; id: ObjectId }) {
   const currency_symbol = getCurrencySymbol(currency);
   return (
     <>
@@ -70,7 +72,7 @@ export default function Plan({
                 </ul>
                 <div className="mt-8">
                   <Link
-                    href={`/dashboard/gallery/billing/plans/checkout?plan_id=${plan_id}&interval=${tab}`}
+                    href={`/dashboard/gallery/billing/plans/checkout?plan_id=${plan_id}&interval=${tab}&id=${id}`}
                     className="h-[40px] px-4 w-full text-[14px] text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
                     aria-describedby="tier-plan"
                   >

@@ -40,6 +40,7 @@ export default function CardInput({
 
   const searchParams = useSearchParams();
   const interval = searchParams.get("interval");
+  const plan_object_id = searchParams.get("id");
   const [transaction_id, set_transaction_id] = useLocalStorage(
     "flw_trans_id",
     ""
@@ -82,7 +83,8 @@ export default function CardInput({
         customer: {
           name: session.data!.user.name,
           email: session.data!.user.email,
-          gallery_id: session.data!.user.gallery_id,
+          gallery_id: session.data!.user.id,
+          plan_id: plan_object_id!,
         },
         redirect: `${url}/dashboard/gallery/billing/plans/checkout/verification`,
       };
