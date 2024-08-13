@@ -3,8 +3,6 @@ import NoSubscriptionTheme from "./features/NoSubscriptionTheme";
 import SubscriptionActiveTheme from "./features/SubscriptionActiveTheme";
 import PageTitle from "../components/PageTitle";
 
-import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/lib/auth/next-auth-options";
 import { getApiUrl } from "@/config";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
