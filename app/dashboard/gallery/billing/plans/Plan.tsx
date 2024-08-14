@@ -93,12 +93,16 @@ export default function Plan({
                   >
                     <button
                       disabled={
-                        sub_data !== null && sub_data.plan_details.type === name
+                        sub_data !== null &&
+                        sub_data.plan_details.type === name &&
+                        sub_data.plan_details.interval === tab
                       }
                       className="h-[40px] px-4 w-full text-[14px] text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
                     >
                       {sub_data !== null
-                        ? sub_data.plan_details.type !== name
+                        ? sub_data.plan_details.type !== name ||
+                          (sub_data.plan_details.type === name &&
+                            sub_data.plan_details.interval !== tab)
                           ? "Migrate to plan"
                           : "Subscribed"
                         : "Get started today"}

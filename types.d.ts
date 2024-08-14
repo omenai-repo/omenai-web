@@ -328,6 +328,7 @@ type SubscriptionModelSchemaTypes = {
     currency: string;
     type: string;
     interval: "monthly" | "yearly";
+    plan_id: string;
   };
 };
 type SubscriptionPaymentTypes = {
@@ -337,6 +338,16 @@ type SubscriptionPaymentTypes = {
   flw_ref: string;
   currency: string;
   type: string;
+};
+
+type SubscriptionTokenizationTypes = {
+  amount: number;
+  email: string;
+  tx_ref: string;
+  token: string;
+  gallery_id: string;
+  plan_id: string;
+  plan_interval: string;
 };
 
 type SubscriptionCardDetails = {
