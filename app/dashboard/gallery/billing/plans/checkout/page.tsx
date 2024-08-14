@@ -63,25 +63,17 @@ export default function SubscriptionCheckout() {
             </p> */}
           </div>
           <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3 items-baseline">
-            {action === null && (
+            {action === "null" ? (
               <div className="col-span-1">
                 <CheckoutItem plan={data?.plans} interval={interval} />
                 <CheckoutStepper plan={data?.plans} />
               </div>
-            )}
-            <div className="col-span-2" />
-          </div>
-          <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3 items-baseline">
-            {action === "upgrade" ? (
-              <div>
+            ) : action === "upgrade" ? (
+              <div className="col-span-1">
                 <MigrationUpgradeCheckoutItem
                   plan={data?.plans}
                   interval={interval}
                   sub_data={data?.sub_data}
-                />
-                <CheckoutBillingCard
-                  sub_data={data?.sub_data}
-                  interval={interval}
                 />
               </div>
             ) : (

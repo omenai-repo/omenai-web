@@ -339,6 +339,16 @@ type SubscriptionPaymentTypes = {
   type: string;
 };
 
+type SubscriptionTokenizationTypes = {
+  amount: number;
+  email: string;
+  tx_ref: string;
+  token: string;
+  gallery_id: string;
+  plan_id: string;
+  plan_interval: string;
+};
+
 type SubscriptionCardDetails = {
   first_6digits: string;
   last_4digits: string;

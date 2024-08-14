@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     const { gallery_id } = await request.json();
 
     const subscription_data = await Subscriptions.findOne({
-      customer: gallery_id,
+      "customer.gallery_id": gallery_id,
     });
 
     if (!subscription_data)

@@ -1,15 +1,19 @@
 import { daysElapsedSince } from "@/utils/daysElapsedSince";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
-import Image from "next/image";
-import { FaPen } from "react-icons/fa";
-import { IoIosLock } from "react-icons/io";
+import CheckoutBillingCard from "./CheckoutBillingCard";
+import { ObjectId } from "mongoose";
+
 export default function MigrationUpgradeCheckoutItem({
   plan,
   interval,
   sub_data,
 }: {
-  plan: SubscriptionPlanDataTypes & { createdAt: string; updatedAt: string };
+  plan: SubscriptionPlanDataTypes & {
+    createdAt: string;
+    updatedAt: string;
+    _id: ObjectId;
+  };
   interval: string;
   sub_data: SubscriptionModelSchemaTypes & {
     created: string;
@@ -17,8 +21,14 @@ export default function MigrationUpgradeCheckoutItem({
   };
 }) {
   const days_used = daysElapsedSince(sub_data.start_date);
+
+  const days_left = interval === "yearly" ? 365 - days_used : 30 - days_used;
+
   const prorated_cost =
-    days_used === 0 ? 0 : (days_used / 30) * +sub_data.payment.value;
+    days_used === 0
+      ? 0
+      : (days_left / (interval === "yearly" ? 365 : 30)) *
+        +sub_data.payment.value;
 
   const upgrade_cost =
     interval === "monthly"
@@ -82,6 +92,12 @@ export default function MigrationUpgradeCheckoutItem({
         </div>
         {/* Card info */}
       </div>
+      <CheckoutBillingCard
+        sub_data={sub_data}
+        interval={interval}
+        plan={plan}
+        amount={total}
+      />
     </>
   );
 }

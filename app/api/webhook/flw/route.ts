@@ -129,7 +129,10 @@ export async function POST(request: Request) {
               interval: req.meta_data.plan_interval,
             },
             next_charge_params: {
-              value: convert_verify_transaction_json_response.data.amount,
+              value:
+                req.meta_data.plan_interval === "monthly"
+                  ? +plan.pricing.monthly_price
+                  : +plan.pricing.annual_price,
               currency: "USD",
               type: plan.name,
               interval: req.meta_data.plan_interval,
@@ -144,44 +147,47 @@ export async function POST(request: Request) {
             { gallery_id: req.meta_data.gallery_id },
             { $set: { subscription_active: true } }
           );
-        }
-
-        await Subscriptions.updateOne(
-          { customer: req.data.customer.email },
-          {
-            $set: {
-              card: convert_verify_transaction_json_response.data.card,
-              start_date: date.toISOString(),
-              expiry_date: expiry_date.toISOString(),
-              status: "active",
-              payment: {
-                value: convert_verify_transaction_json_response.data.amount,
-                currency: "USD",
-                type: convert_verify_transaction_json_response.data
-                  .payment_type,
-                flw_ref: convert_verify_transaction_json_response.data.flw_ref,
-                status: convert_verify_transaction_json_response.data.status,
-                trans_ref: create_transaction.trans_id,
+        } else
+          await Subscriptions.updateOne(
+            { customer: req.data.customer.email },
+            {
+              $set: {
+                card: convert_verify_transaction_json_response.data.card,
+                start_date: date.toISOString(),
+                expiry_date: expiry_date.toISOString(),
+                status: "active",
+                payment: {
+                  value: convert_verify_transaction_json_response.data.amount,
+                  currency: "USD",
+                  type: convert_verify_transaction_json_response.data
+                    .payment_type,
+                  flw_ref:
+                    convert_verify_transaction_json_response.data.flw_ref,
+                  status: convert_verify_transaction_json_response.data.status,
+                  trans_ref: create_transaction.trans_id,
+                },
+                customer: {
+                  ...convert_verify_transaction_json_response.data.customer,
+                  gallery_id: req.meta_data.gallery_id,
+                },
+                plan_details: {
+                  type: plan.name,
+                  value: plan.pricing,
+                  currency: plan.currency,
+                  interval: req.meta_data.plan_interval,
+                },
+                next_charge_params: {
+                  value:
+                    req.meta_data.plan_interval === "monthly"
+                      ? +plan.pricing.monthly_price
+                      : +plan.pricing.annual_price,
+                  currency: "USD",
+                  type: plan.name,
+                  interval: req.meta_data.plan_interval,
+                },
               },
-              customer: {
-                ...convert_verify_transaction_json_response.data.customer,
-                gallery_id: req.meta_data.gallery_id,
-              },
-              plan_details: {
-                type: plan.name,
-                value: plan.pricing,
-                currency: plan.currency,
-                interval: req.meta_data.plan_interval,
-              },
-              next_charge_params: {
-                value: convert_verify_transaction_json_response.data.amount,
-                currency: "USD",
-                type: plan.name,
-                interval: req.meta_data.plan_interval,
-              },
-            },
-          }
-        );
+            }
+          );
       } catch (error) {
         console.log("An error occurred during the transaction:" + error);
 

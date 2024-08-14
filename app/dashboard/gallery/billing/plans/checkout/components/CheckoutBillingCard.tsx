@@ -1,19 +1,54 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { IoIosLock } from "react-icons/io";
 import Image from "next/image";
-import { FaPen } from "react-icons/fa";
+import { ObjectId } from "mongoose";
+import { generateAlphaDigit } from "@/utils/generateToken";
+import { createTokenizedCharge } from "@/services/subscriptions/createTokenizedCharge";
+import { toast } from "sonner";
+import { LoadSmall } from "@/components/loader/Load";
 export default function CheckoutBillingCard({
+  plan,
   interval,
   sub_data,
+  amount,
 }: {
+  plan: SubscriptionPlanDataTypes & {
+    createdAt: string;
+    updatedAt: string;
+    _id: ObjectId;
+  };
   sub_data: SubscriptionModelSchemaTypes & {
     created: string;
     updatedAt: string;
   };
   interval: string;
+  amount: number;
 }) {
   const is_effected_end_of_billing_cycle =
     sub_data.plan_details.interval === "yearly" && interval === "monthly";
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  async function handlePayNow() {
+    const tokenized_data: SubscriptionTokenizationTypes = {
+      amount,
+      email: sub_data.customer.email,
+      tx_ref: generateAlphaDigit(7),
+      token: sub_data.card.token,
+      gallery_id: sub_data.customer.gallery_id,
+      plan_id: plan._id.toString(),
+      plan_interval: interval,
+    };
+    setLoading(true);
+    const tokenize_card = await createTokenizedCharge(tokenized_data);
+
+    if (!tokenize_card?.isOk)
+      toast.error("Couldn't create tokenized card charge");
+    else console.log(tokenize_card.data);
+
+    setLoading(false);
+  }
 
   return (
     <>
@@ -64,8 +99,12 @@ export default function CheckoutBillingCard({
           <span>Migrate to plan</span>
         </button>
       ) : (
-        <button className="flex gap-2 items-center w-full my-5 justify-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white hover:bg-dark/90">
-          <span>Pay now</span>
+        <button
+          onClick={handlePayNow}
+          disabled={loading}
+          className="flex gap-2 items-center w-full my-5 justify-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white hover:bg-dark/90"
+        >
+          {loading ? <LoadSmall /> : "Pay now"}
         </button>
       )}
     </>
