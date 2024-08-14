@@ -5,13 +5,15 @@ import { useQuery } from "@tanstack/react-query";
 import { verifyFlwTransaction } from "@/services/subscriptions/verifyFlwTransaction";
 import Link from "next/link";
 import Load from "@/components/loader/Load";
-import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
+import { useReadLocalStorage } from "usehooks-ts";
 import PageTitle from "@/app/dashboard/gallery/components/PageTitle";
 export default function TransactionVerification() {
-  const searchParams = useSearchParams();
-  const response = searchParams.get("response");
   const transaction_id = useReadLocalStorage("flw_trans_id") as string;
-  if (!response || transaction_id === undefined || transaction_id === "")
+  if (
+    transaction_id === undefined ||
+    transaction_id === null ||
+    transaction_id === ""
+  )
     return notFound();
 
   const { data: verified, isLoading } = useQuery({
@@ -24,6 +26,8 @@ export default function TransactionVerification() {
       }
     },
   });
+
+  console.log(verified?.data);
 
   return (
     <>
@@ -55,7 +59,7 @@ export default function TransactionVerification() {
                 type="button"
                 className="h-[40px] px-4 w-full text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 text-xs bg-dark duration-200 grid place-items-center"
               >
-                View my subscription
+                View subscription info
               </Link>
             </div>
           </div>

@@ -328,6 +328,7 @@ type SubscriptionModelSchemaTypes = {
     currency: string;
     type: string;
     interval: "monthly" | "yearly";
+    plan_id: string;
   };
 };
 type SubscriptionPaymentTypes = {

@@ -6,7 +6,6 @@ import { string } from "zod";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    console.log(data);
 
     const payload = {
       currency: "USD",

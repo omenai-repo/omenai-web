@@ -11,7 +11,6 @@ export default function Plan({
   plan_id,
   id,
   sub_data,
-  interval,
 }: SubscriptionPlanDataTypes & {
   tab: "monthly" | "yearly";
   id: ObjectId;
@@ -19,7 +18,6 @@ export default function Plan({
     created: string;
     updatedAt: string;
   };
-  interval: string;
 }) {
   const { data: session } = useSession();
   return (

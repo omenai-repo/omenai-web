@@ -7,6 +7,9 @@ import { generateAlphaDigit } from "@/utils/generateToken";
 import { createTokenizedCharge } from "@/services/subscriptions/createTokenizedCharge";
 import { toast } from "sonner";
 import { LoadSmall } from "@/components/loader/Load";
+import { useRouter } from "next/navigation";
+import { getApiUrl } from "@/config";
+import { useLocalStorage } from "usehooks-ts";
 export default function CheckoutBillingCard({
   plan,
   interval,
@@ -25,10 +28,18 @@ export default function CheckoutBillingCard({
   interval: string;
   amount: number;
 }) {
+  const [transaction_id, set_transaction_id] = useLocalStorage(
+    "flw_trans_id",
+    ""
+  );
   const is_effected_end_of_billing_cycle =
     sub_data.plan_details.interval === "yearly" && interval === "monthly";
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const url = getApiUrl();
 
   async function handlePayNow() {
     const tokenized_data: SubscriptionTokenizationTypes = {
@@ -45,7 +56,14 @@ export default function CheckoutBillingCard({
 
     if (!tokenize_card?.isOk)
       toast.error("Couldn't create tokenized card charge");
-    else console.log(tokenize_card.data);
+    else {
+      const { data } = tokenize_card;
+      console.log(data);
+      set_transaction_id(data.data.id);
+      router.replace(
+        `${url}/dashboard/gallery/billing/plans/checkout/verification`
+      );
+    }
 
     setLoading(false);
   }
