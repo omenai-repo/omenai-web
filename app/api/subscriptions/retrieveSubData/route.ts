@@ -14,7 +14,10 @@ export async function POST(request: Request) {
     });
 
     if (!subscription_data)
-      throw new NotFoundError("Subscription data not found");
+      return NextResponse.json(
+        { message: "Data not found", data: null },
+        { status: 200 }
+      );
 
     return NextResponse.json(
       {

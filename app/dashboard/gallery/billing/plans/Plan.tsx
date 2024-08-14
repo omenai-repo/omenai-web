@@ -1,18 +1,25 @@
-import React from "react";
+"use client";
 import Link from "next/link";
-import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { ObjectId } from "mongoose";
+import { useSession } from "next-auth/react";
 
 export default function Plan({
   name,
   pricing,
-  currency,
   benefits,
   tab,
   plan_id,
   id,
-}: SubscriptionPlanDataTypes & { tab: "monthly" | "yearly"; id: ObjectId }) {
-  const currency_symbol = getCurrencySymbol(currency);
+  sub_data,
+}: SubscriptionPlanDataTypes & {
+  tab: "monthly" | "yearly";
+  id: ObjectId;
+  sub_data: SubscriptionModelSchemaTypes & {
+    created: string;
+    updatedAt: string;
+  };
+}) {
+  const { data: session } = useSession();
   return (
     <>
       <div className="relative z-10 w-fit my-12">
@@ -43,7 +50,7 @@ export default function Plan({
             <div className="flex flex-1 flex-col p-2">
               <div className="flex flex-1 flex-col justify-between rounded-2xl bg-gray-50 p-4">
                 <ul role="list" className="space-y-4">
-                  {benefits.map((benefit, index) => {
+                  {benefits.map((benefit) => {
                     return (
                       <li key={benefit} className="flex items-start">
                         <span className="flex-shrink-0">
@@ -72,11 +79,30 @@ export default function Plan({
                 </ul>
                 <div className="mt-8">
                   <Link
-                    href={`/dashboard/gallery/billing/plans/checkout?plan_id=${plan_id}&interval=${tab}&id=${id}`}
-                    className="h-[40px] px-4 w-full text-[14px] text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
+                    href={`/dashboard/gallery/billing/plans/checkout?plan_id=${plan_id}&interval=${tab}&id=${id}&action=${
+                      sub_data === null && !session?.user.subscription_active
+                        ? null
+                        : +sub_data.payment.value >
+                          (sub_data.plan_details.interval === "yearly"
+                            ? +pricing.annual_price
+                            : +pricing.monthly_price)
+                        ? "downgrade"
+                        : "upgrade"
+                    }`}
                     aria-describedby="tier-plan"
                   >
-                    Get started today
+                    <button
+                      disabled={
+                        sub_data !== null && sub_data.plan_details.type === name
+                      }
+                      className="h-[40px] px-4 w-full text-[14px] text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
+                    >
+                      {sub_data !== null
+                        ? sub_data.plan_details.type !== name
+                          ? "Migrate to plan"
+                          : "Subscribed"
+                        : "Get started today"}
+                    </button>
                   </Link>
                 </div>
               </div>

@@ -4,14 +4,28 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllPlanData } from "@/services/subscriptions/getAllPlanData";
 import Load from "@/components/loader/Load";
 import PlanWrapper from "./PlanWrapper";
+import { useSession } from "next-auth/react";
+import { retrieveSubscriptionData } from "@/services/subscriptions/retrieveSubscriptionData";
+import { useRouter } from "next/navigation";
+import { getApiUrl } from "@/config";
 
 export default function Plans() {
-  const { data: plans, isLoading } = useQuery({
+  const { data: session } = useSession();
+  const router = useRouter();
+  const url = getApiUrl();
+  if (session === null || session === undefined) router.replace("/auth/login");
+  const { data, isLoading } = useQuery({
     queryKey: ["get_all_plan_details"],
     queryFn: async () => {
       const plans = await getAllPlanData();
-      if (!plans?.isOk) throw new Error("Something went wrong");
-      else return plans.data;
+      const res = await fetch(`${url}/api/subscriptions/retrieveSubData`, {
+        method: "POST",
+        body: JSON.stringify({ gallery_id: session!.user.id }),
+      });
+
+      const result = await res.json();
+      if (!plans?.isOk || !res?.ok) throw new Error("Something went wrong");
+      else return { plans: plans.data, sub: result.data };
     },
   });
 
@@ -35,7 +49,7 @@ export default function Plans() {
               Our pricing plans
             </h1>
           </div>
-          <PlanWrapper plans={plans} />
+          <PlanWrapper plans={data?.plans} sub_data={data?.sub} />
         </>
       )}
     </div>
