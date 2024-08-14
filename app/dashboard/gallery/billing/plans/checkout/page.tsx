@@ -8,12 +8,16 @@ import { useQuery } from "@tanstack/react-query";
 import { notFound, useSearchParams, useRouter } from "next/navigation";
 import Load from "@/components/loader/Load";
 import { useSession } from "next-auth/react";
+import { retrieveSubscriptionData } from "@/services/subscriptions/retrieveSubscriptionData";
+import MigrationUpgradeCheckoutItem from "./components/MigrationUpgradeCheckoutItem";
+import CheckoutBillingCard from "./components/CheckoutBillingCard";
 
 export default function SubscriptionCheckout() {
   const searchParams = useSearchParams();
   const plan_id = searchParams.get("plan_id");
   const interval = searchParams.get("interval");
   const id = searchParams.get("id");
+  const action = searchParams.get("action");
   const router = useRouter();
   const session = useSession();
 
@@ -30,13 +34,15 @@ export default function SubscriptionCheckout() {
   )
     return notFound();
 
-  const { data: plan, isLoading } = useQuery({
-    queryKey: ["get_single_plan_details"],
+  const { data, isLoading } = useQuery({
+    queryKey: ["get_plan_and_sub_details"],
     queryFn: async () => {
       const plans = await getSinglePlanData(plan_id);
+      const sub_data = await retrieveSubscriptionData(session.data!.user.id);
 
-      if (!plans?.isOk) throw new Error("Something went wrong");
-      else return plans.data;
+      if (!plans?.isOk || !sub_data?.isOk)
+        throw new Error("Something went wrong");
+      else return { plans: plans.data, sub_data: sub_data.data };
     },
   });
 
@@ -57,10 +63,30 @@ export default function SubscriptionCheckout() {
             </p> */}
           </div>
           <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3 items-baseline">
-            <div className="col-span-1">
-              <CheckoutItem plan={plan} interval={interval} />
-              <CheckoutStepper plan={plan} />
-            </div>
+            {action === null && (
+              <div className="col-span-1">
+                <CheckoutItem plan={data?.plans} interval={interval} />
+                <CheckoutStepper plan={data?.plans} />
+              </div>
+            )}
+            <div className="col-span-2" />
+          </div>
+          <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3 items-baseline">
+            {action === "upgrade" ? (
+              <div>
+                <MigrationUpgradeCheckoutItem
+                  plan={data?.plans}
+                  interval={interval}
+                  sub_data={data?.sub_data}
+                />
+                <CheckoutBillingCard
+                  sub_data={data?.sub_data}
+                  interval={interval}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
             <div className="col-span-2" />
           </div>
         </>

@@ -43,7 +43,7 @@ export default function Subscription() {
   return (
     <div className="w-full h-full relative">
       <PageTitle title="Subscriptions & Billing" />
-      {subscription_data ? (
+      {subscription_data !== null ? (
         <SubscriptionActiveTheme subscription_data={subscription_data} />
       ) : (
         <NoSubscriptionTheme />

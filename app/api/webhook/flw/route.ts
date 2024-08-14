@@ -81,10 +81,13 @@ export async function POST(request: Request) {
 
         const data: Omit<SubscriptionTransactionModelSchemaTypes, "trans_id"> =
           {
-            amount: formatPrice(req.data.amount, currency),
+            amount: formatPrice(
+              convert_verify_transaction_json_response.data.amount,
+              currency
+            ),
             date,
             gallery_id: req.meta_data.gallery_id,
-            reference: req.data.id,
+            reference: convert_verify_transaction_json_response.data.id,
             type: "subscription",
           };
 
@@ -103,23 +106,32 @@ export async function POST(request: Request) {
 
         if (!found_customer) {
           const subscription_data = {
-            card: req.data.card,
+            card: convert_verify_transaction_json_response.data.card,
             start_date: date.toISOString(),
             expiry_date: expiry_date.toISOString(),
             status: "active",
             payment: {
-              value: req.data.amount,
+              value: convert_verify_transaction_json_response.data.amount,
               currency: "USD",
-              type: req.data.payment_type,
-              flw_ref: req.data.flw_ref,
-              status: req.data.status,
+              type: convert_verify_transaction_json_response.data.payment_type,
+              flw_ref: convert_verify_transaction_json_response.data.flw_ref,
+              status: convert_verify_transaction_json_response.data.status,
               trans_ref: create_transaction.trans_id,
             },
-            customer: req.meta_data.gallery_id,
+            customer: {
+              ...convert_verify_transaction_json_response.data.customer,
+              gallery_id: req.meta_data.gallery_id,
+            },
             plan_details: {
               type: plan.name,
               value: plan.pricing,
               currency: plan.currency,
+              interval: req.meta_data.plan_interval,
+            },
+            next_charge_params: {
+              value: convert_verify_transaction_json_response.data.amount,
+              currency: "USD",
+              type: plan.name,
               interval: req.meta_data.plan_interval,
             },
           };
@@ -132,31 +144,39 @@ export async function POST(request: Request) {
             { gallery_id: req.meta_data.gallery_id },
             { $set: { subscription_active: true } }
           );
-
-          // const update_artwork_show_on_sub_status = await Artworkuploads.updateMany({gallery_id: })
         }
 
         await Subscriptions.updateOne(
           { customer: req.data.customer.email },
           {
             $set: {
-              card: req.data.card,
+              card: convert_verify_transaction_json_response.data.card,
               start_date: date.toISOString(),
               expiry_date: expiry_date.toISOString(),
               status: "active",
               payment: {
-                value: req.data.amount,
+                value: convert_verify_transaction_json_response.data.amount,
                 currency: "USD",
-                type: req.data.payment_type,
-                flw_ref: req.data.flw_ref,
-                status: req.data.status,
+                type: convert_verify_transaction_json_response.data
+                  .payment_type,
+                flw_ref: convert_verify_transaction_json_response.data.flw_ref,
+                status: convert_verify_transaction_json_response.data.status,
                 trans_ref: create_transaction.trans_id,
               },
-              customer: req.meta_data.gallery_id,
+              customer: {
+                ...convert_verify_transaction_json_response.data.customer,
+                gallery_id: req.meta_data.gallery_id,
+              },
               plan_details: {
                 type: plan.name,
                 value: plan.pricing,
                 currency: plan.currency,
+                interval: req.meta_data.plan_interval,
+              },
+              next_charge_params: {
+                value: convert_verify_transaction_json_response.data.amount,
+                currency: "USD",
+                type: plan.name,
                 interval: req.meta_data.plan_interval,
               },
             },

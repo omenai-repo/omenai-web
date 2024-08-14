@@ -6,8 +6,13 @@ import { ObjectId } from "mongoose";
 
 export default function PlanWrapper({
   plans,
+  sub_data,
 }: {
   plans: SubscriptionPlanDataTypes[];
+  sub_data: SubscriptionModelSchemaTypes & {
+    created: string;
+    updatedAt: string;
+  };
 }) {
   const [tab, setTab] = useState<"monthly" | "yearly">("monthly");
 
@@ -26,6 +31,7 @@ export default function PlanWrapper({
               plan_id={plan.plan_id}
               currency={plan.currency}
               id={plan._id}
+              sub_data={sub_data}
             />
           );
         })}

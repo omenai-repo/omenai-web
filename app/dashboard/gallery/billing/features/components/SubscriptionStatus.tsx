@@ -4,6 +4,7 @@ import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import Image from "next/image";
+import Link from "next/link";
 import { RxCross1 } from "react-icons/rx";
 
 export default function SubDetail({
@@ -74,9 +75,11 @@ export default function SubDetail({
               {/* <RxCross1 className="text-base text-white" /> */}
               <span className="text-white">Cancel Subscription</span>
             </button>
-            <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark flex gap-2 items-center">
-              <span className="text-white">Upgrade/Downgrade plan</span>
-            </button>
+            <Link href="/dashboard/gallery/billing/plans">
+              <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark flex gap-2 items-center">
+                <span className="text-white">Upgrade/Downgrade plan</span>
+              </button>
+            </Link>
           </div>
         )}
       </div>
