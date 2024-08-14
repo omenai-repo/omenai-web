@@ -95,7 +95,7 @@ export async function POST(request: Request) {
 
         // Check DB to see if a subscription with this customer reference is present
         const found_customer = await Subscriptions.findOne({
-          customer: req.meta_data.gallery_id,
+          "customer.gallery_id": req.meta_data.gallery_id,
         });
         // Create new customer subscription
 

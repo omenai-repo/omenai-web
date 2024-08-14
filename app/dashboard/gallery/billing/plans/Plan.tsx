@@ -80,7 +80,7 @@ export default function Plan({
                 <div className="mt-8">
                   <Link
                     href={`/dashboard/gallery/billing/plans/checkout?plan_id=${plan_id}&interval=${tab}&id=${id}&action=${
-                      sub_data === null && !session?.user.subscription_active
+                      sub_data === null
                         ? null
                         : +sub_data.payment.value >
                           (sub_data.plan_details.interval === "yearly"
