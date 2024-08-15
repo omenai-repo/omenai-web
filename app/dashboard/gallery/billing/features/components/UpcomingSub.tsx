@@ -5,24 +5,16 @@ import { getFutureDate } from "@/utils/getFutureDate";
 import { formatPrice } from "@/utils/priceFormatter";
 import Image from "next/image";
 export default function UpcomingSub({
-  sub_status,
-  plan_details,
-  payment,
-  end_date,
-  start_date,
+  sub_data,
 }: {
-  sub_status: string;
-  end_date: Date;
-  start_date: Date;
-  payment: { value: number; currency: string };
-  plan_details: {
-    value: { monthly_price: string; annual_price: string };
-    currency: string;
-    type: string;
-    interval: "monthly" | "yearly";
+  sub_data: SubscriptionModelSchemaTypes & {
+    created: string;
+    updatedAt: string;
   };
 }) {
-  const currency_symbol = getCurrencySymbol(payment.currency);
+  const currency_symbol = getCurrencySymbol(
+    sub_data.next_charge_params.currency
+  );
 
   return (
     <div className="ring-1 ring-[#e0e0e0] rounded-md p-5 h-[200px] relative">
@@ -39,18 +31,22 @@ export default function UpcomingSub({
             className="w-fit h-fit"
           />
           <div>
-            <h1 className="font-bold text-xs">Omenai {plan_details.type}</h1>
+            <h1 className="font-bold text-xs">
+              Omenai {sub_data.plan_details.type}
+            </h1>
             <p className="font-normal text-[13px]">
-              {daysLeft(end_date)} days left
+              {daysLeft(sub_data.expiry_date)} days left
             </p>
           </div>
         </div>
         <div className="flex flex-col">
           <h1 className="text-base font-bold">
-            {formatPrice(payment.value, currency_symbol)}
+            {formatPrice(sub_data.next_charge_params.value, currency_symbol)}
           </h1>
           <p className="text-[13px] self-end">
-            {plan_details.interval.replace(/^./, (char) => char.toUpperCase())}
+            {sub_data.plan_details.interval.replace(/^./, (char) =>
+              char.toUpperCase()
+            )}
           </p>
         </div>
       </div>
@@ -58,11 +54,14 @@ export default function UpcomingSub({
         <div className="flex flex-col gap-2 items-center justify-between px-4 font-semibold py-2 rounded-full bg-[#fafafa] text-[13px] ring-1 ring-[#e0e0e0]">
           <p className="whitespace-nowrap">
             <span className="font-bold">From:</span>{" "}
-            {formatIntlDateTime(end_date)}
+            {formatIntlDateTime(sub_data.expiry_date)}
           </p>
           <p className="whitespace-nowrap">
             <span className="font-bold">To:</span>{" "}
-            {getFutureDate(end_date, plan_details.interval)}
+            {getFutureDate(
+              sub_data.expiry_date,
+              sub_data.plan_details.interval
+            )}
           </p>
         </div>
       </div>
