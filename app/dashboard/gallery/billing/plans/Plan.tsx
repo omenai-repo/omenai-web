@@ -25,44 +25,44 @@ export default function Plan({
 }) {
   const { data: session } = useSession();
 
-  const planTiers = {
-    premium: { monthlyPrice: 400, yearlyPrice: 4000 },
-    pro: { monthlyPrice: 250, yearlyPrice: 2500 },
-    basic: { monthlyPrice: 150, yearlyPrice: 1500 },
-  };
+  // const planTiers = {
+  //   premium: { monthlyPrice: 400, yearlyPrice: 4000 },
+  //   pro: { monthlyPrice: 250, yearlyPrice: 2500 },
+  //   basic: { monthlyPrice: 150, yearlyPrice: 1500 },
+  // };
 
-  function determinePlanChange(
-    currentPlan: string,
-    currentInterval: "monthly" | "yearly",
-    newPrice: number,
-    newInterval: "monthly" | "yearly"
-  ): PlanChangeResult {
-    const currentPlanData = planTiers[currentPlan as keyof typeof planTiers];
-    const currentPrice = currentPlanData[`${currentInterval}Price`];
+  // function determinePlanChange(
+  //   currentPlan: string,
+  //   currentInterval: "monthly" | "yearly",
+  //   newPrice: number,
+  //   newInterval: "monthly" | "yearly"
+  // ): PlanChangeResult {
+  //   const currentPlanData = planTiers[currentPlan as keyof typeof planTiers];
+  //   const currentPrice = currentPlanData[`${currentInterval}Price`];
 
-    const planOrder = ["basic", "pro", "premium"];
-    const currentPlanIndex = planOrder.indexOf(currentPlan);
-    const newPlanIndex = planOrder.findIndex(
-      (plan) =>
-        planTiers[plan as keyof typeof planTiers][`${newInterval}Price`] ===
-        newPrice
-    );
+  //   const planOrder = ["basic", "pro", "premium"];
+  //   const currentPlanIndex = planOrder.indexOf(currentPlan);
+  //   const newPlanIndex = planOrder.findIndex(
+  //     (plan) =>
+  //       planTiers[plan as keyof typeof planTiers][`${newInterval}Price`] ===
+  //       newPrice
+  //   );
 
-    const isUpgrade = newPlanIndex > currentPlanIndex;
-    const shouldCharge = newPrice > currentPrice;
+  //   const isUpgrade = newPlanIndex > currentPlanIndex;
+  //   const shouldCharge = newPrice > currentPrice;
 
-    return {
-      action: isUpgrade ? "upgrade" : "downgrade",
-      shouldCharge,
-    };
-  }
+  //   return {
+  //     action: isUpgrade ? "upgrade" : "downgrade",
+  //     shouldCharge,
+  //   };
+  // }
 
-  const { action, shouldCharge } = determinePlanChange(
-    sub_data.plan_details.type.toLowerCase(),
-    sub_data.plan_details.interval.toLowerCase() as "yearly" | "monthly",
-    tab === "yearly" ? +pricing.annual_price : +pricing.monthly_price,
-    tab
-  );
+  // const { action, shouldCharge } = determinePlanChange(
+  //   sub_data.plan_details.type.toLowerCase(),
+  //   sub_data.plan_details.interval.toLowerCase() as "yearly" | "monthly",
+  //   tab === "yearly" ? +pricing.annual_price : +pricing.monthly_price,
+  //   tab
+  // );
 
   return (
     <>
