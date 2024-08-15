@@ -6,7 +6,7 @@ const subscriptions = new Schema<SubscriptionModelSchemaTypes>(
     expiry_date: { type: Date, required: true },
     payment: { type: Schema.Types.Mixed, required: true },
     card: { type: Schema.Types.Mixed, required: true },
-    customer: { type: Schema.Types.Mixed, required: true },
+    customer: { type: Schema.Types.Mixed, required: true, index: true },
     status: { type: String, required: true },
     plan_details: {
       type: Schema.Types.Mixed,
