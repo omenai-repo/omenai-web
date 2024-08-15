@@ -136,6 +136,7 @@ export async function POST(request: Request) {
               currency: "USD",
               type: plan.name,
               interval: req.meta_data.plan_interval,
+              id: plan._id,
             },
           };
 

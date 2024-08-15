@@ -10,6 +10,9 @@ import { LoadSmall } from "@/components/loader/Load";
 import { useRouter } from "next/navigation";
 import { getApiUrl } from "@/config";
 import { useLocalStorage } from "usehooks-ts";
+import { downgradeSubscriptionPlan } from "@/services/subscriptions/downgradeSubscriptionPlan";
+import { useSession } from "next-auth/react";
+
 export default function CheckoutBillingCard({
   plan,
   interval,
@@ -19,7 +22,7 @@ export default function CheckoutBillingCard({
   plan: SubscriptionPlanDataTypes & {
     createdAt: string;
     updatedAt: string;
-    _id: ObjectId;
+    _id: string;
   };
   sub_data: SubscriptionModelSchemaTypes & {
     created: string;
@@ -28,6 +31,7 @@ export default function CheckoutBillingCard({
   interval: string;
   amount: number;
 }) {
+  const { data: session } = useSession();
   const [transaction_id, set_transaction_id] = useLocalStorage(
     "flw_trans_id",
     ""
@@ -36,6 +40,7 @@ export default function CheckoutBillingCard({
     sub_data.plan_details.interval === "yearly" && interval === "monthly";
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [migrationLoading, setMigrationLoading] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -66,6 +71,27 @@ export default function CheckoutBillingCard({
     }
 
     setLoading(false);
+  }
+
+  async function handleMigrateToPlan() {
+    setMigrationLoading(true);
+
+    const data: NextChargeParams = {
+      value:
+        interval === "monthly"
+          ? +plan.pricing.monthly_price
+          : +plan.pricing.annual_price,
+      currency: "USD",
+      type: plan.name,
+      interval,
+      id: plan._id as string,
+    };
+
+    const migrate = await downgradeSubscriptionPlan(data, session!.user.id);
+
+    if (!migrate?.isOk) toast.error(migrate?.message);
+    else toast.success("Migration successful");
+    setMigrationLoading(false);
   }
 
   return (
@@ -113,8 +139,18 @@ export default function CheckoutBillingCard({
         </div> */}
       </div>
       {is_effected_end_of_billing_cycle ? (
-        <button className="flex gap-2 items-center w-full my-5 justify-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white hover:bg-dark/90">
-          <span>Migrate to plan</span>
+        <button
+          disabled={migrationLoading}
+          onClick={handleMigrateToPlan}
+          className="flex gap-2 items-center w-full my-5 justify-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white hover:bg-dark/90"
+        >
+          {migrationLoading ? (
+            <LoadSmall />
+          ) : (
+            <span className="flex items-center gap-x-2">
+              <IoIosLock /> <span>Migrate to Plan</span>
+            </span>
+          )}
         </button>
       ) : (
         <button
@@ -122,7 +158,13 @@ export default function CheckoutBillingCard({
           disabled={loading}
           className="flex gap-2 items-center w-full my-5 justify-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white hover:bg-dark/90"
         >
-          {loading ? <LoadSmall /> : "Pay now"}
+          {loading ? (
+            <LoadSmall />
+          ) : (
+            <span className="flex items-center gap-x-2">
+              <IoIosLock /> <span>Pay now</span>
+            </span>
+          )}
         </button>
       )}
     </>
