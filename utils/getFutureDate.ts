@@ -1,7 +1,4 @@
-export function getFutureDate(
-  dateString: Date,
-  interval: "monthly" | "yearly"
-): string {
+export function getFutureDate(dateString: Date, interval: string): string {
   const date = new Date(dateString);
 
   const year = date.getFullYear();

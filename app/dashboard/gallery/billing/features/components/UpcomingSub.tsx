@@ -32,11 +32,8 @@ export default function UpcomingSub({
           />
           <div>
             <h1 className="font-bold text-xs">
-              Omenai {sub_data.plan_details.type}
+              Omenai {sub_data.next_charge_params.type}
             </h1>
-            <p className="font-normal text-[13px]">
-              {daysLeft(sub_data.expiry_date)} days left
-            </p>
           </div>
         </div>
         <div className="flex flex-col">
@@ -44,7 +41,7 @@ export default function UpcomingSub({
             {formatPrice(sub_data.next_charge_params.value, currency_symbol)}
           </h1>
           <p className="text-[13px] self-end">
-            {sub_data.plan_details.interval.replace(/^./, (char) =>
+            {sub_data.next_charge_params.interval.replace(/^./, (char) =>
               char.toUpperCase()
             )}
           </p>
@@ -60,7 +57,7 @@ export default function UpcomingSub({
             <span className="font-bold">To:</span>{" "}
             {getFutureDate(
               sub_data.expiry_date,
-              sub_data.plan_details.interval
+              sub_data.next_charge_params.interval
             )}
           </p>
         </div>

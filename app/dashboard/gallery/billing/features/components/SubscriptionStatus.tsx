@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RxCross1 } from "react-icons/rx";
 import { plan_details } from "../../plans/plan_details";
+import { daysLeft } from "@/utils/daysLeft";
 
 export default function SubDetail({
   sub_data,
@@ -41,6 +42,9 @@ export default function SubDetail({
             </h1>
             <p className="font-semibold text-[12px]">
               Next Due: {formatIntlDateTime(sub_data.expiry_date)}
+            </p>
+            <p className="font-normal text-[13px]">
+              {daysLeft(sub_data.expiry_date)} days left
             </p>
             <p className=" text-[13px] text-green-600 font-bold">
               {sub_data.status.toUpperCase()}

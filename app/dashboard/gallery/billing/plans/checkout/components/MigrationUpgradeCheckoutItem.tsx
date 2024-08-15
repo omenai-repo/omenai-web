@@ -20,7 +20,7 @@ export default function MigrationUpgradeCheckoutItem({
   plan: SubscriptionPlanDataTypes & {
     createdAt: string;
     updatedAt: string;
-    _id: ObjectId;
+    _id: string;
   };
   interval: string;
   sub_data: SubscriptionModelSchemaTypes & {
@@ -36,6 +36,7 @@ export default function MigrationUpgradeCheckoutItem({
     endOfYear(startDate),
     startOfYear(startDate)
   );
+
   const daysInMonth = getDaysInMonth(startDate);
 
   const days_left = getDaysLeft(startDate, sub_data.plan_details.interval);
@@ -55,11 +56,12 @@ export default function MigrationUpgradeCheckoutItem({
 
   const currency = getCurrencySymbol(plan.currency);
 
+  const total = upgrade_cost - prorated_cost;
+
+  const grand_total = Math.round((total + Number.EPSILON) * 100) / 100;
+
   const is_effected_end_of_billing_cycle =
     sub_data.plan_details.interval === "yearly" && interval === "monthly";
-
-  const total = upgrade_cost - prorated_cost;
-  const grand_total = Math.round((total + Number.EPSILON) * 100) / 100;
 
   return (
     <>

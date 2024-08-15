@@ -323,13 +323,15 @@ type SubscriptionModelSchemaTypes = {
     currency: string;
     interval: "monthly" | "yearly";
   };
-  next_charge_params: {
-    value: number;
-    currency: string;
-    type: string;
-    interval: "monthly" | "yearly";
-    plan_id: string;
-  };
+  next_charge_params: NextChargeParams;
+};
+
+type NextChargeParams = {
+  value: number;
+  currency: string;
+  type: string;
+  interval: string;
+  id: string;
 };
 type SubscriptionPaymentTypes = {
   status: string;
