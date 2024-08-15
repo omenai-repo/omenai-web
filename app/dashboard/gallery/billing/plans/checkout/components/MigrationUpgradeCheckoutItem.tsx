@@ -3,6 +3,14 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import CheckoutBillingCard from "./CheckoutBillingCard";
 import { ObjectId } from "mongoose";
+import { getDaysLeft } from "@/utils/getDaysLeft";
+import {
+  differenceInDays,
+  startOfYear,
+  endOfYear,
+  endOfMonth,
+  getDaysInMonth,
+} from "date-fns";
 
 export default function MigrationUpgradeCheckoutItem({
   plan,
@@ -22,13 +30,23 @@ export default function MigrationUpgradeCheckoutItem({
 }) {
   const days_used = daysElapsedSince(sub_data.start_date);
 
-  const days_left = interval === "yearly" ? 365 - days_used : 30 - days_used;
+  const startDate = new Date(sub_data.start_date);
 
-  const prorated_cost =
-    days_used === 0
-      ? 0
-      : (days_left / (interval === "yearly" ? 365 : 30)) *
-        +sub_data.payment.value;
+  const daysInYear = differenceInDays(
+    endOfYear(startDate),
+    startOfYear(startDate)
+  );
+  const daysInMonth = getDaysInMonth(startDate);
+
+  const days_left = getDaysLeft(startDate, sub_data.plan_details.interval);
+
+  const dailyRate =
+    +sub_data.payment.value /
+    (sub_data.plan_details.interval === "yearly" ? daysInYear : daysInMonth);
+
+  const proratedPrice = days_left * dailyRate;
+
+  const prorated_cost = days_used > 0 ? proratedPrice : 0;
 
   const upgrade_cost =
     interval === "monthly"
@@ -41,6 +59,8 @@ export default function MigrationUpgradeCheckoutItem({
     sub_data.plan_details.interval === "yearly" && interval === "monthly";
 
   const total = upgrade_cost - prorated_cost;
+  const grand_total = Math.round((total + Number.EPSILON) * 100) / 100;
+
   return (
     <>
       <div className="bg-white shadow-md rounded-sm">
@@ -80,7 +100,7 @@ export default function MigrationUpgradeCheckoutItem({
             <p className="text-xs font-bold">
               {is_effected_end_of_billing_cycle
                 ? formatPrice(0, currency)
-                : `${formatPrice(total, currency)}`}
+                : `${formatPrice(grand_total, currency)}`}
             </p>
           </div>
           {is_effected_end_of_billing_cycle && (
@@ -96,7 +116,7 @@ export default function MigrationUpgradeCheckoutItem({
         sub_data={sub_data}
         interval={interval}
         plan={plan}
-        amount={total}
+        amount={grand_total}
       />
     </>
   );
