@@ -42,22 +42,11 @@ export default function SubscriptionActiveTheme({
             />
           </div>
 
-          <SubDetail
-            sub_status={subscription_data.status}
-            plan_details={subscription_data.plan_details}
-            end_date={subscription_data.expiry_date}
-            payment={subscription_data.payment}
-          />
+          <SubDetail sub_data={subscription_data} />
         </div>
 
         <div className="grid 2xl:grid-cols-2 items-center gap-3 w-full">
-          <UpcomingSub
-            start_date={subscription_data.start_date}
-            sub_status={subscription_data.status}
-            plan_details={subscription_data.plan_details}
-            end_date={subscription_data.expiry_date}
-            payment={subscription_data.payment}
-          />
+          <UpcomingSub sub_data={subscription_data} />
 
           <BillingInfo />
         </div>
