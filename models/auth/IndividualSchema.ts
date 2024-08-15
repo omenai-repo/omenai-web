@@ -24,6 +24,7 @@ const individualSignupSchema = new Schema<IndividualSchemaTypes>(
     user_id: {
       type: String,
       default: () => uuidv4(),
+      index: true,
     },
 
     preferences: {

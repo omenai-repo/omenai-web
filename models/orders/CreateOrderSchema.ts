@@ -5,11 +5,12 @@ const createOrder = new Schema<CreateOrderModelTypes>(
   {
     artwork_data: { type: Schema.Types.Mixed, required: true },
     buyer: { type: Schema.Types.Mixed, required: true },
-    gallery_id: { type: String, required: true },
+    gallery_id: { type: String, required: true, index: true },
     order_id: {
       type: String,
       default: () => generateDigit(7),
       unique: true,
+      index: true,
     },
     status: { type: String, required: true, default: "pending" },
     shipping_address: { type: Schema.Types.Mixed, required: true },

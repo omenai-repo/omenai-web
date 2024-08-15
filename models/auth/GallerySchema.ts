@@ -28,6 +28,7 @@ const gallerySignupSchema = new Schema<GallerySchemaTypes>(
       type: String,
       required: true,
       unique: true,
+      index: true,
     },
     password: {
       type: String,
@@ -52,6 +53,7 @@ const gallerySignupSchema = new Schema<GallerySchemaTypes>(
     gallery_id: {
       type: String,
       default: () => uuidv4(),
+      index: true,
     },
     logo: {
       type: String,

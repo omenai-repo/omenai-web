@@ -149,7 +149,7 @@ export async function POST(request: Request) {
           );
         } else
           await Subscriptions.updateOne(
-            { customer: req.data.customer.email },
+            { "customer.email": req.data.customer.email },
             {
               $set: {
                 card: convert_verify_transaction_json_response.data.card,
