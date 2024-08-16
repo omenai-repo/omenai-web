@@ -7,17 +7,17 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const { email } = await request.json();
+    const { gallery_id } = await request.json();
 
     const cancel_subscription = await Subscriptions.updateOne(
-      { "customer.email": email },
-      { $set: { sub_status: "cancelled" } }
+      { "customer.gallery_id": gallery_id },
+      { $set: { status: "canceled" } }
     );
 
     if (!cancel_subscription)
       throw new ServerError("An error has occured, please try again");
     return NextResponse.json(
-      { message: "Subscription cancelled" },
+      { message: "Subscription has been canceled" },
       { status: 200 }
     );
   } catch (error) {
