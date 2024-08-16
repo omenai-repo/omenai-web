@@ -11,6 +11,7 @@ import {
   endOfMonth,
   getDaysInMonth,
 } from "date-fns";
+import { determinePlanChange } from "@/utils/determinePlanChange";
 
 export default function MigrationUpgradeCheckoutItem({
   plan,
@@ -22,7 +23,7 @@ export default function MigrationUpgradeCheckoutItem({
     updatedAt: string;
     _id: string;
   };
-  interval: string;
+  interval: "yearly" | "monthly";
   sub_data: SubscriptionModelSchemaTypes & {
     created: string;
     updatedAt: string;
@@ -60,8 +61,22 @@ export default function MigrationUpgradeCheckoutItem({
 
   const grand_total = Math.round((total + Number.EPSILON) * 100) / 100;
 
-  const is_effected_end_of_billing_cycle =
-    sub_data.plan_details.interval === "yearly" && interval === "monthly";
+  let plan_change_params: { action: string; shouldCharge: boolean } = {
+    action: "",
+    shouldCharge: false,
+  };
+
+  if (sub_data !== null) {
+    const { action, shouldCharge } = determinePlanChange(
+      sub_data.plan_details.type.toLowerCase(),
+      sub_data.plan_details.interval.toLowerCase() as "yearly" | "monthly",
+      interval === "yearly"
+        ? +plan.pricing.annual_price
+        : +plan.pricing.monthly_price,
+      interval
+    );
+    plan_change_params = { action, shouldCharge };
+  }
 
   return (
     <>
@@ -91,7 +106,7 @@ export default function MigrationUpgradeCheckoutItem({
             <p className="text-xs font-bold">Prorated cost</p>
 
             <p className="text-xs font-bold">
-              {is_effected_end_of_billing_cycle
+              {!plan_change_params.shouldCharge
                 ? formatPrice(0, currency)
                 : `-${formatPrice(prorated_cost, currency)}`}
             </p>
@@ -100,12 +115,12 @@ export default function MigrationUpgradeCheckoutItem({
             <p className="text-xs font-bold">Due today</p>
 
             <p className="text-xs font-bold">
-              {is_effected_end_of_billing_cycle
+              {!plan_change_params.shouldCharge
                 ? formatPrice(0, currency)
                 : `${formatPrice(grand_total, currency)}`}
             </p>
           </div>
-          {is_effected_end_of_billing_cycle && (
+          {!plan_change_params.shouldCharge && (
             <p className="text-[13px] font-bold text-red-600 mt-5">
               NOTE: Your plan change will take effect at the end of your current
               billing cycle.
@@ -119,6 +134,7 @@ export default function MigrationUpgradeCheckoutItem({
         interval={interval}
         plan={plan}
         amount={grand_total}
+        shouldCharge={plan_change_params.shouldCharge}
       />
     </>
   );

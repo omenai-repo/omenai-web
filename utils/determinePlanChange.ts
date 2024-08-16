@@ -26,7 +26,7 @@ export function determinePlanChange(
       newPrice
   );
 
-  const isUpgrade = newPlanIndex > currentPlanIndex;
+  const isUpgrade = newPlanIndex >= currentPlanIndex;
   const shouldCharge = newPrice > currentPrice;
 
   return {
