@@ -18,6 +18,7 @@ export default function CheckoutBillingCard({
   interval,
   sub_data,
   amount,
+  shouldCharge,
 }: {
   plan: SubscriptionPlanDataTypes & {
     createdAt: string;
@@ -30,6 +31,7 @@ export default function CheckoutBillingCard({
   };
   interval: string;
   amount: number;
+  shouldCharge: boolean;
 }) {
   const { data: session } = useSession();
   const [transaction_id, set_transaction_id] = useLocalStorage(
@@ -138,7 +140,7 @@ export default function CheckoutBillingCard({
           </button>
         </div> */}
       </div>
-      {is_effected_end_of_billing_cycle ? (
+      {!shouldCharge ? (
         <button
           disabled={migrationLoading}
           onClick={handleMigrateToPlan}
