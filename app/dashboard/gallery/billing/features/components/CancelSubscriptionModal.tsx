@@ -5,6 +5,7 @@ import { cancelSubscription } from "@/services/subscriptions/cancelSubscription"
 import { galleryModalStore } from "@/store/gallery/gallery_modals/GalleryModals";
 import { formatIntlDateTime } from "@/utils/formatIntlDateTime";
 import { formatISODate } from "@/utils/formatISODate";
+import { useQueryClient } from "@tanstack/react-query";
 import { Modal } from "flowbite-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -24,6 +25,8 @@ export default function CancelSubscriptionModal({
     state.updateOpenModal,
   ]);
 
+  const query_client = useQueryClient();
+
   const [loading, setLoading] = useState(false);
 
   const cancel_subscription = async () => {
@@ -32,6 +35,7 @@ export default function CancelSubscriptionModal({
 
     if (response?.isOk) {
       setLoading(false);
+      query_client.invalidateQueries({ queryKey: ["get_sub_data"] });
       toast.success(response.message);
       updateOpenModal();
       router.refresh();

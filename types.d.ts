@@ -314,7 +314,7 @@ type SubscriptionModelSchemaTypes = {
   };
   start_date: Date;
   expiry_date: Date;
-  status: "active" | "cancelled" | "expired";
+  status: "active" | "canceled" | "expired";
   card: SubscriptionCardDetails;
   payment: SubscriptionPaymentTypes;
   plan_details: {

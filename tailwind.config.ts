@@ -62,7 +62,7 @@ const config: Config = withMT({
 
       backgroundImage: {
         "hero-image": "url('/images/e96e5841821e79f985088d21e301bed7.jpeg')",
-        "billing-card": "url('/images/card_curve.jpg')",
+        "billing-card": "url('/images/curve.jpg')",
       },
     },
   },

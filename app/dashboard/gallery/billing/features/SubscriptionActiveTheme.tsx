@@ -53,7 +53,7 @@ export default function SubscriptionActiveTheme({
 
         <CancelSubscriptionModal
           sub_end={subscription_data.expiry_date}
-          id={subscription_data.customer}
+          id={session.data!.user.id}
         />
       </div>
 

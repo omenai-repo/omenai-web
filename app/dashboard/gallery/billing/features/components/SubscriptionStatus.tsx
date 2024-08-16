@@ -5,8 +5,7 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import Image from "next/image";
 import Link from "next/link";
-import { RxCross1 } from "react-icons/rx";
-import { plan_details } from "../../plans/plan_details";
+
 import { daysLeft } from "@/utils/daysLeft";
 
 export default function SubDetail({
@@ -23,7 +22,7 @@ export default function SubDetail({
 
   const currency_symbol = getCurrencySymbol(sub_data.plan_details.currency);
   return (
-    <div className="ring-1 ring-[#e0e0e0] rounded-md p-5 h-[200px] relative">
+    <div className="ring-1 ring-[#e0e0e0] rounded-md p-8 h-[250px] relative">
       <div className="w-full flex justify-start relative z-10 my-2">
         <p className="text-dark text-xs font-semibold">Subscription Info</p>
       </div>
@@ -41,12 +40,18 @@ export default function SubDetail({
               Omenai {sub_data.plan_details.type}
             </h1>
             <p className="font-semibold text-[12px]">
-              Next Due: {formatIntlDateTime(sub_data.expiry_date)}
+              Due date: {formatIntlDateTime(sub_data.expiry_date)}
             </p>
             <p className="font-normal text-[13px]">
               {daysLeft(sub_data.expiry_date)} days left
             </p>
-            <p className=" text-[13px] text-green-600 font-bold">
+            <p
+              className={`text-[13px] ${
+                sub_data.status === "canceled" || sub_data.status === "expired"
+                  ? "text-red-600"
+                  : "text-green-600"
+              }  font-bold`}
+            >
               {sub_data.status.toUpperCase()}
             </p>
           </div>
@@ -67,8 +72,8 @@ export default function SubDetail({
           </p>
         </div>
       </div>
-      <div className="absolute bottom-5 left-4">
-        {sub_data.status === "cancelled" ? (
+      <div className="absolute bottom-5 left-8 mt-4">
+        {sub_data.status === "canceled" ? (
           <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
             Reactivate Subscription
           </button>
