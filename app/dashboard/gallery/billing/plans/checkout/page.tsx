@@ -72,7 +72,7 @@ export default function SubscriptionCheckout() {
               <div className="col-span-1">
                 <MigrationUpgradeCheckoutItem
                   plan={data?.plans}
-                  interval={interval}
+                  interval={interval as "yearly" | "monthly"}
                   sub_data={data?.sub_data}
                 />
               </div>
