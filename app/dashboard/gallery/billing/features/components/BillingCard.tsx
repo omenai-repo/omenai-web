@@ -13,19 +13,22 @@ export default function BillingCard({
   type: string;
 }) {
   return (
-    <div className="rounded-md ring-1 ring-[#e0e0e0] bg-no-repeat text-dark bg-blend-overlay p-5 relative w-full h-[200px]">
+    <div className="rounded-2xl ring-1 bg-billing-card ring-[#e0e0e0] bg-no-repeat text-white bg-blend-overlay p-8 relative w-full h-[250px]">
+      <div className="absolute inset-0 bg-dark/50 rounded-2xl" />
       <div className="w-full flex justify-start relative z-10 my-2">
-        <p className="text-dark text-xs font-semibold">Billing card details</p>
+        <p className="text-white text-xs font-semibold">Billing card details</p>
       </div>
       {/* Icon */}
       <div className="flex justify-between items-center relative z-10">
         <div>
           <div className="flex space-x-3 items-center">
-            <p className="text-xs text-dark font-bold dark whitespace-nowrap tracking-widest">
+            <p className="text-md text-white font-bold  whitespace-nowrap tracking-[0.15rem]">
               {first_6digits} ** **** {last_4digits}
             </p>
           </div>
-          <p className="text-normal text-xs font-normal text-dark ">{expiry}</p>
+          <p className="text-normal text-base font-bold text-white ">
+            {expiry}
+          </p>
         </div>
 
         <Image
@@ -37,9 +40,8 @@ export default function BillingCard({
         />
       </div>
       <div className="w-full flex justify-start absolute bottom-5 left-4">
-        <button className="flex gap-2 items-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white hover:bg-dark/90">
-          <FaPen />
-          <span>Update Card info</span>
+        <button className="flex gap-2 items-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-full text-[13px] bg-white h-[40px] px-4 text-dark hover:text-white hover:bg-dark duration-300">
+          <span>Change card</span>
         </button>
       </div>
     </div>

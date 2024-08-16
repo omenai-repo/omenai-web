@@ -68,7 +68,7 @@ export default function SubscriptionCheckout() {
                 <CheckoutItem plan={data?.plans} interval={interval} />
                 <CheckoutStepper plan={data?.plans} />
               </div>
-            ) : action === "upgrade" ? (
+            ) : (
               <div className="col-span-1">
                 <MigrationUpgradeCheckoutItem
                   plan={data?.plans}
@@ -76,8 +76,6 @@ export default function SubscriptionCheckout() {
                   sub_data={data?.sub_data}
                 />
               </div>
-            ) : (
-              <></>
             )}
             <div className="col-span-2" />
           </div>

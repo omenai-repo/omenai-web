@@ -1,11 +1,11 @@
 import { getApiUrl } from "@/config";
 
-export async function cancelSubscription(email: string) {
+export async function cancelSubscription(gallery_id: string) {
   try {
     const url = getApiUrl();
     const res = await fetch(`${url}/api/subscriptions/cancelSubscription`, {
       method: "POST",
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ gallery_id }),
     });
 
     const result = await res.json();

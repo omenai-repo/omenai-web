@@ -17,51 +17,68 @@ export default function UpcomingSub({
   );
 
   return (
-    <div className="ring-1 ring-[#e0e0e0] rounded-md p-5 h-[200px] relative">
+    <div className="ring-1 ring-[#e0e0e0] rounded-md p-8 h-[250px] relative">
       <div className="w-full flex justify-start relative z-10 my-2">
         <p className="text-dark text-xs font-semibold">Upcoming</p>
       </div>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-x-3">
-          <Image
-            src={"/omenai_logo_cut.png"}
-            width={20}
-            height={20}
-            alt="Omenai logo cut"
-            className="w-fit h-fit"
-          />
-          <div>
-            <h1 className="font-bold text-xs">
-              Omenai {sub_data.next_charge_params.type}
-            </h1>
+      {(sub_data.status === "canceled" || sub_data.status) && (
+        <div className="flex flex-col gap-y-3">
+          <p className="text-[13px] font-bold text-red-600">
+            Subscription {sub_data.status}
+          </p>
+          <button className="absolute bottom-5 left-8 mt-4 h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
+            Reactivate Subscription
+          </button>
+        </div>
+      )}
+      {sub_data.status === "active" && (
+        <>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-x-3">
+              <Image
+                src={"/omenai_logo_cut.png"}
+                width={20}
+                height={20}
+                alt="Omenai logo cut"
+                className="w-fit h-fit"
+              />
+              <div>
+                <h1 className="font-bold text-xs">
+                  Omenai {sub_data.next_charge_params.type}
+                </h1>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <h1 className="text-base font-bold">
+                {formatPrice(
+                  sub_data.next_charge_params.value,
+                  currency_symbol
+                )}
+              </h1>
+              <p className="text-[13px] self-end">
+                {sub_data.next_charge_params.interval.replace(/^./, (char) =>
+                  char.toUpperCase()
+                )}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col">
-          <h1 className="text-base font-bold">
-            {formatPrice(sub_data.next_charge_params.value, currency_symbol)}
-          </h1>
-          <p className="text-[13px] self-end">
-            {sub_data.next_charge_params.interval.replace(/^./, (char) =>
-              char.toUpperCase()
-            )}
-          </p>
-        </div>
-      </div>
-      <div className=" mt-5 w-full">
-        <div className="flex flex-col gap-2 items-center justify-between px-4 font-semibold py-2 rounded-full bg-[#fafafa] text-[13px] ring-1 ring-[#e0e0e0]">
-          <p className="whitespace-nowrap">
-            <span className="font-bold">From:</span>{" "}
-            {formatIntlDateTime(sub_data.expiry_date)}
-          </p>
-          <p className="whitespace-nowrap">
-            <span className="font-bold">To:</span>{" "}
-            {getFutureDate(
-              sub_data.expiry_date,
-              sub_data.next_charge_params.interval
-            )}
-          </p>
-        </div>
-      </div>
+          <div className=" mt-5 w-full">
+            <div className="flex flex-col gap-2 items-center justify-between px-4 font-semibold py-2 rounded-full bg-[#fafafa] text-[13px] ring-1 ring-[#e0e0e0]">
+              <p className="whitespace-nowrap">
+                <span className="font-bold">From:</span>{" "}
+                {formatIntlDateTime(sub_data.expiry_date)}
+              </p>
+              <p className="whitespace-nowrap">
+                <span className="font-bold">To:</span>{" "}
+                {getFutureDate(
+                  sub_data.expiry_date,
+                  sub_data.next_charge_params.interval
+                )}
+              </p>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -82,7 +82,9 @@ export default function MigrationUpgradeCheckoutItem({
     <>
       <div className="bg-white shadow-md rounded-sm">
         <div className="w-full p-5 bg-dark text-white">
-          <p className="text-[13px] font-normal">Subscription upgrade</p>
+          <p className="text-[13px] font-normal">
+            Subscription ${plan_change_params.action}
+          </p>
           <h1 className="text-base font-medium ">
             Omenai {plan.name} subscription
           </h1>
@@ -97,7 +99,7 @@ export default function MigrationUpgradeCheckoutItem({
             <p className="text-xs font-bold">{days_used} days elapsed</p>
           </div>
           <div className="flex justify-between items-center">
-            <p className="text-xs font-bold">Plan upgrade cost</p>
+            <p className="text-xs font-bold">Plan cost</p>
             <p className="text-xs font-bold">
               {formatPrice(upgrade_cost, currency)}
             </p>
