@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { ObjectId } from "mongoose";
 import { useSession } from "next-auth/react";
-
+import { determinePlanChange } from "@/utils/determinePlanChange";
 interface PlanChangeResult {
   action: "upgrade" | "downgrade";
   shouldCharge: boolean;
@@ -23,46 +23,20 @@ export default function Plan({
     updatedAt: string;
   };
 }) {
-  const { data: session } = useSession();
+  let plan_change_params: { action: string; shouldCharge: boolean } = {
+    action: "",
+    shouldCharge: false,
+  };
 
-  // const planTiers = {
-  //   premium: { monthlyPrice: 400, yearlyPrice: 4000 },
-  //   pro: { monthlyPrice: 250, yearlyPrice: 2500 },
-  //   basic: { monthlyPrice: 150, yearlyPrice: 1500 },
-  // };
-
-  // function determinePlanChange(
-  //   currentPlan: string,
-  //   currentInterval: "monthly" | "yearly",
-  //   newPrice: number,
-  //   newInterval: "monthly" | "yearly"
-  // ): PlanChangeResult {
-  //   const currentPlanData = planTiers[currentPlan as keyof typeof planTiers];
-  //   const currentPrice = currentPlanData[`${currentInterval}Price`];
-
-  //   const planOrder = ["basic", "pro", "premium"];
-  //   const currentPlanIndex = planOrder.indexOf(currentPlan);
-  //   const newPlanIndex = planOrder.findIndex(
-  //     (plan) =>
-  //       planTiers[plan as keyof typeof planTiers][`${newInterval}Price`] ===
-  //       newPrice
-  //   );
-
-  //   const isUpgrade = newPlanIndex > currentPlanIndex;
-  //   const shouldCharge = newPrice > currentPrice;
-
-  //   return {
-  //     action: isUpgrade ? "upgrade" : "downgrade",
-  //     shouldCharge,
-  //   };
-  // }
-
-  // const { action, shouldCharge } = determinePlanChange(
-  //   sub_data.plan_details.type.toLowerCase(),
-  //   sub_data.plan_details.interval.toLowerCase() as "yearly" | "monthly",
-  //   tab === "yearly" ? +pricing.annual_price : +pricing.monthly_price,
-  //   tab
-  // );
+  if (sub_data !== null) {
+    const { action, shouldCharge } = determinePlanChange(
+      sub_data.plan_details.type.toLowerCase(),
+      sub_data.plan_details.interval.toLowerCase() as "yearly" | "monthly",
+      tab === "yearly" ? +pricing.annual_price : +pricing.monthly_price,
+      tab
+    );
+    plan_change_params = { action, shouldCharge };
+  }
 
   return (
     <>
@@ -124,14 +98,7 @@ export default function Plan({
                 <div className="mt-8">
                   <Link
                     href={`/dashboard/gallery/billing/plans/checkout?plan_id=${plan_id}&interval=${tab}&id=${id}&action=${
-                      sub_data === null
-                        ? null
-                        : +sub_data.payment.value >
-                          (sub_data.plan_details.interval === "yearly"
-                            ? +pricing.annual_price
-                            : +pricing.monthly_price)
-                        ? "downgrade"
-                        : "upgrade"
+                      sub_data === null ? null : plan_change_params.action
                     }`}
                     aria-describedby="tier-plan"
                   >

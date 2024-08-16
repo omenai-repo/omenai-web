@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     const cancel_subscription = await Subscriptions.updateOne(
       { "customer.email": email },
-      { $set: { sub_status: "cancelled" } }
+      { $set: { status: "cancelled" } }
     );
 
     if (!cancel_subscription)
