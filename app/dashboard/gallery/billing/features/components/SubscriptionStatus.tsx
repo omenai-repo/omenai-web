@@ -74,9 +74,13 @@ export default function SubDetail({
       </div>
       <div className="absolute bottom-5 left-8 mt-4">
         {sub_data.status === "canceled" ? (
-          <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
-            Reactivate Subscription
-          </button>
+          <Link
+            href={`/dashboard/gallery/billing/plans?plan_action=reactivation`}
+          >
+            <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
+              Reactivate Subscription
+            </button>
+          </Link>
         ) : (
           <div className="flex gap-x-2 items-center">
             <button

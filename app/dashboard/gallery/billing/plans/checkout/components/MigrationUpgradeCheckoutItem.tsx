@@ -2,13 +2,11 @@ import { daysElapsedSince } from "@/utils/daysElapsedSince";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import CheckoutBillingCard from "./CheckoutBillingCard";
-import { ObjectId } from "mongoose";
 import { getDaysLeft } from "@/utils/getDaysLeft";
 import {
   differenceInDays,
   startOfYear,
   endOfYear,
-  endOfMonth,
   getDaysInMonth,
 } from "date-fns";
 import { determinePlanChange } from "@/utils/determinePlanChange";
@@ -83,7 +81,7 @@ export default function MigrationUpgradeCheckoutItem({
       <div className="bg-white shadow-md rounded-sm">
         <div className="w-full p-5 bg-dark text-white">
           <p className="text-[13px] font-normal">
-            Subscription ${plan_change_params.action}
+            Subscription {plan_change_params.action}
           </p>
           <h1 className="text-base font-medium ">
             Omenai {plan.name} subscription

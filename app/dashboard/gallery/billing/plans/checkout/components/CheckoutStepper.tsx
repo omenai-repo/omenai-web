@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export function CheckoutStepper({
   plan,
 }: {
-  plan: SubscriptionPlanDataTypes & { createdAt: string; updatedAt: string };
+  plan?: SubscriptionPlanDataTypes & { createdAt: string; updatedAt: string };
 }) {
   const [activeStep, setActiveStep] = useState(0);
 
@@ -29,7 +29,7 @@ export function CheckoutStepper({
           <CardInput
             handleClick={handleNext}
             updateAuthorization={setValidateChargeAuthorization}
-            plan={plan}
+            plan={plan!}
           />
         </div>
       )}

@@ -41,6 +41,8 @@ export default function CardInput({
   const searchParams = useSearchParams();
   const interval = searchParams.get("interval");
   const plan_object_id = searchParams.get("id");
+  const charge_type = searchParams.get("charge_type");
+  const redirect = searchParams.get("redirect");
   const [transaction_id, set_transaction_id] = useLocalStorage(
     "flw_trans_id",
     ""
@@ -77,7 +79,9 @@ export default function CardInput({
         year: card_info.year.slice(2, 4),
         tx_ref: ref,
         amount:
-          interval === "monthly"
+          charge_type === "card_change"
+            ? "1"
+            : interval === "monthly"
             ? plan.pricing.monthly_price
             : plan.pricing.annual_price,
         customer: {
@@ -87,7 +91,11 @@ export default function CardInput({
           plan_id: plan_object_id!,
           plan_interval: interval!,
         },
-        redirect: `${url}/dashboard/gallery/billing/plans/checkout/verification`,
+        redirect:
+          redirect !== null
+            ? `${url}${redirect}`
+            : `${url}/dashboard/gallery/billing/plans/checkout/verification`,
+        charge_type,
       };
 
       const response = await initiateDirectCharge(data);
