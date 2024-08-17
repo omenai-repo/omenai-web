@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ObjectId } from "mongoose";
 import { useSession } from "next-auth/react";
 import { determinePlanChange } from "@/utils/determinePlanChange";
+import { useSearchParams } from "next/navigation";
 interface PlanChangeResult {
   action: "upgrade" | "downgrade";
   shouldCharge: boolean;
@@ -23,6 +24,9 @@ export default function Plan({
     updatedAt: string;
   };
 }) {
+  const searchParams = useSearchParams();
+
+  const plan_action = searchParams.get("plan_action");
   let plan_change_params: { action: string; shouldCharge: boolean } = {
     action: "",
     shouldCharge: false,
@@ -36,6 +40,19 @@ export default function Plan({
       tab
     );
     plan_change_params = { action, shouldCharge };
+  }
+
+  let buttonText = "Get started today";
+
+  if (sub_data !== null) {
+    if (
+      sub_data.plan_details.type !== name ||
+      (sub_data.plan_details.type === name &&
+        sub_data.plan_details.interval !== tab)
+    ) {
+      buttonText =
+        plan_action === "reactivation" ? "Activate plan" : "Subscribed";
+    }
   }
 
   return (
@@ -99,24 +116,19 @@ export default function Plan({
                   <Link
                     href={`/dashboard/gallery/billing/plans/checkout?plan_id=${plan_id}&interval=${tab}&id=${id}&action=${
                       sub_data === null ? null : plan_change_params.action
-                    }`}
+                    }&plan_action=${plan_action}`}
                     aria-describedby="tier-plan"
                   >
                     <button
                       disabled={
                         sub_data !== null &&
                         sub_data.plan_details.type === name &&
-                        sub_data.plan_details.interval === tab
+                        sub_data.plan_details.interval === tab &&
+                        plan_action === null
                       }
                       className="h-[40px] px-4 w-full text-[14px] text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-dark/80 bg-dark duration-300 grid place-items-center"
                     >
-                      {sub_data !== null
-                        ? sub_data.plan_details.type !== name ||
-                          (sub_data.plan_details.type === name &&
-                            sub_data.plan_details.interval !== tab)
-                          ? "Migrate to plan"
-                          : "Subscribed"
-                        : "Get started today"}
+                      {buttonText}
                     </button>
                   </Link>
                 </div>

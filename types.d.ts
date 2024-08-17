@@ -414,10 +414,11 @@ type FLWDirectChargeDataTypes = CardInputTypes & {
     name: string;
     email: string;
     gallery_id: string;
-    plan_id: string;
-    plan_interval: string;
+    plan_id?: string;
+    plan_interval?: string;
   };
   redirect: string;
+  charge_type: string | null;
 };
 
 type SubscriptionPlanDataTypes = {

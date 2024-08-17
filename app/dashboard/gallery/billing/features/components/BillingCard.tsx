@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FaPen } from "react-icons/fa6";
 
 export default function BillingCard({
@@ -39,11 +40,16 @@ export default function BillingCard({
           className="w-fit h-fit"
         />
       </div>
-      <div className="w-full flex justify-start absolute bottom-5 left-4">
+      <Link
+        href={
+          "/dashboard/gallery/billing/card/?charge_type=card_change&redirect=/dashboard/gallery/billing"
+        }
+        className="w-full flex justify-start absolute bottom-5 left-4"
+      >
         <button className="flex gap-2 items-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-full text-[13px] bg-white h-[40px] px-4 text-dark hover:text-white hover:bg-dark duration-300">
           <span>Change card</span>
         </button>
-      </div>
+      </Link>
     </div>
   );
 }

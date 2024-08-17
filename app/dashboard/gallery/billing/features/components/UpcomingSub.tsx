@@ -4,6 +4,7 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { getFutureDate } from "@/utils/getFutureDate";
 import { formatPrice } from "@/utils/priceFormatter";
 import Image from "next/image";
+import Link from "next/link";
 export default function UpcomingSub({
   sub_data,
 }: {
@@ -21,14 +22,18 @@ export default function UpcomingSub({
       <div className="w-full flex justify-start relative z-10 my-2">
         <p className="text-dark text-xs font-semibold">Upcoming</p>
       </div>
-      {(sub_data.status === "canceled" || sub_data.status) && (
+      {(sub_data.status === "canceled" || sub_data.status === "expired") && (
         <div className="flex flex-col gap-y-3">
           <p className="text-[13px] font-bold text-red-600">
             Subscription {sub_data.status}
           </p>
-          <button className="absolute bottom-5 left-8 mt-4 h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
-            Reactivate Subscription
-          </button>
+          <Link
+            href={`/dashboard/gallery/billing/plans?plan_action=reactivation`}
+          >
+            <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
+              Reactivate Subscription
+            </button>
+          </Link>
         </div>
       )}
       {sub_data.status === "active" && (

@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { retrieveSubscriptionData } from "@/services/subscriptions/retrieveSubscriptionData";
 import MigrationUpgradeCheckoutItem from "./components/MigrationUpgradeCheckoutItem";
 import CheckoutBillingCard from "./components/CheckoutBillingCard";
+import CardChangeCheckoutItem from "./components/CardChangeCheckoutItem";
 
 export default function SubscriptionCheckout() {
   const searchParams = useSearchParams();
@@ -18,6 +19,7 @@ export default function SubscriptionCheckout() {
   const interval = searchParams.get("interval");
   const id = searchParams.get("id");
   const action = searchParams.get("action");
+  const charge_type = searchParams.get("charge_type");
   const router = useRouter();
   const session = useSession();
 
@@ -65,7 +67,11 @@ export default function SubscriptionCheckout() {
           <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3 items-baseline">
             {action === "null" ? (
               <div className="col-span-1">
-                <CheckoutItem plan={data?.plans} interval={interval} />
+                {charge_type === "card_change" ? (
+                  <CardChangeCheckoutItem />
+                ) : (
+                  <CheckoutItem plan={data?.plans} interval={interval} />
+                )}
                 <CheckoutStepper plan={data?.plans} />
               </div>
             ) : (

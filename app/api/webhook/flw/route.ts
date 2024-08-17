@@ -79,8 +79,42 @@ export async function POST(request: Request) {
         // Update transaction collection
         session.startTransaction();
 
-        const data: Omit<SubscriptionTransactionModelSchemaTypes, "trans_id"> =
-          {
+        if (
+          req.meta_data.charge_type !== null &&
+          req.meta_data.charge_type === "card_change"
+        ) {
+          await Subscriptions.updateOne(
+            { "customer.gallery_id": req.meta_data.gallery_id },
+            {
+              $set: {
+                card: convert_verify_transaction_json_response.data.card,
+              },
+            }
+          );
+          const response = await fetch(
+            `https://api.flutterwave.com/v3/transactions/${convert_verify_transaction_json_response.data.id}/refund`,
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Bearer ${process.env.FLW_TEST_SECRET_KEY}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          const result = await response.json();
+          console.log(result);
+
+          if (result.status === "error")
+            return NextResponse.json({ status: 401 });
+          else {
+            return NextResponse.json({ status: 200 });
+          }
+        } else {
+          const data: Omit<
+            SubscriptionTransactionModelSchemaTypes,
+            "trans_id"
+          > = {
             amount: formatPrice(
               convert_verify_transaction_json_response.data.amount,
               currency
@@ -91,105 +125,110 @@ export async function POST(request: Request) {
             type: "subscription",
           };
 
-        const create_transaction = await SubscriptionTransactions.create(data);
+          const create_transaction = await SubscriptionTransactions.create(
+            data
+          );
 
-        // Check DB to see if a subscription with this customer reference is present
-        const found_customer = await Subscriptions.findOne({
-          "customer.gallery_id": req.meta_data.gallery_id,
-        });
-        // Create new customer subscription
-
-        const expiry_date = getSubscriptionExpiryDate(
-          req.meta_data.plan_interval
-        );
-        const plan = await SubscriptionPlan.findById(req.meta_data.plan_id);
-
-        if (!found_customer) {
-          const subscription_data = {
-            card: convert_verify_transaction_json_response.data.card,
-            start_date: date.toISOString(),
-            expiry_date: expiry_date.toISOString(),
-            status: "active",
-            payment: {
-              value: convert_verify_transaction_json_response.data.amount,
-              currency: "USD",
-              type: convert_verify_transaction_json_response.data.payment_type,
-              flw_ref: convert_verify_transaction_json_response.data.flw_ref,
-              status: convert_verify_transaction_json_response.data.status,
-              trans_ref: create_transaction.trans_id,
-            },
-            customer: {
-              ...convert_verify_transaction_json_response.data.customer,
-              gallery_id: req.meta_data.gallery_id,
-            },
-            plan_details: {
-              type: plan.name,
-              value: plan.pricing,
-              currency: plan.currency,
-              interval: req.meta_data.plan_interval,
-            },
-            next_charge_params: {
-              value:
-                req.meta_data.plan_interval === "monthly"
-                  ? +plan.pricing.monthly_price
-                  : +plan.pricing.annual_price,
-              currency: "USD",
-              type: plan.name,
-              interval: req.meta_data.plan_interval,
-              id: plan._id,
-            },
-          };
-
-          await Subscriptions.create({
-            ...subscription_data,
+          // Check DB to see if a subscription with this customer reference is present
+          const found_customer = await Subscriptions.findOne({
+            "customer.gallery_id": req.meta_data.gallery_id,
           });
+          // Create new customer subscription
 
-          await AccountGallery.updateOne(
-            { gallery_id: req.meta_data.gallery_id },
-            { $set: { subscription_active: true } }
+          const expiry_date = getSubscriptionExpiryDate(
+            req.meta_data.plan_interval
           );
-        } else
-          await Subscriptions.updateOne(
-            { "customer.email": req.data.customer.email },
-            {
-              $set: {
-                card: convert_verify_transaction_json_response.data.card,
-                start_date: date.toISOString(),
-                expiry_date: expiry_date.toISOString(),
-                status: "active",
-                payment: {
-                  value: convert_verify_transaction_json_response.data.amount,
-                  currency: "USD",
-                  type: convert_verify_transaction_json_response.data
-                    .payment_type,
-                  flw_ref:
-                    convert_verify_transaction_json_response.data.flw_ref,
-                  status: convert_verify_transaction_json_response.data.status,
-                  trans_ref: create_transaction.trans_id,
-                },
-                customer: {
-                  ...convert_verify_transaction_json_response.data.customer,
-                  gallery_id: req.meta_data.gallery_id,
-                },
-                plan_details: {
-                  type: plan.name,
-                  value: plan.pricing,
-                  currency: plan.currency,
-                  interval: req.meta_data.plan_interval,
-                },
-                next_charge_params: {
-                  value:
-                    req.meta_data.plan_interval === "monthly"
-                      ? +plan.pricing.monthly_price
-                      : +plan.pricing.annual_price,
-                  currency: "USD",
-                  type: plan.name,
-                  interval: req.meta_data.plan_interval,
-                  plan_id: plan._id,
-                },
+          const plan = await SubscriptionPlan.findById(req.meta_data.plan_id);
+
+          if (!found_customer) {
+            const subscription_data = {
+              card: convert_verify_transaction_json_response.data.card,
+              start_date: date.toISOString(),
+              expiry_date: expiry_date.toISOString(),
+              status: "active",
+              payment: {
+                value: convert_verify_transaction_json_response.data.amount,
+                currency: "USD",
+                type: convert_verify_transaction_json_response.data
+                  .payment_type,
+                flw_ref: convert_verify_transaction_json_response.data.flw_ref,
+                status: convert_verify_transaction_json_response.data.status,
+                trans_ref: create_transaction.trans_id,
               },
-            }
-          );
+              customer: {
+                ...convert_verify_transaction_json_response.data.customer,
+                gallery_id: req.meta_data.gallery_id,
+              },
+              plan_details: {
+                type: plan.name,
+                value: plan.pricing,
+                currency: plan.currency,
+                interval: req.meta_data.plan_interval,
+              },
+              next_charge_params: {
+                value:
+                  req.meta_data.plan_interval === "monthly"
+                    ? +plan.pricing.monthly_price
+                    : +plan.pricing.annual_price,
+                currency: "USD",
+                type: plan.name,
+                interval: req.meta_data.plan_interval,
+                id: plan._id,
+              },
+            };
+
+            await Subscriptions.create({
+              ...subscription_data,
+            });
+
+            await AccountGallery.updateOne(
+              { gallery_id: req.meta_data.gallery_id },
+              { $set: { subscription_active: true } }
+            );
+          } else
+            await Subscriptions.updateOne(
+              { "customer.email": req.data.customer.email },
+              {
+                $set: {
+                  card: convert_verify_transaction_json_response.data.card,
+                  start_date: date.toISOString(),
+                  expiry_date: expiry_date.toISOString(),
+                  status: "active",
+                  payment: {
+                    value: convert_verify_transaction_json_response.data.amount,
+                    currency: "USD",
+                    type: convert_verify_transaction_json_response.data
+                      .payment_type,
+                    flw_ref:
+                      convert_verify_transaction_json_response.data.flw_ref,
+                    status:
+                      convert_verify_transaction_json_response.data.status,
+                    trans_ref: create_transaction.trans_id,
+                  },
+                  customer: {
+                    ...convert_verify_transaction_json_response.data.customer,
+                    gallery_id: req.meta_data.gallery_id,
+                  },
+                  plan_details: {
+                    type: plan.name,
+                    value: plan.pricing,
+                    currency: plan.currency,
+                    interval: req.meta_data.plan_interval,
+                  },
+                  next_charge_params: {
+                    value:
+                      req.meta_data.plan_interval === "monthly"
+                        ? +plan.pricing.monthly_price
+                        : +plan.pricing.annual_price,
+                    currency: "USD",
+                    type: plan.name,
+                    interval: req.meta_data.plan_interval,
+                    plan_id: plan._id,
+                  },
+                },
+              }
+            );
+        }
       } catch (error) {
         console.log("An error occurred during the transaction:" + error);
 

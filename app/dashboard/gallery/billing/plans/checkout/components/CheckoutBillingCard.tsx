@@ -2,16 +2,16 @@
 import React, { useState } from "react";
 import { IoIosLock } from "react-icons/io";
 import Image from "next/image";
-import { ObjectId } from "mongoose";
 import { generateAlphaDigit } from "@/utils/generateToken";
 import { createTokenizedCharge } from "@/services/subscriptions/createTokenizedCharge";
 import { toast } from "sonner";
 import { LoadSmall } from "@/components/loader/Load";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getApiUrl } from "@/config";
 import { useLocalStorage } from "usehooks-ts";
-import { downgradeSubscriptionPlan } from "@/services/subscriptions/downgradeSubscriptionPlan";
 import { useSession } from "next-auth/react";
+import { updateSubscriptionPlan } from "@/services/subscriptions/updateSubscriptionPlan";
+import Link from "next/link";
 
 export default function CheckoutBillingCard({
   plan,
@@ -38,6 +38,9 @@ export default function CheckoutBillingCard({
     "flw_trans_id",
     ""
   );
+  const [error, setError] = useState<string>("");
+  const searchParams = useSearchParams();
+  const plan_action = searchParams.get("plan_action");
   const is_effected_end_of_billing_cycle =
     sub_data.plan_details.interval === "yearly" && interval === "monthly";
 
@@ -49,6 +52,7 @@ export default function CheckoutBillingCard({
   const url = getApiUrl();
 
   async function handlePayNow() {
+    setError("");
     const tokenized_data: SubscriptionTokenizationTypes = {
       amount,
       email: sub_data.customer.email,
@@ -65,11 +69,14 @@ export default function CheckoutBillingCard({
       toast.error("Couldn't create tokenized card charge");
     else {
       const { data } = tokenize_card;
-      console.log(data);
-      set_transaction_id(data.data.id);
-      router.replace(
-        `${url}/dashboard/gallery/billing/plans/checkout/verification`
-      );
+      if (data.status === "error") setError(data.message);
+      else {
+        console.log(data);
+        set_transaction_id(data.data.id);
+        router.replace(
+          `${url}/dashboard/gallery/billing/plans/checkout/verification`
+        );
+      }
     }
 
     setLoading(false);
@@ -89,11 +96,16 @@ export default function CheckoutBillingCard({
       id: plan._id as string,
     };
 
-    const migrate = await downgradeSubscriptionPlan(data, session!.user.id);
+    const migrate = await updateSubscriptionPlan(
+      data,
+      session!.user.id,
+      typeof plan_action === "string" ? plan_action : ""
+    );
 
     if (!migrate?.isOk) toast.error(migrate?.message);
     else toast.success("Migration successful");
     setMigrationLoading(false);
+    router.replace("/dashboard/gallery/billing");
   }
 
   return (
@@ -133,13 +145,22 @@ export default function CheckoutBillingCard({
             className="w-fit h-fit"
           />
         </div>
-        {/* <div className="w-full flex justify-start absolute bottom-5 left-4">
-          <button className="flex gap-2 items-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white hover:bg-dark/90">
-            <FaPen />
-            <span>Update Card info</span>
-          </button>
-        </div> */}
+        <div className="w-full flex justify-start mb-2 mt-5">
+          <Link
+            href={
+              "/dashboard/gallery/billing/card/?charge_type=card_change&redirect=/dashboard/gallery/billing"
+            }
+            className="w-full flex justify-start mt-5 mb-2"
+          >
+            <button className="flex gap-2 items-center disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm text-[13px] bg-dark h-[40px] px-4 text-white  hover:bg-dark/80 duration-300">
+              <span>Change card</span>
+            </button>
+          </Link>
+        </div>
       </div>
+      {error && (
+        <p className="text-[13px] text-red-600 font-bold py-2">{error}</p>
+      )}
       {!shouldCharge ? (
         <button
           disabled={migrationLoading}
@@ -150,7 +171,7 @@ export default function CheckoutBillingCard({
             <LoadSmall />
           ) : (
             <span className="flex items-center gap-x-2">
-              <IoIosLock /> <span>Migrate to Plan</span>
+              <IoIosLock /> <span>Activate Plan</span>
             </span>
           )}
         </button>

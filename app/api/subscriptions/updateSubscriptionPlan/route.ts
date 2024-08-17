@@ -7,11 +7,23 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     await connectMongoDB();
-    const { data, gallery_id } = await request.json();
+    const { data, gallery_id, action } = await request.json();
+
+    const current_plan = await Subscriptions.findOne(
+      {
+        "customer.gallery_id": gallery_id,
+      },
+      "status"
+    );
 
     const updateFuturePlan = await Subscriptions.updateOne(
       { "customer.gallery_id": gallery_id },
-      { $set: { next_charge_params: data } }
+      {
+        $set: {
+          next_charge_params: data,
+          status: action === "reactivation" ? "active" : current_plan.status,
+        },
+      }
     );
 
     if (!updateFuturePlan)
