@@ -47,4 +47,5 @@ const artworkUpload = new Schema<ArtworkSchemaTypes>(
 );
 
 export const Artworkuploads =
-  models.Artworkuploads || mongoose.model("Artworkuploads", artworkUpload);
+  mongoose.models.Artworkuploads ||
+  mongoose.model("Artworkuploads", artworkUpload);

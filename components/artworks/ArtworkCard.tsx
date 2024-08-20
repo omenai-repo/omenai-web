@@ -50,27 +50,17 @@ export default function ArtworkCard({
               className="min-w-[180px] w-[180px] xxl:w-[200px] md:min-w-[250px] max-h-[400px] md:w-[250px] h-auto aspect-auto object-contain object-center cursor-pointer"
             />
           </Link>
-          {isDashboard ? null : (
-            <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
-              <LikeComponent
-                impressions={impressions}
-                likeIds={likeIds}
-                sessionId={sessionId}
-                art_id={art_id}
-              />
-            </div>
-          )}
         </div>
 
         <div className=" bg-[#FAFAFA] border border-[#E0E0E0] px-3 y-2 w-full">
-          <div className="flex flex-col space--y-1 my-2">
+          <div className="flex flex-col space-y-1 my-2">
             <p className="font-semibold text-[14px] text-dark ">
               {name}
               {/* {name.length > 20 && "..."} */}
             </p>
 
             <div className="flex justify-between items-center">
-              <p className="font-normal text-dark text-xs">
+              <p className="font-normal text-dark text-[13px]">
                 {artist.substring(0, 20)}
                 {artist.length > 20 && "..."}
               </p>
@@ -88,16 +78,58 @@ export default function ArtworkCard({
 
             {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
               !availability ? (
-                <p className="font-semibold text-xs text-dark">Sold</p>
+                <div className="flex justify-between items-center">
+                  <p className="font-semibold text-xs text-dark">Sold</p>
+                  {isDashboard ? null : (
+                    <LikeComponent
+                      impressions={impressions}
+                      likeIds={likeIds}
+                      sessionId={sessionId}
+                      art_id={art_id}
+                    />
+                  )}
+                </div>
               ) : (
-                <p className="font-semibold text-xs text-dark">
-                  {formatPrice(pricing.usd_price)}
-                </p>
+                <div className="flex justify-between items-center">
+                  <p className="font-semibold text-xs text-dark">
+                    {formatPrice(pricing.usd_price)}
+                  </p>
+                  {isDashboard ? null : (
+                    <LikeComponent
+                      impressions={impressions}
+                      likeIds={likeIds}
+                      sessionId={sessionId}
+                      art_id={art_id}
+                    />
+                  )}
+                </div>
               )
             ) : !availability ? (
-              <p className="font-semibold text-xs text-dark">Sold</p>
+              <div className="flex justify-between items-center">
+                <p className="font-semibold text-xs text-dark">Sold</p>
+                {isDashboard ? null : (
+                  <LikeComponent
+                    impressions={impressions}
+                    likeIds={likeIds}
+                    sessionId={sessionId}
+                    art_id={art_id}
+                  />
+                )}
+              </div>
             ) : (
-              <p className="font-semibold text-xs">Price on request</p>
+              <div className="flex justify-between items-center">
+                <p className="font-semibold text-xs text-dark">
+                  Price on request
+                </p>
+                {isDashboard ? null : (
+                  <LikeComponent
+                    impressions={impressions}
+                    likeIds={likeIds}
+                    sessionId={sessionId}
+                    art_id={art_id}
+                  />
+                )}
+              </div>
             )}
           </div>
         </div>

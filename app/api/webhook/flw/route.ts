@@ -103,7 +103,6 @@ export async function POST(request: Request) {
           );
 
           const result = await response.json();
-          console.log(result);
 
           if (result.status === "error")
             return NextResponse.json({ status: 401 });

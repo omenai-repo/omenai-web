@@ -1,8 +1,12 @@
-import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
+import {
+  ForbiddenError,
+  ServerError,
+} from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { stripe } from "@/lib/payments/stripe/stripe";
 import { AccountGallery } from "@/models/auth/GallerySchema";
+import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -17,7 +21,25 @@ export async function POST(request: Request) {
       throw new ServerError("Something went wrong. Please try again");
     // Use an existing Customer ID if this is a returning customer.
 
-    const commission = Math.round(amount * 0.3 * 100);
+    // Get current plam details to ascertain plan package
+
+    const active_subscription = await Subscriptions.findOne(
+      { "customer.gallery_id": gallery_id },
+      "plan_details status"
+    );
+
+    // Calculate commision value based on plan package
+    if (!active_subscription || active_subscription.status !== "active")
+      throw new ForbiddenError("No active subscription for this user");
+
+    const commision_rate =
+      active_subscription.plan_details.type === "premium"
+        ? 0.15
+        : active_subscription.plan_details.type === "pro"
+        ? 0.2
+        : 0.3;
+
+    const commission = Math.round(amount * commision_rate * 100);
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100),

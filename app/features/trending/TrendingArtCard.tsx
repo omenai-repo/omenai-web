@@ -43,38 +43,36 @@ export default function TrendingArtworkCard({
               className="min-w-[220px] aspect-auto object-top object-cover cursor-pointer"
             />
           </Link>
-          <div className="absolute bottom-3 right-3 p-1 rounded-full bg-white border-dark/10 grid place-items-center">
-            <LikeComponent
-              impressions={impressions}
-              likeIds={likeIds}
-              sessionId={sessionId}
-              art_id={art_id}
-            />
-          </div>
         </div>
 
         <div className="mb-[3rem] bg-[#FAFAFA] py-2 px-3">
-          <div className="flex justify-between items-center my-2">
+          <div className="flex justify-between items-center">
             <p className="font-normal text-[14px] text-dark ">
               {name.substring(0, 20)}
               {name.length > 20 && "..."}
             </p>
           </div>
           <div className="flex justify-between items-center">
-            <p className="font-normal text-dark text-xs">
+            <p className="font-normal text-dark text-[13px]">
               {artist.substring(0, 20)}
               {artist.length > 20 && "..."}
             </p>
-            <span className="text-xs text-dark my-2">
-              {impressions} like(s)
+            <span className="text-xs flex gap-x-1 text-dark my-2">
+              {impressions}
+              <LikeComponent
+                impressions={impressions}
+                likeIds={likeIds}
+                sessionId={sessionId}
+                art_id={art_id}
+              />
             </span>
           </div>
 
-          <hr className="border-dark/10 my-5" />
+          {/* <hr className="border-dark/10 my-5" />
           <div className="flex gap-x-2 mb-2 items-center">
             <ArtworkCardTags tag={medium} />
             <ArtworkCardTags tag={rarity} />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
