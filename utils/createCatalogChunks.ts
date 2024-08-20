@@ -8,8 +8,19 @@ export function catalogChunk<T>(arr: T[], n: number): T[][] {
   if (arr.length === 0) {
     return [];
   }
-  const chunkSize = Math.ceil(arr.length / n);
-  return Array.from({ length: n }, (_, index) =>
-    arr.slice(index * chunkSize, (index + 1) * chunkSize)
-  );
+
+  const baseChunkSize = Math.floor(arr.length / n);
+  const remainder = arr.length % n;
+
+  let chunks: T[][] = [];
+  let startIndex = 0;
+
+  for (let i = 0; i < n; i++) {
+    const currentChunkSize = baseChunkSize + (i < remainder ? 1 : 0);
+    const endIndex = startIndex + currentChunkSize;
+    chunks.push(arr.slice(startIndex, endIndex));
+    startIndex = endIndex;
+  }
+
+  return chunks;
 }

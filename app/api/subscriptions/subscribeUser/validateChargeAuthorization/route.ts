@@ -22,6 +22,7 @@ export async function POST(request: Request) {
         type: "subscription",
         plan_id: data.customer.plan_id,
         plan_interval: data.customer.plan_interval,
+        charge_type: data.charge_type,
       },
       authorization: data.authorization,
     };
