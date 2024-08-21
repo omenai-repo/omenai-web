@@ -25,7 +25,6 @@ export async function POST(request: Request) {
         charge_type: data.charge_type,
       },
     };
-    console.log(payload);
 
     const encrypted_payload = encryptPayload(
       process.env.FLW_TEST_ENCRYPTION_KEY!,
