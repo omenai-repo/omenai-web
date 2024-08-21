@@ -1,5 +1,4 @@
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
-import { encryptPayload } from "@/lib/encryption/encrypt_payload";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
