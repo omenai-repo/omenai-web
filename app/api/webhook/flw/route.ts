@@ -10,6 +10,7 @@ import { getSubscriptionExpiryDate } from "@/utils/getSubscriptionExpiryDate";
 import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
+
 export async function POST(request: Request) {
   const req = await request.json();
   const secretHash = process.env.FLW_SECRET_HASH!;
@@ -86,8 +87,6 @@ export async function POST(request: Request) {
 
     const convert_verify_transaction_json_response =
       await verify_transaction.json();
-
-    console.log(convert_verify_transaction_json_response.data);
 
     if (
       convert_verify_transaction_json_response.data.status === "successful" &&
@@ -277,6 +276,13 @@ export async function POST(request: Request) {
                 },
               }
             );
+
+          await AccountGallery.updateOne(
+            {
+              gallery_id,
+            },
+            { $set: { subscription_active: true } }
+          );
         }
       } catch (error) {
         console.log("An error occurred during the transaction:" + error);
