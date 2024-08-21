@@ -8,8 +8,8 @@ export async function fetchAllArtworks(
   url: string
 ) {
   try {
-    const url = getApiUrl();
-    const res = await fetch(`${url}/api/viewHistory/createViewHistory`, {
+    const baseUrl = getApiUrl();
+    const res = await fetch(`${baseUrl}/api/viewHistory/createViewHistory`, {
       method: "POST",
 
       body: JSON.stringify({ artwork, artist, art_id, user_id, url }),
