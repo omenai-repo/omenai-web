@@ -103,12 +103,6 @@ export async function POST(request: Request) {
       gallery_id: { $in: [...basicGalleryIds, ...proPremiumGalleryIds] },
     });
 
-    // Return the paginated results and the total count
-
-    // Return the paginated results
-
-    // Return the paginated results
-
     return NextResponse.json(
       {
         message: "Successful",
