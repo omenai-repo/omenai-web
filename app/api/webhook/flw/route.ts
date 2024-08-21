@@ -86,6 +86,8 @@ export async function POST(request: Request) {
     const convert_verify_transaction_json_response =
       await verify_transaction.json();
 
+    console.log(convert_verify_transaction_json_response.data);
+
     if (
       convert_verify_transaction_json_response.data.status === "successful" &&
       convert_verify_transaction_json_response.data.tx_ref ===
