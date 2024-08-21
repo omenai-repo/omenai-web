@@ -19,11 +19,7 @@
 
   "crons": [
     {
-      "path": "/api/cron",
-      "schedule": "0 0 * * *"
-    },
-    {
-      "path": "/api/cron/check_expired_subscriptions",
+      "path": "/api/cron/subscriptions/check_expired_subscriptions",
       "schedule": "0 0 * * *"
     }
   ]
