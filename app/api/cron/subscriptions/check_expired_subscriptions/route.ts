@@ -57,14 +57,9 @@ export async function GET() {
         fullname: doc.customer.name,
         country: doc.card.country.slice(-2),
         amount: doc.next_charge_params.value.toString(),
-        tx_ref,
-        meta: {
-          gallery_id: doc.customer.gallery_id,
-          type: "subscription",
-          plan_id: doc.next_charge_params.id,
-          plan_interval: doc.next_charge_params.interval,
-          charge_type: null,
-        },
+        tx_ref: `${tx_ref}&${doc.customer.gallery_id}&${
+          doc.next_charge_params.id
+        }&${doc.next_charge_params.interval}&${null}`,
       };
     });
 

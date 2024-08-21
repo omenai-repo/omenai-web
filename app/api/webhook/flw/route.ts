@@ -43,16 +43,14 @@ export async function POST(request: Request) {
 
   if (req.event === "charge.completed") {
     // Check if this transaction has already been processed
-    // const existingTransaction = await SubscriptionTransactions.findOne({
-    //   reference: req.data.id,
-    // });
+    const existingTransaction = await SubscriptionTransactions.findOne({
+      reference: req.data.id,
+    });
 
-    // if (existingTransaction) {
-    //   // Transaction already processed
-    //   return NextResponse.json({ status: 200 });
-    // }
-
-    console.log(req.data);
+    if (existingTransaction) {
+      // Transaction already processed
+      return NextResponse.json({ status: 200 });
+    }
 
     if (req.data.status === "failed") {
       await sendSubscriptionPaymentFailedMail({
@@ -113,16 +111,26 @@ export async function POST(request: Request) {
         // Update transaction collection
         session.startTransaction();
 
+        const parts =
+          convert_verify_transaction_json_response.data.tx_ref.split("&");
+
+        if (parts.length !== 5) {
+          // Handle error: Unexpected format
+          console.error("Unexpected tx_ref format");
+          return NextResponse.json({ status: 401 });
+        }
+
+        const [ref, gallery_id, plan_id, plan_interval, charge_type] = parts;
+
         if (
-          convert_verify_transaction_json_response.meta_data.charge_type !==
-            null &&
-          convert_verify_transaction_json_response.meta_data.charge_type ===
-            "card_change"
+          charge_type !== "null" &&
+          charge_type !== null &&
+          charge_type !== undefined &&
+          charge_type === "card_change"
         ) {
           await Subscriptions.updateOne(
             {
-              "customer.gallery_id":
-                convert_verify_transaction_json_response.meta_data.gallery_id,
+              "customer.gallery_id": gallery_id,
             },
             {
               $set: {
@@ -159,8 +167,7 @@ export async function POST(request: Request) {
               currency
             ),
             date,
-            gallery_id:
-              convert_verify_transaction_json_response.meta_data.gallery_id,
+            gallery_id: gallery_id,
             reference: convert_verify_transaction_json_response.data.id,
             type: "subscription",
           };
@@ -171,17 +178,12 @@ export async function POST(request: Request) {
 
           // Check DB to see if a subscription with this customer reference is present
           const found_customer = await Subscriptions.findOne({
-            "customer.gallery_id":
-              convert_verify_transaction_json_response.meta_data.gallery_id,
+            "customer.gallery_id": gallery_id,
           });
           // Create new customer subscription
 
-          const expiry_date = getSubscriptionExpiryDate(
-            convert_verify_transaction_json_response.meta_data.plan_interval
-          );
-          const plan = await SubscriptionPlan.findById(
-            convert_verify_transaction_json_response.meta_data.plan_id
-          );
+          const expiry_date = getSubscriptionExpiryDate(plan_interval);
+          const plan = await SubscriptionPlan.findById(plan_id);
 
           if (!found_customer) {
             const subscription_data = {
@@ -200,28 +202,22 @@ export async function POST(request: Request) {
               },
               customer: {
                 ...convert_verify_transaction_json_response.data.customer,
-                gallery_id:
-                  convert_verify_transaction_json_response.meta_data.gallery_id,
+                gallery_id,
               },
               plan_details: {
                 type: plan.name,
                 value: plan.pricing,
                 currency: plan.currency,
-                interval:
-                  convert_verify_transaction_json_response.meta_data
-                    .plan_interval,
+                interval: plan_interval,
               },
               next_charge_params: {
                 value:
-                  convert_verify_transaction_json_response.meta_data
-                    .plan_interval === "monthly"
+                  plan_interval === "monthly"
                     ? +plan.pricing.monthly_price
                     : +plan.pricing.annual_price,
                 currency: "USD",
                 type: plan.name,
-                interval:
-                  convert_verify_transaction_json_response.meta_data
-                    .plan_interval,
+                interval: plan_interval,
                 id: plan._id,
               },
             };
@@ -235,8 +231,7 @@ export async function POST(request: Request) {
 
             await AccountGallery.updateOne(
               {
-                gallery_id:
-                  convert_verify_transaction_json_response.meta_data.gallery_id,
+                gallery_id,
               },
               { $set: { subscription_active: true } }
             );
@@ -265,29 +260,22 @@ export async function POST(request: Request) {
                   },
                   customer: {
                     ...convert_verify_transaction_json_response.data.customer,
-                    gallery_id:
-                      convert_verify_transaction_json_response.meta_data
-                        .gallery_id,
+                    gallery_id: gallery_id,
                   },
                   plan_details: {
                     type: plan.name,
                     value: plan.pricing,
                     currency: plan.currency,
-                    interval:
-                      convert_verify_transaction_json_response.meta_data
-                        .plan_interval,
+                    interval: plan_interval,
                   },
                   next_charge_params: {
                     value:
-                      convert_verify_transaction_json_response.meta_data
-                        .plan_interval === "monthly"
+                      plan_interval === "monthly"
                         ? +plan.pricing.monthly_price
                         : +plan.pricing.annual_price,
                     currency: "USD",
                     type: plan.name,
-                    interval:
-                      convert_verify_transaction_json_response.meta_data
-                        .plan_interval,
+                    interval: plan_interval,
                     plan_id: plan._id,
                   },
                 },

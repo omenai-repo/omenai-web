@@ -15,15 +15,8 @@ export async function POST(request: Request) {
       amount: data.amount,
       email: data.customer.email,
       fullname: data.customer.name,
-      tx_ref: data.tx_ref,
+      tx_ref: `${data.tx_ref}&${data.customer.gallery_id}&${data.customer.plan_id}&${data.customer.plan_interval}&${data.charge_type}`,
       redirect_url: data.redirect,
-      meta: {
-        gallery_id: data.customer.gallery_id,
-        type: "subscription",
-        plan_id: data.customer.plan_id,
-        plan_interval: data.customer.plan_interval,
-        charge_type: data.charge_type,
-      },
     };
 
     const encrypted_payload = encryptPayload(
