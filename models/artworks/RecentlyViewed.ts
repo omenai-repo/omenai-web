@@ -13,11 +13,10 @@ const recentView = new Schema(
     user: {
       type: String,
       required: true,
-      unique: true,
     },
     art_id: {
       type: String,
-      unique: true,
+      required: true,
     },
     url: { type: String, required: true },
   },

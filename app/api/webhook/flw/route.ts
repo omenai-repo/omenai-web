@@ -9,19 +9,49 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { getSubscriptionExpiryDate } from "@/utils/getSubscriptionExpiryDate";
 import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
-
+import crypto from "crypto";
 export async function POST(request: Request) {
   const req = await request.json();
-  const secretHash = process.env.FLW_SECRET_HASH;
+  const secretHash = process.env.FLW_SECRET_HASH!;
   const signature = request.headers.get("verif-hash");
 
-  if (!signature || signature !== secretHash) {
+  if (!signature) {
     // This request isn't from Flutterwave, discard
+    return NextResponse.json({ status: 401 });
+  }
+
+  // Convert the signature and secret hash to Buffers
+  const signatureBuffer = Buffer.from(signature, "utf8");
+  const secretHashBuffer = Buffer.from(secretHash, "utf8");
+
+  // Check if they have the same length
+  if (signatureBuffer.length !== secretHashBuffer.length) {
+    return NextResponse.json({ status: 401 });
+  }
+
+  // Use crypto.timingSafeEqual to compare
+  const isValidSignature = crypto.timingSafeEqual(
+    signatureBuffer,
+    secretHashBuffer
+  );
+
+  if (!isValidSignature) {
+    // Signature doesn't match, discard the request
     return NextResponse.json({ status: 401 });
   }
   // Send failure mail if status is failure
 
   if (req.event === "charge.completed") {
+    // Check if this transaction has already been processed
+    const existingTransaction = await SubscriptionTransactions.findOne({
+      reference: req.data.id,
+    });
+
+    if (existingTransaction) {
+      // Transaction already processed
+      return NextResponse.json({ status: 200 });
+    }
+
     if (req.data.status === "failed") {
       await sendSubscriptionPaymentFailedMail({
         name: req.data.customer.name,
@@ -89,7 +119,8 @@ export async function POST(request: Request) {
               $set: {
                 card: convert_verify_transaction_json_response.data.card,
               },
-            }
+            },
+            { session }
           );
           const response = await fetch(
             `https://api.flutterwave.com/v3/transactions/${convert_verify_transaction_json_response.data.id}/refund`,
@@ -176,9 +207,12 @@ export async function POST(request: Request) {
               },
             };
 
-            await Subscriptions.create({
-              ...subscription_data,
-            });
+            await Subscriptions.create(
+              {
+                ...subscription_data,
+              },
+              { session }
+            );
 
             await AccountGallery.updateOne(
               { gallery_id: req.meta_data.gallery_id },
@@ -225,7 +259,8 @@ export async function POST(request: Request) {
                     plan_id: plan._id,
                   },
                 },
-              }
+              },
+              { session }
             );
         }
       } catch (error) {
