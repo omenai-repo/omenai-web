@@ -137,8 +137,7 @@ export async function POST(request: Request) {
               $set: {
                 card: convert_verify_transaction_json_response.data.card,
               },
-            },
-            { session }
+            }
           );
           const response = await fetch(
             `https://api.flutterwave.com/v3/transactions/${convert_verify_transaction_json_response.data.id}/refund`,
@@ -168,7 +167,7 @@ export async function POST(request: Request) {
               currency
             ),
             date,
-            gallery_id: gallery_id,
+            gallery_id,
             reference: convert_verify_transaction_json_response.data.id,
             type: "subscription",
           };
@@ -223,12 +222,9 @@ export async function POST(request: Request) {
               },
             };
 
-            await Subscriptions.create(
-              {
-                ...subscription_data,
-              },
-              { session }
-            );
+            await Subscriptions.create({
+              ...subscription_data,
+            });
 
             await AccountGallery.updateOne(
               {
@@ -239,8 +235,7 @@ export async function POST(request: Request) {
           } else
             await Subscriptions.updateOne(
               {
-                "customer.email":
-                  convert_verify_transaction_json_response.data.customer.email,
+                "customer.gallery_id": gallery_id,
               },
               {
                 $set: {
@@ -280,8 +275,7 @@ export async function POST(request: Request) {
                     plan_id: plan._id,
                   },
                 },
-              },
-              { session }
+              }
             );
         }
       } catch (error) {
