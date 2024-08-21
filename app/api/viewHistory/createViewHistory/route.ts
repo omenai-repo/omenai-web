@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   try {
     await connectMongoDB();
 
-    const { artwork, user_id, art_id, artist } = await request.json();
+    const { artwork, user_id, art_id, artist, url } = await request.json();
     const checkIfViewed = await RecentView.findOne({
       artwork,
       user: user_id,
@@ -22,6 +22,7 @@ export async function POST(request: Request) {
       user: user_id,
       art_id,
       artist,
+      url,
     });
 
     return NextResponse.json({ status: 200 });
