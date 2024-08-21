@@ -42,7 +42,10 @@ export async function POST(request: Request) {
   // Send failure mail if status is failure
 
   if (req.event === "charge.completed") {
+    const client = await connectMongoDB();
+
     // Check if this transaction has already been processed
+
     const existingTransaction = await SubscriptionTransactions.findOne({
       reference: req.data.id,
     });
@@ -95,8 +98,6 @@ export async function POST(request: Request) {
       convert_verify_transaction_json_response.data.currency ===
         req.data.currency
     ) {
-      const client = await connectMongoDB();
-
       // Create a session with the initialized MongoClient
       const session = await client.startSession();
 
