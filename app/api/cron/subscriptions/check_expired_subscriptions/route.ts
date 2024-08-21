@@ -35,6 +35,14 @@ export async function GET() {
       "customer card next_charge_params"
     );
 
+    if (expired_user_emails.length === 0) {
+      await session.abortTransaction();
+      return NextResponse.json(
+        { message: "No exxpired subscriptions" },
+        { status: 200 }
+      );
+    }
+
     const emailsToUpdate = expired_user_emails.map((email) => {
       return email.customer.email;
     });
