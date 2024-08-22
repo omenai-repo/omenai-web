@@ -86,7 +86,7 @@ export default function Filter() {
       </div>
       {selectedFilters.length > 0 && (
         <>
-          <div className="flex flex-wrap gap-2 items-center p-4 cursor-pointer">
+          <div className="flex flex-wrap gap-2 items-center py-4 px-2 cursor-pointer">
             {selectedFilters.map((filter) => {
               return <FilterPill key={filter.name} filter={filter.name} />;
             })}
@@ -100,7 +100,7 @@ export default function Filter() {
             <button
               onClick={handleSubmitFilter}
               disabled={isEmptyFilter(filterOptions)}
-              className="px-3 py-1 border border-dark/10 hover:bg-dark duration-200 hover:text-white rounded-full flex gap-x-2 items-center text-[13px] font-normal"
+              className="px-3 py-1 bg-dark hover:bg-dark duration-200 text-white rounded-full flex gap-x-2 items-center text-[13px] font-normal"
             >
               <span>Apply filters </span>
               <FaCheckCircle />
@@ -111,16 +111,14 @@ export default function Filter() {
 
       <div
         className={`${
-          width >= 960 || showFilterBlock ? "grid" : "hidden"
-        } duration-200 sm:grid-cols-2 lg:grid-cols-4 gap-x-2 items-center px-0`}
+          width >= 960 || showFilterBlock ? "flex" : "hidden"
+        } flex gap-x-2`}
       >
         <PriceFilter />
         <YearFilter />
         <MediumFilter />
         <RarityFilter />
       </div>
-
-      <hr className="border-dark/10" />
     </div>
   );
 }

@@ -29,7 +29,7 @@ const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
           onClick={() => setOpen((pv) => !pv)}
           className="flex items-center gap-1 pl-3 py-2 rounded-sm text-dark transition-colors"
         >
-          <span className="md:block font-medium whitespace-nowrap text-xs hidden">
+          <span className="md:block font-normal whitespace-nowrap text-xs hidden">
             {user}
           </span>
           <BiUser className="text-sm" />

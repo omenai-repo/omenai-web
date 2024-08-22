@@ -25,7 +25,7 @@ export default function Banner() {
           </div>
         </div>
         <div className="" onClick={() => handleSignout()}>
-          <button className="px-2 py-1 sm:px-4 sm:py-2 md:px-5 md:py-3 bg-dark text-white font-medium border text-xs border-dark hover:border-dark/30">
+          <button className="px-2 py-1 sm:px-4 sm:py-2 md:px-5 md:py-3 bg-dark text-white font-normal border text-xs border-dark hover:border-dark/30">
             Logout
           </button>
         </div>

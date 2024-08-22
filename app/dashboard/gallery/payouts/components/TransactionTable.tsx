@@ -64,23 +64,23 @@ export function TransactionTable({
             return (
               <tr key={data.id}>
                 <td className={`${classes}`}>
-                  <p className="font-medium text-[14px]">{data.id}</p>
+                  <p className="font-normal text-[14px]">{data.id}</p>
                 </td>
                 <td className={`${classes}`}>
-                  <p className="font-medium text-[14px]">{data.date}</p>
+                  <p className="font-normal text-[14px]">{data.date}</p>
                 </td>
                 <td className={`${classes}`}>
-                  <p className="font-medium text-[14px]">{data.gross}</p>
+                  <p className="font-normal text-[14px]">{data.gross}</p>
                 </td>
                 <td className={`${classes}`}>
-                  <p className="font-medium text-[14px]">{data.net}</p>
+                  <p className="font-normal text-[14px]">{data.net}</p>
                 </td>
                 <td className={`${classes} flex items-center space-x-2`}>
-                  <p className="font-medium text-[14px]">{data.type}</p>
+                  <p className="font-normal text-[14px]">{data.type}</p>
                   <FiArrowDownLeft className="text-green-600" />
                 </td>
                 <td className={`${classes}`}>
-                  <p className="font-medium text-[14px] px-4 py-1 rounded-full text-white bg-green-600 w-fit">
+                  <p className="font-normal text-[14px] px-4 py-1 rounded-full text-white bg-green-600 w-fit">
                     {data.status}
                   </p>
                 </td>

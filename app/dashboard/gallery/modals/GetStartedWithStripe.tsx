@@ -85,7 +85,7 @@ export default function GetStartedWithStripe() {
             >
               <div className="relative w-full">
                 <label
-                  className="text-[#858585] font-medium text-xs mb-2"
+                  className="text-[#858585] font-normal text-xs mb-2"
                   htmlFor="name"
                 >
                   Name
@@ -99,7 +99,7 @@ export default function GetStartedWithStripe() {
               </div>
               <div className="relative w-full">
                 <label
-                  className="text-[#858585] font-medium text-xs mb-2"
+                  className="text-[#858585] font-normal text-xs mb-2"
                   htmlFor="email"
                 >
                   Email
@@ -113,7 +113,7 @@ export default function GetStartedWithStripe() {
               </div>
               <div className="relative w-full">
                 <label
-                  className="text-[#858585] font-medium text-xs mb-2"
+                  className="text-[#858585] font-normal text-xs mb-2"
                   htmlFor="email"
                 >
                   Business Location
@@ -170,7 +170,7 @@ export default function GetStartedWithStripe() {
                 <button
                   type="submit"
                   disabled={accountCreatePending}
-                  className="h-[40px] text-[14px] font-medium disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-black text-white cursor-pointer mt-5 grid place-items-center"
+                  className="h-[40px] text-[14px] font-normal disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-black text-white cursor-pointer mt-5 grid place-items-center"
                 >
                   {accountCreatePending ? (
                     <LoadSmall />
@@ -184,7 +184,7 @@ export default function GetStartedWithStripe() {
             {connectedAccountId && (
               <button
                 disabled={accountLinkCreatePending}
-                className="h-[40px] text-[14px] font-medium disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-black text-white cursor-pointer mt-5 grid place-items-center"
+                className="h-[40px] text-[14px] font-normal disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] px-4 w-full bg-black text-white cursor-pointer mt-5 grid place-items-center"
                 onClick={handleAccountLink}
               >
                 {accountLinkCreatePending ? (

@@ -110,7 +110,7 @@ export default function EditArtworkWrapper({
   return (
     <div className="mt-5">
       <div className="w-full py-3 bg-white">
-        <h1 className="text-base text-dark font-medium">
+        <h1 className="text-base text-dark font-normal">
           Update artwork pricing
         </h1>
       </div>
@@ -172,7 +172,7 @@ export default function EditArtworkWrapper({
               {data.currency !== "" &&
                 data.price !== "" &&
                 data.usd_price !== "" && (
-                  <span className=" text-dark font-medium">
+                  <span className=" text-dark font-normal">
                     Exchange rate:{" "}
                     {`${formatPrice(
                       +data.price,

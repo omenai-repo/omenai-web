@@ -5,7 +5,7 @@ export default function Action() {
     <div className="sm:absolute bottom-6 flex justify-between items-center w-full px-4 my-[1rem] text-center flex-col sm:flex-row md:flex-col lg:flex-row">
       <p className="font-normal text-xs">
         Got an account? Gotcha!{" "}
-        <Link href={"/auth/login/"} className="text-dark font-medium underline">
+        <Link href={"/auth/login/"} className="text-dark font-normal underline">
           Log in
         </Link>
       </p>
@@ -13,7 +13,7 @@ export default function Action() {
         Individual?{" "}
         <Link
           href={"/auth/register/individual"}
-          className="text-dark font-medium underline"
+          className="text-dark font-normal underline"
         >
           Sign up here
         </Link>

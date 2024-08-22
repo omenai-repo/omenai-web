@@ -42,7 +42,7 @@ function SelectSection() {
           Don’t have an account?{" "}
           <Link href={"/auth/register/gallery"}>
             {" "}
-            <span className="underline text-black font-medium">
+            <span className="underline text-black font-normal">
               Create one
             </span>{" "}
           </Link>

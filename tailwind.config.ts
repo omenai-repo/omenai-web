@@ -17,11 +17,11 @@ const config: Config = withMT({
       center: true,
     },
     fontSize: {
-      xs: "0.875rem",
+      xs: "0.8125rem",
       base: "1rem",
       sm: "1.2rem",
       md: "1.44rem",
-      lg: "1.728rem",
+      lg: "1.625rem",
       xl: "2.074rem",
       "2xl": "2.488rem",
       "3xl": "2.986rem",
@@ -63,6 +63,7 @@ const config: Config = withMT({
       backgroundImage: {
         "hero-image": "url('/images/e96e5841821e79f985088d21e301bed7.jpeg')",
         "billing-card": "url('/images/curve.jpg')",
+        "curated-bg": "url('/images/gloss_black.jpg')",
       },
     },
   },

@@ -27,7 +27,7 @@ export default function Recovery() {
               />
             </div>
             <div className="">
-              <h1 className="text-sm font-medium">Let us help</h1>
+              <h1 className="text-sm font-normal">Let us help</h1>
               <p className="text-xs font-light">
                 Enter your email so we can help recover your account
               </p>

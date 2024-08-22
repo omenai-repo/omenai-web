@@ -20,7 +20,7 @@ export default function TC() {
       exit={{ y: -100 }}
       transition={{ duration: 0.33 }}
     >
-      <h1 className="text-md font-medium mb-4">Confirm account creation</h1>
+      <h1 className="text-md font-normal mb-4">Confirm account creation</h1>
       <p className="text-xs my-4 font-normal">
         Please read through and confirm that you understand and accept all the
         terms stated
@@ -31,11 +31,11 @@ export default function TC() {
           <Checkbox id="terms of use" required className="border-dark" />
           <Label htmlFor="terms of use" className="text-dark text-xs">
             By ticking this box, I accept the{" "}
-            <Link href={"/"} className="underline font-medium">
+            <Link href={"/"} className="underline font-normal">
               Terms of use
             </Link>{" "}
             and{" "}
-            <Link href={"/"} className="underline font-medium">
+            <Link href={"/"} className="underline font-normal">
               Privacy Policy
             </Link>{" "}
             of creating an account with Omenai Inc.
@@ -54,7 +54,7 @@ export default function TC() {
         <button
           type="submit"
           disabled={isLoading}
-          className=" h-[40px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-dark text-white text-xs font-medium"
+          className=" h-[40px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-dark text-white text-xs font-normal"
         >
           {isLoading ? <LoadSmall /> : "Create account"}
         </button>

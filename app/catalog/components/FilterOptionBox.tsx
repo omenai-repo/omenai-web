@@ -38,7 +38,7 @@ export default function FilterOptionBox({
     <div
       className={`${
         open ? "block" : "hidden"
-      } w-full h-auto max-h-[300px] bg-white overflow-y-scroll absolute top-[100%] left-0 z-20 p-2`}
+      } w-[350px] h-auto max-h-auto bg-white overflow-y-scroll absolute top-[100%]  left-0 z-20 p-2`}
     >
       <div
         id="dropdownBgHover"

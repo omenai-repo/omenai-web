@@ -44,7 +44,7 @@ const GalleryVerificationEmail = (galleryName: string, token: string) => {
               <strong>10 minutes.</strong>
             </Text>
             <Section className="text-center mt-[32px] mb-[32px]">
-              <Text className="text-black text-[14px] font-medium leading-[24px]">
+              <Text className="text-black text-[14px] font-normal leading-[24px]">
                 <strong>{token}</strong>
               </Text>
             </Section>

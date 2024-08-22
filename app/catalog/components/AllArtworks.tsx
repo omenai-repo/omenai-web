@@ -11,6 +11,7 @@ import Load from "@/components/loader/Load";
 import { useWindowSize } from "usehooks-ts";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
+import { useState } from "react";
 
 export default function AllArtworks({
   sessionId,
@@ -21,6 +22,7 @@ export default function AllArtworks({
   const { isLoading, setPageCount, setArtworks, artworks } = artworkStore();
   const { filterOptions } = filterStore();
   const { width } = useWindowSize();
+  const [artwork_total, set_artwork_total] = useState(0);
 
   const { data: artworksArray, isLoading: loading } = useQuery({
     queryKey: ["get_paginated_artworks"],
@@ -32,6 +34,7 @@ export default function AllArtworks({
       if (response?.isOk) {
         setPageCount(response.count);
         setArtworks(response.data);
+        set_artwork_total(response.total);
         return response.data;
       } else throw new Error("Failed to fetch artworks");
     },
@@ -61,10 +64,12 @@ export default function AllArtworks({
 
   return (
     <div className="w-full mb-5 px-5 mt-3">
+      <p className="text-xs font-normal mb-4">{artwork_total} artworks:</p>
+
       <div className="flex flex-wrap gap-x-4 justify-center">
         {arts.map((artworks: any[], index) => {
           return (
-            <div className="flex-1 gap-4 space-y-12" key={index}>
+            <div className="flex-1 gap-2 space-y-6" key={index}>
               {artworks.map((art: any) => {
                 return (
                   <ArtworkCanvas

@@ -34,7 +34,7 @@ export const OrderActionModal = () => {
             onClick={(e) => e.stopPropagation()}
             className="bg-white text-dark p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative  overflow-y-scroll"
           >
-            <h1 className="text-base font-medium mb-5">
+            <h1 className="text-base font-normal mb-5">
               Order Request Details
             </h1>
             {/* Add modal form here */}

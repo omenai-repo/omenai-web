@@ -38,7 +38,7 @@ export default function ArtworkCard({
 }) {
   const image_href = getImageFileView(image, 200);
   return (
-    <div className="my-2 w-fit p-4 xxm:p-0 max-h-[500px]">
+    <div className="m-2 w-fit p-4 xxm:p-0 max-h-[500px]">
       <div className="flex flex-col min-w-[180px] w-[180px] xxl:w-[200px] md:min-w-[250px] h-full md:w-[250px] justify-end">
         <div className="relative w-full">
           <Link href={`/artwork/${name}`} className="relative">
@@ -54,13 +54,13 @@ export default function ArtworkCard({
 
         <div className=" bg-[#FAFAFA] border border-[#E0E0E0] px-3 y-2 w-full">
           <div className="flex flex-col space-y-1 my-2">
-            <p className="font-semibold text-[14px] text-dark ">
+            <p className="font-normal text-xs text-dark ">
               {name}
               {/* {name.length > 20 && "..."} */}
             </p>
 
             <div className="flex justify-between items-center">
-              <p className="font-normal text-dark text-[13px]">
+              <p className="font-normal text-[#858585] italic text-xs">
                 {artist.substring(0, 20)}
                 {artist.length > 20 && "..."}
               </p>
@@ -68,7 +68,7 @@ export default function ArtworkCard({
               {isDashboard && (
                 <Link href={`/dashboard/gallery/artworks/edit?id=${name}`}>
                   <button
-                    className={`disabled:cursor-not-allowed disabled:text-dark/20 text-xs font-medium underline cursor-pointer`}
+                    className={`disabled:cursor-not-allowed disabled:text-dark/20 text-xs font-normal underline cursor-pointer`}
                   >
                     Edit artwork
                   </button>
@@ -79,7 +79,7 @@ export default function ArtworkCard({
             {pricing?.price && pricing.shouldShowPrice === "Yes" ? (
               !availability ? (
                 <div className="flex justify-between items-center">
-                  <p className="font-semibold text-xs text-dark">Sold</p>
+                  <p className="font-medium text-xs text-dark">Sold</p>
                   {isDashboard ? null : (
                     <LikeComponent
                       impressions={impressions}
@@ -91,8 +91,8 @@ export default function ArtworkCard({
                 </div>
               ) : (
                 <div className="flex justify-between items-center">
-                  <p className="font-semibold text-xs text-dark">
-                    {formatPrice(pricing.usd_price)}
+                  <p className="font-medium text-xs text-dark">
+                    USD {formatPrice(pricing.usd_price)}
                   </p>
                   {isDashboard ? null : (
                     <LikeComponent
@@ -106,7 +106,7 @@ export default function ArtworkCard({
               )
             ) : !availability ? (
               <div className="flex justify-between items-center">
-                <p className="font-semibold text-xs text-dark">Sold</p>
+                <p className="font-medium text-xs text-dark">Sold</p>
                 {isDashboard ? null : (
                   <LikeComponent
                     impressions={impressions}
@@ -118,7 +118,7 @@ export default function ArtworkCard({
               </div>
             ) : (
               <div className="flex justify-between items-center">
-                <p className="font-semibold text-xs text-dark">
+                <p className="font-medium text-xs text-dark">
                   Price on request
                 </p>
                 {isDashboard ? null : (

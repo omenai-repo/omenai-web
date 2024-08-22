@@ -100,7 +100,7 @@ export default function AuthPinInput({
       onSubmit={handleSubmit}
     >
       <div className="flex justify-between items-center mb-2">
-        <h1 className="text-xs font-medium">Pin Verification</h1>
+        <h1 className="text-xs font-normal">Pin Verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />
           <span className="text-[13px]">Secure form</span>
@@ -108,7 +108,7 @@ export default function AuthPinInput({
       </div>
       <div className="relative w-full">
         <label
-          className="text-[#858585] font-medium text-xs mb-4"
+          className="text-[#858585] font-normal text-xs mb-4"
           htmlFor="otp"
         >
           Enter your 4-digit pin

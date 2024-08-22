@@ -1,30 +1,20 @@
+import { editorialData } from "../mocks/editorialMockData";
 import EditorialGridItemLarge from "./EditorialGridItemLarge";
+import EditorialGridItemsList from "./EditorialGridItemsList";
 
-export default function EditorialsGrid({
-  editorials,
-}: {
-  editorials: any[] | undefined;
-}) {
-  const sortedEditorials = editorials!.reverse().map((editorial) => {
-    const sortedEditorial = {
-      title: editorial.title,
-      summary: editorial.summary,
-      image: editorial.image,
-      id: editorial.id,
-      minutes: editorial.minutes,
-      date: editorial.date,
-    };
-    return sortedEditorial;
-  });
-
+export default function EditorialsGrid() {
   return (
     <>
-      <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:gap-x-4">
-        {sortedEditorials.map((editorial, index) => {
-          return (
-            <EditorialGridItemLarge key={editorial.id} editorial={editorial} />
-          );
-        })}
+      <div className="grid md:grid-cols-12 lg:gap-x-4 w-full">
+        <div className="col-span-12 md:col-span-6">
+          <EditorialGridItemLarge
+            key={editorialData[0].id}
+            editorial={editorialData[0]}
+          />
+        </div>
+        <div className="col-span-12 md:col-span-6">
+          <EditorialGridItemsList editorials={editorialData.slice(1, 7)} />
+        </div>
       </div>
     </>
   );

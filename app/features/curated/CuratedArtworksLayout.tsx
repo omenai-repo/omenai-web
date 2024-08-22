@@ -4,47 +4,73 @@ import Load from "@/components/loader/Load";
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
 import { useQuery } from "@tanstack/react-query";
+import useEmblaCarousel from "embla-carousel-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useState, useEffect, useCallback } from "react";
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
 
 export default function CuratedArtworksLayout({
   sessionId,
+  userCuratedArtworks,
 }: {
   sessionId: string | undefined;
+  userCuratedArtworks: any;
 }) {
-  const session = useSession();
-  const { data: userCuratedArtworks, isLoading } = useQuery({
-    queryKey: ["curated"],
-    queryFn: async () => {
-      const data = await fetchCuratedArtworks(session, 1);
-      if (data?.isOk) return data.data;
-      else throw new Error("Something went wrong");
-    },
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    watchDrag: true,
   });
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  if (isLoading)
-    return (
-      <div className="h-[500px] w-full place-items-center grid">
-        <Load />
-      </div>
-    );
+  const updateScrollProgress = () => {
+    if (!emblaApi) return;
+    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
+    setScrollProgress(progress);
+  };
 
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const handleScroll = () => {
+      requestAnimationFrame(updateScrollProgress);
+    };
+
+    emblaApi.on("scroll", handleScroll);
+    emblaApi.on("resize", updateScrollProgress);
+    updateScrollProgress(); // Initial progress update
+
+    return () => {
+      emblaApi.off("scroll", handleScroll);
+      emblaApi.off("resize", updateScrollProgress);
+    };
+  }, [emblaApi]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) {
+      emblaApi.scrollPrev();
+    }
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) {
+      emblaApi.scrollNext();
+    }
+  }, [emblaApi]);
   return (
     <>
-      {userCuratedArtworks!.length === 0 && (
-        <div className="h-[500px] w-full place-items-center grid">
-          <NotFoundData />
+      <div className="px-4 py-8 relative">
+        <div className="space-y-1">
+          <h1 className="text-md font-normal">Based on your preferences</h1>
+          <p className="text-sm text-[#858585] font-normal italic">
+            Your Art, Your Way: Explore Pieces That Resonate with You
+          </p>
         </div>
-      )}
-      {userCuratedArtworks !== undefined && userCuratedArtworks.length > 0 && (
-        <div className="py-4 md:p-4 relative">
-          <div className="space-y-1 my-10">
-            <h1 className="text-md font-normal">Based on your preferences</h1>
-            <p className="text-sm text-[#858585] font-medium italic">
-              Your Art, Your Way: Explore Pieces That Resonate with You
-            </p>
-          </div>
-          <div className="flex items-end relative overflow-x-scroll w-full space-x-4">
+        <div className="embla" ref={emblaRef}>
+          <div className="embla__container">
             {userCuratedArtworks.map((artwork: any, index: number) => {
               return (
                 <ArtworkCard
@@ -72,7 +98,32 @@ export default function CuratedArtworksLayout({
             )}
           </div>
         </div>
-      )}
+      </div>
+      {/* Controls */}
+
+      <div className="w-full flex gap-x-4 items-center my-3 mt-8 px-6">
+        <div className=" w-full h-[0.5px] bg-[#fafafa]">
+          <div
+            className="h-full bg-dark "
+            style={{ width: `${scrollProgress * 100}%` }}
+          ></div>
+        </div>
+
+        <div className="flex items-center justify-center w-fit space-x-2">
+          <button
+            onClick={scrollPrev}
+            className="h-[40px] w-[40px] rounded-full border border-[#e0e0e0] bg-transparent hover:border-dark duration-300 grid place-items-center"
+          >
+            <MdOutlineKeyboardArrowLeft />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="h-[40px] w-[40px] rounded-full border border-[#e0e0e0] bg-transparent hover:border-dark duration-300 grid place-items-center"
+          >
+            <MdOutlineKeyboardArrowRight />
+          </button>
+        </div>
+      </div>
     </>
   );
 }

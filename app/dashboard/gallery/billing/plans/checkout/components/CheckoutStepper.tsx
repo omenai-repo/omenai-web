@@ -83,7 +83,7 @@ export function CheckoutStepper({
                   <div className="grid place-items-center">
                     <div className="flex flex-col space-y-3 justify-center items-center">
                       <Load />
-                      <p className="text-[13px] text-center font-medium">
+                      <p className="text-[13px] text-center font-normal">
                         Redirecting you to a secure authentication portal <br />{" "}
                         Please wait...
                       </p>
@@ -125,7 +125,7 @@ export function CheckoutStepper({
                   <div className="grid place-items-center">
                     <div className="flex flex-col space-y-3 justify-center items-center">
                       <Load />
-                      <p className="text-[13px] text-center font-medium">
+                      <p className="text-[13px] text-center font-normal">
                         Redirecting you to a secure authentication portal <br />{" "}
                         Please wait...
                       </p>

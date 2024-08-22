@@ -1,6 +1,6 @@
 import { getApiUrl } from "@/config";
 
-export async function fetchAllArtworks(
+export async function createViewHistory(
   artwork: string,
   artist: string,
   art_id: string,

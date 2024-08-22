@@ -11,11 +11,11 @@ export default function BillingInfo() {
         {/* <h4 className="text-sm">{session.data?.user.name}</h4> */}
         <p>
           Gallery name:{" "}
-          <span className="font-medium">{session.data?.user.name}</span>{" "}
+          <span className="font-normal">{session.data?.user.name}</span>{" "}
         </p>
         <p>
           Email address:{" "}
-          <span className="font-medium">{session.data?.user.email}</span>{" "}
+          <span className="font-normal">{session.data?.user.email}</span>{" "}
         </p>
       </div>
     </div>

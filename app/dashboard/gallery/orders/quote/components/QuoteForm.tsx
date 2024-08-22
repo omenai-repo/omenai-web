@@ -70,7 +70,7 @@ export default function QuoteForm() {
   return (
     <div className="my-5">
       <div className="w-full py-3 px-4 bg-white">
-        <h1 className="text-base text-dark font-medium">
+        <h1 className="text-base text-dark font-normal">
           Provide shipping quote
         </h1>
       </div>
@@ -194,7 +194,7 @@ export default function QuoteForm() {
               </p>
             </div>
 
-            <div className="bg-green-100 p-3 font-medium rounded-md flex items-center gap-x-2">
+            <div className="bg-green-100 p-3 font-normal rounded-md flex items-center gap-x-2">
               <PiSealWarning />
               <p>
                 Please confirm buyer&apos;s shipping address before providing

@@ -102,6 +102,9 @@ export async function POST(request: Request) {
       ...builtFilters,
       gallery_id: { $in: [...basicGalleryIds, ...proPremiumGalleryIds] },
     });
+    const grand_total = await Artworkuploads.countDocuments({
+      gallery_id: { $in: [...basicGalleryIds, ...proPremiumGalleryIds] },
+    });
 
     return NextResponse.json(
       {
@@ -109,6 +112,7 @@ export async function POST(request: Request) {
         data: paginatedArtworks,
         page,
         pageCount: Math.ceil(total / 30),
+        total: grand_total,
       },
       { status: 200 }
     );

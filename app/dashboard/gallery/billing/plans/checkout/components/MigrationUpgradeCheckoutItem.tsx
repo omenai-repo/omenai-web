@@ -83,7 +83,7 @@ export default function MigrationUpgradeCheckoutItem({
           <p className="text-[13px] font-normal">
             Subscription {plan_change_params.action}
           </p>
-          <h1 className="text-base font-medium ">
+          <h1 className="text-base font-normal ">
             Omenai {plan.name} subscription
           </h1>
           <p className="mt-1 flex items-baseline text-xs font-bold tracking-tight">

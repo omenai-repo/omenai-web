@@ -36,7 +36,7 @@ export default function PromotionalCard({
         </div>
         <div className="col-span-2 p-4 flex flex-col space-y-3">
           <h1 className="text-base font-bold w-4/5">{headline}</h1>
-          <h2 className="text-xs font-medium">{subheadline}</h2>
+          <h2 className="text-xs font-normal">{subheadline}</h2>
 
           <Link
             href={cta}
