@@ -51,7 +51,7 @@ export default function GalleryListItem({
     <div className="w-full p-0">
       <div className="flex justify-between items-center">
         <div className="flex flex-col gap-y-2">
-          <h1 className="text-[14px] font-medium">{name}</h1>
+          <h1 className="text-[14px] font-normal">{name}</h1>
           <p className="text-xs font-normal">{location.address}</p>
           <button
             onClick={updateGalleryPopupData}

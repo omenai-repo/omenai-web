@@ -31,7 +31,7 @@ export default function FormActions() {
         <p className="font-normal text-xs text-dark/70 text-right">
           Forgot password?{" "}
           <span
-            className="text-black cursor-pointer underline font-medium"
+            className="text-black cursor-pointer underline font-normal"
             onClick={() => updateRecoveryModal("individual")}
           >
             Reset it
@@ -43,7 +43,7 @@ export default function FormActions() {
         <button
           disabled={isLoading}
           type="submit"
-          className="h-[40px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs font-medium"
+          className="h-[40px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-black text-white text-xs font-normal"
         >
           {isLoading ? <LoadSmall /> : "Login"}{" "}
           {!isLoading && <GoArrowRight className="text-md opacity-70" />}

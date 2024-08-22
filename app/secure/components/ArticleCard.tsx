@@ -40,15 +40,15 @@ const ArticleCard = ({
         <div className="flex flex-col gap-[1rem]">
           <div className="flex gap-2 items-center">
             <p className="text-dark/60 text-[14px]">{date}</p>
-            <span className="font-medium">•</span>
+            <span className="font-normal">•</span>
 
             <p className="text-dark text-base">
               <span className="italic">by</span>{" "}
-              <span className="font-medium uppercase text-[14px]">
+              <span className="font-normal uppercase text-[14px]">
                 Olabisi Onabanjo
               </span>
             </p>
-            {/* <span className="font-medium">•</span> */}
+            {/* <span className="font-normal">•</span> */}
           </div>
           <div className="flex flex-col gap-2">
             <Link href={`/articles/${id}/${title}`}>

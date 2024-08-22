@@ -23,10 +23,10 @@ export default function SingleSlide({
         </div>
         <div className="w-full col-span-1 lg:col-span-2 flex flex-col gap-y-4 my-2 container pb-4 px-4 mx-auto justify-center lg:w-7/8 xl:w-3/4 sm:w-full">
           <div className="w-full flex flex-col space-y-3 justify-center ">
-            <h1 className="text-sm sm:text-md lg:text-lg xl:text-xl md:w-full my-0 font-normal text-left leading-tight drop-shadow-2xl ">
+            <h1 className="text-sm sm:text-md lg:text-lg xl:text-xl md:w-full my-0 font-light text-left leading-tight drop-shadow-2xl ">
               {headline}
             </h1>
-            <p className="text-base text-[#858585] italic md:text-sm">
+            <p className="text-base text-[#858585] font-light italic md:text-sm">
               {subheadline}
             </p>
             <Link href={cta} className="hidden lg:block">
@@ -38,7 +38,7 @@ export default function SingleSlide({
               href={cta}
               className="lg:hidden flex items-center space-x-2 my-4"
             >
-              <span className="text-xs font-semibold">View resource</span>
+              <span className="text-xs font-normal">View resource</span>
               <IoIosArrowRoundForward />
             </Link>
           </div>

@@ -31,7 +31,7 @@ export default function TrendingArtworkCard({
   const image_href = getImageFileView(image, 300);
 
   return (
-    <div>
+    <div className="m-2">
       <div className="flex flex-col w-auto h-full max-h-[500px] justify-end">
         <div className="relative">
           <Link href={`/artwork/${name}`} className="relative">
@@ -45,15 +45,15 @@ export default function TrendingArtworkCard({
           </Link>
         </div>
 
-        <div className="mb-[3rem] bg-[#FAFAFA] py-2 px-3">
+        <div className=" bg-[#FAFAFA] py-3 px-3">
           <div className="flex justify-between items-center">
-            <p className="font-normal text-[14px] text-dark ">
+            <p className="font-normal text-xs text-dark ">
               {name.substring(0, 20)}
               {name.length > 20 && "..."}
             </p>
           </div>
           <div className="flex justify-between items-center">
-            <p className="font-normal text-dark text-[13px]">
+            <p className="font-normal text-[#858585] italic text-xs">
               {artist.substring(0, 20)}
               {artist.length > 20 && "..."}
             </p>

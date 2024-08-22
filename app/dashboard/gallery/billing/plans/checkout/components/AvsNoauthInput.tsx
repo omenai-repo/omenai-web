@@ -131,7 +131,7 @@ export default function AvsNoauthInput({
       onSubmit={submitAddressInfo}
     >
       <div className="flex justify-between items-center mb-2">
-        <h1 className="text-xs font-medium">Address verification</h1>
+        <h1 className="text-xs font-normal">Address verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />
           <span className="text-[13px]">Secure form</span>
@@ -192,7 +192,7 @@ export default function AvsNoauthInput({
       </div>
       <div className="relative w-full">
         <label
-          className="text-[#858585] font-medium text-xs mb-2"
+          className="text-[#858585] font-normal text-xs mb-2"
           htmlFor="city"
         >
           City
@@ -208,7 +208,7 @@ export default function AvsNoauthInput({
       </div>
       <div className="relative w-full">
         <label
-          className="text-[#858585] font-medium text-xs mb-2"
+          className="text-[#858585] font-normal text-xs mb-2"
           htmlFor="otp"
         >
           Address
@@ -224,7 +224,7 @@ export default function AvsNoauthInput({
       </div>
       <div className="relative w-full">
         <label
-          className="text-[#858585] font-medium text-xs mb-2"
+          className="text-[#858585] font-normal text-xs mb-2"
           htmlFor="zipcode"
         >
           Zipcode

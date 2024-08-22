@@ -148,7 +148,7 @@ export default function OrdersCard({
           className="object-top object-contain"
         />
         <div className="flex flex-col sapce-y-1 text-xs">
-          <p className="text-dark font-medium text-[15px]">{title}</p>
+          <p className="text-dark font-normal text-[15px]">{title}</p>
           <span className="text-dark text-xs">{artist}</span>
           <span className="text-dark text-xs font-bold">
             {formatPrice(price, currency)}
@@ -164,7 +164,7 @@ export default function OrdersCard({
       </div>
       <div className="flex flex-col md:mt-0 mt-5 text-xs md:items-end items-start gap-y-1">
         <span className="text-dark text-xs font-normal">
-          Order ID: <span className="font-medium">{order_id}</span>
+          Order ID: <span className="font-normal">{order_id}</span>
         </span>
         <span className="text-dark text-xs">{order_date}</span>
 

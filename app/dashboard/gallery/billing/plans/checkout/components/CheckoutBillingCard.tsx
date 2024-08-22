@@ -111,7 +111,7 @@ export default function CheckoutBillingCard({
   return (
     <>
       <div className="flex justify-between items-center my-5">
-        <h1 className="text-xs font-medium">Payment Method</h1>
+        <h1 className="text-xs font-normal">Payment Method</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />
           <span className="text-[13px]">Secure form</span>

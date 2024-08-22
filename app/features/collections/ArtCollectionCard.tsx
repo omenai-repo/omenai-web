@@ -9,18 +9,18 @@ export default function ArtCollectionCard({
   url,
 }: ArtCollectionCardTypes) {
   return (
-    <div className="py-4">
-      <div className="flex flex-col">
+    <div className="py-4 min-w-[300px]">
+      <div className="flex flex-col ">
         <img
           src={`/images/${url}.jpg`}
           alt={title + " image"}
-          className="min-w-[250px] w-[500px] min-h-[200px] h-[250px] object-cover object-top cursor-pointer"
+          className="min-w-[250px] w-auto min-h-[200px] h-[250px] object-cover object-top cursor-pointer"
         />
         <div className="bg-[#FAFAFA] flex flex-col p-4">
-          <p className="text-base] font-medium">{title}</p>
-          <span className="w-fit text-xs font-normal text-[#858585] border-none">
-            #Best picks
-          </span>
+          <p className="text-[14px] font-light">{title}</p>
+          {/* <span className="w-fit text-xs font-light text-[#858585] border-none">
+            Omenai&apos;s best picks
+          </span> */}
         </div>
       </div>
     </div>

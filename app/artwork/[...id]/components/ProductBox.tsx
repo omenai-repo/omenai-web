@@ -1,5 +1,9 @@
+"use client";
+import { useEffect } from "react";
 import ArtworkDetail from "./ArtworkDetail";
 import ImageBox from "./ImageBox";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createViewHistory } from "@/services/viewHistory/createViewHstory";
 
 type ProductBoxTypes = {
   data: ArtworkResultTypes;
@@ -7,6 +11,27 @@ type ProductBoxTypes = {
 };
 
 export default function ProductBox({ data, sessionId }: ProductBoxTypes) {
+  const queryClient = useQueryClient();
+  // Make async call to update liked state in db
+  useEffect(() => {
+    const updateViews = async () => {
+      console.log(sessionId);
+      const res = await createViewHistory(
+        data.title,
+        data.artist,
+        data.art_id,
+        sessionId!,
+        data.url
+      );
+      if (res?.isOk) {
+        queryClient.invalidateQueries({ queryKey: ["recent_views"] });
+      }
+
+      console.log(res);
+    };
+    if (sessionId === undefined) return;
+    else updateViews();
+  }, []);
   return (
     <div className=" p-3 xl:p-[1.5rem] my-5">
       <div className="grid md:grid-cols-2 gap-12 items-center">

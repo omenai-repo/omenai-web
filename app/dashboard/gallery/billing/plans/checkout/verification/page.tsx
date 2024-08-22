@@ -36,7 +36,7 @@ export default function TransactionVerification() {
         {isLoading ? (
           <div className=" w-[20vw] flex flex-col items-center justify-center space-y-6">
             <Load />
-            <p className="text-xs font-medium">
+            <p className="text-xs font-normal">
               Verification in progress...please wait
             </p>
           </div>

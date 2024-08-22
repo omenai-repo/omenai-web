@@ -11,7 +11,7 @@ export default function ImageBlock() {
         className="absolute inset-0 w-full h-full object-center object-cover rounded-tr-xl rounded-br-xl"
       />
       <div className="absolute bottom-14 left-6 z-20 text-white">
-        <h1 className="text-lg xl:text-xl font-medium mb-2">
+        <h1 className="text-lg xl:text-xl font-normal mb-2">
           Your easy access to artworks
         </h1>
         <p className="font-normal">

@@ -80,7 +80,7 @@ export default function OrderActionModalForm() {
           </div>
 
           {galleryOrderActionModalData.status === "pending" && (
-            <div className="bg-green-100 px-3 py-2 font-medium rounded-md flex items-center gap-x-2">
+            <div className="bg-green-100 px-3 py-2 font-normal rounded-md flex items-center gap-x-2">
               <PiSealWarning />
               <p>
                 Please confirm buyer&apos;s shipping address before providing

@@ -65,7 +65,7 @@ export default function CancelSubscriptionModal({
               {/* Add modal form here */}
               <div className="h-auto w-full">
                 <div className="flex flex-col gap-4 font-normal text-xs">
-                  <h2 className="text-red-600 text-sm font-medium">
+                  <h2 className="text-red-600 text-sm font-normal">
                     You are about to cancel your subscription.
                   </h2>
                   <p>

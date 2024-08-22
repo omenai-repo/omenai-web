@@ -1,6 +1,6 @@
 import { getApiUrl } from "@/config";
 
-export async function fetchAllArtworks(user_id: string) {
+export async function fetchViewHistory(user_id: string) {
   try {
     const url = getApiUrl();
     const res = await fetch(`${url}/api/viewHistory/getViewHistory`, {

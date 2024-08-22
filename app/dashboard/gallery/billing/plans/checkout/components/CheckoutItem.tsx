@@ -10,7 +10,7 @@ export default function CheckoutItem({
   return (
     <div className="bg-white shadow-lg">
       <div className="w-full p-8 bg-dark text-white">
-        <h1 className="text-base font-medium ">
+        <h1 className="text-base font-normal ">
           Omenai {plan.name} subscription
         </h1>
         <p className="mt-1 flex items-baseline text-xs font-bold tracking-tight">

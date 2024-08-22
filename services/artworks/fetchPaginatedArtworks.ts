@@ -16,6 +16,7 @@ export async function fetchPaginatedArtworks(page: number, filters?: any) {
       data: result.data,
       page: result.page,
       count: result.pageCount,
+      total: result.total,
     };
   } catch (error: any) {
     console.log(error);

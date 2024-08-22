@@ -25,7 +25,7 @@ export default function VerifyTransaction({
   return (
     <div className="grid place-items-center">
       <div className="flex justify-between items-center mb-2 w-full">
-        <h1 className="text-xs font-medium">Transaction verification</h1>
+        <h1 className="text-xs font-normal">Transaction verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />
           <span className="text-[13px]">Secure form</span>

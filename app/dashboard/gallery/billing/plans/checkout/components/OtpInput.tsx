@@ -59,7 +59,7 @@ export default function Oput({
       onSubmit={handleSubmit}
     >
       <div className="flex justify-between items-center mb-2">
-        <h1 className="text-xs font-medium">OTP verification</h1>
+        <h1 className="text-xs font-normal">OTP verification</h1>
         <p className="text-[13px] flex items-center gap-x-1 font-bold">
           <IoIosLock />
           <span className="text-[13px]">Secure form</span>
@@ -67,7 +67,7 @@ export default function Oput({
       </div>
       <div className="relative w-full">
         <label
-          className="text-[#858585] font-medium text-[13px] mb-4"
+          className="text-[#858585] font-normal text-[13px] mb-4"
           htmlFor="otp"
         >
           Enter OTP sent to your number or email

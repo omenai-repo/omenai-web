@@ -1,21 +1,20 @@
 "use client";
 import DesktopNavbar from "@/components/navbar/desktop/DesktopNavbar";
-import LatestArtworks from "./features/latest/LatestArtworks";
-import { nextAuthOptions } from "@/lib/auth/next-auth-options";
-import { getServerSession } from "next-auth";
+
 import Editorials from "./features/editorials/Editorials";
 import TrendingArtworks from "./features/trending/TrendingArtworks";
 import CuratedArtworkClientWrapper from "./features/curated/CuratedArtworkClientWrapper";
 import Footer from "@/components/footer/Footer";
-import ArtworkSlides from "./features/artworkSlides/ArtworkSlides";
 import Collections from "./features/collections/Collections";
 import { getPromotionalData } from "@/services/promotionals/getPromotionalContent";
 import Hero from "./features/hero/Hero";
 import { useQuery } from "@tanstack/react-query";
-import Load from "@/components/loader/Load";
 import { IndividualLogo } from "@/components/logo/Logo";
 import HomeLoader from "@/components/loader/HomeLoader";
 import { useSession } from "next-auth/react";
+import LatestArtworkWrapper from "./features/latest/LatestArtworkWrapper";
+import TrendingArtworkWrapper from "./features/trending/TrendingrtworksWrapper";
+import RecentViewWrapper from "./features/recentViews/RecentViewWrapper";
 export default function Home() {
   const session = useSession();
   const { data: promotionals, isLoading } = useQuery({
@@ -44,7 +43,7 @@ export default function Home() {
       <Hero promotionals={promotionals.slice(0, 2)} />
 
       <div className="px-4 lg:px-8">
-        <LatestArtworks
+        <LatestArtworkWrapper
           sessionId={
             session?.data?.user.role === "user"
               ? session?.data.user.id
@@ -52,7 +51,7 @@ export default function Home() {
           }
         />
         <Collections />
-        <TrendingArtworks
+        <TrendingArtworkWrapper
           sessionId={
             session?.data?.user.role === "user"
               ? session?.data.user.id
@@ -69,6 +68,13 @@ export default function Home() {
             }
           />
         )}
+        <RecentViewWrapper
+          sessionId={
+            session?.data?.user.role === "user"
+              ? session?.data.user.id
+              : undefined
+          }
+        />
         <Footer />
       </div>
     </main>

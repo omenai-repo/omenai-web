@@ -2,7 +2,7 @@ import AuthProvider from "@/lib/auth/auth-provider";
 import { nextAuthOptions } from "@/lib/auth/next-auth-options";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import { Nunito_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -14,7 +14,7 @@ import RecoveryModal from "@/components/modal/RecoveryModal";
 import { OrderReceivedModal } from "@/components/modal/OrderConfirmedModal";
 import { ThemeProvider } from "./material_tailwind/MaterialTailwindExports";
 
-const nunito_sans = Nunito_Sans({
+const nunito_sans = Inter({
   subsets: ["latin"],
   variable: "--font-nunito_sans",
   weight: ["300", "400", "500", "600", "700", "800"],

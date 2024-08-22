@@ -57,7 +57,7 @@ export default function TokenBlock({ token }: TokenProps) {
         <div className="flex flex-col gap-4 my-[2rem]">
           <p className="leading-32 text-base">
             Thank you for choosing to join{" "}
-            <span className="text-dark font-medium">Omenai inc.</span> We extend
+            <span className="text-dark font-normal">Omenai inc.</span> We extend
             our warmest welcome and look forward to providing you with an
             enjoyable journey with us
           </p>
@@ -94,7 +94,7 @@ export default function TokenBlock({ token }: TokenProps) {
       <p>
         Did not recieve a code?{" "}
         <span
-          className="text-dark underline font-medium cursor-pointer"
+          className="text-dark underline font-normal cursor-pointer"
           onClick={resendVerification}
         >
           Resend code
@@ -106,7 +106,7 @@ export default function TokenBlock({ token }: TokenProps) {
           Feel free to contact us should you have any issues on{" "}
           <Link
             href={"mailto:moses@omenai.net"}
-            className="text-dark font-medium underline"
+            className="text-dark font-normal underline"
           >
             moses@omenai.net
           </Link>

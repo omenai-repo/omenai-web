@@ -1,13 +1,5 @@
 "use client";
-import { FaLinkedinIn } from "react-icons/fa6";
-import { FaXTwitter } from "react-icons/fa6";
 
-import { IoLogoInstagram } from "react-icons/io";
-
-import { CiPhone } from "react-icons/ci";
-import { MdEmail } from "react-icons/md";
-
-import { motion } from "framer-motion";
 import { IndividualLogo } from "../logo/Logo";
 import Newsletter from "./Newsletter";
 const Footer = () => {
@@ -21,13 +13,13 @@ const Footer = () => {
         <div className="w-full">
           <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
             <div className="col-span-2 sm:col-span-1">
-              <p className="text-sm font-medium text-dark">Services</p>
+              <p className="text-xs font-medium text-dark">Services</p>
 
               <ul className="mt-6 space-y-4 ">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Omenai for Galleries
                   </a>
@@ -36,7 +28,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Auctions
                   </a>
@@ -45,7 +37,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Fairs and shows
                   </a>
@@ -54,7 +46,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Buy
                   </a>
@@ -63,7 +55,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Sell
                   </a>
@@ -72,13 +64,13 @@ const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="text-sm font-medium text-dark">Company</p>
+              <p className="text-xs font-medium text-dark">Company</p>
 
               <ul className="mt-6 space-y-4 ">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     About
                   </a>
@@ -87,7 +79,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Meet the Team
                   </a>
@@ -96,7 +88,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Contact us
                   </a>
@@ -105,13 +97,13 @@ const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="text-sm font-medium text-dark">Helpful Links</p>
+              <p className="text-xs font-medium text-dark">Helpful Links</p>
 
               <ul className="mt-6 space-y-4 ">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Editorials
                   </a>
@@ -120,7 +112,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     FAQs
                   </a>
@@ -129,7 +121,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Pricing
                   </a>
@@ -138,13 +130,13 @@ const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="text-sm font-medium text-dark">Legal</p>
+              <p className="text-xs font-medium text-dark">Legal</p>
 
               <ul className="mt-6 space-y-4 ">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Terms & conditions
                   </a>
@@ -153,7 +145,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Returns Policy
                   </a>
@@ -162,7 +154,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Refund Policy
                   </a>
@@ -171,7 +163,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Privacy policy
                   </a>
@@ -180,13 +172,13 @@ const Footer = () => {
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <p className="text-sm font-medium text-dark">Downloads</p>
+              <p className="text-xs font-medium text-dark">Downloads</p>
 
               <ul className="mt-6 space-y-4 ">
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     Marketing Calendar
                   </a>
@@ -195,7 +187,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="#"
-                    className="text-gray-700 transition hover:opacity-75"
+                    className="text-[#858585] text-xs transition hover:opacity-75"
                   >
                     SEO Infographics
                   </a>
@@ -209,7 +201,7 @@ const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-[#858585] text-xs transition hover:opacity-75"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -233,7 +225,7 @@ const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-[#858585] text-xs transition hover:opacity-75"
                 >
                   <span className="sr-only">Instagram</span>
 
@@ -257,7 +249,7 @@ const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-[#858585] text-xs transition hover:opacity-75"
                 >
                   <span className="sr-only">Twitter</span>
 
@@ -277,7 +269,7 @@ const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-[#858585] text-xs transition hover:opacity-75"
                 >
                   <span className="sr-only">GitHub</span>
 
@@ -301,7 +293,7 @@ const Footer = () => {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className="text-[#858585] text-xs transition hover:opacity-75"
                 >
                   <span className="sr-only">Dribbble</span>
 

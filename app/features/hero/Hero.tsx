@@ -49,17 +49,17 @@ export default function Hero({ promotionals }: any) {
       </div>
 
       <div className="w-full flex gap-x-4 items-center my-3 px-6">
-        <div className="w-full h-[4px] bg-[#fafafa] flex justify-center space-x-2 items-center">
+        <div className="w-full h-[2px] bg-[#fafafa] flex justify-center space-x-2 items-center">
           {/* User */}
           <div
             onClick={scrollPrev}
-            className={`h-[2px] w-full rounded-full duration-500 cursor-pointer ${
+            className={`h-[1px] w-full rounded-full duration-500 cursor-pointer ${
               scroll === 1 ? "bg-dark" : "bg-transparent text-dark"
             } `}
           />
           <div
             onClick={scrollNext}
-            className={`h-[2px] w-full rounded-full duration-500 cursor-pointer ${
+            className={`h-[1px] w-full rounded-full duration-500 cursor-pointer ${
               scroll === 2 ? "bg-dark" : "bg-transparent text-dark"
             } `}
           />

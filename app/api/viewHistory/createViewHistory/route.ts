@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
     const { artwork, user_id, art_id, artist, url } = await request.json();
     const checkIfViewed = await RecentView.findOne({
-      artwork,
+      art_id,
       user: user_id,
     });
 
@@ -28,6 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ status: 200 });
   } catch (error) {
     const error_response = handleErrorEdgeCases(error);
+    console.log(error);
 
     return NextResponse.json(
       { message: error_response?.message },

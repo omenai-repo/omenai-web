@@ -99,7 +99,7 @@ export default function PayNowButton({
           )}
         </div>
 
-        <p className="font-medium text-red-600 lg:w-1/2 mt-6 leading-6">
+        <p className="font-normal text-red-600 lg:w-1/2 mt-6 leading-6">
           <span className="text-base font-bold uppercase underline">
             Please note:
           </span>

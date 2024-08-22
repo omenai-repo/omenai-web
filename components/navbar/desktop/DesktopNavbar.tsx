@@ -16,7 +16,7 @@ export default function DesktopNavbar() {
 
   return (
     <>
-      <div className="sticky top-0 z-30 bg-white mb-4">
+      <div className="sticky top-0 z-30 bg-white mb-4 pb-4">
         <nav
           className="px-4 pt-4 text-base text-black font-normal "
           id="navbar"

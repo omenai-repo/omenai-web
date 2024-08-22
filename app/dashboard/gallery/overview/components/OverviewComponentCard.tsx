@@ -16,7 +16,7 @@ export default function OverviewComponentCard({
         fullWidth ? "px-1 py-2" : "p-6"
       } w-full min-h-[400px] rounded-lg ring-1 ring-[#eeeeee] mt-5 relative bg-white`}
     >
-      <h4 className="text-dark text-base font-medium mb-5">{title}</h4>
+      <h4 className="text-dark text-base font-normal mb-5">{title}</h4>
       {children}
     </div>
   );

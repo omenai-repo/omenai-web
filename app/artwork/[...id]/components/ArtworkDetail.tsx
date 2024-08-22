@@ -69,7 +69,7 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
   return (
     <div className="flex flex-col gap-y-4">
       <div className="">
-        <h1 className="text-md font-medium">{data.title}</h1>
+        <h1 className="text-md font-normal">{data.title}</h1>
         <h3 className="text-base font-normal text-dark/70">{data.artist}</h3>
       </div>
       <p className="text-xs font-normal text-dark/80 gap-x-4 flex items-center">
