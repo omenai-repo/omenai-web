@@ -112,7 +112,7 @@ export default function Filter() {
       <div
         className={`${
           width >= 960 || showFilterBlock ? "flex" : "hidden"
-        } flex gap-x-2`}
+        } flex flex-wrap gap-x-2`}
       >
         <PriceFilter />
         <YearFilter />
