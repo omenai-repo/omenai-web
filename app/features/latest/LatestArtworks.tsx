@@ -36,6 +36,13 @@ export default function LatestArtworks({
       )}
       {artworks.length > 0 && (
         <div className="py-4 md:p-4 relative">
+          <div className="space-y-1 my-10">
+            <h1 className="text-md font-normal">Latest artworks</h1>
+            <p className="text-sm text-[#858585] font-medium italic">
+              Fresh Off the Easel: Explore the Newest Masterpieces, Just for You
+            </p>
+          </div>
+
           <div className="flex items-end relative space-x-4 overflow-x-scroll w-full">
             {artworks.map((artwork: any, index: number) => {
               return (

@@ -26,7 +26,9 @@ export default function SingleSlide({
             <h1 className="text-sm sm:text-md lg:text-lg xl:text-xl md:w-full my-0 font-normal text-left leading-tight drop-shadow-2xl ">
               {headline}
             </h1>
-            <p className="text-xs md:text-base">{subheadline}</p>
+            <p className="text-base text-[#858585] italic md:text-sm">
+              {subheadline}
+            </p>
             <Link href={cta} className="hidden lg:block">
               <button className="grid disabled:cursor-not-allowed disabled:bg-dark/20 place-items-center rounded-sm bg-dark h-[40px] px-4 text-xs text-white hover:bg-dark/90">
                 View resource

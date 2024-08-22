@@ -1,8 +1,8 @@
-import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
 import { Subscriptions } from "@/models/subscriptions/SubscriptionSchema";
+import { buildMongoQuery } from "@/utils/buildMongoFilterQuery";
 import { NextResponse } from "next/server";
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   try {
     await connectMongoDB();
 
-    const { page = 1, preferences } = await request.json();
+    const { page = 1, preferences, filters } = await request.json();
     const skip = (page - 1) * PAGE_SIZE;
 
     // Helper function to fetch gallery IDs based on subscription plan
@@ -42,16 +42,23 @@ export async function POST(request: Request) {
       getGalleryIdsByPlan(["Pro", "Premium"]),
     ]);
 
+    // Build filters for artworks
+    const builtFilters = buildMongoQuery(filters);
+
+    // Handle the case where builtFilters might be an empty object
+    const filterCriteria =
+      Object.keys(builtFilters).length > 0 ? builtFilters : {};
+
+    // Fetch all filtered artworks, sorted by creation date
+    const allArtworks = await Artworkuploads.find({
+      ...filterCriteria,
+      gallery_id: { $in: [...basicGalleryIds, ...proPremiumGalleryIds] },
+      medium: { $in: preferences },
+    })
+      .sort({ createdAt: -1 })
+      .exec();
+
     // Fetch all artworks, no initial limit applied
-    const allArtworks = await Artworkuploads.aggregate([
-      {
-        $match: {
-          gallery_id: { $in: [...basicGalleryIds, ...proPremiumGalleryIds] },
-          medium: { $in: preferences },
-        },
-      },
-      { $sort: { createdAt: -1 } }, // Sort by impression count, most liked first
-    ]).exec();
 
     // Calculate how many basic artworks have already been returned in previous pages
     const basicArtworksAlreadyReturned = (page - 1) * PAGE_SIZE - skip;
@@ -96,11 +103,19 @@ export async function POST(request: Request) {
       ...selectedProPremiumArtworks,
     ].slice(0, PAGE_SIZE);
 
+    // Calculate total adhering to restrictions
+    const total = await Artworkuploads.countDocuments({
+      ...builtFilters,
+      gallery_id: { $in: [...basicGalleryIds, ...proPremiumGalleryIds] },
+      medium: { $in: preferences },
+    });
+
     return NextResponse.json(
       {
         message: "Successful",
         data: allCuratedPaginatedArtworks,
-        lenght: allCuratedPaginatedArtworks.length,
+        page,
+        pageCount: Math.ceil(total / 30),
       },
       { status: 200 }
     );

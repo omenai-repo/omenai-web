@@ -38,6 +38,12 @@ export default function CuratedArtworksLayout({
       )}
       {userCuratedArtworks !== undefined && userCuratedArtworks.length > 0 && (
         <div className="py-4 md:p-4 relative">
+          <div className="space-y-1 my-10">
+            <h1 className="text-md font-normal">Based on your preferences</h1>
+            <p className="text-sm text-[#858585] font-medium italic">
+              Your Art, Your Way: Explore Pieces That Resonate with You
+            </p>
+          </div>
           <div className="flex items-end relative overflow-x-scroll w-full space-x-4">
             {userCuratedArtworks.map((artwork: any, index: number) => {
               return (

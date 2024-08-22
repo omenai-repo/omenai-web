@@ -14,9 +14,10 @@ import Hero from "./features/hero/Hero";
 import { useQuery } from "@tanstack/react-query";
 import Load from "@/components/loader/Load";
 import { IndividualLogo } from "@/components/logo/Logo";
-import { ObjectId } from "mongoose";
 import HomeLoader from "@/components/loader/HomeLoader";
+import { useSession } from "next-auth/react";
 export default function Home() {
+  const session = useSession();
   const { data: promotionals, isLoading } = useQuery({
     queryKey: ["home"],
     queryFn: async () => {
@@ -41,10 +42,35 @@ export default function Home() {
     <main>
       <DesktopNavbar />
       <Hero promotionals={promotionals.slice(0, 2)} />
-      <ArtworkSlides />
-      <Collections />
-      <Editorials />
-      <Footer />
+
+      <div className="px-4 lg:px-8">
+        <LatestArtworks
+          sessionId={
+            session?.data?.user.role === "user"
+              ? session?.data.user.id
+              : undefined
+          }
+        />
+        <Collections />
+        <TrendingArtworks
+          sessionId={
+            session?.data?.user.role === "user"
+              ? session?.data.user.id
+              : undefined
+          }
+        />
+        <Editorials />
+        {session.data !== null && session.data.user.role === "user" && (
+          <CuratedArtworkClientWrapper
+            sessionId={
+              session?.data?.user.role === "user"
+                ? session?.data.user.id
+                : undefined
+            }
+          />
+        )}
+        <Footer />
+      </div>
     </main>
   );
 }
