@@ -29,7 +29,7 @@ export default function Hero({ promotionals }: any) {
   }, [emblaApi]);
 
   return (
-    <div className="embla mx-4" ref={emblaRef}>
+    <div className="embla" ref={emblaRef}>
       <div className="embla__container">
         {/* <div className="embla__slide">
           <DefaultHeroSlides />

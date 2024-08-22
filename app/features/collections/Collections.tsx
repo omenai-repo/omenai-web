@@ -11,11 +11,11 @@ const collections = [
 export default function Collections() {
   return (
     <div className="p-4 md:p-8 mb-[4rem]">
-      <div className="my-5 flex flex-col gap-y-2">
-        <h1 className="text-sm font-medium">Art collections</h1>
-        <p className="text-[14px]">
-          Discover artworks meticulously curated into various collections for
-          your browsing pleasure.
+      <div className="space-y-1 my-10">
+        <h1 className="text-md font-normal">Art Collections</h1>
+        <p className="text-sm text-[#858585] font-medium italic">
+          Dive Into Diverse Art Collections, Thoughtfully Curated for Your
+          Exploration
         </p>
       </div>
 

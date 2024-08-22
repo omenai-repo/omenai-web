@@ -271,7 +271,7 @@ export async function POST(request: Request) {
                     currency: "USD",
                     type: plan.name,
                     interval: plan_interval,
-                    plan_id: plan._id,
+                    id: plan._id,
                   },
                 },
               }
