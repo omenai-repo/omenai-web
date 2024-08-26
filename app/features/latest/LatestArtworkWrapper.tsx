@@ -5,6 +5,8 @@ import { fetchAllArtworks } from "@/services/artworks/fetchAllArtworks";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import LatestArtworks from "./LatestArtworks";
+import HorizontalArtworkCardLoader from '@/components/loader/HorizontalArtworkCardsLoader';
+import { SectionLoaderContainers } from "../loaders/SectionLoaderContainers";
 
 export default function LatestArtworkWrapper({
   sessionId,
@@ -22,9 +24,7 @@ export default function LatestArtworkWrapper({
 
   if (isLoading)
     return (
-      <div className="h-[500px] w-full place-items-center grid">
-        <Load />
-      </div>
+      <SectionLoaderContainers title="Latest artworks" />
     );
   return (
     <>

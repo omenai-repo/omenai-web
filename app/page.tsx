@@ -22,6 +22,7 @@ export default function Home() {
     queryFn: async () => {
       const promotionals = await getPromotionalData();
       if (!promotionals?.isOk) throw new Error("Something went wrong");
+      console.log(promotionals)
       return promotionals.data;
     },
   });
@@ -40,8 +41,7 @@ export default function Home() {
   return (
     <main>
       <DesktopNavbar />
-      <Hero promotionals={promotionals.slice(0, 2)} />
-
+      {promotionals && <Hero promotionals={promotionals.slice(0, 2)} />}
       <div className="px-4 lg:px-8">
         <LatestArtworkWrapper
           sessionId={
