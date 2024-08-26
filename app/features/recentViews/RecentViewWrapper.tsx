@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import RecentViewArtworks from "./RecentViewArtworks";
 import { fetchViewHistory } from "@/services/viewHistory/fetchViewHistory";
+import HorizontalArtworkCardLoader from "@/components/loader/HorizontalArtworkCardsLoader";
+import { SectionLoaderContainers } from "../loaders/SectionLoaderContainers";
 
 export default function RecentViewWrapper({
   sessionId,
@@ -22,13 +24,11 @@ export default function RecentViewWrapper({
 
   if (isLoading)
     return (
-      <div className="h-[500px] w-full place-items-center grid">
-        <Load />
-      </div>
+      <SectionLoaderContainers title="Recently viewed" />
     );
   return (
     <>
-      {artworks.length === 0 ? null : (
+      {artworks?.length === 0 ? null : (
         <RecentViewArtworks artworks={artworks} sessionId={sessionId} />
       )}
     </>

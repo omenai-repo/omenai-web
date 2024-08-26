@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import TrendingArtworks from "./TrendingArtworks";
 import { fetchAllArtworkImpressions } from "@/services/artworks/fetchArtworkImpressions";
+import { SectionLoaderContainers } from "../loaders/SectionLoaderContainers";
 
 export default function TrendingArtworkWrapper({
   sessionId,
@@ -24,13 +25,11 @@ export default function TrendingArtworkWrapper({
 
   if (isLoading)
     return (
-      <div className="h-[500px] w-full place-items-center grid">
-        <Load />
-      </div>
+      <SectionLoaderContainers title="Trending artworks" />
     );
   return (
     <>
-      {artworks.length === 0 && (
+      {artworks?.length === 0 && (
         <div className="h-[500px] w-full place-items-center grid">
           <NotFoundData />
         </div>

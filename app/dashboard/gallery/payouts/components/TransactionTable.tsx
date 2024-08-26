@@ -40,7 +40,9 @@ export function TransactionTable({
   return (
     <Card
       placeholder=""
-      className="max-h-[500px] h-full w-full overflow-scroll"
+      className="max-h-[500px] h-full w-full overflow-scroll" 
+      onPointerEnterCapture={undefined} 
+      onPointerLeaveCapture={undefined}
     >
       <table className="w-full min-w-max table-auto text-left">
         <thead>

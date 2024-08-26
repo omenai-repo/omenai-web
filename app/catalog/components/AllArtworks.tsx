@@ -12,6 +12,7 @@ import { useWindowSize } from "usehooks-ts";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
 import { useState } from "react";
+import CatalogLoader from './CatalogLoader';
 
 export default function AllArtworks({
   sessionId,
@@ -43,9 +44,7 @@ export default function AllArtworks({
 
   if (loading || isLoading) {
     return (
-      <div className="h-[75vh] w-full grid place-items-center">
-        <Load />
-      </div>
+      <CatalogLoader />
     );
   }
 

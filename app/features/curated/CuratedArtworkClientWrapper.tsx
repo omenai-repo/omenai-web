@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import CuratedArtworksLayout from "./CuratedArtworksLayout";
 import NotFoundData from "@/components/notFound/NotFoundData";
+import { SectionLoaderContainers } from "../loaders/SectionLoaderContainers";
 
 export default function CuratedArtworkClientWrapper({
   sessionId,
@@ -23,9 +24,7 @@ export default function CuratedArtworkClientWrapper({
 
   if (isLoading)
     return (
-      <div className="h-[500px] w-full place-items-center grid">
-        <Load />
-      </div>
+      <SectionLoaderContainers title="Based on your preferences" />
     );
   return (
     <>

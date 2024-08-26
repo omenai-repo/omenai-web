@@ -65,7 +65,7 @@ export default function RecentViewArtworks({
 
   return (
     <>
-      {artworks.length > 0 && (
+      {artworks?.length > 0 && (
         <div className="p-4 relative">
           <div className="space-y-1 my-5">
             <h1 className="text-md font-normal">Recently viewed</h1>
