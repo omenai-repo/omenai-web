@@ -9,7 +9,6 @@ import {
   FormEvent,
   JSXElementConstructor,
   Key,
-  PromiseLikeOfReactNode,
   ReactElement,
   ReactNode,
   ReactPortal,
