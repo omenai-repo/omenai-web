@@ -69,7 +69,9 @@ export default function TrendingArtworks({
       {artworks.length > 0 && (
         <div className="p-4 relative">
           <div className="space-y-1 my-5">
-            <h1 className="text-md font-normal">Trending artworks</h1>
+            <Link href={'/collections/trendingArtworks'}>
+              <h1 className="text-md font-normal underline">Trending artworks</h1>
+            </Link>
             <p className="text-sm text-[#858585] font-normal italic">
               On the Rise: Discover the Art Everyone's Talking About
             </p>
