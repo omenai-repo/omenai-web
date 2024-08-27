@@ -15,7 +15,7 @@ export default async function CuratedArtworks(){
                 <div className="space-y-1 my-5">
                     <h1 className="text-md font-normal">Artworks based on your preference</h1>
                     <p className="text-sm text-[#858585] font-normal italic">
-                        On the Rise: Discover the Art Everyone's Talking About
+                        Your Art, Your Way: Explore Pieces That Resonate with You
                     </p>
                 </div>
                 <Filter page_type="curated" />

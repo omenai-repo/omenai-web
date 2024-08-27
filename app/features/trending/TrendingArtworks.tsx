@@ -11,6 +11,7 @@ import {
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
+import { FiChevronRight } from "react-icons/fi";
 
 export default function TrendingArtworks({
   sessionId,
@@ -68,13 +69,18 @@ export default function TrendingArtworks({
       )}
       {artworks.length > 0 && (
         <div className="p-4 relative">
-          <div className="space-y-1 my-5">
-            <Link href={'/collections/trending-artworks'}>
+          <div className="flex gap-4 my-5">
+            <div className="space-y-1 flex-1">
               <h1 className="text-md font-normal underline">Trending artworks</h1>
+              <p className="text-sm text-[#858585] font-normal italic">
+                On the Rise: Discover the Art Everyone's Talking About
+              </p>
+            </div>
+            <Link href={'/collections/trending-artworks'}>
+              <div className="flex items-center gap-1 rounded-full border border-black/20 px-3 text-sm py-1 bg-white cursor-pointer text-black/80">
+                <p className="text-[14px]">View all</p><FiChevronRight size={14} />
+              </div>
             </Link>
-            <p className="text-sm text-[#858585] font-normal italic">
-              On the Rise: Discover the Art Everyone's Talking About
-            </p>
           </div>
           <div className="embla" ref={emblaRef}>
             <div className="embla__container">

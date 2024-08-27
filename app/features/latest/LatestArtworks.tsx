@@ -13,6 +13,7 @@ import {
 
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
+import { FiChevronRight } from "react-icons/fi";
 
 export default function LatestArtworks({
   artworks,
@@ -66,13 +67,18 @@ export default function LatestArtworks({
     <>
       {artworks.length > 0 && (
         <div className="p-4 relative">
-          <div className="space-y-1 my-5">
-            <Link href={'/collections/recent-artworks'}>
+          <div className="flex gap-4 my-5">
+            <div className="space-y-1 flex-1">
               <h1 className="text-md font-normal underline">Latest artworks</h1>
+              <p className="text-sm text-[#858585] font-normal italic">
+                Fresh Off the Easel: Explore the Newest Masterpieces, Just for You
+              </p>
+            </div>
+            <Link href={'/collections/recent-artworks'}>
+              <div className="flex items-center gap-1 rounded-full border border-black/20 px-3 text-sm py-1 bg-white cursor-pointer text-black/80">
+                <p className="text-[14px]">View all</p><FiChevronRight size={14} />
+              </div>
             </Link>
-            <p className="text-sm text-[#858585] font-normal italic">
-              Fresh Off the Easel: Explore the Newest Masterpieces, Just for You
-            </p>
           </div>
           <div className="embla" ref={emblaRef}>
             <div className="embla__container">
