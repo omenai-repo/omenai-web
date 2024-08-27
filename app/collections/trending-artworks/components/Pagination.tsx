@@ -1,18 +1,17 @@
 "use client";
 
-import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
+import { collectionsStore } from "@/store/collections/collectionsStore";
 import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
-import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
 import { toast } from "sonner";
 
 export default function Pagination() {
-  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = trendingArtworksStore();
+  const { setArtworks, setPaginationLoading, setIsLoading, paginationCount, setPaginationCount, pageCount } = collectionsStore();
 
   const { filterOptions } = trendingArtworksFilterStore();
 
   async function handlePaginationArtworkFetch(type: "dec" | "inc") {
-    setPaginationLoading(true);
+    setIsLoading(true);
     if (type === "dec") {
       const response = await fetchTrendingArtworks(
         paginationCount - 1,
@@ -38,7 +37,7 @@ export default function Pagination() {
         toast.error(response?.message);
       }
     }
-    setPaginationLoading(false);
+    setIsLoading(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -51,14 +50,14 @@ export default function Pagination() {
       </p>
       <div className="flex gap-x-4 w-full">
         <button
-          disabled={(paginationCount === 1) || paginationLoading}
+          disabled={paginationCount === 1}
           onClick={() => handlePaginationArtworkFetch("dec")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
           Previous page
         </button>
         <button
-          disabled={(paginationCount === pageCount) || paginationLoading}
+          disabled={paginationCount === pageCount}
           onClick={() => handlePaginationArtworkFetch("inc")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
