@@ -8,39 +8,53 @@ import { ImBin2 } from "react-icons/im";
 import { FaCheckCircle } from "react-icons/fa";
 import { useWindowSize } from "usehooks-ts";
 import { MdClear } from "react-icons/md";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
 import PriceFilter from "./PriceFilter";
 import YearFilter from "./YearFilter";
 import MediumFilter from "./MediumFilter";
 import RarityFilter from "./RarityFilter";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
+import { collectionsStore } from "@/store/collections/collectionsStore";
+import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
+import { useSession } from "next-auth/react";
+import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
 
-export default function Filter() {
+export default function Filter({page_type}: {page_type: artworkCollectionTypes}) {
+  const session = useSession();
   const [showFilterBlock, setShowFilterBlock] = useState(true);
   const { width } = useWindowSize();
 
-  const { filterOptions, selectedFilters, clearAllFilters } =
-    trendingArtworksFilterStore();
-  const {
-    setArtworks,
-    setIsLoading,
-    paginationCount,
-    setPaginationCount,
-    pageCount,
-    setPageCount,
-  } = trendingArtworksStore();
+  const { filterOptions, selectedFilters, clearAllFilters } = collectionsFilterStore();
+  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = collectionsStore();
 
   async function handleSubmitFilter() {
     setPaginationCount(1);
     setIsLoading(true);
-    const response = await fetchTrendingArtworks(
-      paginationCount,
-      filterOptions
-    );
+    let response;
+
+    if(page_type === "trending"){
+      response = await fetchTrendingArtworks(
+        paginationCount,
+        filterOptions
+      );
+    }else if(page_type === "curated"){
+      //update to curated
+      response = await fetchCuratedArtworks(
+        session,
+        paginationCount,
+        filterOptions
+      );
+    }else if(page_type === "recent"){
+      //update to recent
+      response = await fetchPaginatedArtworks(
+        paginationCount,
+        filterOptions
+      );
+    }
+    
     if (response?.isOk) {
-      setPageCount(response.count);
-      setArtworks(response.data);
+      setPageCount(1);
+      setArtworks(response?.data);
     } else {
       toast.error(response?.message);
     }
@@ -53,14 +67,38 @@ export default function Filter() {
 
   const handleClearAll = async () => {
     clearAllFilters();
-    const response = await fetchTrendingArtworks(paginationCount, {
+    //visis the clear section
+    let response;
+
+    const emptyFilters = {
       price: [],
       year: [],
       medium: [],
       rarity: [],
-    });
+    }
+
+    if(page_type === "trending"){
+      response = await fetchTrendingArtworks(
+        paginationCount,
+        emptyFilters
+      );
+    }else if(page_type === "curated"){
+      //update to curated
+      response = await fetchCuratedArtworks(
+        session,
+        paginationCount,
+        emptyFilters
+      );
+    }else if(page_type === "recent"){
+      //update to recent
+      response = await fetchPaginatedArtworks(
+        paginationCount,
+        emptyFilters
+      );
+    }
+
     if (response?.isOk) {
-      setArtworks(response.data);
+      setArtworks(response?.data);
       setPaginationCount(1);
     }
   };

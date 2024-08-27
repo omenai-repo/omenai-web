@@ -1,14 +1,14 @@
 "use client";
 
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
-import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
+import { collectionsStore } from "@/store/collections/collectionsStore";
 import { MdClear } from "react-icons/md";
 
 export default function FilterPill({ filter }: { filter: string }) {
-  const { removeSingleFilterSelection, selectedFilters } = trendingArtworksFilterStore();
+  const { removeSingleFilterSelection, selectedFilters } = collectionsFilterStore();
   // const { paginationCount, updatePaginationCount } = artworkActionStore();
-  const { setArtworks, setIsLoading, setPageCount, paginationCount } = trendingArtworksStore();
+  const { setArtworks, setIsLoading, setPageCount, paginationCount } = collectionsStore();
 
   async function handleRemoveSingleFilter() {
     if (selectedFilters.length === 1) {
