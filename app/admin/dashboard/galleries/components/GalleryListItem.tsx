@@ -7,7 +7,7 @@ import { MdClose } from "react-icons/md";
 import { IoCheckmarkOutline } from "react-icons/io5";
 
 import { GoEye } from "react-icons/go";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function GalleryListItem({
   name,

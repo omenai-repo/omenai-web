@@ -1,5 +1,5 @@
 import { getApiUrl } from "@/config";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export async function resendCode(
   route: "individual" | "gallery",
@@ -10,7 +10,7 @@ export async function resendCode(
 
     await fetch(`${url}/api/requests/${route}/verify/resend`, {
       method: "POST",
-      body: JSON.stringify({author: payload.author}),
+      body: JSON.stringify({ author: payload.author }),
       headers: {
         "Content-type": "application/json",
       },

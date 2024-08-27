@@ -3,7 +3,7 @@ import { IndividualLogo } from "../logo/Logo";
 import LoginModalFormActions from "./LoginModalFormActions";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleSignIn } from "@/services/login/ModalLogin";
 import { handleKeyPress } from "@/utils/disableSubmitOnEnter";

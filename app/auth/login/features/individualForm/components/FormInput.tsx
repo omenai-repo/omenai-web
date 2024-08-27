@@ -4,7 +4,7 @@ import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import FormActions from "./FormActions";
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -81,14 +81,14 @@ export default function FormInput() {
           Password
         </label>
         <input
-            value={form.password}
-            type="password"
-            name="password"
-            className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
-            onKeyDown={handleKeyPress}
-            onChange={handleChange}
-            required
-          />
+          value={form.password}
+          type="password"
+          name="password"
+          className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
+          onKeyDown={handleKeyPress}
+          onChange={handleChange}
+          required
+        />
       </div>
       <FormActions />
     </form>

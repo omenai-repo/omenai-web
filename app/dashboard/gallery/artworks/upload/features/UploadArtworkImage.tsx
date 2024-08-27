@@ -8,7 +8,7 @@ import { createUploadedArtworkData } from "@/utils/createUploadedArtworkData";
 import { uploadArtworkData } from "@/services/artworks/uploadArtworkData";
 import { storage } from "@/appwrite";
 import { useSession } from "next-auth/react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { LoadSmall } from "@/components/loader/Load";
 import { useQueryClient } from "@tanstack/react-query";

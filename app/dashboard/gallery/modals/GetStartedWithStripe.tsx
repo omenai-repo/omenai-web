@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 export default function GetStartedWithStripe() {
   const [accountCreatePending, setAccountCreatePending] = useState(false);
 

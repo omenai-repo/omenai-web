@@ -4,10 +4,17 @@ import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtwor
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
 import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
 import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function Pagination() {
-  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = trendingArtworksStore();
+  const {
+    setArtworks,
+    setPaginationLoading,
+    paginationLoading,
+    paginationCount,
+    setPaginationCount,
+    pageCount,
+  } = trendingArtworksStore();
 
   const { filterOptions } = trendingArtworksFilterStore();
 
@@ -51,14 +58,14 @@ export default function Pagination() {
       </p>
       <div className="flex gap-x-4 w-full">
         <button
-          disabled={(paginationCount === 1) || paginationLoading}
+          disabled={paginationCount === 1 || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("dec")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
           Previous page
         </button>
         <button
-          disabled={(paginationCount === pageCount) || paginationLoading}
+          disabled={paginationCount === pageCount || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("inc")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >

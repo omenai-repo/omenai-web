@@ -5,7 +5,7 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function BalanceBox({
   account,

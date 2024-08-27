@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function SearchInput() {
   const [searchTerm, setSearchTerm] = useState("");

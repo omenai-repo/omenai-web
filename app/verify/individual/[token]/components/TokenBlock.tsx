@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 type TokenProps = {
   token: string;
 };

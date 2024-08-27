@@ -7,7 +7,7 @@ import { FormEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import { indexAddress } from "../indexAddressOptions";
 import { createShippingOrder } from "@/services/orders/createShippingOrder";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import Load from "@/components/loader/Load";
 
 import { actionStore } from "@/store/actions/ActionStore";

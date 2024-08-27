@@ -19,8 +19,6 @@ export async function POST(request: Request) {
       gallery_id: data.gallery_id,
     });
 
-    if (!doc_count) throw new ServerError("Unable to ascertail document count");
-
     const active_subscription = await Subscriptions.findOne(
       { "customer.gallery_id": data.gallery_id },
       "plan_details status"

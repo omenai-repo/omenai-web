@@ -5,7 +5,7 @@ import { navMockData } from "../navigations/NavigationMockData";
 import NavigationItem from "../components/NavigationItem";
 import { galleryNavigationActions } from "@/store/gallery/gallery_navigation/GalleryNavigation";
 import { signOut } from "next-auth/react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function PageLayout() {
   function handleSignout() {

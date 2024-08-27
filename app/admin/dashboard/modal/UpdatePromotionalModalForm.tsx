@@ -10,7 +10,7 @@ import { hasEmptyString } from "@/utils/hasEmptyString";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function UpdatePromotionalModalForm() {
   const [data, setData, setOpenModal] = promotionalStore((state) => [

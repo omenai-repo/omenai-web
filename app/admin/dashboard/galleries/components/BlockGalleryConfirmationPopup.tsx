@@ -4,7 +4,7 @@ import { adminModals } from "@/store/admin/AdminModalsStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function BlockGalleryConfirmationPopupModal() {
   const { blockGalleryConfirmationPopup, setBlockGalleryConfirmationPopup } =

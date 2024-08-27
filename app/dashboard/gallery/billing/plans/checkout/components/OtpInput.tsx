@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { IoIosLock } from "react-icons/io";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function Oput({
   handleClick,

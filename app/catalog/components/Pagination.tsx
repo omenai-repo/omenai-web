@@ -4,7 +4,7 @@ import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtwor
 import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
 import { artworkStore } from "@/store/artworks/ArtworkStore";
 import { filterStore } from "@/store/artworks/FilterStore";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function Pagination() {
   const { setArtworks, setIsLoading, pageCount, setPageCount } = artworkStore();
