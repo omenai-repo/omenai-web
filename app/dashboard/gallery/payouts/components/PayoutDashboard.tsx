@@ -6,7 +6,7 @@ import { getAccountId } from "@/services/stripe/getAccountId";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import PayoutDashBoardContent from "./PayoutDashBoardContent";
 import { retrieveBalance } from "@/services/stripe/retrieveBalance";
 import { TransactionTable } from "./TransactionTable";

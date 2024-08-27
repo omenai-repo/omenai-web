@@ -10,7 +10,7 @@ import { CiSettings } from "react-icons/ci";
 import Link from "next/link";
 import { UserDashboardNavigationStore } from "@/store/user/navigation/NavigationStore";
 import { signOut } from "next-auth/react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { BiUser } from "react-icons/bi";
 
 const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {

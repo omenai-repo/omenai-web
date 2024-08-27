@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 import GetStartedWithStripe from "./modals/GetStartedWithStripe";
 import { useQuery } from "@tanstack/react-query";
 import { getAccountId } from "@/services/stripe/getAccountId";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import Load from "@/components/loader/Load";
 export default function GalleryDashboardLayout({
   children,

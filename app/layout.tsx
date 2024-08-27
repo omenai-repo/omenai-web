@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
-import { Toaster } from "sonner";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -13,6 +12,7 @@ import LoginModal from "@/components/modal/LoginModal";
 import RecoveryModal from "@/components/modal/RecoveryModal";
 import { OrderReceivedModal } from "@/components/modal/OrderConfirmedModal";
 import { ThemeProvider } from "./material_tailwind/MaterialTailwindExports";
+import { Toaster } from "react-hot-toast";
 
 const nunito_sans = Inter({
   subsets: ["latin"],
@@ -35,7 +35,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${nunito_sans.className} flex flex-col justify-center`}>
         <NextTopLoader color="#1A1A1A" height={6} />
-        <Toaster richColors position="top-center" visibleToasts={1} />
+        <Toaster />
         <AuthProvider session={session}>
           <ThemeProvider>
             <Providers>

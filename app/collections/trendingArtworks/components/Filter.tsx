@@ -2,7 +2,7 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { isEmptyFilter } from "@/utils/isFilterEmpty";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { FaCheckCircle } from "react-icons/fa";
@@ -20,11 +20,19 @@ export default function Filter() {
   const [showFilterBlock, setShowFilterBlock] = useState(true);
   const { width } = useWindowSize();
 
-  const { filterOptions, selectedFilters, clearAllFilters } = trendingArtworksFilterStore();
-  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = trendingArtworksStore();
+  const { filterOptions, selectedFilters, clearAllFilters } =
+    trendingArtworksFilterStore();
+  const {
+    setArtworks,
+    setIsLoading,
+    paginationCount,
+    setPaginationCount,
+    pageCount,
+    setPageCount,
+  } = trendingArtworksStore();
 
   async function handleSubmitFilter() {
-    setPaginationCount(1)
+    setPaginationCount(1);
     setIsLoading(true);
     const response = await fetchTrendingArtworks(
       paginationCount,
@@ -53,7 +61,7 @@ export default function Filter() {
     });
     if (response?.isOk) {
       setArtworks(response.data);
-      setPaginationCount(1)
+      setPaginationCount(1);
     }
   };
 

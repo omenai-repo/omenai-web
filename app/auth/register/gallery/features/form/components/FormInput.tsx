@@ -3,7 +3,7 @@ import { FormEvent } from "react";
 import FormController from "./FormController";
 import { useGalleryAuthStore } from "@/store/auth/register/GalleryAuthStore";
 import { registerAccount } from "@/services/register/registerAccount";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import uploadGalleryLogoContent from "../../uploadGalleryLogo";
 import { gallery_logo_storage } from "@/appwrite";

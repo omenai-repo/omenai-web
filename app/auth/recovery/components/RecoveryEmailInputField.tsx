@@ -3,7 +3,7 @@ import { LoadSmall } from "@/components/loader/Load";
 import { sendPasswordResetLink } from "@/services/password/sendPasswordResetLink";
 import { actionStore } from "@/store/actions/ActionStore";
 import { FormEvent, useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function RecoveryEmailInputField() {
   const [isLoading, setIsloading] = useState(false);

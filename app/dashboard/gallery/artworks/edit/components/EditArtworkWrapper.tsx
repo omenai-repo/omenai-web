@@ -4,7 +4,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
 import { currencies } from "@/json/currency_select";
 import { getCurrencyConversion } from "@/services/exchange_rate/getCurrencyConversion";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { formatPrice } from "@/utils/priceFormatter";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { updateArtworkPrice } from "@/services/artworks/updateArtworkPrice";

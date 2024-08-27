@@ -5,7 +5,7 @@ import ArtworkPriceInputGroup from "./components/ArtworkPriceInputGroup";
 import { BsArrowRight } from "react-icons/bs";
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { galleryArtworkUploadStore } from "@/store/gallery/gallery_artwork_upload/GalleryArtworkUpload";
 import { allKeysEmpty } from "@/utils/checkIfObjectEmpty";
 import ArtistInfoInputGroup from "./components/ArtistInfoInputGroup";

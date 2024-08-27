@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { actionStore } from "@/store/actions/ActionStore";
 import { requestPrice } from "@/services/requests/requestPrice";
 import { useSession } from "next-auth/react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
 import { PiFrameCornersThin } from "react-icons/pi";

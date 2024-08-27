@@ -10,7 +10,7 @@ import { isEmptyFilter } from "@/utils/isFilterEmpty";
 import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
 import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
 import { artworkStore } from "@/store/artworks/ArtworkStore";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { useRouter } from "next/navigation";

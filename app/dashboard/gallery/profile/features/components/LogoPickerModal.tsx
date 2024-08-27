@@ -7,7 +7,7 @@ import { galleryLogoUpdate } from "@/store/gallery/gallery_logo_upload/GalleryLo
 import { LoadSmall } from "@/components/loader/Load";
 import { gallery_logo_storage, storage } from "@/appwrite";
 import { signOut, useSession } from "next-auth/react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ID } from "appwrite";
 import { updateLogo } from "@/services/update/updateLogo";

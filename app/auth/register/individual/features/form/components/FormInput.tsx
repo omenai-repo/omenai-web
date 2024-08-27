@@ -4,7 +4,7 @@ import { registerAccount } from "@/services/register/registerAccount";
 import { useIndividualAuthStore } from "@/store/auth/register/IndividualAuthStore";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import FormController from "./FormController";
 
 export default function FormInput() {

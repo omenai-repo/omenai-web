@@ -5,7 +5,7 @@ import { InputCard } from "./InputCard";
 import { TextareaCard } from "./TextareaCard";
 import { galleryProfileUpdate } from "@/store/gallery/gallery_profile_update/GalleryProfileUpdateStore";
 import { updateProfile } from "@/services/update/updateProfile";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { LoadSmall } from "@/components/loader/Load";
 

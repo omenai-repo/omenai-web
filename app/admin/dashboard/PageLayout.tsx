@@ -3,7 +3,7 @@ import { IndividualLogo } from "@/components/logo/Logo";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 import { signOut } from "next-auth/react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { navMockData } from "./mocks/NavigationMockData";
 import NavigationItem from "./NavigationItem";
 import { adminNavigationActions } from "@/store/admin/AdminNavigationStore";

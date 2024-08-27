@@ -2,7 +2,7 @@
 
 import { sendPasswordResetLink } from "@/services/password/sendPasswordResetLink";
 import { useState, FormEvent } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { LoadSmall } from "../loader/Load";
 
 export default function RecoveryModalEmailInputField() {

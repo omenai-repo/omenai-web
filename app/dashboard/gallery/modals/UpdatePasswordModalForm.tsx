@@ -7,7 +7,7 @@ import { updatePassword } from "@/services/requests/updateGalleryPassword";
 import { actionStore } from "@/store/actions/ActionStore";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { MdError } from "react-icons/md";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function UpdatePasswordModalForm() {
   const [updatePasswordModalPopup] = actionStore((state) => [

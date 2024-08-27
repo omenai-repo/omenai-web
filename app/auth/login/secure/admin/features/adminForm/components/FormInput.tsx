@@ -3,7 +3,7 @@ import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { LoadSmall } from "@/components/loader/Load";
 import { GoArrowRight } from "react-icons/go";
 

@@ -11,7 +11,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
 import { useEffect, useState } from "react";
 import { getApiUrl } from "@/config";
