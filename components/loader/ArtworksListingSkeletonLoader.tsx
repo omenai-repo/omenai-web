@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-export default function CatalogLoader(){
+export function ArtworksListingSkeletonLoader(){
     return(
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6">
             {new Array(8).fill('').map((_, index: number) => (

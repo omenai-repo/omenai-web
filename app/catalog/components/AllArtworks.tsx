@@ -12,7 +12,7 @@ import { useWindowSize } from "usehooks-ts";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
 import { useState } from "react";
-import CatalogLoader from './CatalogLoader';
+import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListingSkeletonLoader";
 
 export default function AllArtworks({
   sessionId,
@@ -44,7 +44,7 @@ export default function AllArtworks({
 
   if (loading || isLoading) {
     return (
-      <CatalogLoader />
+      <ArtworksListingSkeletonLoader />
     );
   }
 

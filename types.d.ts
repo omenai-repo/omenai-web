@@ -445,3 +445,15 @@ type AvsAuthorizationData = {
   zip?: string;
   address?: string;
 };
+type filterOptionsType = {
+  price: {
+    min: number;
+    max: number;
+  }[];
+  year: {
+    min: number;
+    max: number;
+  }[];
+  medium: string[];
+  rarity: string[];
+};
