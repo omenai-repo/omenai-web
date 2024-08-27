@@ -53,8 +53,8 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
     }
     
     if (response?.isOk) {
-      setPageCount(response.count);
-      setArtworks(response.data);
+      setPageCount(1);
+      setArtworks(response?.data);
     } else {
       toast.error(response?.message);
     }
@@ -68,14 +68,37 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
   const handleClearAll = async () => {
     clearAllFilters();
     //visis the clear section
-    const response = await fetchTrendingArtworks(paginationCount, {
+    let response;
+
+    const emptyFilters = {
       price: [],
       year: [],
       medium: [],
       rarity: [],
-    });
+    }
+
+    if(page_type === "trending"){
+      response = await fetchTrendingArtworks(
+        paginationCount,
+        emptyFilters
+      );
+    }else if(page_type === "curated"){
+      //update to curated
+      response = await fetchCuratedArtworks(
+        session,
+        paginationCount,
+        emptyFilters
+      );
+    }else if(page_type === "recent"){
+      //update to recent
+      response = await fetchPaginatedArtworks(
+        paginationCount,
+        emptyFilters
+      );
+    }
+
     if (response?.isOk) {
-      setArtworks(response.data);
+      setArtworks(response?.data);
       setPaginationCount(1);
     }
   };
