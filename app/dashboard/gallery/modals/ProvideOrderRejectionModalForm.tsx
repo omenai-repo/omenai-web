@@ -6,7 +6,7 @@ import { actionStore } from "@/store/actions/ActionStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function ProvideOrderRejectionModalForm() {
   const [toggleDeclineOrderModal, current_order_id] = actionStore((state) => [

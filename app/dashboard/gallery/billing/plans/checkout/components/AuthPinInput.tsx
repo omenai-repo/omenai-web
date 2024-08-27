@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 import { IoIosLock } from "react-icons/io";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
 
 export default function AuthPinInput({

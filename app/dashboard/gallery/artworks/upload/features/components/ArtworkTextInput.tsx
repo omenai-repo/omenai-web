@@ -4,7 +4,7 @@ import { getCurrencyConversion } from "@/services/exchange_rate/getCurrencyConve
 import { galleryArtworkUploadStore } from "@/store/gallery/gallery_artwork_upload/GalleryArtworkUpload";
 import { trimWhiteSpace } from "@/utils/trimWhitePace";
 import { ChangeEvent, useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 type ArtworkTextInputProps = {
   label: string;

@@ -12,7 +12,7 @@ import ExpiryMonth from "./CardExpiryMonth";
 import ExpiryYear from "./CardExpiryYear";
 import { generateAlphaDigit } from "@/utils/generateToken";
 import { initiateDirectCharge } from "@/services/subscriptions/subscribeUser/initiateDirectCharge";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { getApiUrl } from "@/config";

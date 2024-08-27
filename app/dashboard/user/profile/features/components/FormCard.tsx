@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import { InputCard } from "./InputCard";
 import { updateProfile } from "@/services/update/updateProfile";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { LoadSmall } from "@/components/loader/Load";
 import { individualProfileUdateStore } from "@/store/individual/individual_profile_update/IndividualProfileUpdateStore";

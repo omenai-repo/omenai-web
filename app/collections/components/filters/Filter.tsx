@@ -2,7 +2,7 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { isEmptyFilter } from "@/utils/isFilterEmpty";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { FaCheckCircle } from "react-icons/fa";
@@ -28,7 +28,7 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
   const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = collectionsStore();
 
   async function handleSubmitFilter() {
-    setPaginationCount(1)
+    setPaginationCount(1);
     setIsLoading(true);
     let response;
 
@@ -76,7 +76,7 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
     });
     if (response?.isOk) {
       setArtworks(response.data);
-      setPaginationCount(1)
+      setPaginationCount(1);
     }
   };
 

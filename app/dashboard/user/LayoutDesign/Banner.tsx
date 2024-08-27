@@ -2,7 +2,7 @@
 
 import { signOut, useSession } from "next-auth/react";
 import { CiUser } from "react-icons/ci";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function Banner() {
   const user = useSession();

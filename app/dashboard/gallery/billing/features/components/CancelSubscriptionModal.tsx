@@ -11,7 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoWarning } from "react-icons/io5";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 export default function CancelSubscriptionModal({
   sub_end,
   id,

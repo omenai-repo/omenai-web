@@ -4,7 +4,7 @@ import { IoIosLock } from "react-icons/io";
 import Image from "next/image";
 import { generateAlphaDigit } from "@/utils/generateToken";
 import { createTokenizedCharge } from "@/services/subscriptions/createTokenizedCharge";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { LoadSmall } from "@/components/loader/Load";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getApiUrl } from "@/config";

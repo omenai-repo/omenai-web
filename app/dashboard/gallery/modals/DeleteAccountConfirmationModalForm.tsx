@@ -5,7 +5,7 @@ import { deleteAccount } from "@/services/requests/deleteGalleryAccount";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { IoWarning } from "react-icons/io5";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 export default function DeleteAccountConfirmationModalForm() {
   const [loading, setLoading] = useState<boolean>(false);

@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { usePathname, useSearchParams, notFound } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
 import AddressForm from "./AddressForm";
 import DeliveryMethod from "./DeliveryMethod";

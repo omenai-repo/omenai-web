@@ -4,7 +4,7 @@ import PageTitle from "../../components/PageTitle";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { createAccountLink } from "@/services/stripe/createAccountLink";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import Load, { LoadSmall } from "@/components/loader/Load";
 import { checkIsStripeOnboarded } from "@/services/stripe/checkIsStripeOnboarded";
 import { useQuery } from "@tanstack/react-query";

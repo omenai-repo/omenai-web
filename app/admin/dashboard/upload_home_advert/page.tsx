@@ -4,7 +4,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { AdminUploadInput } from "./components/Input";
 import { LoadSmall } from "@/components/loader/Load";
 import ImageUpload from "./components/ImageUpload";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import uploadPromotionalContentImage from "../controller/uploadPromotionalCoverImage";
 import { createPromotionalData } from "@/services/promotionals/createPromotionalData";
 import { promotional_storage } from "@/appwrite";

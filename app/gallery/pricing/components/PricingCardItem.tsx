@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import PricingCardFeatureListItem from "./PricingCardFeatureListItem";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { LoadSmall } from "@/components/loader/Load";
 import { useSession } from "next-auth/react";
 import { useLocalStorage } from "usehooks-ts";

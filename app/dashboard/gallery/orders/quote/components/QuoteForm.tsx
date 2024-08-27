@@ -7,7 +7,7 @@ import { formatPrice } from "@/utils/priceFormatter";
 import { useRouter } from "next/navigation";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { BsCurrencyDollar } from "react-icons/bs";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import Image from "next/image";
 import { PiSealWarning } from "react-icons/pi";
 import { useQueryClient } from "@tanstack/react-query";

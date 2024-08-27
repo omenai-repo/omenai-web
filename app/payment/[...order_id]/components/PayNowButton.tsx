@@ -5,7 +5,7 @@ import { Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CiLock } from "react-icons/ci";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { LoadSmall } from "@/components/loader/Load";
 
