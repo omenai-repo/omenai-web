@@ -33,7 +33,7 @@ export function ArtworkListing({
             filterOptions
           );
           if (response?.isOk) {
-            setPageCount(response.count);
+            setPageCount(response.pageCount);
             setArtworks(response.data);
             // set_artwork_total(response.total);
             return response.data;
@@ -91,7 +91,7 @@ export function ArtworkListing({
                 {/* first */}
             </div>
 
-            {/* <Pagination /> */}
+            <Pagination />
         </div>
     )
 }
