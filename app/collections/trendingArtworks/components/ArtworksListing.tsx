@@ -7,8 +7,8 @@ import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtwor
 import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
 import { artworkStore } from "@/store/artworks/ArtworkStore";
 import { filterStore } from "@/store/artworks/FilterStore";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/TrendingArtworksFilterStore";
-import { trendingArtworksStore } from "@/store/collections/trendingArtworks/TrendingArtworksStore";
+import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
+import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";

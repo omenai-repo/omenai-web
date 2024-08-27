@@ -1,6 +1,6 @@
 "use client";
 
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/TrendingArtworksFilterStore";
+import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
 import { hasFilterValue } from "@/utils/checkIfFilterExists";
 import { ChangeEvent } from "react";
 

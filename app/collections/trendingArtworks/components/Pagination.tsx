@@ -2,8 +2,8 @@
 
 import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/TrendingArtworksFilterStore";
-import { trendingArtworksStore } from "@/store/collections/trendingArtworks/TrendingArtworksStore";
+import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
+import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
 import { toast } from "sonner";
 
 export default function Pagination() {

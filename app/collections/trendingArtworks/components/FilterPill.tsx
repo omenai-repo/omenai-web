@@ -1,8 +1,8 @@
 "use client";
 
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/TrendingArtworksFilterStore";
-import { trendingArtworksStore } from "@/store/collections/trendingArtworks/TrendingArtworksStore";
+import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
+import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
 import { MdClear } from "react-icons/md";
 
 export default function FilterPill({ filter }: { filter: string }) {
