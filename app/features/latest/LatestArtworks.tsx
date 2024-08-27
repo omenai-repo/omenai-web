@@ -67,7 +67,9 @@ export default function LatestArtworks({
       {artworks.length > 0 && (
         <div className="p-4 relative">
           <div className="space-y-1 my-5">
-            <h1 className="text-md font-normal">Latest artworks</h1>
+            <Link href={'/collections/recent-artwork'}>
+              <h1 className="text-md font-normal underline">Latest artworks</h1>
+            </Link>
             <p className="text-sm text-[#858585] font-normal italic">
               Fresh Off the Easel: Explore the Newest Masterpieces, Just for You
             </p>

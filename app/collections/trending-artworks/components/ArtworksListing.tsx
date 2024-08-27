@@ -3,28 +3,23 @@
 import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
 import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListingSkeletonLoader";
 import NotFoundData from "@/components/notFound/NotFoundData";
-import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
-import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
-import { artworkStore } from "@/store/artworks/ArtworkStore";
-import { filterStore } from "@/store/artworks/FilterStore";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
-import { trendingArtworksStore } from "@/store/collections/trendingArtworks/trendingArtworksStore";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import Pagination from "./Pagination";
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
+import { collectionsStore } from "@/store/collections/collectionsStore";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
 
 export function ArtworkListing({
     sessionId
 }: {
     sessionId: string | undefined
 }){
-    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = trendingArtworksStore();
-    const { filterOptions } = trendingArtworksFilterStore();
+    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = collectionsStore();
+    const { filterOptions } = collectionsFilterStore();
     const { width } = useWindowSize();
-    const [artwork_total, set_artwork_total] = useState(0);
 
     const { data: artworksArray, isLoading: loading } = useQuery({
         queryKey: ["get_paginated_artworks"],

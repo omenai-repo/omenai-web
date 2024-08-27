@@ -4,7 +4,8 @@ import { SessionContextValue } from "next-auth/react";
 
 export const fetchCuratedArtworks = async (
   session: SessionContextValue,
-  page: number
+  page: number,
+  filters?: any []
 ) => {
   try {
     const url = getApiUrl();
@@ -13,6 +14,7 @@ export const fetchCuratedArtworks = async (
       body: JSON.stringify({
         preferences: session.data!.user.preferences,
         page,
+        filters
       }),
     });
 

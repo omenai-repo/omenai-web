@@ -457,3 +457,5 @@ type filterOptionsType = {
   medium: string[];
   rarity: string[];
 };
+
+type artworkCollectionTypes = "trending" | "curated" | "recent"
