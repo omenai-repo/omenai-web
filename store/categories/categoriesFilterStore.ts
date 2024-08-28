@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type FilterStoreTypes = {
+export type CategoriesFilterStore = {
   filterOptions: {
     price: {
       min: number;
@@ -28,7 +28,7 @@ type SelectedFilterArray = {
   value: string;
 };
 
-export const trendingArtworksFilterStore = create<FilterStoreTypes>((set, get) => ({
+export const categoriesFilterStore = create<CategoriesFilterStore>((set, get) => ({
   filterOptions: {
     price: [],
     year: [],

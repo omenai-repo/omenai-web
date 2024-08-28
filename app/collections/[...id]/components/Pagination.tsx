@@ -1,22 +1,20 @@
 "use client";
 
-import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
-import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
-import { categoriesStore } from "@/store/categories/categoriesStore";
-import { useSession } from "next-auth/react";
+import { fetchArtworksByCriteria } from "@/services/artworks/fetchArtworksByCriteria";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
+import { collectionsStore } from "@/store/collections/collectionsStore";
 import { toast } from "sonner";
 
-export default function Pagination() {
-  const session = useSession()
-  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = categoriesStore();
+export default function Pagination({medium}: {medium: string}) {
+  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = collectionsStore();
 
-  const { filterOptions } = categoriesFilterStore();
+  const { filterOptions } = collectionsFilterStore();
 
   async function handlePaginationArtworkFetch(type: "dec" | "inc") {
     setPaginationLoading(true);
     if (type === "dec") {
-      const response = await fetchCuratedArtworks(
-        session,
+      const response = await fetchArtworksByCriteria(
+        medium,
         paginationCount - 1,
         filterOptions
       );
@@ -28,8 +26,8 @@ export default function Pagination() {
         toast.error(response?.message);
       }
     } else {
-      const response = await fetchCuratedArtworks(
-        session,
+      const response = await fetchArtworksByCriteria(
+        medium,
         paginationCount + 1,
         filterOptions
       );

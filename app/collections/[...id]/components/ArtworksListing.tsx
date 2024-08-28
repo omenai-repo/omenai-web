@@ -5,25 +5,26 @@ import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListi
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
-import Pagination from "./Pagination";
-import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
-import { categoriesStore } from "@/store/categories/categoriesStore";
+// import Pagination from "./Pagination";
+import { collectionsStore } from "@/store/collections/collectionsStore";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
 import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
+import Pagination from "./Pagination";
+import { fetchArtworksByCriteria } from "@/services/artworks/fetchArtworksByCriteria";
 
-export async function ArtworkListing({
-  sessionId
-}: {
-  sessionId: string | undefined
-}){
-    const { isLoading, setArtworks, artworks, paginationCount, setPageCount, pageCount } = categoriesStore();
-    const { filterOptions } = categoriesFilterStore();
+
+export function ArtworksListing({medium, sessionId}: {medium: string, sessionId: string | undefined}){
+    const { isLoading, setArtworks, artworks, paginationCount, setPageCount, pageCount } = collectionsStore();
+    const { filterOptions } = collectionsFilterStore();
     const { width } = useWindowSize();
 
     const { data: artworksArray, isLoading: loading } = useQuery({
         queryKey: ["get_paginated_artworks"],
         queryFn: async () => {
-          const response = await fetchPaginatedArtworks(
+          const response = await fetchArtworksByCriteria(
+            medium,
             paginationCount,
             filterOptions
           );
@@ -86,7 +87,7 @@ export async function ArtworkListing({
                 {/* first */}
             </div>
 
-            <Pagination />
+            <Pagination medium={medium} />
         </div>
     )
 }

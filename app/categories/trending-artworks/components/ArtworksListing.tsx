@@ -5,20 +5,19 @@ import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListi
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import Pagination from "./Pagination";
 import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { collectionsStore } from "@/store/collections/collectionsStore";
-import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
+import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
+import { categoriesStore } from "@/store/categories/categoriesStore";
 
 export function ArtworkListing({
     sessionId
 }: {
     sessionId: string | undefined
 }){
-    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = collectionsStore();
-    const { filterOptions } = collectionsFilterStore();
+    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = categoriesStore();
+    const { filterOptions } = categoriesFilterStore();
     const { width } = useWindowSize();
 
     const { data: artworksArray, isLoading: loading } = useQuery({

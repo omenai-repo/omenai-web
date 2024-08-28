@@ -8,11 +8,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import Pagination from "./Pagination";
-import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
-import { collectionsStore } from "@/store/collections/collectionsStore";
 import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
 import { useSession } from "next-auth/react";
+import { categoriesStore } from "@/store/categories/categoriesStore";
+import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
 
 export function ArtworkListing({
   sessionId
@@ -20,8 +19,8 @@ export function ArtworkListing({
   sessionId: string | undefined
 }){
     const session = useSession();
-    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = collectionsStore();
-    const { filterOptions } = collectionsFilterStore();
+    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = categoriesStore();
+    const { filterOptions } = categoriesFilterStore();
     const { width } = useWindowSize();
 
     const { data: artworksArray, isLoading: loading } = useQuery({

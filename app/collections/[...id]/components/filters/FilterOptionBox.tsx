@@ -1,6 +1,6 @@
 "use client";
 
-import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
 import { hasFilterValue } from "@/utils/checkIfFilterExists";
 import { ChangeEvent } from "react";
 
@@ -24,7 +24,7 @@ export default function FilterOptionBox({
     setSelectedFilters,
     removeSingleFilterSelection,
     selectedFilters,
-  } = categoriesFilterStore();
+  } = collectionsFilterStore();
   const handleChange = (e: ChangeEvent<HTMLInputElement>, filter: string) => {
     if (e.target.checked) {
       updateFilter(label, e.target.value);

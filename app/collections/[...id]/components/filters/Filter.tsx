@@ -8,49 +8,29 @@ import { ImBin2 } from "react-icons/im";
 import { FaCheckCircle } from "react-icons/fa";
 import { useWindowSize } from "usehooks-ts";
 import { MdClear } from "react-icons/md";
-import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
 import PriceFilter from "./PriceFilter";
 import YearFilter from "./YearFilter";
-import MediumFilter from "./MediumFilter";
 import RarityFilter from "./RarityFilter";
-import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
-import { useSession } from "next-auth/react";
-import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
-import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
-import { categoriesStore } from "@/store/categories/categoriesStore";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
+import { collectionsStore } from "@/store/collections/collectionsStore";
+import { fetchArtworksByCriteria } from "@/services/artworks/fetchArtworksByCriteria";
 
-export default function Filter({page_type}: {page_type: artworkCollectionTypes}) {
-  const session = useSession();
+export default function Filter({medium}: {medium: string}) {
   const [showFilterBlock, setShowFilterBlock] = useState(false);
   const { width } = useWindowSize();
 
-  const { filterOptions, selectedFilters, clearAllFilters } = categoriesFilterStore();
-  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = categoriesStore();
+  const { filterOptions, selectedFilters, clearAllFilters } = collectionsFilterStore();
+  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = collectionsStore();
 
   async function handleSubmitFilter() {
     setPaginationCount(1);
     setIsLoading(true);
-    let response;
 
-    if(page_type === "trending"){
-      response = await fetchTrendingArtworks(
-        paginationCount,
-        filterOptions
-      );
-    }else if(page_type === "curated"){
-      //update to curated
-      response = await fetchCuratedArtworks(
-        session,
-        paginationCount,
-        filterOptions
-      );
-    }else if(page_type === "recent"){
-      //update to recent
-      response = await fetchPaginatedArtworks(
-        paginationCount,
-        filterOptions
-      );
-    }
+    const response = await fetchArtworksByCriteria(
+      medium,
+      paginationCount,
+      filterOptions
+    );
     
     if (response?.isOk) {
       setPageCount(1);
@@ -67,8 +47,6 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
 
   const handleClearAll = async () => {
     clearAllFilters();
-    //visis the clear section
-    let response;
 
     const emptyFilters = {
       price: [],
@@ -77,25 +55,11 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
       rarity: [],
     }
 
-    if(page_type === "trending"){
-      response = await fetchTrendingArtworks(
-        paginationCount,
-        emptyFilters
-      );
-    }else if(page_type === "curated"){
-      //update to curated
-      response = await fetchCuratedArtworks(
-        session,
-        paginationCount,
-        emptyFilters
-      );
-    }else if(page_type === "recent"){
-      //update to recent
-      response = await fetchPaginatedArtworks(
-        paginationCount,
-        emptyFilters
-      );
-    }
+    const response = await fetchArtworksByCriteria(
+      medium,
+      paginationCount,
+      emptyFilters
+    );
 
     if (response?.isOk) {
       setArtworks(response?.data);
@@ -159,7 +123,7 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
       >
         <PriceFilter filterOptions={filterOptions} />
         <YearFilter filterOptions={filterOptions} />
-        <MediumFilter filterOptions={filterOptions} />
+        {/* <MediumFilter filterOptions={filterOptions} /> */}
         <RarityFilter filterOptions={filterOptions} />
       </div>
     </div>
