@@ -72,7 +72,7 @@ export default function TrendingArtworks({
         <div className="p-4 relative">
           <div className="flex gap-4 my-5">
             <div className="space-y-1 flex-1">
-              <h1 className="text-md font-normal underline">Trending artworks</h1>
+              <h1 className="text-md font-normal">Trending artworks</h1>
               <p className="text-sm text-[#858585] font-normal italic">
                 On the Rise: Discover the Art Everyone's Talking About
               </p>

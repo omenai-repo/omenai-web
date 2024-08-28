@@ -67,7 +67,7 @@ export default function CuratedArtworksLayout({
       <div className="px-4 py-8 relative">
         <div className="flex gap-4 my-5">
           <div className="space-y-1 flex-1">
-            <h1 className="text-md font-normal underline">Based on your preferences</h1>
+            <h1 className="text-md font-normal">Based on your preferences</h1>
             <p className="text-sm text-[#858585] font-normal italic">
               Your Art, Your Way: Explore Pieces That Resonate with You
             </p>
