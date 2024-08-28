@@ -22,10 +22,11 @@ export default function LatestArtworkWrapper({
     },
   });
 
-  if (isLoading)
-    return (
-      <SectionLoaderContainers title="Latest artworks" />
-    );
+  // if (isLoading)
+  return (
+    <SectionLoaderContainers title="Latest artworks" />
+  );
+  
   return (
     <>
       {artworks.length === 0 && (

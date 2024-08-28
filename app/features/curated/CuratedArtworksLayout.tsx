@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { FiChevronRight } from "react-icons/fi";
 import {
+  MdArrowRightAlt,
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
@@ -71,10 +72,12 @@ export default function CuratedArtworksLayout({
               Your Art, Your Way: Explore Pieces That Resonate with You
             </p>
           </div>
-          <Link href={'/collections/curated-artworks'}>
-            <div className="flex items-center gap-1 rounded-full border border-black/20 px-3 text-sm py-1 bg-white cursor-pointer text-black/80">
-              <p className="text-[14px]">View all</p><FiChevronRight size={14} />
-            </div>
+          <Link
+            href={"/categories/curated-artworks"}
+            className="text-dark flex items-center gap-x-2 font-normal text-[14px] break-words"
+          >
+            View all
+            <MdArrowRightAlt />
           </Link>
         </div>
         <div className="embla" ref={emblaRef}>
