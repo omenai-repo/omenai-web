@@ -28,8 +28,9 @@ export function ArtworksListing({medium, sessionId}: {medium: string, sessionId:
             paginationCount,
             filterOptions
           );
-          if (response?.isOk) {
-            setPageCount(response.count);
+          
+          if (response?.data) {
+            setPageCount(response.pageCount);
             setArtworks(response.data);
             // set_artwork_total(response.total);
             return response.data;
