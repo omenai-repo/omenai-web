@@ -22,7 +22,7 @@ export default async function page({ params }: { params: { id: string[] } }){
                     <Link 
                         href={'/collections'} 
                         className="opacity-80 hover:opacity-100 hover:underline"
-                    >Collections</Link>
+                    > Art collections</Link>
                     <p>/</p>
                     <Link 
                         href={`/collection/${params.id[0]}`}
