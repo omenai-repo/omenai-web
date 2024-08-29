@@ -13,19 +13,19 @@ import PriceFilter from "./PriceFilter";
 import YearFilter from "./YearFilter";
 import MediumFilter from "./MediumFilter";
 import RarityFilter from "./RarityFilter";
-import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
-import { collectionsStore } from "@/store/collections/collectionsStore";
 import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
 import { useSession } from "next-auth/react";
 import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
+import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
+import { categoriesStore } from "@/store/categories/categoriesStore";
 
 export default function Filter({page_type}: {page_type: artworkCollectionTypes}) {
   const session = useSession();
-  const [showFilterBlock, setShowFilterBlock] = useState(true);
+  const [showFilterBlock, setShowFilterBlock] = useState(false);
   const { width } = useWindowSize();
 
-  const { filterOptions, selectedFilters, clearAllFilters } = collectionsFilterStore();
-  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = collectionsStore();
+  const { filterOptions, selectedFilters, clearAllFilters } = categoriesFilterStore();
+  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = categoriesStore();
 
   async function handleSubmitFilter() {
     setPaginationCount(1);
@@ -116,7 +116,7 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
               ? "bg-dark text-white"
               : "border-dark/10 border bg-white text-dark"
           } duration-200 border px-3 py-1 border-dark/10 rounded-full  flex gap-x-2 items-center text-[13px] font-normal w-fit cursor-pointer`}
-          onClick={() => setShowFilterBlock(!showFilterBlock)}
+          onClick={() => setShowFilterBlock(prev => !prev)}
         >
           <span className="text-[13px] font-normal">Filters</span>
           {showFilterBlock ? (

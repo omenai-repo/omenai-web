@@ -5,35 +5,34 @@ import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListi
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import Pagination from "./Pagination";
-import { collectionsStore } from "@/store/collections/collectionsStore";
-import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
-import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
+import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
+import { useSession } from "next-auth/react";
+import { categoriesStore } from "@/store/categories/categoriesStore";
+import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
 
 export function ArtworkListing({
-    sessionId
+  sessionId
 }: {
-    sessionId: string | undefined
+  sessionId: string | undefined
 }){
-    const { isLoading, setArtworks, artworks, paginationCount, setPageCount, pageCount } = collectionsStore();
-    const { filterOptions } = collectionsFilterStore();
+    const session = useSession();
+    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = categoriesStore();
+    const { filterOptions } = categoriesFilterStore();
     const { width } = useWindowSize();
-
-    useEffect(() => {
-      console.log(pageCount)
-    }, [pageCount])
 
     const { data: artworksArray, isLoading: loading } = useQuery({
         queryKey: ["get_paginated_artworks"],
         queryFn: async () => {
-          const response = await fetchPaginatedArtworks(
+          const response = await fetchCuratedArtworks(
+            session,
             paginationCount,
             filterOptions
           );
           if (response?.isOk) {
-            setPageCount(response.count);
+            setPageCount(response.pageCount);
             setArtworks(response.data);
             // set_artwork_total(response.total);
             return response.data;

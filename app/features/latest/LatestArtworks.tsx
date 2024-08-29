@@ -7,6 +7,7 @@ import NotFoundData from "@/components/notFound/NotFoundData";
 import Link from "next/link";
 
 import {
+  MdArrowRightAlt,
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
@@ -69,15 +70,17 @@ export default function LatestArtworks({
         <div className="p-4 relative">
           <div className="flex gap-4 my-5">
             <div className="space-y-1 flex-1">
-              <h1 className="text-md font-normal underline">Latest artworks</h1>
+              <h1 className="text-md font-normal">Latest artworks</h1>
               <p className="text-sm text-[#858585] font-normal italic">
                 Fresh Off the Easel: Explore the Newest Masterpieces, Just for You
               </p>
             </div>
-            <Link href={'/collections/recent-artworks'}>
-              <div className="flex items-center gap-1 rounded-full border border-black/20 px-3 text-sm py-1 bg-white cursor-pointer text-black/80">
-                <p className="text-[14px]">View all</p><FiChevronRight size={14} />
-              </div>
+            <Link
+              href={"/categories/recent-artworks"}
+              className="text-dark flex items-center gap-x-2 font-normal text-[14px] break-words"
+            >
+              View all
+              <MdArrowRightAlt />
             </Link>
           </div>
           <div className="embla" ref={emblaRef}>

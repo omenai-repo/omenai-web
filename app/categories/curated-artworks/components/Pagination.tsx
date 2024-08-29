@@ -1,16 +1,16 @@
 "use client";
 
 import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
-import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
-import { collectionsStore } from "@/store/collections/collectionsStore";
+import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
+import { categoriesStore } from "@/store/categories/categoriesStore";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 export default function Pagination() {
   const session = useSession()
-  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = collectionsStore();
+  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = categoriesStore();
 
-  const { filterOptions } = collectionsFilterStore();
+  const { filterOptions } = categoriesFilterStore();
 
   async function handlePaginationArtworkFetch(type: "dec" | "inc") {
     setPaginationLoading(true);

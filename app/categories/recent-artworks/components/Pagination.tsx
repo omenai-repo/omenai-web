@@ -1,19 +1,19 @@
 "use client";
 
-import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { collectionsStore } from "@/store/collections/collectionsStore";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
+import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
+import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
+import { categoriesStore } from "@/store/categories/categoriesStore";
 import { toast } from "sonner";
 
 export default function Pagination() {
-  const { setArtworks, setPaginationLoading, setIsLoading, paginationCount, setPaginationCount, pageCount } = collectionsStore();
+  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount } = categoriesStore();
 
-  const { filterOptions } = trendingArtworksFilterStore();
+  const { filterOptions } = categoriesFilterStore();
 
   async function handlePaginationArtworkFetch(type: "dec" | "inc") {
     setIsLoading(true);
     if (type === "dec") {
-      const response = await fetchTrendingArtworks(
+      const response = await fetchPaginatedArtworks(
         paginationCount - 1,
         filterOptions
       );
@@ -25,7 +25,7 @@ export default function Pagination() {
         toast.error(response?.message);
       }
     } else {
-      const response = await fetchTrendingArtworks(
+      const response = await fetchPaginatedArtworks(
         paginationCount + 1,
         filterOptions
       );

@@ -5,35 +5,30 @@ import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListi
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import Pagination from "./Pagination";
-import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
-import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
-import { collectionsStore } from "@/store/collections/collectionsStore";
-import { fetchCuratedArtworks } from "@/services/artworks/fetchedCuratedArtworks";
-import { useSession } from "next-auth/react";
+import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
+import { categoriesStore } from "@/store/categories/categoriesStore";
+import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
 
-export function ArtworkListing({
+export async function ArtworkListing({
   sessionId
 }: {
   sessionId: string | undefined
 }){
-    const session = useSession();
-    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = collectionsStore();
-    const { filterOptions } = collectionsFilterStore();
+    const { isLoading, setArtworks, artworks, paginationCount, setPageCount, pageCount } = categoriesStore();
+    const { filterOptions } = categoriesFilterStore();
     const { width } = useWindowSize();
 
     const { data: artworksArray, isLoading: loading } = useQuery({
         queryKey: ["get_paginated_artworks"],
         queryFn: async () => {
-          const response = await fetchCuratedArtworks(
-            session,
+          const response = await fetchPaginatedArtworks(
             paginationCount,
             filterOptions
           );
           if (response?.isOk) {
-            setPageCount(response.pageCount);
+            setPageCount(response.count);
             setArtworks(response.data);
             // set_artwork_total(response.total);
             return response.data;

@@ -8,6 +8,7 @@ import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import { useState, useEffect, useCallback } from "react";
 import {
+  MdArrowRightAlt,
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
@@ -71,15 +72,17 @@ export default function TrendingArtworks({
         <div className="p-4 relative">
           <div className="flex gap-4 my-5">
             <div className="space-y-1 flex-1">
-              <h1 className="text-md font-normal underline">Trending artworks</h1>
+              <h1 className="text-md font-normal">Trending artworks</h1>
               <p className="text-sm text-[#858585] font-normal italic">
                 On the Rise: Discover the Art Everyone's Talking About
               </p>
             </div>
-            <Link href={'/collections/trending-artworks'}>
-              <div className="flex items-center gap-1 rounded-full border border-black/20 px-3 text-sm py-1 bg-white cursor-pointer text-black/80">
-                <p className="text-[14px]">View all</p><FiChevronRight size={14} />
-              </div>
+            <Link
+              href={"/categories/trending-artworks"}
+              className="text-dark flex items-center gap-x-2 font-normal text-[14px] break-words"
+            >
+              View all
+              <MdArrowRightAlt />
             </Link>
           </div>
           <div className="embla" ref={emblaRef}>

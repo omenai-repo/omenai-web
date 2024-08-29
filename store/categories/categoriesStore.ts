@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type ArtworkStoreTypes = {
+type categoriesStoreTypes = {
   artworks: any[];
   setArtworks: (artworks: any[]) => void;
   isLoading: boolean;
@@ -12,7 +12,7 @@ type ArtworkStoreTypes = {
   pageCount: number,
   setPageCount: (count: number) => void
 };
-export const trendingArtworksStore = create<ArtworkStoreTypes>((set, get) => ({
+export const categoriesStore = create<categoriesStoreTypes>((set, get) => ({
   artworks: [],
   setArtworks: (artworks: any[]) => {
     set({ artworks });

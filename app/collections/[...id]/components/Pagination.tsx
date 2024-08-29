@@ -1,20 +1,20 @@
 "use client";
 
-import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
+import { fetchArtworksByCriteria } from "@/services/artworks/fetchArtworksByCriteria";
+import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
 import { collectionsStore } from "@/store/collections/collectionsStore";
-import { trendingArtworksFilterStore } from "@/store/collections/trendingArtworks/trendingArtworksFilterStore";
-import { useEffect } from "react";
 import { toast } from "sonner";
 
-export default function Pagination() {
-  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount } = collectionsStore();
+export default function Pagination({medium}: {medium: string}) {
+  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = collectionsStore();
 
-  const { filterOptions } = trendingArtworksFilterStore();
+  const { filterOptions } = collectionsFilterStore();
 
   async function handlePaginationArtworkFetch(type: "dec" | "inc") {
-    setIsLoading(true);
+    setPaginationLoading(true);
     if (type === "dec") {
-      const response = await fetchPaginatedArtworks(
+      const response = await fetchArtworksByCriteria(
+        medium,
         paginationCount - 1,
         filterOptions
       );
@@ -26,7 +26,8 @@ export default function Pagination() {
         toast.error(response?.message);
       }
     } else {
-      const response = await fetchPaginatedArtworks(
+      const response = await fetchArtworksByCriteria(
+        medium,
         paginationCount + 1,
         filterOptions
       );
@@ -38,7 +39,7 @@ export default function Pagination() {
         toast.error(response?.message);
       }
     }
-    setIsLoading(false);
+    setPaginationLoading(false);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -51,14 +52,14 @@ export default function Pagination() {
       </p>
       <div className="flex gap-x-4 w-full">
         <button
-          disabled={paginationCount === 1}
+          disabled={(paginationCount === 1) || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("dec")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
           Previous page
         </button>
         <button
-          disabled={paginationCount === pageCount}
+          disabled={(paginationCount === pageCount) || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("inc")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >

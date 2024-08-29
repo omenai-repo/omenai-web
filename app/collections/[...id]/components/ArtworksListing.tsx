@@ -5,26 +5,26 @@ import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListi
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
-import Pagination from "./Pagination";
-import { fetchTrendingArtworks } from "@/services/artworks/fetchTrendingArtworks";
+// import Pagination from "./Pagination";
 import { collectionsStore } from "@/store/collections/collectionsStore";
 import { collectionsFilterStore } from "@/store/collections/collectionsFilterStore";
+import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
+import Pagination from "./Pagination";
+import { fetchArtworksByCriteria } from "@/services/artworks/fetchArtworksByCriteria";
 
-export function ArtworkListing({
-    sessionId
-}: {
-    sessionId: string | undefined
-}){
-    const { isLoading, setArtworks, artworks, paginationCount, setPageCount } = collectionsStore();
+
+export function ArtworksListing({medium, sessionId}: {medium: string, sessionId: string | undefined}){
+    const { isLoading, setArtworks, artworks, paginationCount, setPageCount, pageCount } = collectionsStore();
     const { filterOptions } = collectionsFilterStore();
     const { width } = useWindowSize();
 
     const { data: artworksArray, isLoading: loading } = useQuery({
         queryKey: ["get_paginated_artworks"],
         queryFn: async () => {
-          const response = await fetchTrendingArtworks(
+          const response = await fetchArtworksByCriteria(
+            medium,
             paginationCount,
             filterOptions
           );
@@ -87,7 +87,7 @@ export function ArtworkListing({
                 {/* first */}
             </div>
 
-            <Pagination />
+            <Pagination medium={medium} />
         </div>
     )
 }
