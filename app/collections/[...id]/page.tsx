@@ -20,9 +20,9 @@ export default async function page({ params }: { params: { id: string[] } }){
                 <h1 className="text-lg lg:text-xl font-normal">{pageTitleParser()}</h1>
                 <div className="flex items-center gap-2">
                     <Link 
-                        href={'/collection'} 
+                        href={'/collections'} 
                         className="opacity-80 hover:opacity-100 hover:underline"
-                    >Collection</Link>
+                    >Collections</Link>
                     <p>/</p>
                     <Link 
                         href={`/collection/${params.id[0]}`}
