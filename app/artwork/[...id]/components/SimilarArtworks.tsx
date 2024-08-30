@@ -2,16 +2,20 @@
 import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { catalogChunk } from "@/utils/createCatalogChunks";
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 import { useWindowSize } from "usehooks-ts";
 
 export default function SimilarArtworks({
   title,
   artworksByCriteria,
   sessionId,
+  medium
 }: {
   title: string;
   artworksByCriteria: any;
   sessionId: string | undefined;
+  medium: string
 }) {
   const { width } = useWindowSize();
 
@@ -78,6 +82,11 @@ export default function SimilarArtworks({
             );
           })}
         </div>
+      </div>
+      <div className="flex items-center justify-center py-5">
+        <Link href={`/collections/${medium}`}>
+          <button className="py-2 px-5 text-white bg-[#1a1a1a] flex items-center gap-2">View more similar artworks <FiArrowRight size={18} /></button>
+        </Link>
       </div>
     </div>
   );

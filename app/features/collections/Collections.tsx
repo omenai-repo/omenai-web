@@ -2,12 +2,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import ArtCollectionCard from "./ArtCollectionCard";
 import {
+  MdArrowRightAlt,
   MdOutlineKeyboardArrowLeft,
   MdOutlineKeyboardArrowRight,
 } from "react-icons/md";
 
 import useEmblaCarousel from "embla-carousel-react";
 import { collections } from "@/constants/collections.constants";
+import Link from "next/link";
 
 export default function Collections() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -52,12 +54,21 @@ export default function Collections() {
   }, [emblaApi]);
   return (
     <div className="p-4">
-      <div className="space-y-1 my-5">
-        <h1 className="text-md font-normal">Art Collections</h1>
-        <p className="text-sm text-[#858585] font-normal italic">
-          Dive Into Diverse Art Collections, Thoughtfully Curated for Your
-          Exploration
-        </p>
+      <div className="flex gap-4 my-5">
+        <div className="space-y-1 flex-1">
+          <h1 className="text-md font-normal">Art Collections</h1>
+          <p className="text-sm text-[#858585] font-normal italic">
+            Dive Into Diverse Art Collections, Thoughtfully Curated for Your
+            Exploration
+          </p>
+        </div>
+        <Link
+          href={"/collections"}
+          className="text-dark flex items-center gap-x-2 font-normal text-[14px] break-words"
+        >
+          View all
+          <MdArrowRightAlt />
+        </Link>
       </div>
 
       <div className="embla" ref={emblaRef}>

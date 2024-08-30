@@ -46,6 +46,7 @@ export default async function page({ params }: { params: { id: string } }) {
         title={artworkDetails.data.title}
         artworksByCriteria={artworksByCriteria}
         sessionId={session?.user.role === "user" ? session?.user.id : undefined}
+        medium={artworkDetails.data.medium}
       />
       <Footer />
     </div>
