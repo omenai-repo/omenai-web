@@ -22,7 +22,7 @@ export default function LatestArtworkWrapper({
     },
   });
 
-  // if (isLoading)
+  if (isLoading)
   return (
     <SectionLoaderContainers title="Latest artworks" />
   );
