@@ -16,10 +16,10 @@ export const sendOrderRequestToGalleryMail = async ({
   artwork_data,
 }: EmailData) => {
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: "Notification of order request for Your Artwork",
-    html: render(OrderRequestToGalleryMail(name, buyer, date, artwork_data), {
-      pretty: true,
-    }),
+    react: OrderRequestToGalleryMail(name, buyer, date, artwork_data),
   });
 };

@@ -17,10 +17,10 @@ export const sendOrderAcceptedMail = async ({
   artwork_data,
 }: EmailData) => {
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: "Your Order has been Accepted!",
-    html: render(OrderAcceptedEmail(name, order_id, user_id, artwork_data), {
-      pretty: true,
-    }),
+    react: OrderAcceptedEmail(name, order_id, user_id, artwork_data),
   });
 };

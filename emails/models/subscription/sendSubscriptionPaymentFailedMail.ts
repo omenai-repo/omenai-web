@@ -13,10 +13,10 @@ export const sendSubscriptionPaymentFailedMail = async ({
 }: EmailData) => {
   // Set up resend here instead
   await sendMailVerification({
+    prefix: "Subscriptions",
+    from: "transactions",
     to: email,
     subject: " Notification: Failed Subscription Payment Attempt",
-    html: render(SubscriptionPaymentFailedMail(name), {
-      pretty: true,
-    }),
+    react: SubscriptionPaymentFailedMail(name),
   });
 };

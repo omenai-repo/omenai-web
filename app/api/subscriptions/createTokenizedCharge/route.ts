@@ -1,15 +1,27 @@
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
-import { encryptPayload } from "@/lib/encryption/encrypt_payload";
+import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
+import { Proration } from "@/models/prorations/ProrationSchemaModel";
 import { NextResponse } from "next/server";
-import { string } from "zod";
 
 export async function POST(request: Request) {
   try {
+    await connectMongoDB();
     const data = await request.json();
+
+    const prorationValue = await Proration.findOne(
+      {
+        gallery_id: data.gallery_id,
+      },
+      "value"
+    );
+
+    const amount = prorationValue
+      ? +data.amount - prorationValue.value
+      : data.amount;
 
     const payload = {
       currency: "USD",
-      amount: data.amount,
+      amount,
       email: data.email,
       tx_ref: data.tx_ref,
       token: data.token,
@@ -21,11 +33,6 @@ export async function POST(request: Request) {
         plan_interval: data.plan_interval,
       },
     };
-
-    const encrypted_payload = encryptPayload(
-      process.env.FLW_TEST_ENCRYPTION_KEY!,
-      payload
-    );
 
     const response = await fetch(
       "https://api.flutterwave.com/v3/tokenized-charges",
@@ -40,6 +47,11 @@ export async function POST(request: Request) {
     );
 
     const result = await response.json();
+
+    await Proration.updateOne(
+      { gallery_id: data.gaallery_id },
+      { $set: { value: 0 } }
+    );
 
     return NextResponse.json({
       message: "Tokenized charge done",

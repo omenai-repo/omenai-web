@@ -1,5 +1,4 @@
 import { sendMailVerification } from "@/emails/controller/emailController";
-import GalleryVerificationEmail from "@/emails/views/gallery/verifyGallery";
 import PasswordUpdateConfirmationCodeEmail from "@/emails/views/recovery/PasswordUpdateConfirmationCodeEmail";
 import { render } from "@react-email/render";
 
@@ -16,13 +15,10 @@ export const sendPasswordConfirmationCodeMail = async ({
   gallery_name,
 }: EmailData) => {
   await sendMailVerification({
+    prefix: "Onboarding",
+    from: "onboarding",
     to: email,
     subject: "Password Confirmation Code request",
-    html: render(
-      PasswordUpdateConfirmationCodeEmail(username, token, gallery_name),
-      {
-        pretty: true,
-      }
-    ),
+    react: PasswordUpdateConfirmationCodeEmail(username, token, gallery_name),
   });
 };

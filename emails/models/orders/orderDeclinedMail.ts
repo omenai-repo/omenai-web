@@ -16,10 +16,10 @@ export const sendOrderDeclinedMail = async ({
   artwork_data,
 }: EmailData) => {
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: "Your Order has been Declined!",
-    html: render(OrderDeclinedEmail(name, reason, artwork_data), {
-      pretty: true,
-    }),
+    react: OrderDeclinedEmail(name, reason, artwork_data),
   });
 };

@@ -14,10 +14,10 @@ export const sendSubscriptionPaymentSuccessfulMail = async ({
 }: EmailData) => {
   // Set up resend here instead
   await sendMailVerification({
+    prefix: "Subscriptions",
+    from: "transactions",
     to: email,
     subject: "Confirmation: Successful Subscription Payment",
-    html: render(SubscriptionPaymentSuccessfulMail(name), {
-      pretty: true,
-    }),
+    react: SubscriptionPaymentSuccessfulMail(name),
   });
 };

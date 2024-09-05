@@ -16,10 +16,10 @@ export const sendPaymentFailedMail = async ({
 }: EmailData) => {
   // Set up resend here instead
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: "We encountered an issue processing your payment",
-    html: render(PaymentFailedMail(name, artwork, order_id), {
-      pretty: true,
-    }),
+    react: PaymentFailedMail(name, artwork, order_id),
   });
 };

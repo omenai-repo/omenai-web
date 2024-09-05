@@ -193,6 +193,8 @@ type CreateOrderModelTypes = {
   tracking_information: TrackingInformationTypes;
   order_accepted: OrderAcceptedStatusTypes;
   delivery_confirmed: boolean;
+  payment_date: Date | null;
+  payment_payout_date: Date | null;
 };
 
 type OrderAcceptedStatusTypes = {
@@ -458,4 +460,9 @@ type filterOptionsType = {
   rarity: string[];
 };
 
-type artworkCollectionTypes = "trending" | "curated" | "recent"
+type ProrationSchemaTypes = {
+  gallery_id: string;
+  value: number;
+};
+
+type artworkCollectionTypes = "trending" | "curated" | "recent";

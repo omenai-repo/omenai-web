@@ -1,9 +1,6 @@
 "use client";
-import Load from "@/components/loader/Load";
 import ArtworkCard from "../../../components/artworks/ArtworkCard";
-import { fetchAllArtworks } from "@/services/artworks/fetchAllArtworks";
-import { useQuery } from "@tanstack/react-query";
-import NotFoundData from "@/components/notFound/NotFoundData";
+
 import Link from "next/link";
 
 import {
