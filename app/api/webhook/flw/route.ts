@@ -1,3 +1,4 @@
+import { create } from "zustand";
 import { sendSubscriptionPaymentFailedMail } from "@/emails/models/subscription/sendSubscriptionPaymentFailedMail";
 import { sendSubscriptionPaymentSuccessfulMail } from "@/emails/models/subscription/sendSubscriptionPaymentSuccessMail";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
@@ -10,6 +11,7 @@ import { getSubscriptionExpiryDate } from "@/utils/getSubscriptionExpiryDate";
 import { formatPrice } from "@/utils/priceFormatter";
 import { NextResponse } from "next/server";
 import crypto from "crypto";
+import { Proration } from "@/models/prorations/ProrationSchemaModel";
 
 export async function POST(request: Request) {
   const req = await request.json();
@@ -128,6 +130,7 @@ export async function POST(request: Request) {
           charge_type !== undefined &&
           charge_type === "card_change"
         ) {
+          console.log(convert_verify_transaction_json_response);
           await Subscriptions.updateOne(
             {
               "customer.gallery_id": gallery_id,
@@ -138,24 +141,14 @@ export async function POST(request: Request) {
               },
             }
           );
-          const response = await fetch(
-            `https://api.flutterwave.com/v3/transactions/${convert_verify_transaction_json_response.data.id}/refund`,
-            {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${process.env.FLW_TEST_SECRET_KEY}`,
-                "Content-Type": "application/json",
-              },
-            }
+          // Add to proration
+          await Proration.findOneAndUpdate(
+            { gallery_id }, // Filter to find the document
+            { $inc: { value: 1 } }, // Increment the value by 1
+            { upsert: true, new: true, setDefaultsOnInsert: true }
           );
 
-          const result = await response.json();
-
-          if (result.status === "error")
-            return NextResponse.json({ status: 401 });
-          else {
-            return NextResponse.json({ status: 200 });
-          }
+          return NextResponse.json({ status: 200 });
         } else {
           const data: Omit<
             SubscriptionTransactionModelSchemaTypes,

@@ -9,10 +9,10 @@ type EmailData = {
 };
 export const sendGalleryMail = async ({ name, email, token }: EmailData) => {
   await sendMailVerification({
+    prefix: "Onboarding",
+    from: "onboarding",
     to: email,
     subject: "Verify your Omenai Gallery account.",
-    html: render(GalleryVerificationEmail(name, token), {
-      pretty: true,
-    }),
+    react: GalleryVerificationEmail(name, token),
   });
 };

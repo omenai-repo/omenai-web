@@ -1,30 +1,25 @@
-import nodemailer from "nodemailer";
+import Test from "@/app/Test";
 
-const email = process.env.GMAIL_ADDRESS;
-const pass = process.env.GMAIL_APP_PASS;
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 type EmailPayload = {
+  prefix: string;
+  from: string;
   to: string;
   subject: string;
-  html: string;
+  react: React.ReactNode;
 };
-
-// Replace with your SMTP credentials
-const smtpOptions = {
-  service: "gmail",
-  auth: {
-    user: email,
-    pass,
-  },
-};
-
-const transporter = nodemailer.createTransport({
-  ...smtpOptions,
-});
 
 export const sendMailVerification = async (data: EmailPayload) => {
-  await transporter.sendMail({
-    from: email,
-    ...data,
+  await resend.emails.send({
+    from:
+      data.from === "onboarding"
+        ? `${data.prefix} <onboarding@omenai.app>`
+        : `${data.prefix} <omenai@omenai.app>`,
+    to: data.to,
+    subject: data.subject,
+    react: data.react,
   });
 };

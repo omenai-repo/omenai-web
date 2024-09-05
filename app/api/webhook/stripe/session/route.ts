@@ -88,6 +88,7 @@ export async function POST(request: Request) {
         {
           $set: {
             payment_information,
+            payment_date: new Date().toISOString(),
           },
         }
       );

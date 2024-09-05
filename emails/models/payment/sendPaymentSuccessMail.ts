@@ -22,20 +22,17 @@ export const sendPaymentSuccessMail = async ({
 }: EmailData) => {
   // Set up resend here instead
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: "Confirmation: Successful Order Payment",
-    html: render(
-      PaymentSuccessfulMail(
-        name,
-        artwork,
-        price,
-        order_id,
-        order_date,
-        transaction_Id
-      ),
-      {
-        pretty: true,
-      }
+    react: PaymentSuccessfulMail(
+      name,
+      artwork,
+      price,
+      order_id,
+      order_date,
+      transaction_Id
     ),
   });
 };

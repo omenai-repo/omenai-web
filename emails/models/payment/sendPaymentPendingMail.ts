@@ -14,10 +14,10 @@ export const sendPaymentPendingMail = async ({
 }: EmailData) => {
   // Set up resend here instead
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: "Your Payment is being Processed",
-    html: render(PaymentPendingMail(name, artwork), {
-      pretty: true,
-    }),
+    react: PaymentPendingMail(name, artwork),
   });
 };
