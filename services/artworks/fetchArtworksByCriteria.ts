@@ -9,15 +9,18 @@ export async function fetchArtworksByCriteria(
     const url = getApiUrl();
     const response = await fetch(`${url}/api/artworks/getArtworksByCriteria`, {
       method: "POST",
-      body: JSON.stringify({ medium, page, filters }),
-    }).then(async (res) => {
-      if (!res.ok) return undefined;
-      const result = await res.json();
-
-      return result;
+      body: JSON.stringify({ page, medium, filters }),
     });
 
-    return response;
+    const result = await response.json();
+
+    return {
+      isOk: response.ok,
+      message: result.message,
+      data: result.data,
+      page: result.page,
+      pageCount: result.pageCount,
+    };
   } catch (error: any) {
     console.log(error);
   }

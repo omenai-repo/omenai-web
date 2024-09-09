@@ -49,7 +49,7 @@ export default function Pagination() {
   return (
     <div className="w-full grid place-items-center mt-12">
       <p className="text-[14px] font-normal my-5">
-        Showing page {paginationCount} of {pageCount}
+        Showing page {pageCount === 0 ? 0 : paginationCount} of {pageCount}
       </p>
       <div className="flex gap-x-4 w-full">
         <button

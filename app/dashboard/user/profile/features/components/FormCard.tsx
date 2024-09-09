@@ -24,21 +24,23 @@ export const FormCard = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(updateData);
+    let newUpdateData;
 
-    if (updateData.name === "" && updateData!.preferences!.length === 0)
-      toast.error("Invalid inputs");
+    if (updateData!.preferences!.length === 0) toast.error("Invalid inputs");
     else if (
       updateData!.preferences!.length < 5 &&
       updateData!.preferences!.length > 0
     ) {
       toast.error("Please select up to 5 interests please");
+    } else if (updateData.name === "") {
+      newUpdateData = { preferences: updateData.preferences };
     } else {
+      newUpdateData = { ...updateData };
       setIsLoading(true);
 
       const { isOk, body } = await updateProfile(
         "individual",
-        updateData,
+        newUpdateData,
         session.data!.user.id
       );
       if (!isOk) toast.error(body.message);
@@ -49,6 +51,7 @@ export const FormCard = () => {
         router.refresh();
       }
     }
+    console.log(newUpdateData);
     setIsLoading(false);
   };
 

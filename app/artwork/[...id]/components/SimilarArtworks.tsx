@@ -10,12 +10,12 @@ export default function SimilarArtworks({
   title,
   artworksByCriteria,
   sessionId,
-  medium
+  medium,
 }: {
   title: string;
   artworksByCriteria: any;
   sessionId: string | undefined;
-  medium: string
+  medium: string;
 }) {
   const { width } = useWindowSize();
 
@@ -37,7 +37,7 @@ export default function SimilarArtworks({
   );
   return (
     <div className="w-full h-full p-5">
-      <h1 className="text-dark font-normal text-sm">You may also like</h1>
+      <h1 className="text-dark font-normal text-base">Hot recommendations</h1>
 
       <div className="w-full my-5">
         <div className="flex flex-wrap gap-x-4 justify-center">
@@ -85,7 +85,9 @@ export default function SimilarArtworks({
       </div>
       <div className="flex items-center justify-center py-5">
         <Link href={`/collections/${medium}`}>
-          <button className="py-2 px-5 text-white bg-[#1a1a1a] flex items-center gap-2">View more similar artworks <FiArrowRight size={18} /></button>
+          <button className="py-2 px-5 text-white bg-[#1a1a1a] text-xs font-normal h-[35px] flex items-center gap-2">
+            View more <FiArrowRight size={18} />
+          </button>
         </Link>
       </div>
     </div>

@@ -78,18 +78,22 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
         <span>{data.rarity}</span>
       </p>
       <Dimensions dimensions={data.dimensions} />
-      <div className="flex items-center gap-x-4">
+      <div className="flex items-center flex-wrap gap-4">
         {data.certificate_of_authenticity === "Yes" && (
           <div className="flex gap-x-2 text-xs items-center px-4 py-1 bg-[#E7F6EC] text-[#004617] w-fit rounded-full">
             <GrCertificate />
-            <p>Certificate of authenticity available</p>
+            <p className="whitespace-nowrap">
+              Certificate of authenticity available
+            </p>
           </div>
         )}
         <div className="flex gap-x-2 text-xs items-center px-4 py-1 bg-[#e5f4ff] text-[#30589f] w-fit rounded-full">
           <PiFrameCornersThin />
-          {data.framing === "Framed"
-            ? "Frame Included"
-            : "Artwork is not framed"}
+          <p className="whitespace-nowrap">
+            {data.framing === "Framed"
+              ? "Frame Included"
+              : "Artwork is not framed"}
+          </p>
         </div>
       </div>
 

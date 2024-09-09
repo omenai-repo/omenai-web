@@ -68,8 +68,8 @@ export default function RecentViewArtworks({
       {artworks?.length > 0 && (
         <div className="p-4 relative">
           <div className="space-y-1 my-5">
-            <h1 className="text-md font-normal">Recently viewed</h1>
-            <p className="text-sm text-[#858585] font-normal italic">
+            <h1 className="text-sm md:text-md font-normal">Recently viewed</h1>
+            <p className="text-base md:text-sm text-[#858585] font-light italic">
               Back for a Second Look: Your Recently Viewed Pieces
             </p>
           </div>

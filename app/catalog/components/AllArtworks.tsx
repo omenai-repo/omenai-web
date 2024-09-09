@@ -43,14 +43,12 @@ export default function AllArtworks({
   });
 
   if (loading || isLoading) {
-    return (
-      <ArtworksListingSkeletonLoader />
-    );
+    return <ArtworksListingSkeletonLoader />;
   }
 
-  if (!artworksArray || artworksArray.length === 0) {
+  if (!artworksArray || artworksArray.length === 0 || artworks.length === 0) {
     return (
-      <div className="w-full h-full grid place-items-center">
+      <div className="w-full h-full grid place-items-center my-12">
         <NotFoundData />
       </div>
     );
@@ -62,7 +60,7 @@ export default function AllArtworks({
   );
 
   return (
-    <div className="w-full mb-5 px-5 mt-3">
+    <div className="w-full mb-5 mt-3">
       <p className="text-xs font-normal mb-4">{artwork_total} artworks:</p>
 
       <div className="flex flex-wrap gap-x-4 justify-center">

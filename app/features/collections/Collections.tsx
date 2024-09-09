@@ -54,10 +54,10 @@ export default function Collections() {
   }, [emblaApi]);
   return (
     <div className="p-4">
-      <div className="flex gap-4 my-5">
+      <div className="flex gap-4 my-5 flex-col md:flex-row">
         <div className="space-y-1 flex-1">
-          <h1 className="text-md font-normal">Art Collections</h1>
-          <p className="text-sm text-[#858585] font-normal italic">
+          <h1 className="text-sm md:text-md font-normal">Art Collections</h1>
+          <p className="text-base md:text-sm text-[#858585] font-light italic">
             Dive Into Diverse Art Collections, Thoughtfully Curated for Your
             Exploration
           </p>

@@ -19,14 +19,18 @@ const yearFilterOptions = [
   { option: "19th century", value: { min: 1800, max: 1899 } },
   { option: "18th century & Earlier", value: { min: 0, max: 1799 } },
 ];
-export default function YearFilter({filterOptions}: {filterOptions: filterOptionsType}) {
+export default function YearFilter({
+  filterOptions,
+}: {
+  filterOptions: filterOptionsType;
+}) {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   return (
-    <div className="p-2 relative w-fit">
+    <div className="p-2 md:relative w-full md:w-fit">
       <div
         onClick={() => setOpenDropdown(!openDropdown)}
-        className="ring-1 rounded-full whitespace-nowrap cursor-pointer ring-[#e0e0e0] font-normal text-[13px] text-dark flex justify-between items-center px-3 h-[30px] hover:bg-[#FAFAFA] hover:ring-dark"
+        className="ring-1 rounded-full whitespace-nowrap cursor-pointer ring-[#e0e0e0] font-normal text-[13px] text-dark flex justify-between items-center px-3 h-[35px] hover:bg-[#FAFAFA] hover:ring-dark"
       >
         <p className="flex gap-x-2 items-center">
           <span className="font-light">Filter by Year</span>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import LikeComponent from "../likes/LikeComponent";
 
 import { getImageFileView } from "@/lib/storage/getImageFileView";
+import Image from "next/image";
 
 export default function ArtworkCanvas({
   image,
@@ -40,9 +41,12 @@ export default function ArtworkCanvas({
       <div className="flex flex-col w-full h-full justify-end">
         <div className="relative w-full">
           <Link href={`/artwork/${name}`} className="relative">
-            <img
+            <Image
               src={image_href}
               alt={name + " image"}
+              loading="lazy"
+              height={500}
+              width={500}
               className="w-full h-full aspect-auto object-cover object-center cursor-pointer"
             />
           </Link>
