@@ -28,7 +28,7 @@ export default function TrendingArtworkCard({
   art_id: string;
   availability: boolean;
 }) {
-  const image_href = getImageFileView(image, 300);
+  const image_href = getImageFileView(image, 250);
 
   return (
     <div className="m-2">
@@ -38,8 +38,8 @@ export default function TrendingArtworkCard({
             <Image
               src={image_href}
               alt={name + " image"}
-              height={500}
-              width={220}
+              height={200}
+              width={250}
               className="min-w-[220px] aspect-auto object-top object-cover cursor-pointer"
             />
           </Link>

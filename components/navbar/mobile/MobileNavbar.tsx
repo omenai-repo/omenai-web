@@ -54,7 +54,7 @@ export default function MobileNavbar() {
             onClick={() => updateOpenSideNav(false)}
             disabled={false}
             text={"Editorials"}
-            link={"/articles"}
+            link={"https://omenai.net"}
           />
         </ul>
       </div>

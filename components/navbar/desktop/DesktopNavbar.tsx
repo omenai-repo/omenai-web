@@ -18,7 +18,7 @@ export default function DesktopNavbar() {
     <>
       <div className="sticky top-0 z-30 bg-white mb-4 pb-4">
         <nav
-          className="px-4 pt-4 text-base text-black font-normal "
+          className="px-4 md:px-8 pt-4 text-base text-black font-normal "
           id="navbar"
         >
           <MobileNavbar />
@@ -34,7 +34,7 @@ export default function DesktopNavbar() {
             <ul className="lg:flex space-x-4 hidden p-4">
               <NavbarLink
                 disabled={false}
-                text={"Catalogue"}
+                text={"Buy artworks"}
                 link={"/catalog"}
               />
               <NavbarLink
@@ -50,7 +50,7 @@ export default function DesktopNavbar() {
               <NavbarLink
                 disabled={false}
                 text={"Editorials"}
-                link={"/articles"}
+                link={"https://omenai.net"}
               />
             </ul>
 

@@ -8,19 +8,13 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST() {
   try {
-    await connectMongoDB();
-    const prorationValue = await Proration.findOne(
-      {
-        gallery_id: "425353646",
-      },
-      "value"
-    );
-    const amount = prorationValue ? 5 - prorationValue.value : 5;
-    await Proration.updateOne(
-      { gallery_id: 425353646 },
-      { $set: { value: 0 } }
-    );
-    return Response.json({ message: amount });
+    await resend.emails.send({
+      from: "Orders <omenai@omenai.app>",
+      to: "gbenro@omenai.net",
+      subject: "Email domain test",
+      react: Test(),
+    });
+    return Response.json({ message: "Sent" });
   } catch (error) {
     console.log(error);
     return Response.json({ error }, { status: 500 });

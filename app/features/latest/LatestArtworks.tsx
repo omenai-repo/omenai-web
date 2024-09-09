@@ -65,11 +65,14 @@ export default function LatestArtworks({
     <>
       {artworks.length > 0 && (
         <div className="p-4 relative">
-          <div className="flex gap-4 my-5">
+          <div className="flex md:flex-row flex-col gap-4 my-5">
             <div className="space-y-1 flex-1">
-              <h1 className="text-md font-normal">Latest artworks</h1>
-              <p className="text-sm text-[#858585] font-normal italic">
-                Fresh Off the Easel: Explore the Newest Masterpieces, Just for You
+              <h1 className="text-sm md:text-md font-normal">
+                Latest artworks
+              </h1>
+              <p className="text-base md:text-sm text-[#858585] font-light italic">
+                Fresh Off the Easel: Explore the Newest Masterpieces, Just for
+                You
               </p>
             </div>
             <Link
@@ -100,7 +103,7 @@ export default function LatestArtworks({
               })}
               {artworks.length >= 25 && (
                 <div className="h-[400px] w-[250px] grid place-items-center mx-10">
-                  <Link href={""}>
+                  <Link href={"/categories/recent-artworks"}>
                     <button className="whitespace-nowrap border border-dark rounded-full bg-transparent text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585]  w-full text-dark disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark hover:text-white duration-300">
                       View all recent artworks
                     </button>

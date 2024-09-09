@@ -70,10 +70,12 @@ export default function TrendingArtworks({
       )}
       {artworks.length > 0 && (
         <div className="p-4 relative">
-          <div className="flex gap-4 my-5">
+          <div className="flex gap-4 my-5 flex-col md:flex-row">
             <div className="space-y-1 flex-1">
-              <h1 className="text-md font-normal">Trending artworks</h1>
-              <p className="text-sm text-[#858585] font-normal italic">
+              <h1 className="text-sm md:text-md font-normal">
+                Trending artworks
+              </h1>
+              <p className="text-base md:text-sm text-[#858585] font-light italic">
                 On the Rise: Discover the Art Everyone's Talking About
               </p>
             </div>

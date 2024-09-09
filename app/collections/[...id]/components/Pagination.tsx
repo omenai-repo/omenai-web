@@ -5,13 +5,26 @@ import { collectionsFilterStore } from "@/store/collections/collectionsFilterSto
 import { collectionsStore } from "@/store/collections/collectionsStore";
 import { toast } from "sonner";
 
-export default function Pagination({medium}: {medium: string}) {
-  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = collectionsStore();
+export default function Pagination({ medium }: { medium: string }) {
+  const {
+    setArtworks,
+    setPaginationLoading,
+    paginationLoading,
+    paginationCount,
+    setPaginationCount,
+    pageCount,
+    setIsLoading,
+  } = collectionsStore();
 
   const { filterOptions } = collectionsFilterStore();
 
   async function handlePaginationArtworkFetch(type: "dec" | "inc") {
     setPaginationLoading(true);
+    setIsLoading(true);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     if (type === "dec") {
       const response = await fetchArtworksByCriteria(
         medium,
@@ -40,26 +53,23 @@ export default function Pagination({medium}: {medium: string}) {
       }
     }
     setPaginationLoading(false);
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    setIsLoading(false);
   }
   return (
     <div className="w-full grid place-items-center mt-12">
       <p className="text-[14px] font-normal my-5">
-        Showing page {paginationCount} of {pageCount}
+        Showing page {pageCount === 0 ? 0 : paginationCount} of {pageCount}
       </p>
       <div className="flex gap-x-4 w-full">
         <button
-          disabled={(paginationCount === 1) || paginationLoading}
+          disabled={paginationCount === 1 || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("dec")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
           Previous page
         </button>
         <button
-          disabled={(paginationCount === pageCount) || paginationLoading}
+          disabled={paginationCount === pageCount || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("inc")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >

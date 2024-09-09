@@ -52,6 +52,7 @@ export const ArtworkImage = ({
         <img
           src={image_href}
           alt="artwork image"
+          loading="lazy"
           className="w-fit max-w-[250px] rounded-sm"
         />
 

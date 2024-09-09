@@ -9,14 +9,18 @@ const rarityFilterOptions = [
   { option: "Open edition", value: "Open edition" },
   { option: "Unknown edition", value: "Unknown edition" },
 ];
-export default function RarityFilter({filterOptions}: {filterOptions: filterOptionsType}) {
+export default function RarityFilter({
+  filterOptions,
+}: {
+  filterOptions: filterOptionsType;
+}) {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   return (
-    <div className="p-2 relative w-fit">
+    <div className="p-2 md:relative w-full md:w-fit">
       <div
         onClick={() => setOpenDropdown(!openDropdown)}
-        className="ring-1 whitespace-nowrap rounded-full cursor-pointer ring-[#e0e0e0] font-normal text-[13px] text-dark flex justify-between items-center px-3 h-[30px] hover:bg-[#FAFAFA] hover:ring-dark"
+        className="ring-1 whitespace-nowrap rounded-full cursor-pointer ring-[#e0e0e0] font-normal text-[13px] text-dark flex justify-between items-center px-3 h-[35px] hover:bg-[#FAFAFA] hover:ring-dark"
       >
         <p className="flex gap-x-2 items-center">
           <span className="font-light">Filter by Rarity</span>

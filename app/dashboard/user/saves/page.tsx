@@ -1,14 +1,18 @@
 "use client";
+import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
 import ArtworkCard from "@/components/artworks/ArtworkCard";
 import Load from "@/components/loader/Load";
 import { fetchUserSaveArtworks } from "@/services/artworks/fetchUserSavedArtworks";
+import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useWindowSize } from "usehooks-ts";
 
 export default function Saves() {
   const session = useSession();
   const router = useRouter();
+  const { width } = useWindowSize();
 
   if (session.data === null) router.replace("/auth/login");
 
@@ -28,6 +32,10 @@ export default function Saves() {
       </div>
     );
   }
+  const arts = catalogChunk(
+    artworks,
+    width < 400 ? 1 : width < 768 ? 2 : width < 1280 ? 3 : 4
+  );
 
   return (
     <div className="p-2">
@@ -36,53 +44,32 @@ export default function Saves() {
           <p>Like an artwork to add it here.</p>
         </div>
       ) : (
-        <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center md:space-y-16 md:gap-x-4 gap-x-2 items-end">
-          {artworks.map((art: ArtworkResultTypes, index: number) => {
+        <div className="flex flex-wrap gap-x-4 justify-center">
+          {arts.map((artworks: any[], index) => {
             return (
-              <div key={art.art_id}>
-                <ArtworkCard
-                  image={art.url}
-                  name={art.title}
-                  artist={art.artist}
-                  art_id={art.art_id}
-                  pricing={art.pricing}
-                  impressions={art.impressions as number}
-                  likeIds={art.like_IDs as string[]}
-                  availability={art.availability}
-                  sessionId={
-                    session?.data?.user.role === "user"
-                      ? session?.data?.user.id
-                      : undefined
-                  }
-                />
+              <div className="flex-1 gap-2 space-y-6" key={index}>
+                {artworks.map((art: any) => {
+                  return (
+                    <ArtworkCanvas
+                      key={art.art_id}
+                      image={art.url}
+                      name={art.title}
+                      artist={art.artist}
+                      art_id={art.art_id}
+                      pricing={art.pricing}
+                      impressions={art.impressions as number}
+                      likeIds={art.like_IDs as string[]}
+                      sessionId={session.data?.user.id}
+                      availability={art.availability}
+                    />
+                  );
+                })}
               </div>
             );
           })}
+          {/* first */}
         </div>
       )}
     </div>
   );
-}
-
-{
-  /* <div className="grid grid-row-auto xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-x-3 gap-y-12 w-full items-end ">
-  {artworks.map((art: ArtworkResultTypes, index: number) => {
-    return (
-      <div key={index}>
-        <ArtworkCard
-          key={index}
-          image={art.url}
-          name={art.title}
-          artist={art.artist}
-          art_id={art.art_id}
-          pricing={art.pricing}
-          impressions={art.impressions as number}
-          likeIds={art.like_IDs as string[]}
-          sessionId={sessionId}
-          availability={art.availability}
-        />
-      </div>
-    );
-  })}
-</div>; */
 }

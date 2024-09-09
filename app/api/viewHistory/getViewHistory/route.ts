@@ -9,7 +9,9 @@ export async function POST(request: Request) {
 
     const { user_id } = await request.json();
 
-    const recentlyViewed = await RecentView.find({ user: user_id }).exec();
+    const recentlyViewed = await RecentView.find({ user: user_id })
+      .sort({ createdAt: -1 })
+      .exec();
 
     return NextResponse.json(
       {
