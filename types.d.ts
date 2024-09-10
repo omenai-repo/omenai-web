@@ -388,6 +388,15 @@ type PromotionalSchemaTypes = {
   image: string;
   cta: string;
 };
+
+type EditorialSchemaTypes = {
+  title: string;
+  link: string;
+  cover: string;
+  date: string;
+  minutes: number
+};
+
 type PromotionalDataUpdateTypes = {
   headline?: string;
   subheadline?: string;
