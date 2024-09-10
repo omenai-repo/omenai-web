@@ -7,6 +7,7 @@ import LikeComponent from "../likes/LikeComponent";
 
 import { getImageFileView } from "@/lib/storage/getImageFileView";
 import Image from "next/image";
+import { useRef, useState } from "react";
 
 export default function ArtworkCanvas({
   image,
@@ -35,19 +36,55 @@ export default function ArtworkCanvas({
   isDashboard?: boolean;
   availability: boolean;
 }) {
-  const image_href = getImageFileView(image, 500);
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [zoomScale, setZoomScale] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [imageSrc, setImageSrc] = useState(getImageFileView(image, 500)); // Default to low-res
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!containerRef.current) return;
+    setZoomScale(2.2);
+    setImageSrc(getImageFileView(image, 1500)); // Replace with higher resolution (e.g., 1500px)
+
+    requestAnimationFrame(() => {
+      const rect = containerRef.current!.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      setPosition({ x, y });
+    });
+  };
+
+  const handleMouseLeave = () => {
+    // Reset to center when not hovering
+
+    setPosition({ x: 50, y: 50 });
+    setImageSrc(getImageFileView(image, 500)); // Replace with higher resolution (e.g., 1000px)
+
+    setZoomScale(1);
+  };
   return (
     <div className="my-2 w-fit p-0 max-h-full">
       <div className="flex flex-col w-full h-full justify-end">
-        <div className="relative w-full">
+        <div
+          className="relative w-full artContainer"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          ref={containerRef}
+        >
           <Link href={`/artwork/${name}`} className="relative">
             <Image
-              src={image_href}
+              src={imageSrc}
               alt={name + " image"}
               loading="lazy"
               height={500}
               width={500}
-              className="w-full h-full aspect-auto object-cover object-center cursor-pointer"
+              className="w-full h-full aspect-auto object-cover object-center cursor-pointer artImage"
+              style={{
+                transform: `scale(${zoomScale})`,
+                transformOrigin: `${position.x}% ${position.y}%`,
+                transition: "transform 0.4s ease, transform-origin 0.2s ease",
+              }}
             />
           </Link>
           {isDashboard ? null : (
