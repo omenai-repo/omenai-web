@@ -66,13 +66,13 @@ export default function ImageBox({ url, title, availability }: ImageBoxProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       ref={containerRef}
-      onTouchMove={handleTouchMove}
-      onTouchStart={() => setZoomScale(2)} // Start zoom on touch
-      onTouchEnd={handleTouchEnd}
-      style={{
-        overflow: "hidden",
-        touchAction: "none", // Prevent default behavior like scrolling on mobile
-      }}
+      // onTouchMove={handleTouchMove}
+      // onTouchStart={() => setZoomScale(2)} // Start zoom on touch
+      // onTouchEnd={handleTouchEnd}
+      // style={{
+      //   overflow: "hidden",
+      //   touchAction: "none", // Prevent default behavior like scrolling on mobile
+      // }}
     >
       <Image
         src={imageSrc}
