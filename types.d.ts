@@ -393,7 +393,7 @@ type EditorialSchemaTypes = {
   title: string;
   link: string;
   cover: string;
-  date: string;
+  date: Date | null;
   minutes: number
 };
 
