@@ -193,8 +193,7 @@ type CreateOrderModelTypes = {
   tracking_information: TrackingInformationTypes;
   order_accepted: OrderAcceptedStatusTypes;
   delivery_confirmed: boolean;
-  payment_date: Date | null;
-  payment_payout_date: Date | null;
+  availability: boolean;
 };
 
 type OrderAcceptedStatusTypes = {

@@ -31,14 +31,8 @@ const createOrder = new Schema<CreateOrderModelTypes>(
       type: Boolean,
       default: () => false,
     },
-    payment_date: {
-      type: Schema.Types.Mixed,
-      default: () => null,
-    },
-    payment_payout_date: {
-      type: Schema.Types.Mixed,
-      default: () => null,
-    },
+
+    availability: { type: Boolean, default: () => true },
   },
   { timestamps: true }
 );

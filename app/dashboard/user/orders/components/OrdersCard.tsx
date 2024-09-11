@@ -24,6 +24,7 @@ type OverviewOrdersCardProps = {
   shipping_quote?: ShippingQuoteTypes;
   delivery_confirmed: boolean;
   order_accepted: OrderAcceptedStatusTypes;
+  availability: boolean;
 };
 export default function OrdersCard({
   title,
@@ -37,6 +38,7 @@ export default function OrdersCard({
   tracking_information,
   delivery_confirmed,
   order_accepted,
+  availability,
 }: OverviewOrdersCardProps) {
   const image_url = getImageFileView(url, 200);
 
@@ -52,8 +54,16 @@ export default function OrdersCard({
     payment_status: string,
     tracking_status: string,
     order_accepted: string,
-    delivery_confirmed: boolean
+    delivery_confirmed: boolean,
+    availability: boolean
   ) {
+    if (!availability) {
+      return (
+        <span className="px-3 py-1 rounded-full bg-[#e0e0e0] flex gap-x-1 items-center w-fit">
+          Artwork unavailable for purchase
+        </span>
+      );
+    }
     if (
       status === "pending" &&
       status === "pending" &&
@@ -158,7 +168,8 @@ export default function OrdersCard({
             payment_information.status,
             tracking_information.tracking_link,
             order_accepted.status,
-            delivery_confirmed
+            delivery_confirmed,
+            availability
           )}
         </div>
       </div>
