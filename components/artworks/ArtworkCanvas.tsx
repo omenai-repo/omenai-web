@@ -91,13 +91,9 @@ export default function ArtworkCanvas({
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           ref={containerRef}
-          onTouchMove={handleTouchMove}
-          onTouchStart={() => setZoomScale(2)} // Start zoom on touch
-          onTouchEnd={handleTouchEnd}
-          style={{
-            overflow: "hidden",
-            touchAction: "none", // Prevent default behavior like scrolling on mobile
-          }}
+          // onTouchMove={handleTouchMove}
+          // onTouchStart={() => setZoomScale(2)} // Start zoom on touch
+          // onTouchEnd={handleTouchEnd}
         >
           <Link href={`/artwork/${name}`} className="relative">
             <Image

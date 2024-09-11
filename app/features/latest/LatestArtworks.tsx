@@ -65,24 +65,6 @@ export default function LatestArtworks({
     <>
       {artworks.length > 0 && (
         <div className="p-4 relative">
-          <div className="flex md:flex-row flex-col gap-4 my-5">
-            <div className="space-y-1 flex-1">
-              <h1 className="text-sm md:text-md font-normal">
-                Latest artworks
-              </h1>
-              <p className="text-base md:text-sm text-[#858585] font-light italic">
-                Fresh Off the Easel: Explore the Newest Masterpieces, Just for
-                You
-              </p>
-            </div>
-            <Link
-              href={"/categories/recent-artworks"}
-              className="text-dark flex items-center gap-x-2 font-normal text-[14px] break-words"
-            >
-              View all
-              <MdArrowRightAlt />
-            </Link>
-          </div>
           <div className="embla" ref={emblaRef}>
             <div className="embla__container">
               {artworks.map((artwork: any, index: number) => {

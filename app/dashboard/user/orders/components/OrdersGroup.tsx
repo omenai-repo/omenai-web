@@ -26,7 +26,8 @@ export default function OrdersGroup({
   };
 
   const completed_orders = orders.filter(
-    (order: CreateOrderModelTypes) => order.delivery_confirmed
+    (order: CreateOrderModelTypes) =>
+      order.delivery_confirmed || !order.availability
   );
 
   return (
