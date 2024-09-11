@@ -9,7 +9,6 @@ import { UploadTrackingIDModal } from "./modals/ProvideTrackingIDModal";
 import { UploadOrderRejectionReason } from "./modals/ProvideOrderRejectionReason";
 import { DeleteAccountConfirmationModal } from "./modals/DeleteAccountConfirmationMdal";
 import { UpdatePasswordModal } from "./modals/UpdatePasswordModal";
-import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import GetStartedWithStripe from "./modals/GetStartedWithStripe";
 import { useQuery } from "@tanstack/react-query";

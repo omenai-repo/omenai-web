@@ -18,7 +18,7 @@ export default function ImageBox({ url, title, availability }: ImageBoxProps) {
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!containerRef.current) return;
-    setZoomScale(2);
+    setZoomScale(2.2);
     setImageSrc(getImageFileView(url, 1500)); // Replace with higher resolution (e.g., 1500px)
 
     requestAnimationFrame(() => {
@@ -30,6 +30,21 @@ export default function ImageBox({ url, title, availability }: ImageBoxProps) {
     });
   };
 
+  // Handle touch move for mobile
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+
+    // Set zoom scale for mobile
+    setZoomScale(2);
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const touch = e.touches[0];
+    const x = ((touch.clientX - rect.left) / rect.width) * 100;
+    const y = ((touch.clientY - rect.top) / rect.height) * 100;
+
+    setPosition({ x, y });
+  };
+
   const handleMouseLeave = () => {
     // Reset to center when not hovering
 
@@ -39,12 +54,25 @@ export default function ImageBox({ url, title, availability }: ImageBoxProps) {
     setZoomScale(1);
   };
 
+  const handleTouchEnd = () => {
+    setZoomScale(1);
+    setPosition({ x: 50, y: 50 }); // Reset position to center
+    setImageSrc(getImageFileView(url, 800)); // Replace with higher resolution (e.g., 1000px)
+  };
+
   return (
     <div
       className="relative w-auto h-full max-h-[1000px] artContainer"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       ref={containerRef}
+      onTouchMove={handleTouchMove}
+      onTouchStart={() => setZoomScale(2)} // Start zoom on touch
+      onTouchEnd={handleTouchEnd}
+      style={{
+        overflow: "hidden",
+        touchAction: "none", // Prevent default behavior like scrolling on mobile
+      }}
     >
       <Image
         src={imageSrc}
