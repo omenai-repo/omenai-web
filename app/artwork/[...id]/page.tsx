@@ -28,26 +28,36 @@ export default async function page({ params }: { params: { id: string } }) {
   return (
     <div className="">
       <DesktopNavbar />
-      <ProductBox
-        data={artworkDetails.data}
-        sessionId={session?.user.role === "user" ? session?.user.id : undefined}
-      />
-      <hr className="border-dark/10" />
-      <FullArtworkDetails data={artworkDetails.data} />
-      <ArtistInformation
-        name={artworkDetails.data.artist}
-        year={artworkDetails.data.artist_birthyear}
-        location={artworkDetails.data.artist_country_origin}
-      />
-      <SimilarArtworks
-        title={artworkDetails.data.title}
-        sessionId={session?.user.role === "user" ? session?.user.id : undefined}
-        medium={artworkDetails.data.medium}
-      />
-      <SimilarArtworksByArtist
-        sessionId={session?.user.role === "user" ? session?.user.id : undefined}
-        artist={artworkDetails.data.artist}
-      />
+
+      <div className="p-2 md:p-8">
+        <ProductBox
+          data={artworkDetails.data}
+          sessionId={
+            session?.user.role === "user" ? session?.user.id : undefined
+          }
+        />
+        <hr className="border-dark/10" />
+        <FullArtworkDetails data={artworkDetails.data} />
+        <ArtistInformation
+          name={artworkDetails.data.artist}
+          year={artworkDetails.data.artist_birthyear}
+          location={artworkDetails.data.artist_country_origin}
+        />
+        <SimilarArtworks
+          title={artworkDetails.data.title}
+          sessionId={
+            session?.user.role === "user" ? session?.user.id : undefined
+          }
+          medium={artworkDetails.data.medium}
+        />
+        <SimilarArtworksByArtist
+          sessionId={
+            session?.user.role === "user" ? session?.user.id : undefined
+          }
+          artist={artworkDetails.data.artist}
+        />
+      </div>
+
       <Footer />
     </div>
   );

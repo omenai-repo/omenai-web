@@ -55,6 +55,21 @@ export default function ArtworkCanvas({
     });
   };
 
+  // Handle touch move for mobile
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+
+    // Set zoom scale for mobile
+    setZoomScale(2);
+
+    const rect = containerRef.current.getBoundingClientRect();
+    const touch = e.touches[0];
+    const x = ((touch.clientX - rect.left) / rect.width) * 100;
+    const y = ((touch.clientY - rect.top) / rect.height) * 100;
+
+    setPosition({ x, y });
+  };
+
   const handleMouseLeave = () => {
     // Reset to center when not hovering
 
@@ -62,6 +77,11 @@ export default function ArtworkCanvas({
     setImageSrc(getImageFileView(image, 500)); // Replace with higher resolution (e.g., 1000px)
 
     setZoomScale(1);
+  };
+
+  const handleTouchEnd = () => {
+    setZoomScale(1);
+    setPosition({ x: 50, y: 50 }); // Reset position to center
   };
   return (
     <div className="my-2 w-fit p-0 max-h-full">
@@ -71,6 +91,13 @@ export default function ArtworkCanvas({
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           ref={containerRef}
+          onTouchMove={handleTouchMove}
+          onTouchStart={() => setZoomScale(2)} // Start zoom on touch
+          onTouchEnd={handleTouchEnd}
+          style={{
+            overflow: "hidden",
+            touchAction: "none", // Prevent default behavior like scrolling on mobile
+          }}
         >
           <Link href={`/artwork/${name}`} className="relative">
             <Image
