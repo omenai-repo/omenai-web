@@ -14,7 +14,7 @@ export default function ImageUpload({
 
   return (
     <div>
-      <div className="w-[400px] h-[200px]">
+      <div className="w-[400px] h-[300px]">
         {cover ? (
           <Image
             src={URL.createObjectURL(cover as File)}
