@@ -400,7 +400,7 @@ type AccountAdminSchemaTypes = {
   email: string;
   password: string;
   admin_id: string;
-  verified: boolean;
+  // verified: boolean;
   role: string;
 };
 
