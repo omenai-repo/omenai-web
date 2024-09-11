@@ -19,7 +19,7 @@ export default function page(){
             );
 
             if(editorials.total > 0){
-                setEditorials(editorials.documents)
+                setEditorials(editorials.documents as unknown as EditorialSchemaTypes[])
             }
     
             setLoading(false);
@@ -48,7 +48,7 @@ export default function page(){
                         link={editorial.link}
                         minutes={editorial.minutes}
                         date={editorial.date}
-                        index={index}
+                        key={index}
                     />
                 ))}
                 {editorials.length === 0 && (
