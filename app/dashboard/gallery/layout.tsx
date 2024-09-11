@@ -30,6 +30,7 @@ export default function GalleryDashboardLayout({
         toast.error("Something went wrong, Please refresh the page");
       } else return acc.data;
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

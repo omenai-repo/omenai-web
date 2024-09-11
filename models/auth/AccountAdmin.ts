@@ -26,11 +26,11 @@ const adminAccountSchema = new Schema<AccountAdminSchemaTypes>(
       default: () => uuidv4(),
     },
 
-    verified: {
-      type: Boolean,
-      required: true,
-      default: () => false,
-    },
+    // verified: {
+    //   type: Boolean,
+    //   required: true,
+    //   default: () => false,
+    // },
 
     role: {
       type: String,
