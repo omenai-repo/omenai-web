@@ -1,3 +1,4 @@
+import { getEditorialCoverFileView } from "@/lib/storage/getEditorialCoverFileView";
 import Link from "next/link"
 
 export default function EditorialCard({
@@ -13,11 +14,13 @@ export default function EditorialCard({
     link: string,
     date: string
 }){
+    const url = getEditorialCoverFileView(cover);
+
     return(
         <div className="w-full">
             <img
-                src=""
-                alt=""
+                src={url}
+                alt={title}
                 className="w-full object-cover aspect-square object-top"
             />
             <div className="mt-2">

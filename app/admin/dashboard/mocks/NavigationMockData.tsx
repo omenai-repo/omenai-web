@@ -1,7 +1,7 @@
 import { TfiPackage } from "react-icons/tfi";
 import { BsCreditCard2Front } from "react-icons/bs";
 // import { RiAuctionLine } from "react-icons/ri";
-import { IoAlbumsOutline, IoWalletOutline } from "react-icons/io5";
+import { IoAlbumsOutline, IoDocumentTextOutline, IoWalletOutline } from "react-icons/io5";
 
 import {
   CiUser,
@@ -22,7 +22,7 @@ const profile = <CiUser className="text-dark group-hover:text-white" />;
 const settings = <CiSettings className="text-dark group-hover:text-white" />;
 const logout = <CiLogout className="text-dark group-hover:text-white" />;
 const album = <IoAlbumsOutline />;
-const editorial = <IoAlbumsOutline />
+const editorial = <IoDocumentTextOutline />
 const wallet = <IoWalletOutline className="text-dark group-hover:text-white" />;
 
 export const navMockData: NavMockData = {
