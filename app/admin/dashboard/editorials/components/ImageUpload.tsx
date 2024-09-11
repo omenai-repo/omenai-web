@@ -21,7 +21,7 @@ export default function ImageUpload({
             alt="uploaded image"
             width={400}
             height={200}
-            className="w-[400px] h-[200px] object-cover object-top mt-2 filter hover:grayscale transition-all duration-200 rounded-lg cursor-not-allowed"
+            className="w-[400px] h-[300px] object-cover object-top mt-2 filter hover:grayscale transition-all duration-200 rounded-lg cursor-not-allowed"
             onClick={() => {
               setCover(null);
             }}

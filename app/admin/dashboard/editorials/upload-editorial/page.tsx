@@ -7,8 +7,12 @@ import DateInput from "../components/DateInput";
 import { LoadSmall } from "@/components/loader/Load";
 import toast from "react-hot-toast";
 import uploadEditorialCoverImage from "../../controller/uploadEditorialCoverImage";
+import uploadEditorialDocument from "../../controller/uploadEditorialDocument";
+import { editorial_storage } from "@/appwrite";
+import { useRouter } from "next/navigation";
 
 export default function page(){
+    const router = useRouter();
     const [loading, setLoading] = useState<boolean>(false);
 
     const [cover, setCover] = useState<File | null>(null);
@@ -58,14 +62,32 @@ export default function page(){
                     cover: file.fileId,
                 };
 
+                const documentUploaded = await uploadEditorialDocument(data);
+
+                if(!documentUploaded){
+                    await editorial_storage.deleteFile(
+                        process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_BUCKET_ID!,
+                        file.fileId
+                    );
+                    toast.error("Something went wrong uploading editorial, try aagin");
+                    setCover(null);
+                }else{
+                    setLoading(false);
+                    toast.success("Successfully uploaded editorial, redirecting...");
+                    setCover(null);
+
+                    router.replace("/admin/dashboard/editorials");
+                    router.refresh();
+                }
+
             }else{
                 toast.error(
                     "Error uploading cover image. Please try again or contact IT support"
                 );
             }
-        }
+        };
 
-
+        setLoading(false)
     }
 
     return(
