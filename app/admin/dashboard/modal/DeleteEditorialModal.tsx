@@ -42,7 +42,7 @@ export const DeleteEditorialModal = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={() => {
-                        setShowDeleteEditorialModal(false);
+                        setShowDeleteEditorialModal(false, '');
                     }}
                     className="bg-slate-900/20 backdrop-blur py-8 px-2 fixed inset-0 z-50 grid place-items-center cursor-pointer"
                 >
