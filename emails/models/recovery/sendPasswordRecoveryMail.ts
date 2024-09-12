@@ -18,10 +18,10 @@ export const sendPasswordRecoveryMail = async ({
 }: EmailData) => {
   // Set up resend here instead
   await sendMailVerification({
+    prefix: "Onboarding",
+    from: "transactions",
     to: email,
     subject: "Reset your password",
-    html: render(PasswordRecoveryEmail(name, token, route, gallery_name), {
-      pretty: true,
-    }),
+    react: PasswordRecoveryEmail(name, token, route, gallery_name),
   });
 };

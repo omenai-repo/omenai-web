@@ -193,6 +193,7 @@ type CreateOrderModelTypes = {
   tracking_information: TrackingInformationTypes;
   order_accepted: OrderAcceptedStatusTypes;
   delivery_confirmed: boolean;
+  availability: boolean;
 };
 
 type OrderAcceptedStatusTypes = {
@@ -408,7 +409,7 @@ type AccountAdminSchemaTypes = {
   email: string;
   password: string;
   admin_id: string;
-  verified: boolean;
+  // verified: boolean;
   role: string;
 };
 
@@ -467,4 +468,9 @@ type filterOptionsType = {
   rarity: string[];
 };
 
-type artworkCollectionTypes = "trending" | "curated" | "recent"
+type ProrationSchemaTypes = {
+  gallery_id: string;
+  value: number;
+};
+
+type artworkCollectionTypes = "trending" | "curated" | "recent";

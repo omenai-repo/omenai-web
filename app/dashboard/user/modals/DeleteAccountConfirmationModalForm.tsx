@@ -28,8 +28,8 @@ export default function DeleteAccountConfirmationModalForm() {
         Confirm Account Deletion
       </h1>
       <div className="flex flex-col gap-4 font-normal text-base">
-        <h2 className="text-red-600 text-base font-bold">
-          You are about to delete your Gallery account!
+        <h2 className="text-red-600 text-x font-bold">
+          You are about to delete your Omenai account!
         </h2>
 
         <div className="bg-[#FDF7EF] p-5 flex flex-col gap-3">
@@ -38,10 +38,13 @@ export default function DeleteAccountConfirmationModalForm() {
             <span className="text-[#FFA500] text-[14px]">Warning</span>
           </p>
 
-          <p>
-            Deleting your account will permanently erase all your uploaded
-            artwork and prevent you from using any of the platform&apos;s
-            features.{" "}
+          <p className="text-xs">
+            Deleting your account will permanently erase all your data on the
+            platform and prevent you from using any of the platform&apos;s
+            features. <br />
+            Please be advised that all artworks you have ordered and paid for
+            prior to confirming this action will still be delivered to your
+            address. <br />
             <strong className="text-red-600">
               This action is not reversible!
             </strong>
@@ -54,7 +57,7 @@ export default function DeleteAccountConfirmationModalForm() {
           disabled={loading}
           type="button"
           onClick={handleDeleteGalleryAccount}
-          className="h-[40px] px-4 w-full text-base text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-500 bg-red-600 duration-300 grid place-items-center"
+          className="h-[40px] px-4 w-full text-xs text-white disabled:cursor-not-allowed disabled:bg-[#E0E0E0] hover:bg-red-500 bg-red-600 duration-300 grid place-items-center"
         >
           {loading ? <LoadSmall /> : "I understand, delete this account"}
         </button>

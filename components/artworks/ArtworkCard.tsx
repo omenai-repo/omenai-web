@@ -8,6 +8,7 @@ import LikeComponent from "../likes/LikeComponent";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
 
 import { HiPencil } from "react-icons/hi";
+import Image from "next/image";
 
 export default function ArtworkCard({
   image,
@@ -36,17 +37,18 @@ export default function ArtworkCard({
   isDashboard?: boolean;
   availability: boolean;
 }) {
-  const image_href = getImageFileView(image, 200);
+  const image_href = getImageFileView(image, 250);
   return (
     <div className="m-2 w-fit p-4 xxm:p-0 max-h-[500px]">
       <div className="flex flex-col min-w-[180px] w-[180px] xxl:w-[200px] md:min-w-[250px] h-full md:w-[250px] justify-end">
         <div className="relative w-full">
           <Link href={`/artwork/${name}`} className="relative">
-            <img
+            <Image
               src={image_href}
               alt={name + " image"}
-              // height={400}
-              // width={400}
+              loading="lazy"
+              height={200}
+              width={250}
               className="min-w-[180px] w-[180px] xxl:w-[200px] md:min-w-[250px] max-h-[400px] md:w-[250px] h-auto aspect-auto object-contain object-center cursor-pointer"
             />
           </Link>

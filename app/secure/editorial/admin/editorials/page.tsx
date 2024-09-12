@@ -13,7 +13,7 @@ export default async function EditorialAdmin() {
             <NotFoundData />
           </div>
         ) : (
-          <div className=" w-full grid  lg:grid-cols-3 2xl:grid-cols-4 gap-[1rem]">
+          <div className=" w-full grid lg:grid-cols-3 2xl:grid-cols-4 gap-[1rem]">
             {editorials!.map((data, index) => {
               return (
                 <ArticleCard

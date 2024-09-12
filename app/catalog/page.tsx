@@ -11,10 +11,12 @@ export default async function page() {
   return (
     <main className="relative">
       <DesktopNavbar />
-      <div className="p-4 md:p-8">
+      <div className="px-0 md:px-4">
         <Collections />
+      </div>
 
-        {/* <Hero /> */}
+      {/* <Hero /> */}
+      <div className="px-4 md:px-8">
         <Filter />
         <AllArtworks
           sessionId={

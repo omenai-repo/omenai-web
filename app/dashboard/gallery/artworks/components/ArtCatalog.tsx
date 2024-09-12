@@ -1,15 +1,22 @@
 "use client";
 
+import ArtworkCanvas from "@/components/artworks/ArtworkCanvas";
 import ArtworkCard from "@/components/artworks/ArtworkCard";
+import { ArtworksListingSkeletonLoader } from "@/components/loader/ArtworksListingSkeletonLoader";
 import Load from "@/components/loader/Load";
 import NotFoundData from "@/components/notFound/NotFoundData";
 import { getAllArtworksById } from "@/services/artworks/fetchAllArtworksById";
+import { catalogChunk } from "@/utils/createCatalogChunks";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { useWindowSize } from "usehooks-ts";
 
 export default function ArtCatalog() {
   const session = useSession();
   const sessionId = session.data?.user.id;
+
+  const { width } = useWindowSize();
+
   const { data: artworks, isLoading } = useQuery({
     queryKey: ["fetch_artworks_by_id"],
     queryFn: async () => {
@@ -22,13 +29,16 @@ export default function ArtCatalog() {
     },
   });
 
-  if (isLoading)
-    return (
-      <div className="h-[75vh] grid place-items-center">
-        <Load />
-      </div>
-    );
+  if (isLoading) {
+    return <ArtworksListingSkeletonLoader />;
+  }
+
   const reversedArtworks = [...artworks].reverse();
+
+  const arts = catalogChunk(
+    reversedArtworks,
+    width < 400 ? 1 : width < 768 ? 2 : width < 1280 ? 3 : width < 1440 ? 4 : 5
+  );
   return (
     <div className="py-4 mt-10 xxm:px-4 my-4 w-full">
       {artworks.length === 0 ? (
@@ -36,26 +46,32 @@ export default function ArtCatalog() {
           <NotFoundData />
         </div>
       ) : (
-        <div className="w-full mb-12">
-          <div className="grid xxm:grid-cols-2 md:grid-cols-3 2lg:grid-cols-4 xl:grid-cols-5 3xl:grid-cols-7 justify-center md:space-y-4 md:gap-x-4 gap-x-2 items-end">
-            {reversedArtworks.map((art: ArtworkResultTypes, index: number) => {
+        <div className="w-full mb-5 mt-3">
+          <div className="flex flex-wrap gap-x-4 justify-center">
+            {arts.map((artworks: any[], index) => {
               return (
-                <div key={art.art_id}>
-                  <ArtworkCard
-                    image={art.url}
-                    name={art.title}
-                    artist={art.artist}
-                    art_id={art.art_id}
-                    pricing={art.pricing}
-                    impressions={art.impressions as number}
-                    likeIds={art.like_IDs as string[]}
-                    sessionId={sessionId}
-                    isDashboard={true}
-                    availability={art.availability}
-                  />
+                <div className="flex-1 gap-2 space-y-6" key={index}>
+                  {artworks.map((art: any) => {
+                    return (
+                      <ArtworkCanvas
+                        key={art.art_id}
+                        image={art.url}
+                        name={art.title}
+                        artist={art.artist}
+                        art_id={art.art_id}
+                        pricing={art.pricing}
+                        impressions={art.impressions as number}
+                        likeIds={art.like_IDs as string[]}
+                        sessionId={sessionId}
+                        availability={art.availability}
+                        isDashboard
+                      />
+                    );
+                  })}
                 </div>
               );
             })}
+            {/* first */}
           </div>
         </div>
       )}

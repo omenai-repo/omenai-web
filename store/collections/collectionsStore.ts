@@ -2,20 +2,20 @@ import { create } from "zustand";
 
 type collectionsStoreTypes = {
   artworks: any[];
-  setArtworks: (artworks: any[]) => void;
+  setArtworks: (art_data: any[]) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
   paginationCount: number;
   setPaginationCount: (count: number) => void;
-  paginationLoading: boolean,
-  setPaginationLoading: (paginationLoading: boolean) => void,
-  pageCount: number,
-  setPageCount: (count: number) => void
+  paginationLoading: boolean;
+  setPaginationLoading: (paginationLoading: boolean) => void;
+  pageCount: number;
+  setPageCount: (count: number) => void;
 };
 export const collectionsStore = create<collectionsStoreTypes>((set, get) => ({
   artworks: [],
-  setArtworks: (artworks: any[]) => {
-    set({ artworks });
+  setArtworks: (art_data: any[]) => {
+    set({ artworks: art_data });
   },
   isLoading: false,
   setIsLoading: (loading: boolean) => {
@@ -25,12 +25,12 @@ export const collectionsStore = create<collectionsStoreTypes>((set, get) => ({
   setPaginationCount: (count: number) => {
     set({ paginationCount: count });
   },
-  paginationLoading: true,
+  paginationLoading: false,
   setPaginationLoading: (paginationLoading: boolean) => {
-    set({paginationLoading: paginationLoading})
+    set({ paginationLoading: paginationLoading });
   },
   pageCount: 1,
   setPageCount: (count: number) => {
-    set({pageCount: count})
-  }
+    set({ pageCount: count });
+  },
 }));

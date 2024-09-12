@@ -15,12 +15,20 @@ import { collectionsFilterStore } from "@/store/collections/collectionsFilterSto
 import { collectionsStore } from "@/store/collections/collectionsStore";
 import { fetchArtworksByCriteria } from "@/services/artworks/fetchArtworksByCriteria";
 
-export default function Filter({medium}: {medium: string}) {
+export default function Filter({ medium }: { medium: string }) {
   const [showFilterBlock, setShowFilterBlock] = useState(false);
   const { width } = useWindowSize();
 
-  const { filterOptions, selectedFilters, clearAllFilters } = collectionsFilterStore();
-  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = collectionsStore();
+  const { filterOptions, selectedFilters, clearAllFilters } =
+    collectionsFilterStore();
+  const {
+    setArtworks,
+    setIsLoading,
+    paginationCount,
+    setPaginationCount,
+    pageCount,
+    setPageCount,
+  } = collectionsStore();
 
   async function handleSubmitFilter() {
     setPaginationCount(1);
@@ -31,7 +39,7 @@ export default function Filter({medium}: {medium: string}) {
       paginationCount,
       filterOptions
     );
-    
+
     if (response?.isOk) {
       setPageCount(1);
       setArtworks(response?.data);
@@ -47,13 +55,13 @@ export default function Filter({medium}: {medium: string}) {
 
   const handleClearAll = async () => {
     clearAllFilters();
-
+    setIsLoading(true);
     const emptyFilters = {
       price: [],
       year: [],
       medium: [],
       rarity: [],
-    }
+    };
 
     const response = await fetchArtworksByCriteria(
       medium,
@@ -62,9 +70,10 @@ export default function Filter({medium}: {medium: string}) {
     );
 
     if (response?.isOk) {
-      setArtworks(response?.data);
       setPaginationCount(1);
+      setArtworks(response.data);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -72,15 +81,15 @@ export default function Filter({medium}: {medium: string}) {
       <div
         className={`w-full ${
           width > 960 ? "hidden" : "flex"
-        } justify-between items-center py-4 px-4`}
+        } justify-between items-center py-4 px-3`}
       >
         <button
           className={`${
             showFilterBlock
               ? "bg-dark text-white"
               : "border-dark/10 border bg-white text-dark"
-          } duration-200 border px-3 py-1 border-dark/10 rounded-full  flex gap-x-2 items-center text-[13px] font-normal w-fit cursor-pointer`}
-          onClick={() => setShowFilterBlock(prev => !prev)}
+          } duration-200 border px-3 py-1 border-dark/10 rounded-full h-[35px] flex gap-x-2 items-center text-[13px] font-normal w-fit cursor-pointer`}
+          onClick={() => setShowFilterBlock((prev) => !prev)}
         >
           <span className="text-[13px] font-normal">Filters</span>
           {showFilterBlock ? (
@@ -119,7 +128,7 @@ export default function Filter({medium}: {medium: string}) {
       <div
         className={`${
           width >= 960 || showFilterBlock ? "flex" : "hidden"
-        } flex flex-wrap gap-x-2`}
+        } grid grid-cols-2 md:flex md:flex-wrap relative`}
       >
         <PriceFilter filterOptions={filterOptions} />
         <YearFilter filterOptions={filterOptions} />

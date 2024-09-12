@@ -13,10 +13,10 @@ import { artworkStore } from "@/store/artworks/ArtworkStore";
 import toast from "react-hot-toast";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
-import { useRouter } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import { useWindowSize } from "usehooks-ts";
 import { MdClear } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 export default function Filter() {
   const [showFilterBlock, setShowFilterBlock] = useState(false);
@@ -25,7 +25,7 @@ export default function Filter() {
   const { filterOptions, selectedFilters, clearAllFilters } = filterStore();
   const { paginationCount, updatePaginationCount } = artworkActionStore();
   const { setArtworks, setIsLoading, setPageCount } = artworkStore();
-
+  const router = useRouter();
   async function handleSubmitFilter() {
     updatePaginationCount("reset");
     setIsLoading(true);
@@ -48,6 +48,7 @@ export default function Filter() {
 
   const handleClearAll = async () => {
     clearAllFilters();
+    setIsLoading(true);
     const response = await fetchPaginatedArtworks(paginationCount, {
       price: [],
       year: [],
@@ -55,24 +56,25 @@ export default function Filter() {
       rarity: [],
     });
     if (response?.isOk) {
-      setArtworks(response.data);
       setPageCount(response.count);
+      setArtworks(response.data);
     }
+    setIsLoading(false);
   };
 
   return (
-    <div className="sticky top-[38px] sm:top-[50px] lg:top-[73px] px-0 lg:px-4 z-20 py-3 bg-white">
+    <div className="sticky top-[38px] sm:top-[50px] lg:top-[73px] z-20 py-3 bg-white">
       <div
         className={`w-full ${
           width > 960 ? "hidden" : "flex"
-        } justify-between items-center py-4 px-4`}
+        } justify-between items-center my-5`}
       >
         <button
           className={`${
             showFilterBlock
               ? "bg-dark text-white"
               : "border-dark/10 border bg-white text-dark"
-          } duration-200 border px-3 py-1 border-dark/10 rounded-full  flex gap-x-2 items-center text-[13px] font-normal w-fit cursor-pointer`}
+          } duration-200 border px-3 py-1 border-dark/10 rounded-full h-[35px] flex gap-x-2 items-center text-[13px] font-normal w-fit cursor-pointer`}
           onClick={() => setShowFilterBlock(!showFilterBlock)}
         >
           <span className="text-[13px] font-normal">Filters</span>
@@ -86,7 +88,7 @@ export default function Filter() {
       </div>
       {selectedFilters.length > 0 && (
         <>
-          <div className="flex flex-wrap gap-2 items-center py-4 px-2 cursor-pointer">
+          <div className="flex flex-wrap gap-4 items-center py-4 px-2 cursor-pointer">
             {selectedFilters.map((filter) => {
               return <FilterPill key={filter.name} filter={filter.name} />;
             })}
@@ -112,7 +114,7 @@ export default function Filter() {
       <div
         className={`${
           width >= 960 || showFilterBlock ? "flex" : "hidden"
-        } flex flex-wrap gap-x-2`}
+        } grid grid-cols-2 md:flex md:flex-wrap relative`}
       >
         <PriceFilter />
         <YearFilter />

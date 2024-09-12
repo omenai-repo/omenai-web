@@ -23,7 +23,7 @@ const CronTest = () => {
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Img
               src={
-                "https://cloud.appwrite.io/v1/storage/buckets/655c43e6901e0f772192/files/omenai_logo/view?project=655231c3469bf1ef8d8f"
+                "https://cloud.appwrite.io/v1/storage/buckets/66aa1aa0001a0c51d892/files/66d988de000cf7f960c3/view?project=66aa198b0038ad614178&project=66aa198b0038ad614178&mode=admin"
               }
               width="120"
               height="20"

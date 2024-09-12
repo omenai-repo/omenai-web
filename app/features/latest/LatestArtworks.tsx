@@ -1,9 +1,6 @@
 "use client";
-import Load from "@/components/loader/Load";
 import ArtworkCard from "../../../components/artworks/ArtworkCard";
-import { fetchAllArtworks } from "@/services/artworks/fetchAllArtworks";
-import { useQuery } from "@tanstack/react-query";
-import NotFoundData from "@/components/notFound/NotFoundData";
+
 import Link from "next/link";
 
 import {
@@ -68,21 +65,6 @@ export default function LatestArtworks({
     <>
       {artworks.length > 0 && (
         <div className="p-4 relative">
-          <div className="flex gap-4 my-5">
-            <div className="space-y-1 flex-1">
-              <h1 className="text-md font-normal">Latest artworks</h1>
-              <p className="text-sm text-[#858585] font-normal italic">
-                Fresh Off the Easel: Explore the Newest Masterpieces, Just for You
-              </p>
-            </div>
-            <Link
-              href={"/categories/recent-artworks"}
-              className="text-dark flex items-center gap-x-2 font-normal text-[14px] break-words"
-            >
-              View all
-              <MdArrowRightAlt />
-            </Link>
-          </div>
           <div className="embla" ref={emblaRef}>
             <div className="embla__container">
               {artworks.map((artwork: any, index: number) => {
@@ -103,7 +85,7 @@ export default function LatestArtworks({
               })}
               {artworks.length >= 25 && (
                 <div className="h-[400px] w-[250px] grid place-items-center mx-10">
-                  <Link href={""}>
+                  <Link href={"/categories/recent-artworks"}>
                     <button className="whitespace-nowrap border border-dark rounded-full bg-transparent text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585]  w-full text-dark disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark hover:text-white duration-300">
                       View all recent artworks
                     </button>

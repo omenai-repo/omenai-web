@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 type ArtworkStoreTypes = {
   artworks: any[];
-  setArtworks: (artworks: any[]) => void;
+  setArtworks: (art_data: any[]) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
   pageCount: number;
@@ -10,8 +10,8 @@ type ArtworkStoreTypes = {
 };
 export const artworkStore = create<ArtworkStoreTypes>((set, get) => ({
   artworks: [],
-  setArtworks: (artworks: any[]) => {
-    set({ artworks });
+  setArtworks: (art_data: any[]) => {
+    set({ artworks: art_data });
   },
   isLoading: false,
   setIsLoading: (loading: boolean) => {

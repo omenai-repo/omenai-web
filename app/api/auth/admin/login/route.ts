@@ -36,13 +36,12 @@ export async function POST(request: Request) {
 
     if (!isPasswordMatch) throw new ConflictError("Invalid credentials");
 
-    const { admin_id, verified, name, role } = user;
+    const { admin_id, name, role } = user;
 
     return res.json(
       {
         message: "Login successfull",
         id: admin_id,
-        verified,
         email,
         name,
         role,

@@ -15,10 +15,10 @@ export const sendPriceEmail = async ({
   artwork_data,
 }: EmailData) => {
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: `Requested Information: Base Price of artwork`,
-    html: render(RequestPriceEmail(name, artwork_data), {
-      pretty: true,
-    }),
+    react: RequestPriceEmail(name, artwork_data),
   });
 };

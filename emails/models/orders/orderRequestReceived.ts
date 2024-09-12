@@ -12,10 +12,10 @@ export const sendOrderRequestReceivedMail = async ({
   artwork_data,
 }: EmailData) => {
   await sendMailVerification({
+    prefix: "Orders",
+    from: "transactions",
     to: email,
     subject: "Acknowledgement of order request",
-    html: render(OrderRequestReceivedEmail(name, artwork_data), {
-      pretty: true,
-    }),
+    react: OrderRequestReceivedEmail(name, artwork_data),
   });
 };

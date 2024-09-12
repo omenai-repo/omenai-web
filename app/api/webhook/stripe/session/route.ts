@@ -88,6 +88,7 @@ export async function POST(request: Request) {
         {
           $set: {
             payment_information,
+            payment_date: new Date().toISOString(),
           },
         }
       );
@@ -124,6 +125,14 @@ export async function POST(request: Request) {
 
       // Clear the order lock on the artwork
       await releaseOrderLock(meta.art_id, meta.user_id);
+
+      await CreateOrder.updateMany(
+        {
+          "artwork_data.art_id": meta.art_id,
+          "buyer.user_id": { $ne: meta.user_id },
+        },
+        { $set: { availability: false } }
+      );
 
       transaction_id = create_transaction.trans_id;
 

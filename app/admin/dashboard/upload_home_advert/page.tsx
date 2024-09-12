@@ -104,78 +104,54 @@ export default function Upload() {
             Create a promotional content
           </h1>
         </div>
-        <Timeline>
-          {/* Item */}
-          <Timeline.Item>
-            <Timeline.Point />
-            <Timeline.Content>
-              <AdminUploadInput
-                label={"Headline"}
-                name={"headline"}
-                handleChange={handleInputChange}
-                value={upload_data.headline}
-              />
-            </Timeline.Content>
-          </Timeline.Item>
-          <Timeline.Item>
-            <Timeline.Point />
-            <Timeline.Content>
-              <AdminUploadInput
-                label={"Sub headline"}
-                name={"subheadline"}
-                handleChange={handleInputChange}
-                value={upload_data.subheadline}
-              />
-            </Timeline.Content>
-          </Timeline.Item>
-          <Timeline.Item>
-            <Timeline.Point />
-            <Timeline.Content>
-              <AdminUploadInput
-                label={"Call to action (A link to the promotional resource)"}
-                name={"cta"}
-                handleChange={handleInputChange}
-                value={upload_data.cta}
-              />
-            </Timeline.Content>
-          </Timeline.Item>
 
-          <Timeline.Item>
-            <Timeline.Point />
-            <Timeline.Content>
-              <div className="flex flex-col gap-3">
-                <label htmlFor="Cover" className="text-xs">
-                  Cover image
-                </label>
-                <label
-                  htmlFor="label_description"
-                  className="text-xs text-red-600 font-semibold"
-                >
-                  Note: Uploading a landscaped or square-shaped image would be
-                  most ideal for display
-                </label>
-              </div>
-              <ImageUpload cover={cover} setCover={setCover} />
-            </Timeline.Content>
-          </Timeline.Item>
-          <Timeline.Item>
-            <Timeline.Point />
-            <Timeline.Content>
-              <div className="flex flex-col gap-3">
-                <label htmlFor="Cover" className="text-xs">
-                  Upload content
-                </label>
-                <button
-                  disabled={loading}
-                  type="submit"
-                  className={`whitespace-nowrap bg-dark text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80 `}
-                >
-                  {loading ? <LoadSmall /> : "Upload promotional content"}
-                </button>
-              </div>
-            </Timeline.Content>
-          </Timeline.Item>
-        </Timeline>
+        <AdminUploadInput
+          label={"Headline"}
+          name={"headline"}
+          handleChange={handleInputChange}
+          value={upload_data.headline}
+        />
+
+        <AdminUploadInput
+          label={"Sub headline"}
+          name={"subheadline"}
+          handleChange={handleInputChange}
+          value={upload_data.subheadline}
+        />
+
+        <AdminUploadInput
+          label={"Call to action (A link to the promotional resource)"}
+          name={"cta"}
+          handleChange={handleInputChange}
+          value={upload_data.cta}
+        />
+
+        <div className="flex flex-col gap-3">
+          <label htmlFor="Cover" className="text-xs">
+            Cover image
+          </label>
+          <label
+            htmlFor="label_description"
+            className="text-xs text-red-600 font-semibold"
+          >
+            Note: Uploading a landscaped or square-shaped image would be most
+            ideal for display
+          </label>
+        </div>
+        <ImageUpload cover={cover} setCover={setCover} />
+
+        <div className="flex flex-col gap-3">
+          <label htmlFor="Cover" className="text-xs">
+            Upload content
+          </label>
+          <button
+            disabled={loading}
+            type="submit"
+            className={`whitespace-nowrap bg-dark text-xs disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80 `}
+          >
+            {loading ? <LoadSmall /> : "Upload promotional content"}
+          </button>
+        </div>
       </form>
     </div>
   );

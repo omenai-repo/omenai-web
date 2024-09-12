@@ -55,6 +55,15 @@ export default function ComponentWrapper({
     data!.order.order_accepted.status === "declined"
   )
     notFound();
+  if (!data!.order.availabiity) {
+    return (
+      <div className="w-full h-full grid place-items-center">
+        <p className="text-xs font-semibold">
+          Unfortunately, this artwork has been purchased by another customer
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-screen">

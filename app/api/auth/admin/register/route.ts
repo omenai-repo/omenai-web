@@ -46,11 +46,11 @@ export async function POST(request: Request) {
     if (!storeVerificationCode)
       throw new ServerError("A server error has occured, please try again");
 
-    await sendIndividualMail({
-      name: saveData.name,
-      email: saveData.email,
-      token: email_token,
-    });
+    // await sendIndividualMail({
+    //   name: saveData.name,
+    //   email: saveData.email,
+    //   token: email_token,
+    // });
 
     return res.json(
       {

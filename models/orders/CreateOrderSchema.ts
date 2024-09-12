@@ -31,6 +31,8 @@ const createOrder = new Schema<CreateOrderModelTypes>(
       type: Boolean,
       default: () => false,
     },
+
+    availability: { type: Boolean, default: () => true },
   },
   { timestamps: true }
 );
