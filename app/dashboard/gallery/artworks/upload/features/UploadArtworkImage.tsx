@@ -22,62 +22,73 @@ export default function UploadArtworkImage() {
       state.artworkUploadData,
       state.clearData,
     ]);
-
   const [loading, setLoading] = useState(false);
-  const session = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const acceptedFileTypes = ["jpg", "jpeg", "png"];
 
-  const queryClient = useQueryClient();
-
-  async function handleArtworkUpload(e: FormEvent<HTMLFormElement>) {
+  const handleArtworkUpload = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    if (image) {
-      const type = image.type.split("/");
-      if (!acceptedFileTypes.includes(type[1])) {
-        toast.error(
-          "File type unsupported. Supported file types are: JPEG, JPG, and PNG"
-        );
-        setLoading(false);
-        return;
-      }
+
+    if (!image) {
+      toast.error("Please select an image");
+      setLoading(false);
+      return;
+    }
+
+    const fileType = image.type.split("/")[1];
+    if (!acceptedFileTypes.includes(fileType)) {
+      toast.error(
+        "File type unsupported. Supported file types are: JPEG, JPG, and PNG"
+      );
+      setLoading(false);
+      return;
+    }
+
+    try {
       const fileUploaded = await uploadImage(image);
 
-      if (fileUploaded) {
-        let file: { bucketId: string; fileId: string } = {
-          bucketId: fileUploaded.bucketId,
-          fileId: fileUploaded.$id,
-        };
-
-        const data = createUploadedArtworkData(
-          artworkUploadData,
-          file.fileId,
-          session.data!.user.id
-        );
-
-        const upload_response = await uploadArtworkData(data);
-        if (!upload_response?.isOk) {
-          await storage.deleteFile(
-            process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
-            file.fileId
-          );
-          toast.error(upload_response!.body.message);
-          setImage(null);
-          setLoading(false);
-        } else {
-          setLoading(false);
-          toast.success(upload_response!.body.message);
-          queryClient.invalidateQueries();
-          clearData();
-          router.replace("/dashboard/gallery/artworks");
-        }
+      if (!fileUploaded) {
+        throw new Error("Image upload failed");
       }
-    } else {
-      toast.error("Please select an image");
+
+      const file = {
+        bucketId: fileUploaded.bucketId,
+        fileId: fileUploaded.$id,
+      };
+      const data = createUploadedArtworkData(
+        artworkUploadData,
+        file.fileId,
+        session?.user?.id ?? ""
+      );
+
+      const uploadResponse = await uploadArtworkData(data);
+
+      if (!uploadResponse?.isOk) {
+        await storage.deleteFile(
+          process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
+          file.fileId
+        );
+        toast.error(uploadResponse?.body.message);
+        setImage(null);
+        return;
+      }
+
+      toast.success(uploadResponse.body.message);
+      queryClient.invalidateQueries();
+      clearData();
+      router.replace("/dashboard/gallery/artworks");
+    } catch (error) {
+      console.error("Error uploading artwork:", error);
+      toast.error(
+        "An error occurred while uploading the artwork. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
-  }
+  };
   return (
     <form onSubmit={handleArtworkUpload}>
       <div className="w-full h-[60vh] grid place-items-center">

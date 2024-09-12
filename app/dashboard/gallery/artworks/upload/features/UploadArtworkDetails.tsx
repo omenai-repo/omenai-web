@@ -17,7 +17,6 @@ export default function UploadArtworkDetails() {
 
   function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(artworkUploadData);
     if (!allKeysEmpty(errorFields)) toast.error("Invalid field inputs...");
     else {
       toast.success("Processing...please wait");
