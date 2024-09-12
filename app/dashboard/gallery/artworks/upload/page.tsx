@@ -10,33 +10,43 @@ import { checkIsStripeOnboarded } from "@/services/stripe/checkIsStripeOnboarded
 import { useRouter } from "next/navigation";
 import { getAccountId } from "@/services/stripe/getAccountId";
 import Load from "@/components/loader/Load";
+import { retrieveSubscriptionData } from "@/services/subscriptions/retrieveSubscriptionData";
+import { handleError } from "@/utils/handleQueryError";
 
 export default function UploadArtwork() {
   const session = useSession();
   const router = useRouter();
-  if (session.data === null || session.data === undefined)
-    router.replace("/auth/login");
+  if (!session.data?.user) router.replace("/auth/login");
 
   const { data: isConfirmed, isLoading } = useQuery({
     queryKey: ["check_stripe_onboarded"],
     queryFn: async () => {
-      const acc = await getAccountId(session.data!.user.email);
-      console.log(acc);
-      if (!acc?.isOk) {
-        throw new Error("Something went wrong, Please refresh the page");
-      }
+      try {
+        if (!session.data?.user) throw new Error("User not authenticated");
 
-      const response = await checkIsStripeOnboarded(
-        acc!.data.connected_account_id
-      );
+        // Fetch account ID first, as it's required for the next call
+        const acc = await getAccountId(session.data.user.email);
+        if (!acc?.isOk)
+          throw new Error("Something went wrong, Please refresh the page");
 
-      if (response?.isOk) {
+        // Start retrieving subscription data while fetching Stripe onboarding status
+        const [response, sub_check] = await Promise.all([
+          checkIsStripeOnboarded(acc.data.connected_account_id), // Dependent on account ID
+          retrieveSubscriptionData(session.data.user.id), // Independent
+        ]);
+
+        if (!response?.isOk || !sub_check?.isOk) {
+          throw new Error("Something went wrong, Please refresh the page");
+        }
+
         return {
           isSubmitted: response.details_submitted,
           id: acc.data.connected_account_id,
+          isSubActive: sub_check?.data?.status === "active",
         };
-      } else {
-        throw new Error("Something went wrong, Please refresh the page");
+      } catch (error) {
+        console.error(error);
+        handleError();
       }
     },
   });
@@ -55,18 +65,20 @@ export default function UploadArtwork() {
   return (
     <div className="relative">
       <PageTitle title="Upload an artwork" />
-      {!session?.data?.user.gallery_verified &&
-        !session?.data?.user.subscription_active && <NoVerificationBlock />}
-      {session?.data?.user.gallery_verified &&
-        !session?.data?.user.subscription_active && <NoSubscriptionBlock />}
-      {!session?.data?.user.gallery_verified &&
-        session?.data?.user.subscription_active && <NoVerificationBlock />}
-      {session?.data?.user.gallery_verified &&
-        session.data.user.subscription_active && (
-          <div className="">
-            <UploadArtworkDetails />
-          </div>
-        )}
+      {!session?.data?.user.gallery_verified && !isConfirmed?.isSubActive && (
+        <NoVerificationBlock />
+      )}
+      {session?.data?.user.gallery_verified && !isConfirmed?.isSubActive && (
+        <NoSubscriptionBlock />
+      )}
+      {!session?.data?.user.gallery_verified && isConfirmed?.isSubActive && (
+        <NoVerificationBlock />
+      )}
+      {session?.data?.user.gallery_verified && isConfirmed?.isSubActive && (
+        <div className="">
+          <UploadArtworkDetails />
+        </div>
+      )}
     </div>
   );
 }

@@ -32,7 +32,7 @@ const SubscriptionPaymentSuccessfulMail = (name: string) => {
             />
 
             <Heading className="text-black text-[20px] font-normal text-center p-0 mb-[40px] mx-0">
-              SUBSCRIPTION RENEWED SUCCESSFULLY
+              SUBSCRIPTION ACTIVATED
             </Heading>
             <Text className="text-black text-[14px] leading-[24px]">
               Hello <strong>{name}</strong>,
@@ -56,7 +56,7 @@ const SubscriptionPaymentSuccessfulMail = (name: string) => {
               feel free to reach out to us at{" "}
               <Link
                 href="mailto:contact@omenani.net"
-                className="underline text-blue-800 italic"
+                className="underline text-dark italic"
               >
                 contact@omeani.net
               </Link>

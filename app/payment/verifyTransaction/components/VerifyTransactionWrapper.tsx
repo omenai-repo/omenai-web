@@ -9,6 +9,7 @@ import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import { getApiUrl } from "@/config";
 import { LoadSmall } from "@/components/loader/Load";
 import { string } from "zod";
+import { handleError } from "@/utils/handleQueryError";
 
 export default function VerifyTransactionWrapper() {
   const searchParams = useSearchParams();
@@ -27,21 +28,39 @@ export default function VerifyTransactionWrapper() {
   const { data: verify_data, isLoading } = useQuery({
     queryKey: ["verify_transaction"],
     queryFn: async () => {
-      const response = await fetch(
-        "/api/purchase/verify_artwork_purchase_transaction",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            transaction_id,
-            gallery_id: ids!.gid,
-            order_id: ids!.oid,
-          }),
+      try {
+        if (!transaction_id || !ids?.gid || !ids?.oid) {
+          throw new Error(
+            "Missing required parameters for transaction verification"
+          );
         }
-      );
 
-      const result = await response.json();
+        const response = await fetch(
+          "/api/purchase/verify_artwork_purchase_transaction",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              transaction_id,
+              gallery_id: ids.gid,
+              order_id: ids.oid,
+            }),
+          }
+        );
 
-      return { message: result.message, isOk: response.ok };
+        if (!response.ok) {
+          const errorResult = await response.json();
+          throw new Error(
+            errorResult.message || "Transaction verification failed"
+          );
+        }
+
+        const result = await response.json();
+        return { message: result.message, isOk: true };
+      } catch (error) {
+        console.error("Verification Error:", error);
+        handleError();
+      }
     },
   });
 

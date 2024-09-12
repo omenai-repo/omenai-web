@@ -21,32 +21,36 @@ export default function PayoutDashboard() {
   const { data: isConfirmed, isLoading } = useQuery({
     queryKey: ["check_stripe_onboarded"],
     queryFn: async () => {
-      const acc = await getAccountId(session.data!.user.email);
-      if (!acc?.isOk) {
-        throw new Error("Something went wrong, Please refresh the page");
-      }
-      const balance = await retrieveBalance(acc!.data.connected_account_id);
+      try {
+        // Ensure session data exists
+        if (!session.data?.user) throw new Error("User not authenticated");
 
-      if (!balance?.isOk) {
-        throw new Error("Something went wrong, Please refresh the page");
-      }
-      const response = await checkIsStripeOnboarded(
-        acc!.data.connected_account_id
-      );
+        const acc = await getAccountId(session.data.user.email);
+        if (!acc?.isOk) throw new Error("Failed to fetch account ID");
 
-      const table = await fetchTransactions(session.data!.user.id);
+        const connectedAccountId = acc.data.connected_account_id;
 
-      if (!table?.isOk)
-        throw new Error("Something went wrong, Please refresh the page");
+        // Run independent async calls concurrently
+        const [balance, table, response] = await Promise.all([
+          retrieveBalance(connectedAccountId),
+          fetchTransactions(session.data.user.id),
+          checkIsStripeOnboarded(connectedAccountId),
+        ]);
 
-      if (response?.isOk) {
+        // Check if all results are okay
+        if (!balance?.isOk || !table?.isOk || !response?.isOk) {
+          throw new Error("Something went wrong, Please refresh the page");
+        }
+
+        // Return final data if all checks passed
         return {
           isSubmitted: response.details_submitted,
-          id: acc.data.connected_account_id,
+          id: connectedAccountId,
           balance: balance.data,
           table_data: table.data,
         };
-      } else {
+      } catch (error) {
+        console.error(error);
         throw new Error("Something went wrong, Please refresh the page");
       }
     },

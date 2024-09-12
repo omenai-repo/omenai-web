@@ -14,12 +14,17 @@ export default function OrdersGroup() {
   const { data: orders, isLoading } = useQuery({
     queryKey: ["fetch_orders_by_category"],
     queryFn: async () => {
-      const orders = await getOverviewOrders();
-      if (orders!.isOk) {
-        return orders!.data;
-      } else {
-        return [];
+      const result = await getOverviewOrders();
+
+      // Handle potential undefined result
+      if (!result) {
+        return []; // Return an empty array if the result is undefined
       }
+
+      const { isOk, data } = result;
+
+      // Return the data if isOk, else return an empty array
+      return isOk ? data : [];
     },
   });
 
@@ -30,34 +35,30 @@ export default function OrdersGroup() {
       </div>
     );
 
-  const pending_orders = orders.filter(
-    (
-      order: CreateOrderModelTypes & {
-        createdAt: string;
-        updatedAt: string;
-        _id: ObjectId;
-      }
-    ) => order.order_accepted.status === ""
-  );
-  const processing_orders = orders.filter(
-    (
-      order: CreateOrderModelTypes & {
-        createdAt: string;
-        updatedAt: string;
-        _id: ObjectId;
-      }
-    ) => order.order_accepted.status === "accepted" && !order.delivery_confirmed
-  );
+  // Extract the shared type definition
+  // type OrderType = CreateOrderModelTypes & {
+  //   createdAt: string;
+  //   updatedAt: string;
+  //   _id: ObjectId;
+  // };
 
-  const completed_orders = orders.filter(
-    (
-      order: CreateOrderModelTypes & {
-        createdAt: string;
-        updatedAt: string;
-        _id: ObjectId;
-      }
-    ) => order.status === "completed"
-  );
+  const pending_orders: any = [];
+  const processing_orders: any = [];
+  const completed_orders: any = [];
+
+  // Loop through orders once to classify them
+  orders.forEach((order: any) => {
+    if (order.order_accepted.status === "") {
+      pending_orders.push(order);
+    } else if (
+      order.order_accepted.status === "accepted" &&
+      !order.delivery_confirmed
+    ) {
+      processing_orders.push(order);
+    } else if (order.status === "completed") {
+      completed_orders.push(order);
+    }
+  });
   return (
     <>
       <div className="w-full my-3">
