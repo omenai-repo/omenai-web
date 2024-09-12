@@ -25,6 +25,10 @@ type AdminModalsStore = {
     gallery_id: string;
     status: string;
   }) => void;
+
+  showDeleteEditorialModal: boolean;
+  showDeleteEditorialId: string;
+  setShowDeleteEditorialModal: (val: boolean, id: string) => void
 };
 
 type RejectConfirmationPopupOptions = {
@@ -86,4 +90,9 @@ export const adminModals = create<AdminModalsStore>((set, get) => ({
   }) {
     set({ blockGalleryConfirmationPopup: val });
   },
+  showDeleteEditorialModal: false,
+  showDeleteEditorialId: '',
+  setShowDeleteEditorialModal: (value: boolean, id: string) => {
+    set({showDeleteEditorialModal: value, showDeleteEditorialId: id})
+  }
 }));

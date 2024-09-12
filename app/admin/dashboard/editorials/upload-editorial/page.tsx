@@ -18,7 +18,7 @@ export default function page(){
     const [cover, setCover] = useState<File | null>(null);
     const [upload_data, set_upload_data] = useState<Omit <EditorialSchemaTypes, "cover">>({
         title: "",
-        minutes: 1,
+        minutes: "",
         date: new Date(),
         link: ""
     });
@@ -40,7 +40,7 @@ export default function page(){
         if(
             upload_data.title === "" ||
             upload_data.link === "" ||
-            upload_data.minutes === 0 ||
+            upload_data.minutes === "" ||
             upload_data.date === null ||
             cover === null
         )toast.error(
@@ -118,8 +118,8 @@ export default function page(){
                                 <AdminUploadInput
                                     handleChange={handleInputChange}
                                     label="Minutes read"
+                                    placeholder="1"
                                     value={upload_data.minutes}
-                                    inputType="number"
                                     name="minutes"
                                 />
                             </div>

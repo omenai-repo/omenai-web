@@ -394,7 +394,7 @@ type EditorialSchemaTypes = {
   link: string;
   cover: string;
   date: Date | null;
-  minutes: number
+  minutes: string
 };
 
 type PromotionalDataUpdateTypes = {
