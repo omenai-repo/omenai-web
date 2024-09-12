@@ -8,6 +8,7 @@ import { signOut } from "next-auth/react";
 import { useLocalStorage } from "usehooks-ts";
 import { getApiUrl } from "@/config";
 import { LoadSmall } from "@/components/loader/Load";
+import { handleError } from "@/utils/handleQueryError";
 
 export default function VerifyTransactionWrapper() {
   const searchParams = useSearchParams();
@@ -18,24 +19,47 @@ export default function VerifyTransactionWrapper() {
   );
   const url = getApiUrl();
 
-  const { data: verify_data, isLoading } = useQuery({
+  const {
+    data: verify_data,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["verify_transaction"],
     queryFn: async () => {
-      const response = await fetch("/api/transactions/verify_FLW_transaction", {
-        method: "POST",
-        body: JSON.stringify({ transaction_id }),
-      });
+      try {
+        const response = await fetch(
+          "/api/transactions/verify_FLW_transaction",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }, // Add appropriate header
+            body: JSON.stringify({ transaction_id }),
+          }
+        );
 
-      const result = await response.json();
-      set_redirect_uri(`${url}/dashboard/gallery/subscription`);
-      setTimeout(() => {
-        toast.success("Please log back in");
-        signOut({ callbackUrl: "/auth/login/" });
-      }, 3000);
+        if (!response.ok) {
+          const errorResult = await response.json();
+          throw new Error(errorResult.message || "Verification failed");
+        }
 
-      return { message: result.message, isOk: response.ok };
+        const result = await response.json();
+        return { message: result.message, isOk: true };
+      } catch (error) {
+        console.error("Error verifying transaction:", error);
+        handleError();
+      }
     },
+    // onSuccess: () => {
+    //   // Call functions after the query resolves
+    //   set_redirect_uri(`${url}/dashboard/gallery/subscription`);
+    //   toast.success("Please log back in");
+
+    //   // Delayed sign-out
+    //   setTimeout(() => {
+    //     signOut({ callbackUrl: "/auth/login/" });
+    //   }, 3000);
+    // },
   });
+
   if (isLoading) {
     return (
       <div className="w-full h-[80vh] grid place-items-center">

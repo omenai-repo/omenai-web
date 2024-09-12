@@ -15,6 +15,7 @@ export default function BalanceBox({
   balance: any;
 }) {
   const [generatingLoginLink, setGeneratingLoginLink] = useState(false);
+  console.log(balance);
 
   const router = useRouter();
   async function generateLoginLink() {
