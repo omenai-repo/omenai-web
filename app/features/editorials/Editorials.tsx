@@ -2,19 +2,26 @@
 import Link from "next/link";
 import EditorialsGrid from "./components/EditorialsGrid";
 import { useQuery } from "@tanstack/react-query";
-import { listEditorials } from "@/app/secure/editorial/admin/lib/getAllBlogArticles";
 import Load from "@/components/loader/Load";
 import { MdArrowRightAlt } from "react-icons/md";
 import { editorialData } from "./mocks/editorialMockData";
+import { editorial_database } from "@/appwrite";
 
 export default function Editorials() {
-  // const { data: editorials, isLoading } = useQuery({
-  //   queryKey: ["editorials"],
-  //   queryFn: async () => {
-  //     const data = await listEditorials();
-  //     return data;
-  //   },
-  // });
+
+  const { data: editorials, isLoading } = useQuery({
+    queryKey: ["editorials"],
+    queryFn: async () => {
+      const response = await editorial_database.listDocuments(
+          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_DATABASE_ID!,
+          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_COLLECTION_ID!,
+      );
+
+      if (response?.documents) {
+        return response.documents;
+      } else throw new Error("Something went wrong");
+    },
+  });
 
   // if (isLoading)
   //   return (
@@ -25,7 +32,7 @@ export default function Editorials() {
 
   return (
     <>
-      {editorialData.length === 0 ? null : (
+      {editorials && editorials?.length === 0 ? null : (
         <div className="p-5 sm:px-4 relative bg-[#FAFAFA]">
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center p-2">
             <div className="space-y-1 my-10">
@@ -42,7 +49,7 @@ export default function Editorials() {
               <MdArrowRightAlt />
             </Link>
           </div>
-          <EditorialsGrid />
+          <EditorialsGrid editorials={editorials} />
         </div>
       )}
     </>

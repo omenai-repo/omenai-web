@@ -3,6 +3,7 @@ import { adminModals } from "@/store/admin/AdminModalsStore";
 import Link from "next/link"
 import { FiArrowRight } from "react-icons/fi";
 import { GoTrash } from "react-icons/go";
+import { MdArrowRightAlt } from "react-icons/md";
 
 export default function EditorialCard({
     cover,
@@ -38,16 +39,14 @@ export default function EditorialCard({
                     </div>
                 </div>
             </div>
-            <div className="mt-3 space-y-1">
+            <div className="mt-3 space-y-2">
+                <p className="text-dark/60 text-xs">{minutes} minutes read</p>
                 <h1 className="text-sm lg:text-md leading-tight font-normal">{title}</h1>
-                <p className="text-dark/60">{minutes} minutes read</p>
                 {/* <p className="text-dark/60">Posted on <span className="text-dark/90 font-medium">{date !== null && date?.getDate()}</span></p> */}
                 <a href={'https://' + link} target="_blank" rel="noopener noreferrer">
-                    <div
-                        className="hover:text-blue-500 underline text-[14px] flex items-center gap-1 w-fit"
-                    >
-                        Open link <FiArrowRight />
-                    </div>
+                    <p className="flex items-center gap-x-2 underline text-xs">
+                        Read full article <MdArrowRightAlt />
+                    </p>
                 </a>
             </div>
         </div>

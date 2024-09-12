@@ -1,5 +1,6 @@
 import NoCover from "@/app/secure/components/NoCover";
 import { getEditorialImageFilePreview } from "@/app/secure/editorial/admin/lib/getEditorialImageFilePreview";
+import { getEditorialCoverFileView } from "@/lib/storage/getEditorialCoverFileView";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
 import Link from "next/link";
 import { MdArrowRightAlt } from "react-icons/md";
@@ -8,27 +9,37 @@ export type EditorialItemProps = {
   title: string;
   date: string;
   minutes: string;
-  image: string;
+  cover: string;
   summary: string;
-  id: string;
+  $id: string;
+  link: string
 };
 export default function EditorialItem({
   title,
   date,
   minutes,
-  image,
+  cover,
   summary,
-  id,
+  $id,
+  link
 }: EditorialItemProps) {
+  
+  console.log(cover)
+  let url
+
+  if(cover){
+    url = getEditorialCoverFileView(cover);
+  }
+
   return (
     <>
       {" "}
       <div className="px-2 py-8 bg-transaparent flex flex-col gap-[1rem] h-full w-full">
-        {image ? (
+        {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`/images/${image}.jpg`}
-            alt={"article_image"}
+            src={url}
+            alt={title}
             className="w-full object-cover aspect-square object-top"
           />
         ) : (
@@ -47,9 +58,11 @@ export default function EditorialItem({
 
             {/* <p className="text-[#858585] italic text-base">{summary}</p> */}
           </div>
-          <p className="flex items-center gap-x-2 underline text-xs">
-            Read full article <MdArrowRightAlt />
-          </p>{" "}
+          <a href={'https://' + link} target="_blank" rel="noopener noreferrer">
+              <p className="flex items-center gap-x-2 underline text-xs">
+                Read full article <MdArrowRightAlt />
+              </p>
+          </a>
         </div>
       </div>
     </>
