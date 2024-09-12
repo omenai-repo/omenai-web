@@ -63,9 +63,9 @@ export default function ImageBox({ url, title, availability }: ImageBoxProps) {
   return (
     <div
       className="relative w-auto h-full max-h-[1000px] artContainer"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      ref={containerRef}
+      // onMouseMove={handleMouseMove}
+      // onMouseLeave={handleMouseLeave}
+      // ref={containerRef}
       // onTouchMove={handleTouchMove}
       // onTouchStart={() => setZoomScale(2)} // Start zoom on touch
       // onTouchEnd={handleTouchEnd}
