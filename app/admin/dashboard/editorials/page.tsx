@@ -5,6 +5,7 @@ import EditorialCard from "./components/EditorialCard";
 import { editorial_database } from "@/appwrite";
 import Load from "@/components/loader/Load";
 import { useQuery } from "@tanstack/react-query";
+import EditorialListingItem from "./components/EditorialListingItem";
 
 export default function page(){
     // const [loading, setLoading] = useState<boolean>(false);
@@ -37,9 +38,9 @@ export default function page(){
             <div className="mt-5 my-[3rem]">
                 <h1 className="divide-y text-sm ">Omenai Editorials</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="flex flex-col gap-5 pb-10">
                 {editorials && editorials.map((editorial, index) => (
-                    <EditorialCard 
+                    <EditorialListingItem 
                         cover={editorial.cover}
                         title={editorial.title}
                         link={editorial.link}
