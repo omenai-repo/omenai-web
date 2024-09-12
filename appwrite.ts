@@ -1,4 +1,4 @@
-import { Client, Storage } from "appwrite";
+import { Client, Storage, Databases } from "appwrite";
 const client = new Client();
 const endpoint = "https://cloud.appwrite.io/v1";
 
@@ -27,3 +27,14 @@ gallery_logo_client
   .setProject(process.env.NEXT_PUBLIC_APPWRITE_GALLERY_LOGO_CLIENT_ID!);
 
 export const gallery_logo_storage = new Storage(gallery_logo_client);
+
+
+//editorials content
+const editorial_client = new Client();
+
+editorial_client
+  .setEndpoint(endpoint)
+  .setProject(process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_PROJECT_ID!)
+
+export const editorial_database = new Databases(editorial_client);
+export const editorial_storage = new Storage(editorial_client)

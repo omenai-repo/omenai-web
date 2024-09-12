@@ -11,9 +11,10 @@ export default function EditorialGridItemLarge({
         title={editorial.title}
         date={editorial.date}
         minutes={editorial.minutes}
-        image={editorial.image}
+        cover={editorial.cover}
         summary={editorial.summary}
-        id={editorial.id}
+        $id={editorial.$id}
+        link={editorial.link}
       />
     </div>
   );

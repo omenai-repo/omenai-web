@@ -7,6 +7,7 @@ import PageLayout from "./PageLayout";
 import { adminNavigationActions } from "@/store/admin/AdminNavigationStore";
 import Appbar from "./Appbar";
 import { UpdatePromotionalModal } from "./modal/UpdatePromotionalModal";
+import { DeleteEditorialModal } from "./modal/DeleteEditorialModal";
 export default function GalleryDashboardLayout({
   children,
 }: {
@@ -35,6 +36,7 @@ export default function GalleryDashboardLayout({
               <Appbar />
               <div className="h-auto rounded-lg relative my-5 px-5">
                 <UpdatePromotionalModal />
+                <DeleteEditorialModal />
                 {children}
               </div>
             </div>

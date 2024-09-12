@@ -10,13 +10,14 @@ export default function EditorialGridItemsList({
       {editorials.map((editorial, index) => {
         return (
           <EditorialItem
-            key={editorial.id}
+            key={editorial.$id}
             title={editorial.title}
             date={editorial.date}
             minutes={editorial.minutes}
-            image={editorial.image}
+            cover={editorial.cover}
             summary={editorial.summary}
-            id={editorial.id}
+            $id={editorial.$id}
+            link={editorial.link}
           />
         );
       })}
