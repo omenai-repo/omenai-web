@@ -9,6 +9,17 @@ import { editorial_database } from "@/appwrite";
 
 export default function Editorials() {
 
+  function reverseArray(arr: any[]) {
+    let reversedArr = [];
+    
+    for (let i = arr.length - 1; i >= 0; i--) {
+      reversedArr.push(arr[i]);
+    }
+    
+    return reversedArr;
+  }
+  
+
   const { data: editorials, isLoading } = useQuery({
     queryKey: ["editorials"],
     queryFn: async () => {
@@ -18,7 +29,7 @@ export default function Editorials() {
       );
 
       if (response?.documents) {
-        return response.documents;
+        return reverseArray(response.documents);
       } else throw new Error("Something went wrong");
     },
   });
