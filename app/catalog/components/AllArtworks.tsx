@@ -56,7 +56,7 @@ export default function AllArtworks({
 
   const arts = catalogChunk(
     artworks,
-    width < 400 ? 1 : width < 768 ? 2 : width < 1280 ? 3 : 4
+    width < 400 ? 1 : width < 768 ? 2 : width < 1280 ? 3 : width < 1440 ? 4 : 5
   );
 
   return (
