@@ -11,6 +11,16 @@ export default function page(){
     // const [loading, setLoading] = useState<boolean>(false);
     // const [editorials, setEditorials] = useState<EditorialSchemaTypes[]>([])
 
+    function reverseArray(arr: any[]) {
+        let reversedArr = [];
+        
+        for (let i = arr.length - 1; i >= 0; i--) {
+          reversedArr.push(arr[i]);
+        }
+        
+        return reversedArr;
+    }
+
     const { data: editorials, isLoading: loading } = useQuery({
         queryKey: ["promotional_data"],
         queryFn: async () => {
@@ -20,7 +30,7 @@ export default function page(){
             );
     
           if (response?.documents) {
-            return response.documents;
+            return reverseArray(response.documents)
           } else throw new Error("Something went wrong");
         },
     });
