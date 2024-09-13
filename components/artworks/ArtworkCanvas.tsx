@@ -42,17 +42,18 @@ export default function ArtworkCanvas({
   const [imageSrc, setImageSrc] = useState(getImageFileView(image, 500)); // Default to low-res
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!containerRef.current) return;
     setZoomScale(2.2);
     setImageSrc(getImageFileView(image, 1500)); // Replace with higher resolution (e.g., 1500px)
+    if (!containerRef.current) return;
+    else {
+      requestAnimationFrame(() => {
+        const rect = containerRef.current?.getBoundingClientRect();
+        const x = ((e.clientX - rect!.left) / rect!.width) * 100;
+        const y = ((e.clientY - rect!.top) / rect!.height) * 100;
 
-    requestAnimationFrame(() => {
-      const rect = containerRef.current!.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-      setPosition({ x, y });
-    });
+        setPosition({ x, y });
+      });
+    }
   };
 
   // Handle touch move for mobile
@@ -84,7 +85,7 @@ export default function ArtworkCanvas({
     setPosition({ x: 50, y: 50 }); // Reset position to center
   };
   return (
-    <div className="my-2 w-fit p-0 max-h-full">
+    <div className="my-2 max-w-full p-0 max-h-full">
       <div className="flex flex-col w-full h-full justify-end">
         <div
           className="relative w-full artContainer"
