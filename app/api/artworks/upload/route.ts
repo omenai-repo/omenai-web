@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     if (!active_subscription || active_subscription.status !== "active")
       throw new ForbiddenError("No active subscription for this user");
 
-    if (active_subscription.plan_details.type === "basic" && doc_count >= 25)
+    if (active_subscription.plan_details.type === "Basic" && doc_count >= 25)
       throw new ForbiddenError(
         "Plan usage limit exceeded, please upgrade plan"
       );

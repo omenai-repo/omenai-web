@@ -54,6 +54,7 @@ export default function PayoutDashboard() {
         throw new Error("Something went wrong, Please refresh the page");
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

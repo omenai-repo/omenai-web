@@ -14,6 +14,7 @@ export default function HighlightCard({ tag }: HightlightCardProps) {
       const data = await fetchHighlightData(tag);
       return data;
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <LoadSmall />;

@@ -26,6 +26,7 @@ export default function OrdersGroup() {
       // Return the data if isOk, else return an empty array
       return isOk ? data : [];
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading)

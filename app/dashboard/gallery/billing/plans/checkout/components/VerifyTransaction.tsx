@@ -21,6 +21,7 @@ export default function VerifyTransaction({
         return { message: response.message, data: response.data };
       }
     },
+    refetchOnWindowFocus: false,
   });
   return (
     <div className="grid place-items-center">

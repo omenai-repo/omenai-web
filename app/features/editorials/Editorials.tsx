@@ -13,14 +13,15 @@ export default function Editorials() {
     queryKey: ["editorials"],
     queryFn: async () => {
       const response = await editorial_database.listDocuments(
-          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_DATABASE_ID!,
-          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_COLLECTION_ID!,
+        process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_DATABASE_ID!,
+        process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_COLLECTION_ID!
       );
 
       if (response?.documents) {
         return response.documents;
       } else throw new Error("Something went wrong");
     },
+    refetchOnWindowFocus: false,
   });
 
   // if (isLoading)

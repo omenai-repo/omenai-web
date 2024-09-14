@@ -13,6 +13,7 @@ export default function Orders() {
       if (!orders?.isOk) throw new Error("Something went wrong");
       else return orders.data;
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

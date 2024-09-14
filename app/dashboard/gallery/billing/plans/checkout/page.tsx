@@ -46,6 +46,7 @@ export default function SubscriptionCheckout() {
         throw new Error("Something went wrong");
       else return { plans: plans.data, sub_data: sub_data.data };
     },
+    refetchOnWindowFocus: false,
   });
 
   return (

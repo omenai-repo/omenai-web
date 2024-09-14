@@ -20,26 +20,10 @@ export default async function VerifyEmail({
             Back to login
           </Link>
         </div>
-        <hr className="bg-gray-400/20 my-8" />
+        <hr className="bg-[#e0e0e0] my-8" />
         {/* Body */}
         <TokenBlock token={params.token} />
       </div>
     </div>
   );
 }
-
-// export async function generateStaticParams() {
-//   const result: Promise<any> = getIds("gallery");
-
-//   const results = await result;
-
-//   return results.map(
-//     (id: { _id: string; gallery_id: string; verified: boolean }) => {
-//       return {
-//         token: id.gallery_id,
-//       };
-//     }
-//   );
-// }
-
-// export const revalidate = 0;

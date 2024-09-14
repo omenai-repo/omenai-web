@@ -16,6 +16,7 @@ export default function ActivityWrapper() {
         return data.data;
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading)

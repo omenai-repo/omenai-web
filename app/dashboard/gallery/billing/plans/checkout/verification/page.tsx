@@ -25,6 +25,7 @@ export default function TransactionVerification() {
         return { message: response.message, data: response.data };
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   console.log(verified?.data);

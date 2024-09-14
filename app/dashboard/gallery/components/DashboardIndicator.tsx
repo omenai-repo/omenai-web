@@ -1,8 +1,12 @@
 "use client";
 
+import { LoadSmall } from "@/components/loader/Load";
+import { verifyGalleryRequest } from "@/services/verification/verifyGalleryRequest";
 import { galleryDummyVerification } from "@/store/gallery/gallery_dummy_verification/GalleryDummyVerification";
 import { getFormattedDateTime } from "@/utils/getCurrentDateTime";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { RiAdminLine } from "react-icons/ri";
 type AppbarTypes = {
   admin_name?: string;
@@ -14,11 +18,25 @@ export default function DashboardIndicator({
   gallery_name,
   gallery_verified,
 }: AppbarTypes) {
-  const [open] = galleryDummyVerification((state) => [
-    state.open,
-    state.updateOpen,
-  ]);
-  const pathname = usePathname().split("/");
+  // const [open] = galleryDummyVerification((state) => [
+  //   state.open,
+  //   state.updateOpen,
+  // ]);
+  // const pathname = usePathname().split("/");
+  const [loading, setLoading] = useState(false);
+  async function handleRequestGalleryVerification() {
+    setLoading(true);
+    try {
+      const response = await verifyGalleryRequest(gallery_name!);
+      if (!response?.isOk)
+        toast.error("Something wwent wrong. Please try again");
+      else toast.success(response.message);
+    } catch (error) {
+      toast.error("Something wwent wrong. Please try again");
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="w-full flex justify-between items-center">
       <div className="text-xs">
@@ -35,8 +53,12 @@ export default function DashboardIndicator({
       {/* Request verification */}
       {!gallery_verified ? (
         <div className="" id="gallery-verification">
-          <button className=" w-full text-xs disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
-            Request gallery verification
+          <button
+            disabled={loading}
+            onClick={handleRequestGalleryVerification}
+            className=" w-full text-xs disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+          >
+            {loading ? <LoadSmall /> : "Request gallery verification"}
           </button>
         </div>
       ) : (

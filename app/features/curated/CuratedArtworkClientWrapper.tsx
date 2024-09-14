@@ -22,6 +22,7 @@ export default function CuratedArtworkClientWrapper({
       if (data?.isOk) return data.data;
       else throw new Error("Something went wrong");
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading)

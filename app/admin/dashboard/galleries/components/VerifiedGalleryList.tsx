@@ -16,6 +16,7 @@ export default function VerifiedGalleryList() {
         return res.data;
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

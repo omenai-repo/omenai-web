@@ -7,13 +7,13 @@ import { checkIsStripeOnboarded } from "@/services/stripe/checkIsStripeOnboarded
 import Load from "@/components/loader/Load";
 import { useRouter } from "next/navigation";
 export default function NoSubscriptionTheme() {
-  const session = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const { data, isLoading } = useQuery({
     queryKey: ["get_account_info"],
     queryFn: async () => {
       const response = await checkIsStripeOnboarded(
-        session!.data!.user.connected_account_id!
+        session?.user.connected_account_id!
       );
 
       if (!response?.isOk) {
@@ -22,6 +22,7 @@ export default function NoSubscriptionTheme() {
         return response.details_submitted;
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {
@@ -37,8 +38,10 @@ export default function NoSubscriptionTheme() {
 
   return (
     <div className=" w-full h-[78vh] grid place-items-center">
-      {!session?.data?.user.gallery_verified ? (
-        <NoVerificationBlock />
+      {!session?.user.gallery_verified ? (
+        <NoVerificationBlock
+          gallery_name={session !== null ? session.user.name : ""}
+        />
       ) : (
         <div className="flex justify-center items-center flex-col gap-3">
           <h5>No subscriptions plans are active</h5>

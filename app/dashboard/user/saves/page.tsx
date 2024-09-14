@@ -23,6 +23,7 @@ export default function Saves() {
       if (!artworks) throw new Error("Something went wrong");
       else return artworks.data;
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

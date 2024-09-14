@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
-import { Toaster, toast } from "sonner";
+import toast from "react-hot-toast";
 type TokenProps = {
   token: string;
 };
@@ -17,6 +17,7 @@ export default function TokenBlock({ token }: TokenProps) {
     state.isLoading,
     state.setIsloading,
   ]);
+  const [resendTokenLoading, setResentTokenLoading] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -43,24 +44,31 @@ export default function TokenBlock({ token }: TokenProps) {
   }
 
   const resendVerification = async () => {
-    toast("A new token will soon be on it's way to you");
-    const payload = { author: token };
-    await resendCode("gallery", payload);
+    setResentTokenLoading(true);
+    toast.success("A new token is on it's way to you");
+    try {
+      const payload = { author: token };
+      await resendCode("gallery", payload);
+    } catch (error) {
+      toast.error("Something went wrong. Please try again or contact support");
+    } finally {
+      setResentTokenLoading(false);
+    }
   };
   return (
     <div className="text-center flex flex-col items-center">
       <div className="info_text my-[1rem]">
-        <h1 className="lg:text-2xl md:text-xl text-md">
-          Verify your email to kickstart your Journey.
+        <h1 className="lg:text-xl md:text-lg text-sm">
+          Verify your email to kickstart your journey.
         </h1>
         <div className="flex flex-col gap-4 my-[2rem]">
-          <p className="leading-32 text-base">
+          <p className="leading-32 text-xs">
             Thank you for choosing to join{" "}
             <span className="text-dark font-normal">Omenai inc.</span> We extend
             our warmest welcome and look forward to providing you with an
             enjoyable journey with us
           </p>
-          <p className="leading-32 text-base">
+          <p className="leading-32 text-xs">
             A token has been sent to the email address you provided to us,
             Kindly utilize this token to authenticate your account and access
             our services.
@@ -75,7 +83,7 @@ export default function TokenBlock({ token }: TokenProps) {
       >
         <input
           type="text"
-          className=" h-[40px] px-4 ring-1 ring-dark rounded-md w-full md:w-1/3"
+          className=" h-[40px] px-4 ring-1 ring-dark border-0 w-full md:w-1/3 placeholder:text-xs"
           placeholder="Verification token"
           required
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -84,30 +92,31 @@ export default function TokenBlock({ token }: TokenProps) {
         />
         <button
           disabled={isLoading}
-          className=" disabled:bg-gray-400 grid place-items-center disabled:cursor-not-allowed  h-[40px] px-4 bg-black text-white rounded-md transition-all ease-linear duration-200"
+          className=" disabled:bg-gray-400 grid place-items-center disabled:cursor-not-allowed  h-[40px] px-4 bg-black text-white transition-all ease-linear duration-200"
           type={"submit"}
         >
           {isLoading ? <LoadSmall /> : "Submit"}
         </button>
       </form>
-      <p>
+      <p className="text-xs">
         Did not recieve a code?{" "}
-        <span
-          className="text-dark underline font-normal cursor-pointer"
+        <button
+          disabled={resendTokenLoading}
+          className="text-dark underline font-bold cursor-pointer"
           onClick={resendVerification}
         >
-          Resend code
-        </span>
+          {resendTokenLoading ? <LoadSmall /> : "Resend code"}
+        </button>
       </p>
 
-      <div className="contact my-[3rem] md:w-[50%] mx-auto leading-32">
+      <div className="contact my-[3rem] md:w-[50%] text-xs mx-auto leading-32">
         <p className="text-center">
           Feel free to contact us should you have any issues on{" "}
           <Link
-            href={"mailto:moses@omenai.net"}
+            href={"mailto:contact@omenai.net"}
             className="text-dark font-normal underline"
           >
-            moses@omenai.net
+            contact@omenai.net
           </Link>
           . We are always happy to help.
         </p>

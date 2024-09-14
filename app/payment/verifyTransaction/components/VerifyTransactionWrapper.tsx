@@ -62,6 +62,7 @@ export default function VerifyTransactionWrapper() {
         handleError();
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   function handleRedirect() {
