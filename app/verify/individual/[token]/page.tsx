@@ -27,19 +27,3 @@ export default async function VerifyEmail({
     </div>
   );
 }
-
-// export async function generateStaticParams() {
-//   const result: Promise<any> = getIds("individual");
-
-//   const results = await result;
-
-//   return results.map(
-//     (id: { _id: string; user_id: string; verified: boolean }) => {
-//       return {
-//         token: id.user_id,
-//       };
-//     }
-//   );
-// }
-
-// export const revalidate = 0;

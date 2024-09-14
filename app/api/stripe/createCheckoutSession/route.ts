@@ -31,11 +31,11 @@ export async function POST(request: Request) {
       throw new ForbiddenError("No active subscription for this user");
 
     const commision_rate =
-      active_subscription.plan_details.type === "premium"
+      active_subscription.plan_details.type.toLowerCase() === "premium"
         ? 0.15
-        : active_subscription.plan_details.type === "pro"
+        : active_subscription.plan_details.type.toLowerCase() === "pro"
         ? 0.2
-        : 0.3;
+        : 0.25;
     const commission = Math.round(amount * commision_rate * 100);
     const currentTimestampSeconds = Math.floor(Date.now() / 1000);
     const thirtyMinutesOffset = 30 * 60;

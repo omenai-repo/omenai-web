@@ -27,6 +27,7 @@ export default function Plans() {
       if (!plans?.isOk || !res?.ok) throw new Error("Something went wrong");
       else return { plans: plans.data, sub: result.data };
     },
+    refetchOnWindowFocus: false,
   });
 
   return (

@@ -27,6 +27,7 @@ export default function OrderCanceledPage() {
         throw new Error("Something went wrong, please refresh your page");
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

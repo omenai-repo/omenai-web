@@ -15,6 +15,7 @@ export default function PopularArtworks() {
         return data.data;
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading)

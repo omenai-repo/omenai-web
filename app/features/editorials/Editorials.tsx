@@ -9,29 +9,19 @@ import { editorial_database } from "@/appwrite";
 
 export default function Editorials() {
 
-  function reverseArray(arr: any[]) {
-    let reversedArr = [];
-    
-    for (let i = arr.length - 1; i >= 0; i--) {
-      reversedArr.push(arr[i]);
-    }
-    
-    return reversedArr;
-  }
-  
-
   const { data: editorials, isLoading } = useQuery({
     queryKey: ["editorials"],
     queryFn: async () => {
       const response = await editorial_database.listDocuments(
-          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_DATABASE_ID!,
-          process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_COLLECTION_ID!,
+        process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_DATABASE_ID!,
+        process.env.NEXT_PUBLIC_APPWRITE_EDITORIAL_COLLECTION_ID!
       );
 
       if (response?.documents) {
-        return reverseArray(response.documents);
+        return response.documents;
       } else throw new Error("Something went wrong");
     },
+    refetchOnWindowFocus: false,
   });
 
   // if (isLoading)

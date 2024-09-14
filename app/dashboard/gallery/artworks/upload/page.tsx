@@ -49,6 +49,7 @@ export default function UploadArtwork() {
         handleError();
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {
@@ -66,13 +67,13 @@ export default function UploadArtwork() {
     <div className="relative">
       <PageTitle title="Upload an artwork" />
       {!session?.data?.user.gallery_verified && !isConfirmed?.isSubActive && (
-        <NoVerificationBlock />
+        <NoVerificationBlock gallery_name={session.data!.user.name} />
       )}
       {session?.data?.user.gallery_verified && !isConfirmed?.isSubActive && (
         <NoSubscriptionBlock />
       )}
       {!session?.data?.user.gallery_verified && isConfirmed?.isSubActive && (
-        <NoVerificationBlock />
+        <NoVerificationBlock gallery_name={session.data!.user.name} />
       )}
       {session?.data?.user.gallery_verified && isConfirmed?.isSubActive && (
         <div className="">

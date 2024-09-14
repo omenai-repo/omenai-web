@@ -1,6 +1,5 @@
 import { sendMailVerification } from "@/emails/controller/emailController";
 import PasswordUpdateConfirmationCodeEmail from "@/emails/views/recovery/PasswordUpdateConfirmationCodeEmail";
-import { render } from "@react-email/render";
 
 type EmailData = {
   username: string;

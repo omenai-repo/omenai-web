@@ -48,16 +48,7 @@ export default function VerifyTransactionWrapper() {
         handleError();
       }
     },
-    // onSuccess: () => {
-    //   // Call functions after the query resolves
-    //   set_redirect_uri(`${url}/dashboard/gallery/subscription`);
-    //   toast.success("Please log back in");
-
-    //   // Delayed sign-out
-    //   setTimeout(() => {
-    //     signOut({ callbackUrl: "/auth/login/" });
-    //   }, 3000);
-    // },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

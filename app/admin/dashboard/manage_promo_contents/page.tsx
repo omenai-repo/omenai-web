@@ -16,6 +16,7 @@ export default function ManagePromoContent() {
         return response.data;
       } else throw new Error("Something went wrong");
     },
+    refetchOnWindowFocus: false,
   });
 
   if (loading) {

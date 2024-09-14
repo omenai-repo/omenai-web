@@ -2,7 +2,6 @@ import { sendMailVerification } from "@/emails/controller/emailController";
 import PasswordRecoveryEmail from "@/emails/views/recovery/PasswordRecoveryEmail";
 import SubscriptionPaymentFailedMail from "@/emails/views/subscription/SubscriptionPaymentFailedMail";
 import SubscriptionPaymentSuccessfulMail from "@/emails/views/subscription/SubscriptionPaymentSuccessfulMail";
-import { render } from "@react-email/render";
 
 type EmailData = {
   name: string;

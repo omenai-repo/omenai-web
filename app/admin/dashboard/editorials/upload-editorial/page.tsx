@@ -106,12 +106,10 @@ export default function page(){
                             label="Title"
                             value={upload_data.title}
                             name="title"
-                            placeholder="Editorial title"
                         />
                         <AdminUploadInput
                             handleChange={handleInputChange}
                             label="Link"
-                            placeholder="www.example.com"
                             value={upload_data.link}
                             name="link"
                         />

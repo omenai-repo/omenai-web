@@ -18,6 +18,7 @@ export default function Orders() {
         return orders.data;
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading)

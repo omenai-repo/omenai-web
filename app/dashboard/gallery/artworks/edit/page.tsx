@@ -22,6 +22,7 @@ export default function EditArtwork() {
       if (!data?.isOk) throw new Error("Something went wrong");
       return data.data;
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

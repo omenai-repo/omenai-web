@@ -1,6 +1,5 @@
 import { sendMailVerification } from "@/emails/controller/emailController";
 import PaymentPendingMail from "@/emails/views/payment/PaymentPendingMail";
-import { render } from "@react-email/render";
 
 type EmailData = {
   email: string;

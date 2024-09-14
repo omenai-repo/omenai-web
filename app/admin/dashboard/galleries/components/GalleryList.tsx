@@ -16,7 +16,7 @@ export default function GalleryList() {
         return res.data;
       }
     },
-    staleTime: 0,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

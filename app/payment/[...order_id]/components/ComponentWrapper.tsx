@@ -37,6 +37,7 @@ export default function ComponentWrapper({
         throw new Error("Uh oh! Something went wrong!");
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

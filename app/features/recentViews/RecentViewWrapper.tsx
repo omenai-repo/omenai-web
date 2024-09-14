@@ -20,12 +20,10 @@ export default function RecentViewWrapper({
       if (!data?.isOk) throw new Error("Something went wrong");
       else return data.data;
     },
+    refetchOnWindowFocus: false,
   });
 
-  if (isLoading)
-    return (
-      <SectionLoaderContainers title="Recently viewed" />
-    );
+  if (isLoading) return <SectionLoaderContainers title="Recently viewed" />;
   return (
     <>
       {artworks?.length === 0 ? null : (

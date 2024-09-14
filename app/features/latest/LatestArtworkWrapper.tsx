@@ -22,6 +22,7 @@ export default function LatestArtworkWrapper({
       if (!data?.isOk) throw new Error("Something went wrong");
       else return data.data;
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <SectionLoaderContainers title="Latest artworks" />;

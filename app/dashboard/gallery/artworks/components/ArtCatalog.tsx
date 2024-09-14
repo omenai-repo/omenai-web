@@ -27,6 +27,7 @@ export default function ArtCatalog() {
         return [];
       }
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) {

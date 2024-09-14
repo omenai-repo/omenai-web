@@ -16,6 +16,7 @@ export default function TransactionTable() {
       if (trans?.isOk) return trans.data;
       else throw new Error("Something went wrong");
     },
+    refetchOnWindowFocus: false,
   });
   return (
     <div className="flex flex-col gap-y-4 w-full rounded-md overflow-y-scroll overflow-x-hidden text-xs p-8 ring-1 ring-[#e0e0e0]">

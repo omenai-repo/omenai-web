@@ -23,6 +23,7 @@ export default function TrendingArtworkWrapper({
       if (!data?.isOk) throw new Error("Something went wrong");
       return data.data;
     },
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <SectionLoaderContainers title="Trending artworks" />;
