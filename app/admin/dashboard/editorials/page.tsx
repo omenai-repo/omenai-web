@@ -22,8 +22,9 @@ export default function page() {
         return response.documents;
       } else throw new Error("Something went wrong");
     },
-    refetchOnWindowFocus: false,
   });
+  let reversedEditorials;
+  reversedEditorials = editorials?.reverse();
 
   if (loading) {
     return (
@@ -39,8 +40,8 @@ export default function page() {
         <h1 className="divide-y text-sm ">Omenai Editorials</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {editorials &&
-          editorials.map((editorial, index) => (
+        {reversedEditorials &&
+          reversedEditorials.map((editorial, index) => (
             <EditorialCard
               cover={editorial.cover}
               title={editorial.title}
