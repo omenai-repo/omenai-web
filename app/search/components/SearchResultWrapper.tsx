@@ -3,7 +3,7 @@
 import { fetchSearchKeyWordResults } from "@/services/search/fetchSearchKeywordResults";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import NotFoundSearchResult from "./NotFoundSearchResult";
 import SearchResultDetails from "./SearchResultDetails";
 import { useSession } from "next-auth/react";
@@ -37,7 +37,15 @@ export default function SearchResultWrapper() {
       if (data !== undefined) setSearchResults(data.data);
 
       if (data === undefined)
-        toast.error("An error has occured, please try again");
+        toast.error("Error notification", {
+          description:
+            "An error has occured, please try again or contact support",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       setIsPending(false);
     };
 
@@ -57,7 +65,7 @@ export default function SearchResultWrapper() {
             searchTerm={searchTerm as string}
             sessionId={
               session.data?.user.role === "user"
-                ? session?.data.user.user_id
+                ? session.data.user.id
                 : undefined
             }
             isPending={isPending}

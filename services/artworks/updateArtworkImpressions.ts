@@ -1,5 +1,5 @@
 import { getApiUrl } from "@/config";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export async function updateArtworkImpressions(
   id: string,

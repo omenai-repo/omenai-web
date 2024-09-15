@@ -10,7 +10,7 @@ import { isEmptyFilter } from "@/utils/isFilterEmpty";
 import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtworks";
 import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
 import { artworkStore } from "@/store/artworks/ArtworkStore";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { FaCheckCircle } from "react-icons/fa";
@@ -37,7 +37,14 @@ export default function Filter() {
       setPageCount(response.count);
       setArtworks(response.data);
     } else {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setIsLoading(false);
     window.scrollTo({

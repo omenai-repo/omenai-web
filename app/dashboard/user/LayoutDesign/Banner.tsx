@@ -2,14 +2,21 @@
 
 import { signOut, useSession } from "next-auth/react";
 import { CiUser } from "react-icons/ci";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function Banner() {
   const user = useSession();
 
   function handleSignout() {
     signOut({ callbackUrl: "/" });
-    toast.success("Successfully signed out...redirecting");
+    toast.success("Operation successful", {
+      description: "Successfully signed out...redirecting",
+      style: {
+        background: "green",
+        color: "white",
+      },
+      className: "class",
+    });
   }
   return (
     <>

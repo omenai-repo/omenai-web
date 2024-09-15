@@ -4,7 +4,7 @@ import { IoIosLock } from "react-icons/io";
 import Image from "next/image";
 import { generateAlphaDigit } from "@/utils/generateToken";
 import { createTokenizedCharge } from "@/services/subscriptions/createTokenizedCharge";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { LoadSmall } from "@/components/loader/Load";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getApiUrl } from "@/config";
@@ -66,7 +66,14 @@ export default function CheckoutBillingCard({
     const tokenize_card = await createTokenizedCharge(tokenized_data);
 
     if (!tokenize_card?.isOk)
-      toast.error("Couldn't create tokenized card charge");
+      toast.error("Error notification", {
+        description: "Unable to initiate card charge. Please contact support",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else {
       const { data } = tokenize_card;
       if (data.status === "error") setError(data.message);
@@ -102,8 +109,24 @@ export default function CheckoutBillingCard({
       typeof plan_action === "string" ? plan_action : ""
     );
 
-    if (!migrate?.isOk) toast.error(migrate?.message);
-    else toast.success("Migration successful");
+    if (!migrate?.isOk)
+      toast.error("Error notification", {
+        description: migrate?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
+    else
+      toast.success("Operation successful", {
+        description: "Migration successful",
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
     setMigrationLoading(false);
     router.replace("/dashboard/gallery/billing");
   }

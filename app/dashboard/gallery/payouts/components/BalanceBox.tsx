@@ -5,7 +5,7 @@ import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function BalanceBox({
   account,
@@ -22,7 +22,14 @@ export default function BalanceBox({
     setGeneratingLoginLink(true);
     const loginLink = await generateStripeLoginLink(account);
     if (!loginLink?.isOk) {
-      toast.error("Something went wrong, Please try again.");
+      toast.error("Error notification", {
+        description: "Something went wrong, Please try again.",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       setGeneratingLoginLink(true);
     } else router.replace(loginLink.url);
   }

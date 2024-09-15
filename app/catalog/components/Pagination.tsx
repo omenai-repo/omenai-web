@@ -4,7 +4,7 @@ import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtwor
 import { artworkActionStore } from "@/store/artworks/ArtworkActionStore";
 import { artworkStore } from "@/store/artworks/ArtworkStore";
 import { filterStore } from "@/store/artworks/FilterStore";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function Pagination() {
   const { setArtworks, setIsLoading, pageCount, setPageCount } = artworkStore();
@@ -25,7 +25,14 @@ export default function Pagination() {
         updatePaginationCount(type);
         setPageCount(response.count);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     } else {
       const response = await fetchPaginatedArtworks(
@@ -37,7 +44,14 @@ export default function Pagination() {
         updatePaginationCount(type);
         setPageCount(response.count);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     }
     setIsLoading(false);

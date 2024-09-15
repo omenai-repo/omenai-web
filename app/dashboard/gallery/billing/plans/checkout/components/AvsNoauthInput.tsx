@@ -16,7 +16,7 @@ import {
   useState,
 } from "react";
 import { IoIosLock } from "react-icons/io";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 
 export default function AvsNoauthInput({
@@ -72,7 +72,14 @@ export default function AvsNoauthInput({
     );
     const updated_address_info = { ...address_info, country: countryCode?.key };
     if (hasEmptyString(updated_address_info)) {
-      toast.error("Invalid input parameters");
+      toast.error("Error notification", {
+        description: "Invalid input parameters",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       return;
     }
     const ref = generateAlphaDigit(7);
@@ -94,15 +101,21 @@ export default function AvsNoauthInput({
     const response = await validateChargeAuthorization(data);
     if (response?.isOk) {
       if (response.data.status === "error") {
-        console.log(response.data);
-        toast.error(response.data.message);
+        toast.error("Error notification", {
+          description: response.data.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       } else {
         console.log(response.data);
         update_flw_charge_payload_data(
           {} as FLWDirectChargeDataTypes & { name: string }
         );
         if (response.data.meta.authorization.mode === "redirect") {
-          toast.success("Redirecting to authentication portal...Please wait");
+          toast.info("Redirecting to authentication portal, Please wait");
           set_transaction_id(response.data.data.id);
           router.replace(response.data.meta.authorization.redirect);
           // redirect user
@@ -112,7 +125,14 @@ export default function AvsNoauthInput({
         handleClick();
       }
     } else {
-      toast.error("Something went wrong");
+      toast.error("Error notification", {
+        description: "Something went wrong",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setIsLoading(false);
   };

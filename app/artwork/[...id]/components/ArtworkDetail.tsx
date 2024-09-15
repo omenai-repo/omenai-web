@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { actionStore } from "@/store/actions/ActionStore";
 import { requestPrice } from "@/services/requests/requestPrice";
 import { useSession } from "next-auth/react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
 import { PiFrameCornersThin } from "react-icons/pi";
@@ -55,12 +55,25 @@ export default function ArtworkDetail({ data, sessionId }: ArtworkDetailTypes) {
         );
 
         if (res?.isOk) {
-          toast.success("Price data sent. Please check your email inbox");
+          toast.success("Operation successful", {
+            description: "Price data sent. Please check your email inbox",
+            style: {
+              background: "green",
+              color: "white",
+            },
+            className: "class",
+          });
           setLoading(false);
         } else {
-          toast.error(
-            "Something went wrong, please try again or contact us for assistance."
-          );
+          toast.error("Error notification", {
+            description:
+              "Something went wrong, please try again or contact us for assistance.",
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
           setLoading(false);
         }
       }

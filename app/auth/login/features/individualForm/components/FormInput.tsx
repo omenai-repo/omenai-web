@@ -4,7 +4,7 @@ import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import FormActions from "./FormActions";
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -36,7 +36,14 @@ export default function FormInput() {
         if (ok) {
           const session = await getSession();
           if (session?.user) {
-            toast.success("Login successful...redirecting!");
+            toast.success("Operation successful", {
+              description: "Login successful... redirecting!",
+              style: {
+                background: "green",
+                color: "white",
+              },
+              className: "class",
+            });
             if (session?.user.verified) {
               if (url === "" || url === null) {
                 set_redirect_uri("");
@@ -52,7 +59,15 @@ export default function FormInput() {
               });
             }
           }
-        } else toast.error(error);
+        } else
+          toast.error("Error notification", {
+            description: error,
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
       })
       .finally(() => setIsLoading());
   };

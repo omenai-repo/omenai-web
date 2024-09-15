@@ -5,7 +5,7 @@ import ArtworkPriceInputGroup from "./components/ArtworkPriceInputGroup";
 import { BsArrowRight } from "react-icons/bs";
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { galleryArtworkUploadStore } from "@/store/gallery/gallery_artwork_upload/GalleryArtworkUpload";
 import { allKeysEmpty } from "@/utils/checkIfObjectEmpty";
 import ArtistInfoInputGroup from "./components/ArtistInfoInputGroup";
@@ -17,9 +17,19 @@ export default function UploadArtworkDetails() {
 
   function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!allKeysEmpty(errorFields)) toast.error("Invalid field inputs...");
+    if (!allKeysEmpty(errorFields))
+      toast.error("Error notification", {
+        description: "Invalid field inputs...",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else {
-      toast.success("Processing...please wait");
+      toast.info("Operation in progress", {
+        description: "Processing, please wait",
+      });
       router.push("/dashboard/gallery/artworks/upload/image");
     }
   }

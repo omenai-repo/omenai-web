@@ -10,7 +10,7 @@ import { CiSettings } from "react-icons/ci";
 import Link from "next/link";
 import { UserDashboardNavigationStore } from "@/store/user/navigation/NavigationStore";
 import { signOut } from "next-auth/react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { BiUser } from "react-icons/bi";
 
 const LoggedInUserDropDown = ({ user }: { user: string | undefined }) => {
@@ -94,7 +94,14 @@ const Option = ({
 }) => {
   function handleSignout() {
     signOut({ callbackUrl: "/" });
-    toast.success("Successfully signed out...redirecting");
+    toast.success("Operation successful", {
+      description: "Successfully signed out...redirecting",
+      style: {
+        background: "green",
+        color: "white",
+      },
+      className: "class",
+    });
     setOpen(false);
   }
   return (

@@ -5,7 +5,7 @@ import { InputCard } from "./InputCard";
 import { TextareaCard } from "./TextareaCard";
 import { galleryProfileUpdate } from "@/store/gallery/gallery_profile_update/GalleryProfileUpdateStore";
 import { updateProfile } from "@/services/update/updateProfile";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { LoadSmall } from "@/components/loader/Load";
 
@@ -30,10 +30,25 @@ export const FormCard = () => {
       updateData,
       session.data!.user.id
     );
-    if (!isOk) toast.error(body.message);
+    if (!isOk)
+      toast.error("Error notification", {
+        description: body.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else {
       await session.update();
-      toast.success(`${body.message}... Please log back in`);
+      toast.success("Operation successful", {
+        description: `${body.message}... Please log back in`,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       setIsLoading(false);
       clearData();
       router.refresh();

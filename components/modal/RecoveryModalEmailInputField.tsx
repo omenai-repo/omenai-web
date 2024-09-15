@@ -2,7 +2,7 @@
 
 import { sendPasswordResetLink } from "@/services/password/sendPasswordResetLink";
 import { useState, FormEvent } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { LoadSmall } from "../loader/Load";
 
 export default function RecoveryModalEmailInputField() {
@@ -17,8 +17,24 @@ export default function RecoveryModalEmailInputField() {
       email,
     });
 
-    if (data.isOk) toast.success(data.body.message);
-    else toast.error(data.body.message);
+    if (data.isOk)
+      toast.success("Operation successful", {
+        description: data.body.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
+    else
+      toast.error("Error notification", {
+        description: data.body.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     setIsloading(false);
   };
   return (

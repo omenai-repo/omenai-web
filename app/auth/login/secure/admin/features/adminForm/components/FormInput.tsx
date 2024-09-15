@@ -3,7 +3,7 @@ import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { LoadSmall } from "@/components/loader/Load";
 import { GoArrowRight } from "react-icons/go";
 
@@ -27,7 +27,14 @@ export default function FormInput() {
         if (ok) {
           const session = await getSession();
           if (session?.user) {
-            toast.success("Login successful...redirecting!");
+            toast.success("Operation successful", {
+              description: "Login successful...redirecting!",
+              style: {
+                background: "green",
+                color: "white",
+              },
+              className: "class",
+            });
             router.replace("/admin/dashboard/galleries");
             router.refresh();
             // if (session?.user.verified) {
@@ -38,10 +45,24 @@ export default function FormInput() {
             // await signOut({
             //   callbackUrl: `/verify/individual/${session?.user.id}`,
             // });
-            toast.error("No session detected");
+            toast.error("Error notification", {
+              description: "No session detected",
+              style: {
+                background: "red",
+                color: "white",
+              },
+              className: "class",
+            });
           }
         } else {
-          toast.error(error);
+          toast.error("Error notification", {
+            description: error,
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
         }
       })
       .finally(() => setIsLoading(false));

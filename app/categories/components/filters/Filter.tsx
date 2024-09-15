@@ -2,7 +2,7 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { isEmptyFilter } from "@/utils/isFilterEmpty";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { FaCheckCircle } from "react-icons/fa";
@@ -19,44 +19,57 @@ import { fetchPaginatedArtworks } from "@/services/artworks/fetchPaginatedArtwor
 import { categoriesFilterStore } from "@/store/categories/categoriesFilterStore";
 import { categoriesStore } from "@/store/categories/categoriesStore";
 
-export default function Filter({page_type}: {page_type: artworkCollectionTypes}) {
+export default function Filter({
+  page_type,
+}: {
+  page_type: artworkCollectionTypes;
+}) {
   const session = useSession();
   const [showFilterBlock, setShowFilterBlock] = useState(false);
   const { width } = useWindowSize();
 
-  const { filterOptions, selectedFilters, clearAllFilters } = categoriesFilterStore();
-  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount, setPageCount } = categoriesStore();
+  const { filterOptions, selectedFilters, clearAllFilters } =
+    categoriesFilterStore();
+  const {
+    setArtworks,
+    setIsLoading,
+    paginationCount,
+    setPaginationCount,
+    pageCount,
+    setPageCount,
+  } = categoriesStore();
 
   async function handleSubmitFilter() {
     setPaginationCount(1);
     setIsLoading(true);
     let response;
 
-    if(page_type === "trending"){
-      response = await fetchTrendingArtworks(
-        paginationCount,
-        filterOptions
-      );
-    }else if(page_type === "curated"){
+    if (page_type === "trending") {
+      response = await fetchTrendingArtworks(paginationCount, filterOptions);
+    } else if (page_type === "curated") {
       //update to curated
       response = await fetchCuratedArtworks(
         session,
         paginationCount,
         filterOptions
       );
-    }else if(page_type === "recent"){
+    } else if (page_type === "recent") {
       //update to recent
-      response = await fetchPaginatedArtworks(
-        paginationCount,
-        filterOptions
-      );
+      response = await fetchPaginatedArtworks(paginationCount, filterOptions);
     }
-    
+
     if (response?.isOk) {
       setPageCount(1);
       setArtworks(response?.data);
     } else {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setIsLoading(false);
     window.scrollTo({
@@ -75,26 +88,20 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
       year: [],
       medium: [],
       rarity: [],
-    }
+    };
 
-    if(page_type === "trending"){
-      response = await fetchTrendingArtworks(
-        paginationCount,
-        emptyFilters
-      );
-    }else if(page_type === "curated"){
+    if (page_type === "trending") {
+      response = await fetchTrendingArtworks(paginationCount, emptyFilters);
+    } else if (page_type === "curated") {
       //update to curated
       response = await fetchCuratedArtworks(
         session,
         paginationCount,
         emptyFilters
       );
-    }else if(page_type === "recent"){
+    } else if (page_type === "recent") {
       //update to recent
-      response = await fetchPaginatedArtworks(
-        paginationCount,
-        emptyFilters
-      );
+      response = await fetchPaginatedArtworks(paginationCount, emptyFilters);
     }
 
     if (response?.isOk) {
@@ -116,7 +123,7 @@ export default function Filter({page_type}: {page_type: artworkCollectionTypes})
               ? "bg-dark text-white"
               : "border-dark/10 border bg-white text-dark"
           } duration-200 border px-3 py-1 border-dark/10 rounded-full  flex gap-x-2 items-center text-[13px] font-normal w-fit cursor-pointer`}
-          onClick={() => setShowFilterBlock(prev => !prev)}
+          onClick={() => setShowFilterBlock((prev) => !prev)}
         >
           <span className="text-[13px] font-normal">Filters</span>
           {showFilterBlock ? (

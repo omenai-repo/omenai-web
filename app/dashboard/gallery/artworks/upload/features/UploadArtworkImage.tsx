@@ -8,7 +8,7 @@ import { createUploadedArtworkData } from "@/utils/createUploadedArtworkData";
 import { uploadArtworkData } from "@/services/artworks/uploadArtworkData";
 import { storage } from "@/appwrite";
 import { useSession } from "next-auth/react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { LoadSmall } from "@/components/loader/Load";
 import { useQueryClient } from "@tanstack/react-query";
@@ -33,16 +33,24 @@ export default function UploadArtworkImage() {
     setLoading(true);
 
     if (!image) {
-      toast.error("Please select an image");
+      toast.error("Error notification", {
+        description: "Please select an image",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       setLoading(false);
       return;
     }
 
     const fileType = image.type.split("/")[1];
     if (!acceptedFileTypes.includes(fileType)) {
-      toast.error(
-        "File type unsupported. Supported file types are: JPEG, JPG, and PNG"
-      );
+      toast.error("Error notification", {
+        description:
+          "File type unsupported. Supported file types are: JPEG, JPG, and PNG",
+      });
       setLoading(false);
       return;
     }
@@ -71,20 +79,40 @@ export default function UploadArtworkImage() {
           process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID!,
           file.fileId
         );
-        toast.error(uploadResponse?.body.message);
+        toast.error("Error notification", {
+          description: uploadResponse?.body.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
         setImage(null);
         return;
       }
 
-      toast.success(uploadResponse.body.message);
+      toast.success("Operation successful", {
+        description: uploadResponse.body.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       queryClient.invalidateQueries();
       clearData();
       router.replace("/dashboard/gallery/artworks");
     } catch (error) {
       console.error("Error uploading artwork:", error);
-      toast.error(
-        "An error occurred while uploading the artwork. Please try again."
-      );
+      toast.error("Error notification", {
+        description:
+          "An error occurred while uploading the artwork. Please try again.",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } finally {
       setLoading(false);
     }

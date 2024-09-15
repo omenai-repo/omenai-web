@@ -3,7 +3,7 @@ import { IndividualLogo } from "@/components/logo/Logo";
 import { BsArrowLeftShort } from "react-icons/bs";
 
 import { signOut } from "next-auth/react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { navMockData } from "./mocks/NavigationMockData";
 import NavigationItem from "./NavigationItem";
 import { adminNavigationActions } from "@/store/admin/AdminNavigationStore";
@@ -16,7 +16,9 @@ export default function PageLayout() {
 
   function handleSignout() {
     signOut({ callbackUrl: "/auth/login/" });
-    toast.success("Successfully signed out...redirecting");
+    toast.info("Operation successful", {
+      description: "Successfully signed out...redirecting",
+    });
   }
 
   return (

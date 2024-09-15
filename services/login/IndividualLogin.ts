@@ -38,6 +38,7 @@ export const IndividualLoginProvider = CredentialsProvider<Credentials>({
 
       return {
         id: data.id,
+        user_id: data.id,
         verified: data.verified,
         email: data.email,
         name: data.name,

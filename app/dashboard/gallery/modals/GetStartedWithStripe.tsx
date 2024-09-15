@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 export default function GetStartedWithStripe() {
   const [accountCreatePending, setAccountCreatePending] = useState(false);
 
@@ -35,11 +35,25 @@ export default function GetStartedWithStripe() {
 
     if (response?.isOk) {
       setConnectedAccountId(response.account_id);
-      toast.success(
-        "Connected account created successfully, Please continue with Onboarding"
-      );
+      toast.success("Operation successful", {
+        description:
+          "Connected account created successfully, Please continue with Onboarding",
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
     } else {
-      toast.error("Something went wrong, please try again or contact support");
+      toast.error("Error notification", {
+        description:
+          "Something went wrong, please try again or contact support",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setAccountCreatePending(false);
   }
@@ -49,10 +63,25 @@ export default function GetStartedWithStripe() {
     const response = await createAccountLink(connectedAccountId!);
 
     if (response?.isOk) {
-      toast.success("Account link created successfully... Redirecting!");
+      toast.success("Operation successful", {
+        description: "Account link created successfully... Redirecting!",
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       router.push(response.url);
     } else {
-      toast.error("Something went wrong, please try again or contact support");
+      toast.error("Error notification", {
+        description:
+          "Something went wrong, please try again or contact support",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
   }
 

@@ -1,5 +1,5 @@
 import { getApiUrl } from "@/config";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export async function resendCode(
   route: "individual" | "gallery",
@@ -21,9 +21,23 @@ export async function resendCode(
       };
 
       if (!res.ok) {
-        toast.error(response.body.message);
+        toast.error("Error notification", {
+          description: response.body.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       } else {
-        toast.success(response.body.message);
+        toast.success("Operation successful", {
+          description: response.body.message,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     });
   } catch (error: any) {

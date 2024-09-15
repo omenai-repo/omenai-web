@@ -6,7 +6,7 @@ import { actionStore } from "@/store/actions/ActionStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function ProvideOrderRejectionModalForm() {
   const [toggleDeclineOrderModal, current_order_id] = actionStore((state) => [
@@ -41,11 +41,25 @@ export default function ProvideOrderRejectionModalForm() {
       current_order_id
     );
     if (!response?.isOk) {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       setLoading(false);
     } else {
       setLoading(false);
-      toast.success(response.message);
+      toast.success("Operation successful", {
+        description: response.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       queryClient.invalidateQueries({
         queryKey: ["fetch_orders_by_category"],
       });

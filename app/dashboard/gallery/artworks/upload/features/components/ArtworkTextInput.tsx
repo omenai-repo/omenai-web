@@ -4,7 +4,7 @@ import { getCurrencyConversion } from "@/services/exchange_rate/getCurrencyConve
 import { galleryArtworkUploadStore } from "@/store/gallery/gallery_artwork_upload/GalleryArtworkUpload";
 import { trimWhiteSpace } from "@/utils/trimWhitePace";
 import { ChangeEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 type ArtworkTextInputProps = {
   label: string;
@@ -55,7 +55,15 @@ export default function ArtworkTextInput({
       );
 
       if (!conversion_value?.isOk)
-        toast.error("Unable to retrieve exchange rate value at this time.");
+        toast.error("Error notification", {
+          description:
+            "Issue encountered while retrieving exchange rate value. Please try again.",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       else {
         updateArtworkUploadData("usd_price", conversion_value.data);
       }

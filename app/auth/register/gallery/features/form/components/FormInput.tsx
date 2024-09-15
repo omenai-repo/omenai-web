@@ -3,7 +3,7 @@ import { FormEvent } from "react";
 import FormController from "./FormController";
 import { useGalleryAuthStore } from "@/store/auth/register/GalleryAuthStore";
 import { registerAccount } from "@/services/register/registerAccount";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import uploadGalleryLogoContent from "../../uploadGalleryLogo";
 import { gallery_logo_storage } from "@/appwrite";
@@ -53,7 +53,15 @@ export default function FormInput() {
       const response = await registerAccount(payload, "gallery");
 
       if (response.isOk) {
-        toast.success(response.body.message + " redirecting...");
+        toast.success("Operation successful", {
+          description: response.body.message + " redirecting...",
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
+
         router.push(`/verify/gallery/${response.body.data}`);
         clearData();
       } else {
@@ -61,7 +69,14 @@ export default function FormInput() {
           process.env.NEXT_PUBLIC_APPWRITE_GALLERY_LOGO_BUCKET_ID!,
           file.fileId
         );
-        toast.error(response.body.message);
+        toast.error("Error notification", {
+          description: response.body.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
       setIsLoading();
     }

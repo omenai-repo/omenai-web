@@ -2,7 +2,7 @@
 import { LoadSmall } from "@/components/loader/Load";
 import { verifyGalleryRequest } from "@/services/verification/verifyGalleryRequest";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { BsShieldLock } from "react-icons/bs";
 export default function NoVerificationBlock({
   gallery_name,
@@ -15,10 +15,32 @@ export default function NoVerificationBlock({
     try {
       const response = await verifyGalleryRequest(gallery_name!);
       if (!response?.isOk)
-        toast.error("Something wwent wrong. Please try again");
-      else toast.success(response.message);
+        toast.error("Error notification", {
+          description: "Something wwent wrong. Please try again",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
+      else
+        toast.success("Operation successful", {
+          description: response.message,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
     } catch (error) {
-      toast.error("Something wwent wrong. Please try again");
+      toast.error("Error notification", {
+        description: "Something wwent wrong. Please try again",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } finally {
       setLoading(false);
     }

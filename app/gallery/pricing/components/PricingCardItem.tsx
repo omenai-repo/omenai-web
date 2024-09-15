@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import PricingCardFeatureListItem from "./PricingCardFeatureListItem";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { LoadSmall } from "@/components/loader/Load";
 import { useSession } from "next-auth/react";
 import { useLocalStorage } from "usehooks-ts";
@@ -38,7 +38,14 @@ export default function PricingCardItem({
       (session.data.user && session.data?.user.role !== "gallery")
     ) {
       set_redirect_uri(`${url}/gallery/pricing`);
-      toast.error("Please login to your gallery account");
+      toast.error("Error notification", {
+        description: "Login to your gallery account",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       router.push("/auth/login/");
     } else {
       setLoading(true);
@@ -52,15 +59,36 @@ export default function PricingCardItem({
 
       const result = await response.json();
       if (!response.ok) {
-        toast.error(result.message);
+        toast.error("Error notification", {
+          description: result.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
         setLoading(false);
       } else {
         // TODO: Check this properly, this might be a bug
         if (result.data.type === "sub_activated") {
-          toast.success(result.message);
+          toast.success("Operation successful", {
+            description: result.message,
+            style: {
+              background: "green",
+              color: "white",
+            },
+            className: "class",
+          });
           router.push("/dashboard/gallery/subscription");
         } else {
-          toast.success("Payment link generated...redirecting");
+          toast.success("Operation successful", {
+            description: "Payment link generated...redirecting",
+            style: {
+              background: "green",
+              color: "white",
+            },
+            className: "class",
+          });
           const link = result.data.link;
           setLoading(false);
           router.push(link);

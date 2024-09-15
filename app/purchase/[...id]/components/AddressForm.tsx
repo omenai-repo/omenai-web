@@ -7,7 +7,7 @@ import { FormEvent, useState } from "react";
 import { useSession } from "next-auth/react";
 import { indexAddress } from "../indexAddressOptions";
 import { createShippingOrder } from "@/services/orders/createShippingOrder";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import Load from "@/components/loader/Load";
 
 import { actionStore } from "@/store/actions/ActionStore";
@@ -40,7 +40,14 @@ export default function AddressForm({
     e.preventDefault();
     setLoading(true);
     if (!availabiity) {
-      toast.error("This artwork is not available for purchase");
+      toast.error("Error notification", {
+        description: "This artwork is not available for purchase",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       setLoading(false);
     } else {
       let shipping_address;
@@ -56,7 +63,14 @@ export default function AddressForm({
       );
 
       if (!createdShippingOrder!.isOk) {
-        toast.error(createdShippingOrder!.message);
+        toast.error("Error notification", {
+          description: createdShippingOrder!.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
         setLoading(false);
       } else {
         toggleOrderReceivedModal(true);

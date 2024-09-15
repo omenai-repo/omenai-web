@@ -2,19 +2,35 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function SearchInput() {
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (searchTerm === "") toast.error("Please include a search term");
+      if (searchTerm === "")
+        toast.error("Error notification", {
+          description: "Please include a search term",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       else router.push(`/search?searchTerm=${searchTerm}`);
     }
   };
   const handleIconTrigger = () => {
-    if (searchTerm === "") toast.error("Please include a search term");
+    if (searchTerm === "")
+      toast.error("Error notification", {
+        description: "Please include a search term",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else router.push(`/search?searchTerm=${searchTerm}`);
   };
   return (

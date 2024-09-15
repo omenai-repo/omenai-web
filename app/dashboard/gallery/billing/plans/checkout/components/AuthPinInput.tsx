@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 import { IoIosLock } from "react-icons/io";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 
 export default function AuthPinInput({
@@ -51,7 +51,14 @@ export default function AuthPinInput({
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (auth_data.pin === "" || auth_data.pin.length < 4) {
-      toast.error("Invalid input parameter");
+      toast.error("Error notification", {
+        description: "Invalid input parameter",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       return;
     }
     const ref = generateAlphaDigit(7);
@@ -72,15 +79,23 @@ export default function AuthPinInput({
     const response = await validateChargeAuthorization(data);
     if (response?.isOk) {
       if (response.data.status === "error") {
-        console.log(response.data);
-        toast.error(response.data.message);
+        toast.error("Error notification", {
+          description: response.data.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       } else {
         update_flw_charge_payload_data(
           {} as FLWDirectChargeDataTypes & { name: string }
         );
         if (response.data.meta.authorization.mode === "redirect") {
           // redirect user
-          toast.success("Redirecting to authentication portal...Please wait");
+          toast.info("Operation in progress", {
+            description: "Redirecting to authentication portal, Please wait",
+          });
           set_transaction_id(response.data.data.id);
           router.replace(response.data.meta.authorization.redirect);
         } else {
@@ -90,7 +105,14 @@ export default function AuthPinInput({
         handleClick();
       }
     } else {
-      toast.error("Something went wrong");
+      toast.error("Error notification", {
+        description: "Something went wrong, please try again",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setIsLoading(false);
   }

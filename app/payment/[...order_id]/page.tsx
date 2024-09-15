@@ -11,7 +11,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 import { useEffect, useState } from "react";
 import { getApiUrl } from "@/config";
@@ -36,7 +36,14 @@ export default function OrderPayment({
 
   useEffect(() => {
     if (session.data === null) {
-      toast.error("Please login");
+      toast.error("Error notification", {
+        description: "Please login to your account",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       router.replace("/auth/login");
     }
     if (user_id_key === "" || undefined) notFound();
@@ -45,9 +52,15 @@ export default function OrderPayment({
       session!.data.user === undefined ||
       session!.data.user.id !== user_id_key
     ) {
-      toast.error(
-        "Unauthorized access detected. Please login to the appropriate account to view this page"
-      );
+      toast.error("Error notification", {
+        description:
+          "Unauthorized access detected. Please login to the appropriate account to access this page",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       set_redirect_uri(`${url}${route}?id_key=${user_id_key}`);
       router.replace("/auth/login/");
     } else {

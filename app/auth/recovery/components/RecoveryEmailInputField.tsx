@@ -3,7 +3,7 @@ import { LoadSmall } from "@/components/loader/Load";
 import { sendPasswordResetLink } from "@/services/password/sendPasswordResetLink";
 import { actionStore } from "@/store/actions/ActionStore";
 import { FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function RecoveryEmailInputField() {
   const [isLoading, setIsloading] = useState(false);
@@ -18,8 +18,24 @@ export default function RecoveryEmailInputField() {
       email,
     });
 
-    if (data.isOk) toast.success(data.body.message);
-    else toast.error(data.body.message);
+    if (data.isOk)
+      toast.success("Operation successful", {
+        description: data.body.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
+    else
+      toast.error("Error notification", {
+        description: data.body.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     setIsloading(false);
   };
   return (
