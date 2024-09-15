@@ -4,7 +4,7 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
 import { currencies } from "@/json/currency_select";
 import { getCurrencyConversion } from "@/services/exchange_rate/getCurrencyConversion";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { formatPrice } from "@/utils/priceFormatter";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { updateArtworkPrice } from "@/services/artworks/updateArtworkPrice";
@@ -51,7 +51,14 @@ export default function EditArtworkWrapper({
       );
 
       if (!conversion_value?.isOk)
-        toast.error("Unable to retrieve exchange rate value at this time.");
+        toast.error("Error notification", {
+          description: "Unable to retrieve exchange rate value at this time.",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       else {
         setData((prevData) => ({
           ...prevData,
@@ -68,7 +75,14 @@ export default function EditArtworkWrapper({
     setLoading(true);
     if (Object.values(data).some((value) => value === "")) {
       setLoading(false);
-      toast.error("Invalid field inputs");
+      toast.error("Error notification", {
+        description: "Invalid field inputs",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } else {
       const filter: ArtworkPriceFilterData = {
         "pricing.price": +data.price,
@@ -79,9 +93,24 @@ export default function EditArtworkWrapper({
 
       const update = await updateArtworkPrice(filter, artwork.art_id);
 
-      if (!update?.isOk) toast.error(update?.message);
+      if (!update?.isOk)
+        toast.error("Error notification", {
+          description: update?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       else {
-        toast.success(update.message);
+        toast.success("Operation successful", {
+          description: update.message,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
         queryClient.invalidateQueries({ queryKey: ["fetch_artworks_by_id"] });
         router.replace("/dashboard/gallery/artworks");
       }
@@ -93,9 +122,24 @@ export default function EditArtworkWrapper({
     setDeleteLoading(true);
     const deleteArtworkData = await deleteArtwork(artwork.art_id);
 
-    if (!deleteArtworkData?.isOk) toast.error(deleteArtworkData?.message);
+    if (!deleteArtworkData?.isOk)
+      toast.error("Error notification", {
+        description: deleteArtworkData?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else {
-      toast.success(deleteArtworkData.message);
+      toast.success("Operation successful", {
+        description: deleteArtworkData.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       queryClient.invalidateQueries({
         queryKey: ["fetch_artworks_by_id"],
       });

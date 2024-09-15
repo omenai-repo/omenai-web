@@ -4,7 +4,7 @@ import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import FormActions from "./FormActions";
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 
@@ -47,18 +47,39 @@ export default function FormInput() {
           } else {
             if (url === "" || url === null) {
               set_redirect_uri("");
-              toast.success("Login successful...redirecting!");
+              toast.success("Operation successful", {
+                description: "Login successful...redirecting!",
+                style: {
+                  background: "green",
+                  color: "white",
+                },
+                className: "class",
+              });
               router.replace("/dashboard/gallery/overview");
               router.refresh();
             } else {
-              toast.success("Login successful...Please proceed!");
+              toast.success("Operation successful", {
+                description: "Login successful, please proceed!",
+                style: {
+                  background: "green",
+                  color: "white",
+                },
+                className: "class",
+              });
               router.replace(url);
               set_redirect_uri("");
             }
           }
         }
       } else {
-        toast.error(error);
+        toast.error("Error notification", {
+          description: error,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     } catch (error) {
       console.error("Authentication error:", error);

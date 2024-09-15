@@ -36,7 +36,14 @@ export default function Pagination({ medium }: { medium: string }) {
         // updatePaginationCount(type);
         setPaginationCount(paginationCount - 1);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     } else {
       const response = await fetchArtworksByCriteria(
@@ -49,7 +56,14 @@ export default function Pagination({ medium }: { medium: string }) {
         // updatePaginationCount(type);
         setPaginationCount(paginationCount + 1);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     }
     setPaginationLoading(false);

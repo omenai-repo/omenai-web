@@ -12,7 +12,7 @@ import LoginModal from "@/components/modal/LoginModal";
 import RecoveryModal from "@/components/modal/RecoveryModal";
 import { OrderReceivedModal } from "@/components/modal/OrderConfirmedModal";
 import { ThemeProvider } from "./material_tailwind/MaterialTailwindExports";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "sonner";
 
 const nunito_sans = Inter({
   subsets: ["latin"],
@@ -35,7 +35,13 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${nunito_sans.className} flex flex-col justify-center`}>
         <NextTopLoader color="#1A1A1A" height={6} />
-        <Toaster />
+        <Toaster
+          position="top-right"
+          expand
+          visibleToasts={3}
+          closeButton
+          duration={7000}
+        />
         <AuthProvider session={session}>
           <ThemeProvider>
             <Providers>

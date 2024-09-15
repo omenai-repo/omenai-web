@@ -4,7 +4,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { AdminUploadInput } from "./components/Input";
 import { LoadSmall } from "@/components/loader/Load";
 import ImageUpload from "./components/ImageUpload";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import uploadPromotionalContentImage from "../controller/uploadPromotionalCoverImage";
 import { createPromotionalData } from "@/services/promotionals/createPromotionalData";
 import { promotional_storage } from "@/appwrite";
@@ -43,17 +43,29 @@ export default function Upload() {
       upload_data.subheadline === "" ||
       cover === null
     )
-      toast.error(
-        "Invalid input parameters, Please fill in all the fields to upload"
-      );
+      toast.error("Error notification", {
+        description:
+          "Invalid input parameters, Please fill in all the fields to upload",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else {
       setLoading(true);
       const type = cover.type.split("/");
 
       if (!acceptedFileTypes.includes(type[1])) {
-        toast.error(
-          "File type unsupported. Supported file types are: JPEG, JPG, and PNG"
-        );
+        toast.error("Error notification", {
+          description:
+            "File type unsupported. Supported file types are: JPEG, JPG, and PNG",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
         setLoading(false);
 
         return;
@@ -77,20 +89,40 @@ export default function Upload() {
             process.env.NEXT_PUBLIC_APPWRITE_PROMOTIONAL_BUCKET_ID!,
             file.fileId
           );
-          toast.error(upload_response?.message);
+          toast.error("Error notification", {
+            description: upload_response?.message,
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
           setCover(null);
           setLoading(false);
         } else {
           setLoading(false);
-          toast.success(upload_response.message);
+          toast.success("Operation successful", {
+            description: upload_response.message,
+            style: {
+              background: "green",
+              color: "white",
+            },
+            className: "class",
+          });
           queryClient.invalidateQueries();
           set_upload_data({ headline: "", subheadline: "", cta: "" });
           setCover(null);
         }
       } else {
-        toast.error(
-          "Error uploading cover image. Please try again or contact IT support"
-        );
+        toast.error("Error notification", {
+          description:
+            "Error uploading cover image. Please try again or contact IT support",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     }
     setLoading(false);

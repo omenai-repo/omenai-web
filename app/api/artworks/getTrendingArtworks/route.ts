@@ -55,7 +55,7 @@ export async function POST(request: Request) {
       gallery_id: { $in: [...basicGalleryIds, ...proPremiumGalleryIds] },
       impressions: { $gt: 0 },
     })
-      .sort({ createdAt: -1 })
+      .sort({ impressions: -1 })
       .exec();
 
     // Fetch all artworks, no initial limit applied

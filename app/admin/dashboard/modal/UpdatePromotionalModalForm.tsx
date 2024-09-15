@@ -10,7 +10,7 @@ import { hasEmptyString } from "@/utils/hasEmptyString";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function UpdatePromotionalModalForm() {
   const [data, setData, setOpenModal] = promotionalStore((state) => [
@@ -48,11 +48,25 @@ export default function UpdatePromotionalModalForm() {
 
     const response = await updatePromotionalData(data.id, updateData);
     if (!response?.isOk) {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       setLoading(false);
     } else {
       setLoading(false);
-      toast.success(response.message);
+      toast.success("Operation successful", {
+        description: response.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       queryClient.invalidateQueries({
         queryKey: ["promotional_data"],
       });
@@ -68,11 +82,25 @@ export default function UpdatePromotionalModalForm() {
 
     const response = await deletePromotionalData(data.id);
     if (!response?.isOk) {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       setDeleteLoading(false);
     } else {
       setDeleteLoading(false);
-      toast.success(response.message);
+      toast.success("Operation successful", {
+        description: response.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       queryClient.invalidateQueries({
         queryKey: ["promotional_data"],
       });

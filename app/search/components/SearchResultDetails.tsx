@@ -37,6 +37,8 @@ export default function SearchResultDetails({
     data,
     width < 400 ? 1 : width < 768 ? 2 : width < 1280 ? 3 : width < 1440 ? 4 : 5
   );
+
+  console.log(arts);
   return (
     <div>
       {isPending ? (
@@ -76,6 +78,7 @@ export default function SearchResultDetails({
                           likeIds={art.like_IDs as string[]}
                           sessionId={sessionId}
                           availability={art.availability}
+                          isDashboard={false}
                         />
                       );
                     })}

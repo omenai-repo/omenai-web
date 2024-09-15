@@ -7,7 +7,7 @@ import { updatePassword } from "@/services/requests/updateGalleryPassword";
 import { actionStore } from "@/store/actions/ActionStore";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { MdError } from "react-icons/md";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function UpdatePasswordModalForm() {
   const [updatePasswordModalPopup] = actionStore((state) => [
@@ -26,8 +26,24 @@ export default function UpdatePasswordModalForm() {
   async function requestConfirmationCode() {
     setCodeLoading(true);
     const response = await requestPasswordConfirmationCode("individual");
-    if (response?.isOk) toast.success(response.message);
-    else toast.error(response?.message);
+    if (response?.isOk)
+      toast.success("Operation successful", {
+        description: response.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
+    else
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     setCodeLoading(false);
   }
 
@@ -55,10 +71,24 @@ export default function UpdatePasswordModalForm() {
     );
 
     if (response?.isOk) {
-      toast.success(response.message);
+      toast.success("Operation successful", {
+        description: response.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       updatePasswordModalPopup(false);
     } else {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setLoading(false);
   }

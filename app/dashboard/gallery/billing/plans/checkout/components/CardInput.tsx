@@ -12,7 +12,7 @@ import ExpiryMonth from "./CardExpiryMonth";
 import ExpiryYear from "./CardExpiryYear";
 import { generateAlphaDigit } from "@/utils/generateToken";
 import { initiateDirectCharge } from "@/services/subscriptions/subscribeUser/initiateDirectCharge";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { getApiUrl } from "@/config";
@@ -72,7 +72,14 @@ export default function CardInput({
     setCardInputLoading(true);
     const ref = generateAlphaDigit(7);
     if (hasEmptyString(card_info))
-      toast.error("Some fields are empty, please fill all fields");
+      toast.error("Error notification", {
+        description: "Some fields are empty, please fill all required fields",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else {
       const data: FLWDirectChargeDataTypes & { name: string } = {
         ...card_info,
@@ -101,12 +108,18 @@ export default function CardInput({
       const response = await initiateDirectCharge(data);
       if (response?.isOk) {
         if (response.data.status === "error") {
-          console.log(response.data);
-          toast.error(response.data.message);
+          toast.error("Error notification", {
+            description: response.data.message,
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
         } else {
           console.log(response.data);
           if (response.data.meta.authorization.mode === "redirect") {
-            toast.success("Redirecting to authentication portal...Please wait");
+            toast.info("Redirecting to authentication portal, Please wait");
             set_transaction_id(response.data.data.id);
             router.replace(response.data.meta.authorization.redirect);
             // redirect user
@@ -117,7 +130,14 @@ export default function CardInput({
         }
         update_flw_charge_payload_data(data);
       } else {
-        toast.error("Something went wrong");
+        toast.error("Error notification", {
+          description: "Something went wrong",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     }
 

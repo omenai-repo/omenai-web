@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       {
         $or: [{ title: regex }, { artist: regex }],
       },
-      "artist title url art_id pricing medium rarity availability"
+      "artist title url art_id pricing medium rarity availability like_IDs"
     ).exec();
 
     return NextResponse.json(

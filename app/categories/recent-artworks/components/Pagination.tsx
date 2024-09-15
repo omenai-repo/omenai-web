@@ -6,7 +6,13 @@ import { categoriesStore } from "@/store/categories/categoriesStore";
 import { toast } from "sonner";
 
 export default function Pagination() {
-  const { setArtworks, setIsLoading, paginationCount, setPaginationCount, pageCount } = categoriesStore();
+  const {
+    setArtworks,
+    setIsLoading,
+    paginationCount,
+    setPaginationCount,
+    pageCount,
+  } = categoriesStore();
 
   const { filterOptions } = categoriesFilterStore();
 
@@ -22,7 +28,14 @@ export default function Pagination() {
         // updatePaginationCount(type);
         setPaginationCount(paginationCount - 1);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     } else {
       const response = await fetchPaginatedArtworks(
@@ -34,7 +47,14 @@ export default function Pagination() {
         // updatePaginationCount(type);
         setPaginationCount(paginationCount + 1);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     }
     setIsLoading(false);

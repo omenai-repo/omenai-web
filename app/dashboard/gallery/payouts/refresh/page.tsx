@@ -4,7 +4,7 @@ import PageTitle from "../../components/PageTitle";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { createAccountLink } from "@/services/stripe/createAccountLink";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import Load, { LoadSmall } from "@/components/loader/Load";
 import { checkIsStripeOnboarded } from "@/services/stripe/checkIsStripeOnboarded";
 import { useQuery } from "@tanstack/react-query";
@@ -48,10 +48,25 @@ export default function RefreshStripe() {
     const response = await createAccountLink(account_Id!);
 
     if (response?.isOk) {
-      toast.success("Account link created successfully... Redirecting!");
+      toast.success("Operation successful", {
+        description: "Account link created successfully... Redirecting!",
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       router.replace(response.url);
     } else {
-      toast.error("Something went wrong, please try again or contact support");
+      toast.error("Error notification", {
+        description:
+          "Something went wrong, please try again or contact support",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
   }
   return (

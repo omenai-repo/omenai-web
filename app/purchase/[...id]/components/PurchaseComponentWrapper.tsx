@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { usePathname, useSearchParams, notFound } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 import AddressForm from "./AddressForm";
 import DeliveryMethod from "./DeliveryMethod";
@@ -39,9 +39,15 @@ export default function PurchaseComponentWrapper({
 
   useEffect(() => {
     if (session === null || session.data?.user === undefined) {
-      toast.error(
-        "Unauthorized access detected. Please login to the appropriate account to view this page"
-      );
+      toast.error("Error notification", {
+        description:
+          "Unauthorized access detected. Please login to the appropriate account to view this page",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       set_redirect_uri(`${url}${route}`);
       router.replace("/auth/login/");
     }
@@ -52,7 +58,14 @@ export default function PurchaseComponentWrapper({
         if (user?.isOk) {
           setAddress(user.data.address);
         } else {
-          toast.error(user?.message);
+          toast.error("Error notification", {
+            description: user?.message,
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
         }
       };
 

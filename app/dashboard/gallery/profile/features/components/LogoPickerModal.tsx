@@ -7,7 +7,7 @@ import { galleryLogoUpdate } from "@/store/gallery/gallery_logo_upload/GalleryLo
 import { LoadSmall } from "@/components/loader/Load";
 import { gallery_logo_storage, storage } from "@/appwrite";
 import { signOut, useSession } from "next-auth/react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { ID } from "appwrite";
 import { updateLogo } from "@/services/update/updateLogo";
@@ -49,18 +49,40 @@ export default function LogoPickerModal() {
             url: file.fileId,
           });
 
-          if (!isOk) toast.error(body.message);
+          if (!isOk)
+            toast.error("Error notification", {
+              description: body.message,
+              style: {
+                background: "red",
+                color: "white",
+              },
+              className: "class",
+            });
           else {
             updateModal(false);
             signOut({ callbackUrl: "/auth/login/" });
 
-            toast.success(`${body.message}... Please log back in`);
+            toast.success("Operation successful", {
+              description: `${body.message}... Please log back in`,
+              style: {
+                background: "green",
+                color: "white",
+              },
+              className: "class",
+            });
             router.refresh();
           }
         }
       }
     } catch (error) {
-      toast.error("An error has occured, try again");
+      toast.error("Error notification", {
+        description: "An error has occured, try again",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } finally {
       setLoading(false);
     }

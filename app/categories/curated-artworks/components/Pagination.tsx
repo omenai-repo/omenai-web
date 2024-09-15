@@ -7,8 +7,15 @@ import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 
 export default function Pagination() {
-  const session = useSession()
-  const { setArtworks, setPaginationLoading, paginationLoading, paginationCount, setPaginationCount, pageCount } = categoriesStore();
+  const session = useSession();
+  const {
+    setArtworks,
+    setPaginationLoading,
+    paginationLoading,
+    paginationCount,
+    setPaginationCount,
+    pageCount,
+  } = categoriesStore();
 
   const { filterOptions } = categoriesFilterStore();
 
@@ -25,7 +32,14 @@ export default function Pagination() {
         // updatePaginationCount(type);
         setPaginationCount(paginationCount - 1);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     } else {
       const response = await fetchCuratedArtworks(
@@ -38,7 +52,14 @@ export default function Pagination() {
         // updatePaginationCount(type);
         setPaginationCount(paginationCount + 1);
       } else {
-        toast.error(response?.message);
+        toast.error("Error notification", {
+          description: response?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     }
     setPaginationLoading(false);
@@ -54,14 +75,14 @@ export default function Pagination() {
       </p>
       <div className="flex gap-x-4 w-full">
         <button
-          disabled={(paginationCount === 1) || paginationLoading}
+          disabled={paginationCount === 1 || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("dec")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >
           Previous page
         </button>
         <button
-          disabled={(paginationCount === pageCount) || paginationLoading}
+          disabled={paginationCount === pageCount || paginationLoading}
           onClick={() => handlePaginationArtworkFetch("inc")}
           className="bg-dark text-xs rounded-sm w-full text-white h-[50px] px-4 disabled:bg-dark/30 disabled:cursor-not-allowed"
         >

@@ -5,7 +5,7 @@ import { Tooltip } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CiLock } from "react-icons/ci";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { LoadSmall } from "@/components/loader/Load";
 
@@ -54,17 +54,29 @@ export default function PayNowButton({
         );
 
         if (!checkout_session?.isOk) {
-          toast.error(
-            "Something went wrong, please try again or contact support"
-          );
+          toast.error("Error notification", {
+            description:
+              "Something went wrong, please try again or contact support",
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
         } else {
-          toast.success("Checkout session initiated...Redirecting!");
+          toast.info("Checkout session initiated...Redirecting!");
           router.replace(checkout_session.url);
         }
       } else {
-        toast.error(
-          "A user is currently processing a purchase transaction on this artwork. Please check back in a few minutes for a status update"
-        );
+        toast.error("Error notification", {
+          description:
+            "A user is currently processing a purchase transaction on this artwork.",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     }
 

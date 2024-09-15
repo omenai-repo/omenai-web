@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
 import GetStartedWithStripe from "./modals/GetStartedWithStripe";
 import { useQuery } from "@tanstack/react-query";
 import { getAccountId } from "@/services/stripe/getAccountId";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import Load from "@/components/loader/Load";
 export default function GalleryDashboardLayout({
   children,
@@ -27,7 +27,14 @@ export default function GalleryDashboardLayout({
     queryFn: async () => {
       const acc = await getAccountId(session.data!.user.email);
       if (!acc?.isOk) {
-        toast.error("Something went wrong, Please refresh the page");
+        toast.error("Error notification", {
+          description: "Something went wrong, Please refresh the page",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       } else return acc.data;
     },
     refetchOnWindowFocus: false,

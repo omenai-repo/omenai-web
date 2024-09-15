@@ -6,7 +6,7 @@ import { resetStore } from "@/store/auth/reset/resetStore";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 type IdProps = {
   id: string;
 };
@@ -44,7 +44,14 @@ export default function PasswordForm({ id }: IdProps) {
       setIsLoading();
     } else {
       if (passwordData.password !== passwordData.confirmPassword) {
-        toast.error("Passwords do not match");
+        toast.error("Error notification", {
+          description: "Passwords do not match",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
         setIsLoading();
       } else {
         const response = await resetPassword("individual", {
@@ -52,9 +59,24 @@ export default function PasswordForm({ id }: IdProps) {
           id,
         });
 
-        if (!response.isOk) toast.error(response.body.message);
+        if (!response.isOk)
+          toast.error("Error notification", {
+            description: response.body.message,
+            style: {
+              background: "red",
+              color: "white",
+            },
+            className: "class",
+          });
         else {
-          toast.success(response.body.message);
+          toast.success("Operation successful", {
+            description: response.body.message,
+            style: {
+              background: "green",
+              color: "white",
+            },
+            className: "class",
+          });
           router.replace("/auth/login/");
         }
         setIsLoading();

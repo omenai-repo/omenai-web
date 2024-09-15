@@ -7,7 +7,7 @@ import { formatPrice } from "@/utils/priceFormatter";
 import { useRouter } from "next/navigation";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { BsCurrencyDollar } from "react-icons/bs";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import Image from "next/image";
 import { PiSealWarning } from "react-icons/pi";
 import { useQueryClient } from "@tanstack/react-query";
@@ -48,11 +48,25 @@ export default function QuoteForm() {
       galleryOrderActionModalData.order_id
     );
     if (!response?.isOk) {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       setLoading(false);
     } else {
       setLoading(false);
-      toast.success(response.message);
+      toast.success("Operation successful", {
+        description: response.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       queryClient.invalidateQueries({
         queryKey: ["fetch_orders_by_category"],
       });

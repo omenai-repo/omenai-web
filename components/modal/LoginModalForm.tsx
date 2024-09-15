@@ -3,7 +3,7 @@ import { IndividualLogo } from "../logo/Logo";
 import LoginModalFormActions from "./LoginModalFormActions";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleSignIn } from "@/services/login/ModalLogin";
 import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
@@ -31,12 +31,26 @@ export default function LoginModalForm() {
 
         router.refresh();
         if (data.message !== "") {
-          toast.success(data.message);
+          toast.success("Operation successful", {
+            description: data.message,
+            style: {
+              background: "green",
+              color: "white",
+            },
+            className: "class",
+          });
         }
 
         toggleLoginModal(false);
       } else {
-        toast.error(data?.message);
+        toast.error("Error notification", {
+          description: data?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
     },
   });

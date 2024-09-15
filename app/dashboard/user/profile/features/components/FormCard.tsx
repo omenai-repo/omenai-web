@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import { InputCard } from "./InputCard";
 import { updateProfile } from "@/services/update/updateProfile";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { LoadSmall } from "@/components/loader/Load";
 import { individualProfileUdateStore } from "@/store/individual/individual_profile_update/IndividualProfileUpdateStore";
@@ -26,12 +26,27 @@ export const FormCard = () => {
     e.preventDefault();
     let newUpdateData;
 
-    if (updateData!.preferences!.length === 0) toast.error("Invalid inputs");
+    if (updateData!.preferences!.length === 0)
+      toast.error("Error notification", {
+        description: "Invalid inputs",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     else if (
       updateData!.preferences!.length < 5 &&
       updateData!.preferences!.length > 0
     ) {
-      toast.error("Please select up to 5 interests please");
+      toast.error("Error notification", {
+        description: "Please select up to 5 art interests",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } else if (updateData.name === "") {
       newUpdateData = { preferences: updateData.preferences };
     } else {
@@ -43,15 +58,29 @@ export const FormCard = () => {
         newUpdateData,
         session.data!.user.id
       );
-      if (!isOk) toast.error(body.message);
+      if (!isOk)
+        toast.error("Error notification", {
+          description: body.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       else {
         await session.update();
-        toast.success(`${body.message}... Please log back in`);
+        toast.success("Operation successfull", {
+          description: `${body.message}... Please log back in`,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
         clearData();
         router.refresh();
       }
     }
-    console.log(newUpdateData);
     setIsLoading(false);
   };
 

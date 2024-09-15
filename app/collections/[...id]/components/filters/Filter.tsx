@@ -2,7 +2,7 @@
 import { GiSettingsKnobs } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { isEmptyFilter } from "@/utils/isFilterEmpty";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import FilterPill from "./FilterPill";
 import { ImBin2 } from "react-icons/im";
 import { FaCheckCircle } from "react-icons/fa";
@@ -44,7 +44,14 @@ export default function Filter({ medium }: { medium: string }) {
       setPageCount(1);
       setArtworks(response?.data);
     } else {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setIsLoading(false);
     window.scrollTo({

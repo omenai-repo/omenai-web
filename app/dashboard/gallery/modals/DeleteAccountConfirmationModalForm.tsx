@@ -5,7 +5,7 @@ import { deleteAccount } from "@/services/requests/deleteGalleryAccount";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { IoWarning } from "react-icons/io5";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function DeleteAccountConfirmationModalForm() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -15,10 +15,24 @@ export default function DeleteAccountConfirmationModalForm() {
     const response = await deleteAccount("gallery");
 
     if (response?.isOk) {
-      toast.success(response.message);
+      toast.success("Operation successful", {
+        description: response.message,
+        style: {
+          background: "green",
+          color: "white",
+        },
+        className: "class",
+      });
       await signOut({ callbackUrl: "/auth/login/" });
     } else {
-      toast.error(response?.message);
+      toast.error("Error notification", {
+        description: response?.message,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setLoading(false);
   }

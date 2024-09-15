@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { LoadSmall } from "@/components/loader/Load";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 type TokenProps = {
   token: string;
 };
@@ -26,18 +26,40 @@ export default function TokenBlock({ token }: TokenProps) {
     const error: string = validateStringCode(tokenValue);
 
     if (error) {
-      toast.error(error);
+      toast.error("Error notification", {
+        description: error,
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } else {
-      toast.success("Verifying token");
+      toast.info("Verifying token");
       setIsLoading();
 
       const res = await verifyEmail(
         { params: token, token: tokenValue },
         "individual"
       );
-      if (!res.isOk) toast.error(res.body.message);
+      if (!res.isOk)
+        toast.error("Error notification", {
+          description: res.body.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       if (res.isOk) {
-        toast.success(res.body.message);
+        toast.success("Operation successful", {
+          description: res.body.message,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
         router.push("/auth/login/");
       }
       setIsLoading();
@@ -46,12 +68,20 @@ export default function TokenBlock({ token }: TokenProps) {
 
   const resendVerification = async () => {
     setResentTokenLoading(true);
-    toast.success("A new token is on it's way to you");
+    toast.info("A new token is on it's way to you");
     try {
       const payload = { author: token };
       await resendCode("individual", payload);
     } catch (error) {
-      toast.error("Something went wrong. Please try again or contact support");
+      toast.error("Error notification", {
+        description:
+          "Something went wrong. Please try again or contact support",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } finally {
       setResentTokenLoading(false);
     }

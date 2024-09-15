@@ -5,12 +5,19 @@ import { navMockData } from "../navigations/NavigationMockData";
 import NavigationItem from "../components/NavigationItem";
 import { galleryNavigationActions } from "@/store/gallery/gallery_navigation/GalleryNavigation";
 import { signOut } from "next-auth/react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function PageLayout() {
   function handleSignout() {
     signOut({ callbackUrl: "/auth/login/" });
-    toast.success("Successfully signed out...redirecting");
+    toast.success("Operation successful", {
+      description: "Successfully signed out...redirecting",
+      style: {
+        background: "green",
+        color: "white",
+      },
+      className: "class",
+    });
   }
 
   return (

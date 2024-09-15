@@ -6,7 +6,7 @@ import { galleryDummyVerification } from "@/store/gallery/gallery_dummy_verifica
 import { getFormattedDateTime } from "@/utils/getCurrentDateTime";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 import { RiAdminLine } from "react-icons/ri";
 type AppbarTypes = {
   admin_name?: string;
@@ -29,10 +29,32 @@ export default function DashboardIndicator({
     try {
       const response = await verifyGalleryRequest(gallery_name!);
       if (!response?.isOk)
-        toast.error("Something wwent wrong. Please try again");
-      else toast.success(response.message);
+        toast.error("Error notification", {
+          description: "Something wwent wrong. Please try again",
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
+      else
+        toast.success("Operation successful", {
+          description: response.message,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
     } catch (error) {
-      toast.error("Something wwent wrong. Please try again");
+      toast.error("Error notification", {
+        description: "Something wwent wrong. Please try again",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     } finally {
       setLoading(false);
     }

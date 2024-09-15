@@ -4,7 +4,7 @@ import { adminModals } from "@/store/admin/AdminModalsStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function RejectConfirmationPopupModal() {
   const { rejectConfirmationPopup, setRejectConfirmationPopup } = adminModals();
@@ -18,9 +18,23 @@ export default function RejectConfirmationPopupModal() {
         rejectConfirmationPopup.email
       );
       if (reject_gallery?.isOk) {
-        toast.success(reject_gallery.message);
+        toast.success("Operation successful", {
+          description: reject_gallery.message,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
       } else {
-        toast.error(reject_gallery?.message);
+        toast.error("Error notification", {
+          description: reject_gallery?.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       }
 
       setRejectConfirmationPopup({

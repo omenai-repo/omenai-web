@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { IoIosLock } from "react-icons/io";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 export default function Oput({
   handleClick,
@@ -30,7 +30,14 @@ export default function Oput({
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (otp === "" || otp.length < 4) {
-      toast.error("Invalid input parameter");
+      toast.error("Error notification", {
+        description: "Invalid input parameter",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
       return;
     }
     setIsLoading(true);
@@ -40,15 +47,27 @@ export default function Oput({
     const response = await validateCharge(data);
     if (response?.isOk) {
       if (response.data.status === "error") {
-        console.log(response.data);
-        toast.error(response.data.message);
+        toast.error("Error notification", {
+          description: response.data.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
       } else {
-        console.log(response.data);
         set_id(response.data.data.id);
         handleClick();
       }
     } else {
-      toast.error("Something went wrong");
+      toast.error("Error notification", {
+        description: "Something went wrong",
+        style: {
+          background: "red",
+          color: "white",
+        },
+        className: "class",
+      });
     }
     setIsLoading(false);
   }
