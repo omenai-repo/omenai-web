@@ -18,7 +18,8 @@ export default function OrdersGroup({
   const [tab, setTab] = useState("pending");
 
   const pending_orders = orders.filter(
-    (order: CreateOrderModelTypes) => !order.delivery_confirmed
+    (order: CreateOrderModelTypes) =>
+      !order.delivery_confirmed && order.availability
   ) as CreateOrderModelTypes[] & {
     createdAt: string;
     updatedAt: string;

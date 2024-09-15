@@ -60,7 +60,6 @@ export default function UserOrdersTable({ data, tab }: OrdersTableProps) {
   ) {
     if (
       status === "pending" &&
-      status === "pending" &&
       order_accepted === "accepted" &&
       payment_status === "pending" &&
       tracking_status === "" &&

@@ -29,7 +29,7 @@ export default function CompletedOrders({ orders }: { orders: any }) {
                     order_date={formatIntlDateTime(order.createdAt)}
                     status={order.status}
                     order_id={order.order_id}
-                    state="pending"
+                    state="history"
                     payment_information={order.payment_information}
                     tracking_information={order.tracking_information}
                     shipping_quote={order.shipping_quote}
