@@ -1,6 +1,8 @@
+import { getApiUrl } from "@/config";
 import {
   Body,
   Button,
+  Column,
   Container,
   Head,
   Heading,
@@ -8,12 +10,14 @@ import {
   Html,
   Img,
   Link,
+  Row,
   Section,
   Tailwind,
   Text,
 } from "@react-email/components";
 
-const UserVerificationEmail = (username: string, token: string) => {
+const RejectGalleryMail = (gallery_name?: string) => {
+  const url = getApiUrl();
   return (
     <Html>
       <Head />
@@ -29,33 +33,45 @@ const UserVerificationEmail = (username: string, token: string) => {
               alt="Omenai logo"
               className="mx-auto my-10"
             />
-            <Heading className="text-black text-[24px] font-normal text-center p-0 mb-[20px] mx-0">
-              Welcome on board to <strong>Omenai</strong>
-            </Heading>
-            <Text className="text-black text-[14px] leading-[24px]">
-              Hello {username},
+
+            <Text className="text-dark text-[14px] leading-[24px]">
+              Dear {gallery_name},
             </Text>
-            <Text className="text-black text-[14px] leading-[24px]">
-              We, at <strong>Omenai Inc.</strong>, are thrilled to have you on
-              board and eagerly await the beginning of your journey with us
+            <Text className="text-dark text-[14px] leading-[24px]">
+              Thank you for registering your gallery with OMENAI Inc. After
+              reviewing your account, we regret to inform you that your
+              verification request has not been approved.
             </Text>
-            <Text className="text-black text-[14px] leading-[24px]">
-              Your email verification token is located below. Enter this code
-              into the designated input field on the verification page. Please
-              be aware that the validity of this token will expire in{" "}
-              <strong>10 minutes.</strong>
+            <Text className="text-dark text-[14px] leading-[24px]">
+              Due to this, you will no longer be able to register for an account
+              on our platform without further assistance. If you believe this
+              decision was made in error or if you would like to discuss your
+              account further, please contact our support team at{" "}
+              <Link
+                href="mailto:contact@omenai.net"
+                className="text-dark font-bold underline"
+              >
+                contact@omenai.net
+              </Link>
+              , and we will be happy to assist you.
             </Text>
-            <Section className="text-center mt-[32px] mb-[32px]">
-              <Text className="text-black text-[14px] font-normal leading-[24px]">
-                <strong>{token}</strong>
-              </Text>
-            </Section>
+
+            <Text className="text-[14px] leading-[24px]">
+              We appreciate your interest in OMENAI Inc, and we are here to
+              address any questions or concerns you may have.
+            </Text>
+
+            <br />
+            <Text className="text-[14px] leading-[24px]">
+              Best regards, <br /> The Omenai team
+            </Text>
+
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
             <Text className="text-dark text-[12px] leading-[24px]">
               Please be advised that the information contained within this email
               was directed exclusively to{" "}
-              <span className="text-black">{username} </span>. In the event that
-              you were not anticipating the receipt of this email, we
+              <span className="text-dark">{gallery_name} </span>. In the event
+              that you were not anticipating the receipt of this email, we
               respectfully request that you refrain from taking any action based
               on its contents. This communication may contain confidential and
               legally privileged information, and it is intended solely for the
@@ -72,4 +88,4 @@ const UserVerificationEmail = (username: string, token: string) => {
   );
 };
 
-export default UserVerificationEmail;
+export default RejectGalleryMail;

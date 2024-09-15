@@ -13,7 +13,9 @@ export default function AcceptConfirmationPopupModal() {
   const acceptGalleryVerificationMutation = useMutation({
     mutationFn: async () => {
       const accept_gallery = await acceptGalleryVerification(
-        acceptConfirmationPopup.gallery_id
+        acceptConfirmationPopup.gallery_id,
+        acceptConfirmationPopup.name,
+        acceptConfirmationPopup.email
       );
       if (accept_gallery?.isOk) {
         toast.success("Operation successful", {
@@ -37,6 +39,8 @@ export default function AcceptConfirmationPopupModal() {
       setAcceptConfirmationPopup({
         show: false,
         gallery_id: "",
+        name: "",
+        email: "",
       });
       return accept_gallery?.isOk;
     },
@@ -74,6 +78,8 @@ export default function AcceptConfirmationPopupModal() {
               setAcceptConfirmationPopup({
                 show: false,
                 gallery_id: "",
+                name: "",
+                email: "",
               })
             }
             className=" flex gap-x-2 w-fit rounded-md items-center px-4 py-2.5 bg-red-600 text-white"

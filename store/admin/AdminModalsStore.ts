@@ -9,10 +9,17 @@ type AdminModalsStore = {
   setOpenMobileNav: () => void;
   rejectConfirmationPopup: RejectConfirmationPopupOptions;
   setRejectConfirmationPopup: (val: RejectConfirmationPopupOptions) => void;
-  acceptConfirmationPopup: { show: boolean; gallery_id: string };
+  acceptConfirmationPopup: {
+    show: boolean;
+    gallery_id: string;
+    name: string;
+    email: string;
+  };
   setAcceptConfirmationPopup: (val: {
     show: boolean;
     gallery_id: string;
+    name: string;
+    email: string;
   }) => void;
 
   blockGalleryConfirmationPopup: {
@@ -28,7 +35,7 @@ type AdminModalsStore = {
 
   showDeleteEditorialModal: boolean;
   showDeleteEditorialId: string;
-  setShowDeleteEditorialModal: (val: boolean, id: string) => void
+  setShowDeleteEditorialModal: (val: boolean, id: string) => void;
 };
 
 type RejectConfirmationPopupOptions = {
@@ -73,8 +80,13 @@ export const adminModals = create<AdminModalsStore>((set, get) => ({
   setRejectConfirmationPopup(val: RejectConfirmationPopupOptions) {
     set({ rejectConfirmationPopup: val });
   },
-  acceptConfirmationPopup: { show: false, gallery_id: "" },
-  setAcceptConfirmationPopup(val: { show: boolean; gallery_id: string }) {
+  acceptConfirmationPopup: { show: false, gallery_id: "", name: "", email: "" },
+  setAcceptConfirmationPopup(val: {
+    show: boolean;
+    gallery_id: string;
+    name: string;
+    email: string;
+  }) {
     set({ acceptConfirmationPopup: val });
   },
 
@@ -91,8 +103,8 @@ export const adminModals = create<AdminModalsStore>((set, get) => ({
     set({ blockGalleryConfirmationPopup: val });
   },
   showDeleteEditorialModal: false,
-  showDeleteEditorialId: '',
+  showDeleteEditorialId: "",
   setShowDeleteEditorialModal: (value: boolean, id: string) => {
-    set({showDeleteEditorialModal: value, showDeleteEditorialId: id})
-  }
+    set({ showDeleteEditorialModal: value, showDeleteEditorialId: id });
+  },
 }));

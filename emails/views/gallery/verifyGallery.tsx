@@ -25,7 +25,7 @@ const GalleryVerificationEmail = (galleryName: string, token: string) => {
                 "https://cloud.appwrite.io/v1/storage/buckets/66aa1aa0001a0c51d892/files/66d988de000cf7f960c3/view?project=66aa198b0038ad614178&project=66aa198b0038ad614178&mode=admin"
               }
               width="120"
-              height="30"
+              height="20"
               alt="Omenai logo"
               className="mx-auto my-10"
             />
