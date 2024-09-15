@@ -1,11 +1,15 @@
 import { getApiUrl } from "@/config";
 
-export async function acceptGalleryVerification(gallery_id: string) {
+export async function acceptGalleryVerification(
+  gallery_id: string,
+  name: string,
+  email: string
+) {
   try {
     const url = getApiUrl();
     const res = await fetch(`${url}/api/admin/accept_gallery_verification`, {
       method: "POST",
-      body: JSON.stringify({ gallery_id }),
+      body: JSON.stringify({ gallery_id, name, email }),
     });
 
     const result = await res.json();

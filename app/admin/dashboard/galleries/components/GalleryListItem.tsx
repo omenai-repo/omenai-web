@@ -114,7 +114,12 @@ export default function GalleryListItem({
 
             <button
               onClick={() =>
-                setAcceptConfirmationPopup({ show: true, gallery_id })
+                setAcceptConfirmationPopup({
+                  show: true,
+                  gallery_id,
+                  name,
+                  email,
+                })
               }
               className="disabled:cursor-not-allowed disabled:bg-dark/10 flex gap-x-2 w-fit rounded-md items-center  h-[40px] px-4 bg-green-600 text-white"
             >

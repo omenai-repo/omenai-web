@@ -1,5 +1,6 @@
 import { ServerError } from "@/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@/custom/errors/handler/errorHandler";
+import { sendGalleryRejectedMail } from "@/emails/models/gallery/sendGalleryRejectionMail";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { RejectedGallery } from "@/models/auth/RejectedGalleryScema";
@@ -19,6 +20,10 @@ export async function POST(request: Request) {
     if (!delete_gallery_info) throw new ServerError("Something went wrong");
 
     // TODO: Send mail to gallery
+    await sendGalleryRejectedMail({
+      name,
+      email,
+    });
 
     return NextResponse.json(
       { message: "Gallery verification rejected" },
