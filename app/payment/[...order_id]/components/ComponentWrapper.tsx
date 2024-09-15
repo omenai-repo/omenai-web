@@ -56,7 +56,7 @@ export default function ComponentWrapper({
     data!.order.order_accepted.status === "declined"
   )
     notFound();
-  if (!data!.order.availabiity) {
+  if (!data!.order.availability) {
     return (
       <div className="w-full h-full grid place-items-center">
         <p className="text-xs font-semibold">

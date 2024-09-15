@@ -17,13 +17,13 @@ type AddressFormTypes = {
   userAddress: IndividualAddressTypes;
   gallery_id: string;
   art_id: string;
-  availabiity: boolean;
+  availability: boolean;
 };
 export default function AddressForm({
   userAddress,
   gallery_id,
   art_id,
-  availabiity,
+  availability,
 }: AddressFormTypes) {
   const [address] = orderStore((state) => [state.address]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,7 +39,7 @@ export default function AddressForm({
   async function handleOrderSubmission(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
-    if (!availabiity) {
+    if (!availability) {
       toast.error("Error notification", {
         description: "This artwork is not available for purchase",
         style: {
