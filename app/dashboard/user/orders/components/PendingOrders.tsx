@@ -44,7 +44,7 @@ export default function PendingOrders({
                     shipping_quote={order.shipping_quote}
                     delivery_confirmed={order.delivery_confirmed}
                     order_accepted={order.order_accepted}
-                    availability={order.availabiity}
+                    availability={order.availability}
                   />
                   <hr className="h-px my-2 bg-dark/10 border-0 dark:bg-gray-700" />
                 </>

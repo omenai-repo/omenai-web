@@ -63,88 +63,87 @@ export default function OrdersCard({
           Artwork unavailable for purchase
         </span>
       );
-    }
-    if (
-      status === "pending" &&
-      status === "pending" &&
-      order_accepted === "accepted" &&
-      payment_status === "pending" &&
-      tracking_status === "" &&
-      !delivery_confirmed
-    ) {
-      return (
-        <span className="px-3 py-1 rounded-full bg-amber-100 flex gap-x-1 items-center w-fit">
-          <MdInfo />
-          Awaiting payment
-        </span>
-      );
-    }
-    if (
-      status === "pending" &&
-      status === "pending" &&
-      order_accepted === "accepted" &&
-      payment_status === "completed" &&
-      tracking_status === "" &&
-      !delivery_confirmed
-    ) {
-      return (
-        <span className="px-3 py-1 rounded-full bg-green-100 flex gap-x-1 items-center w-fit">
-          <GoIssueClosed />
-          Payment completed
-        </span>
-      );
-    }
-    if (
-      status === "pending" &&
-      order_accepted === "accepted" &&
-      payment_status === "completed" &&
-      tracking_status !== "" &&
-      !delivery_confirmed
-    ) {
-      return (
-        <span className="px-3 py-1 rounded-full bg-green-100 flex gap-x-1 items-center w-fit">
-          <GoIssueClosed />
-          Delivery in progress
-        </span>
-      );
-    }
-    if (
-      status === "pending" &&
-      order_accepted === "" &&
-      payment_status === "pending" &&
-      tracking_status === "" &&
-      !delivery_confirmed
-    ) {
-      return (
-        <span className="px-3 py-1 rounded-full bg-amber-100 flex gap-x-1 items-center w-fit">
-          <MdInfo />
-          Order in review
-        </span>
-      );
-    }
-    if (
-      status === "completed" &&
-      order_accepted === "declined" &&
-      !delivery_confirmed
-    ) {
-      return (
-        <span className="px-3 py-1 rounded-full bg-red-200 flex gap-x-1 items-center w-fit">
-          <IoClose />
-          Order declined by Gallery
-        </span>
-      );
-    }
-    if (
-      status === "completed" &&
-      order_accepted === "accepted" &&
-      delivery_confirmed
-    ) {
-      return (
-        <span className="px-3 py-1 rounded-full bg-green-100 flex gap-x-1 items-center w-fit">
-          <GoIssueClosed />
-          Order has been completed
-        </span>
-      );
+    } else {
+      if (
+        status === "pending" &&
+        order_accepted === "accepted" &&
+        payment_status === "pending" &&
+        tracking_status === "" &&
+        !delivery_confirmed
+      ) {
+        return (
+          <span className="px-3 py-1 rounded-full bg-amber-100 flex gap-x-1 items-center w-fit">
+            <MdInfo />
+            Awaiting payment
+          </span>
+        );
+      }
+      if (
+        status === "pending" &&
+        order_accepted === "accepted" &&
+        payment_status === "completed" &&
+        tracking_status === "" &&
+        !delivery_confirmed
+      ) {
+        return (
+          <span className="px-3 py-1 rounded-full bg-green-100 flex gap-x-1 items-center w-fit">
+            <GoIssueClosed />
+            Payment completed
+          </span>
+        );
+      }
+      if (
+        status === "pending" &&
+        order_accepted === "accepted" &&
+        payment_status === "completed" &&
+        tracking_status !== "" &&
+        !delivery_confirmed
+      ) {
+        return (
+          <span className="px-3 py-1 rounded-full bg-green-100 flex gap-x-1 items-center w-fit">
+            <GoIssueClosed />
+            Delivery in progress
+          </span>
+        );
+      }
+      if (
+        status === "pending" &&
+        order_accepted === "" &&
+        payment_status === "pending" &&
+        tracking_status === "" &&
+        !delivery_confirmed
+      ) {
+        return (
+          <span className="px-3 py-1 rounded-full bg-amber-100 flex gap-x-1 items-center w-fit">
+            <MdInfo />
+            Order in review
+          </span>
+        );
+      }
+      if (
+        status === "completed" &&
+        order_accepted === "declined" &&
+        !delivery_confirmed
+      ) {
+        return (
+          <span className="px-3 py-1 rounded-full bg-red-200 flex gap-x-1 items-center w-fit">
+            <IoClose />
+            Order declined by Gallery
+          </span>
+        );
+      }
+      if (
+        status === "completed" &&
+        order_accepted === "accepted" &&
+        delivery_confirmed
+      ) {
+        return (
+          <span className="px-3 py-1 rounded-full bg-green-100 flex gap-x-1 items-center w-fit">
+            <GoIssueClosed />
+            Order has been completed
+          </span>
+        );
+      }
     }
   }
   return (
@@ -163,14 +162,16 @@ export default function OrdersCard({
           <span className="text-dark text-xs font-bold">
             {formatPrice(price, currency)}
           </span>
-          {construct_status(
-            status,
-            payment_information.status,
-            tracking_information.tracking_link,
-            order_accepted.status,
-            delivery_confirmed,
-            availability
-          )}
+          <div className="mt-3">
+            {construct_status(
+              status,
+              payment_information.status,
+              tracking_information.tracking_link,
+              order_accepted.status,
+              delivery_confirmed,
+              availability
+            )}
+          </div>
         </div>
       </div>
       <div className="flex flex-col md:mt-0 mt-5 text-xs md:items-end items-start gap-y-1">
@@ -178,67 +179,79 @@ export default function OrdersCard({
           Order ID: <span className="font-normal">{order_id}</span>
         </span>
         <span className="text-dark text-xs">{order_date}</span>
+        {!availability ? (
+          <button
+            disabled
+            className="whitespace-nowrap bg-dark rounded-sm text-white disabled:bg-[#E0E0E0] disabled:text-[#858585] w-full disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+          >
+            <span>No action required</span>
+          </button>
+        ) : (
+          <>
+            {payment_information.status === "pending" &&
+              status !== "completed" &&
+              order_accepted.status === "accepted" && (
+                <Link
+                  href={`/payment/${order_id}?id_key=${session.data!.user.id}`}
+                >
+                  <button className="whitespace-nowrap bg-dark rounded-sm text-white disabled:bg-[#E0E0E0] disabled:text-[#858585] w-full disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+                    <span>Pay for this artwork</span>
+                  </button>
+                </Link>
+              )}
+            <div className="w-full sm:flex-row flex-col flex items-center gap-2">
+              {payment_information.status === "completed" &&
+                status !== "completed" &&
+                !delivery_confirmed &&
+                tracking_information.tracking_link !== "" && (
+                  <button className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+                    <span>View tracking information</span>
+                  </button>
+                )}
+              {payment_information.status === "completed" &&
+                !delivery_confirmed &&
+                tracking_information.tracking_link !== "" && (
+                  <button className="whitespace-nowrap bg-green-600 disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+                    <span>Confirm order delivery</span>
+                  </button>
+                )}
+            </div>
 
-        {payment_information.status === "pending" &&
-          status !== "completed" &&
-          order_accepted.status === "accepted" && (
-            <Link href={`/payment/${order_id}?id_key=${session.data!.user.id}`}>
-              <button className="whitespace-nowrap bg-dark rounded-sm text-white disabled:bg-[#E0E0E0] disabled:text-[#858585] w-full disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
-                <span>Pay for this artwork</span>
-              </button>
-            </Link>
-          )}
-        <div className="w-full sm:flex-row flex-col flex items-center gap-2">
-          {payment_information.status === "completed" &&
-            status !== "completed" &&
-            !delivery_confirmed &&
-            tracking_information.tracking_link !== "" && (
-              <button className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
-                <span>View tracking information</span>
-              </button>
+            {payment_information.status === "completed" &&
+              order_accepted.status === "accepted" &&
+              status !== "completed" &&
+              tracking_information.tracking_link === "" && (
+                <button
+                  disabled
+                  className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                >
+                  <span>Awaiting tracking information</span>
+                </button>
+              )}
+
+            {order_accepted.status === "" && (
+              <div className="relative flex items-center gap-x-1">
+                <button
+                  disabled
+                  className="whitespace-nowrap bg-dark rounded-sm disabled:cursor-not-allowed w-full disabled:bg-gray-400 disabled:text-[#A1A1A1] text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                >
+                  <MdOutlineCallToAction />
+                  <span>Order in review</span>
+                </button>
+              </div>
             )}
-          {payment_information.status === "completed" &&
-            !delivery_confirmed &&
-            tracking_information.tracking_link !== "" && (
-              <button className="whitespace-nowrap bg-green-600 disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
-                <span>Confirm order delivery</span>
-              </button>
+            {delivery_confirmed && (
+              <div className="relative flex items-center gap-x-1">
+                <button
+                  disabled
+                  className="whitespace-nowrap bg-dark rounded-sm disabled:cursor-not-allowed w-full disabled:bg-gray-400 disabled:text-[#A1A1A1] text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                >
+                  <GoIssueClosed />
+                  <span>This order has been fulfilled</span>
+                </button>
+              </div>
             )}
-        </div>
-
-        {payment_information.status === "completed" &&
-          order_accepted.status === "accepted" &&
-          status !== "completed" &&
-          tracking_information.tracking_link === "" && (
-            <button
-              disabled
-              className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
-            >
-              <span>Awaiting tracking information</span>
-            </button>
-          )}
-
-        {order_accepted.status === "" && (
-          <div className="relative flex items-center gap-x-1">
-            <button
-              disabled
-              className="whitespace-nowrap bg-dark rounded-sm disabled:cursor-not-allowed w-full disabled:bg-gray-400 disabled:text-[#A1A1A1] text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
-            >
-              <MdOutlineCallToAction />
-              <span>Order in review</span>
-            </button>
-          </div>
-        )}
-        {delivery_confirmed && (
-          <div className="relative flex items-center gap-x-1">
-            <button
-              disabled
-              className="whitespace-nowrap bg-dark rounded-sm disabled:cursor-not-allowed w-full disabled:bg-gray-400 disabled:text-[#A1A1A1] text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
-            >
-              <GoIssueClosed />
-              <span>This order has been fulfilled</span>
-            </button>
-          </div>
+          </>
         )}
       </div>
     </div>
