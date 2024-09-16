@@ -14,6 +14,7 @@ import { Artworkuploads } from "@/models/artworks/UploadArtworkSchema";
 import { sendPaymentPendingMail } from "@/emails/models/payment/sendPaymentPendingMail";
 import { sendPaymentFailedMail } from "@/emails/models/payment/sendPaymentFailedMail";
 import { PurchaseTransactions } from "@/models/transactions/TransactionSchema";
+import { sendPaymentSuccessGalleryMail } from "@/emails/models/payment/sendPaymentSuccessGalleryMail";
 
 export async function POST(request: Request) {
   const secretHash = process.env.STRIPE_PAYMENT_INTENT_WEBHOOK_SECRET!;
@@ -170,6 +171,17 @@ export async function POST(request: Request) {
       email: meta.user_email,
       name: email_order_info.buyer.name,
       artwork: email_order_info.artwork_data.title,
+      order_id: email_order_info.order_id,
+      order_date: formatIntlDateTime(email_order_info.createdAt),
+      transaction_Id: transaction_id,
+      price,
+    });
+
+    // Send mail to gallery
+    await sendPaymentSuccessGalleryMail({
+      email: meta.gallery_email,
+      name: meta.gallery_name,
+      artwork: meta.artwork_name,
       order_id: email_order_info.order_id,
       order_date: formatIntlDateTime(email_order_info.createdAt),
       transaction_Id: transaction_id,

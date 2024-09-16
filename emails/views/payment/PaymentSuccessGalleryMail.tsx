@@ -12,7 +12,7 @@ import {
   Text,
 } from "@react-email/components";
 
-const PaymentSuccessfulMail = (
+const PaymentSuccessfulGalleryMail = (
   name: string,
   artwork: string,
   price: string,
@@ -37,29 +37,23 @@ const PaymentSuccessfulMail = (
               className="mx-auto mt-10"
             />
 
-            <Heading className="text-black text-[20px] font-normal  p-0 mb-[40px] mx-0">
-              ARTWORK PURCHASE SUCCESSFUL
-            </Heading>
             <Text className="text-black text-[14px] leading-[24px]">
               <strong>Dear {name},</strong>
             </Text>
             <Text className="text-black text-[14px] leading-[24px]">
-              We're thrilled to inform you that we have received your payment
-              for <strong>(Order ID #{order_id})</strong>
+              We are excited to inform you that your artwork, titled{" "}
+              <strong>{artwork}</strong> with{" "}
+              <strong>(Order ID #{order_id})</strong> has been successfully
+              purchased on <strong>OMENAI Inc</strong>. The payment has been
+              processed, and the funds have been deposited into your Stripe
+              Connect account.{" "}
             </Text>
             <div className="w-fit p-5 bg-black text-white border border-t-8 border-t-white flex">
               <div className="">
-                <Text className="font-bold">Receipt from Omenai Inc.</Text>
-                <Text>
-                  Your payment was successful and has been received by Omenai
-                  Inc.
-                </Text>
-                <h1 className="text-bold text-xl">{price}</h1>
-
-                <Hr className="border-[#FAFAFA] my-5" />
-
                 <div className="w-full">
-                  <Text className="uppercase text-center">PAYMENT DETAILS</Text>
+                  <Text className="uppercase text-center font-semibold">
+                    TRANSACTION DETAILS
+                  </Text>
 
                   <div className="py-2 w-full">
                     <div className="flex gap-x-1 items-center">
@@ -84,26 +78,17 @@ const PaymentSuccessfulMail = (
               </div>
             </div>
 
-            <div>
-              <Text className="font-bold">What happens next:</Text>
-              <ul className="gap-y-4 text-[14px] leading-[24px]">
-                <li>
-                  You can track your order status by visiting your{" "}
-                  <Link
-                    href={`${url}/dashboard/user/orders`}
-                    className="underline text-dark italic font-bold"
-                  >
-                    Account Page
-                  </Link>
-                </li>
-                <li>
-                  We will send you a tracking ID and a tracking link once your
-                  order ships.{" "}
-                </li>
-              </ul>
-            </div>
-
             <Text className="text-black text-[14px] leading-[24px]">
+              You can view the details of this payment and manage your funds
+              through your{" "}
+              <Link href={`${url}/dashboard/gallery/payouts`}>
+                Stripe dashboard
+              </Link>
+              .
+            </Text>
+            <Text className="text-black text-[14px] leading-[24px]">
+              Please ensure the artwork is prepared for delivery based on the
+              agreed terms with the buyer. <br />
               As always, if you have any questions, feedback, or concerns
               regarding your Order or any other aspect of our service, please
               feel free to reach out to us at{" "}
@@ -115,10 +100,14 @@ const PaymentSuccessfulMail = (
               </Link>
               . Our dedicated customer support team is available to assist you
               and ensure your experience remains exceptional.{" "}
+              <Link href={"mailto:contact@omenai.net"}>contact@omenai.net</Link>
+              .
             </Text>
+
             <Text className="text-black text-[14px] leading-[24px]">
-              Once again, thank you for choosing <strong>Omenai Inc.</strong> We
-              appreciate your business and look forward to serving you.
+              Thank you for being a valued member of{" "}
+              <strong>Omenai Inc.</strong>, and we look forward to seeing more
+              of your incredible work!
             </Text>
             <Text className="text-black text-[14px] leading-[24px]">
               Best regards, <br />
@@ -146,4 +135,4 @@ const PaymentSuccessfulMail = (
   );
 };
 
-export default PaymentSuccessfulMail;
+export default PaymentSuccessfulGalleryMail;

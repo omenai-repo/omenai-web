@@ -60,6 +60,11 @@ export async function POST(request: Request) {
           shipping_fees: "",
           taxes: "",
         },
+        gallery_details: {
+          id: gallery_id,
+          name: gallery_data.name,
+          email: gallery_data.email,
+        },
         payment_information: {
           status: "pending",
           transaction_value: "",

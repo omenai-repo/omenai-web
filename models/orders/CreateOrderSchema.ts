@@ -15,6 +15,7 @@ const createOrder = new Schema<CreateOrderModelTypes>(
     status: { type: String, required: true, default: "pending" },
     shipping_address: { type: Schema.Types.Mixed, required: true },
     shipping_quote: { type: Schema.Types.Mixed, required: true },
+    gallery_details: { type: Schema.Types.Mixed, required: true },
     payment_information: {
       type: Schema.Types.Mixed,
       required: true,
