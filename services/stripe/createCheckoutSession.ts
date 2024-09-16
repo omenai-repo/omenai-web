@@ -8,6 +8,9 @@ export async function createCheckoutSession(
     trans_type: string;
     user_id: string;
     user_email: string;
+    gallery_email: string;
+    gallery_name: string;
+    artwork_name: string;
     art_id: string;
   },
   success_url: string,

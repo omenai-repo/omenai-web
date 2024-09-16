@@ -29,6 +29,8 @@ export default function OrderDetails({
           amount={total_price_number}
           gallery_id={order.gallery_id}
           lock_status={lock_status}
+          gallery_email={order.gallery_details.email}
+          gallery_name={order.gallery_details.name}
         />
       </div>
 

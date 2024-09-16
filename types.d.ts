@@ -184,6 +184,11 @@ type CreateOrderModelTypes = {
     user_id: string;
     _id: ObjectId;
   };
+  gallery_details: {
+    id: string;
+    email: string;
+    name: string;
+  };
   gallery_id: string;
   order_id: string;
   status: string;
@@ -395,7 +400,7 @@ type EditorialSchemaTypes = {
   link: string;
   cover: string;
   date: Date | null;
-  minutes: string
+  minutes: string;
 };
 
 type PromotionalDataUpdateTypes = {

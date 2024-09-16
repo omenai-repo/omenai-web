@@ -18,12 +18,16 @@ export default function PayNowButton({
   amount,
   gallery_id,
   lock_status,
+  gallery_email,
+  gallery_name,
 }: {
   art_id: string;
   artwork: string;
   amount: number;
   gallery_id: string;
   lock_status: boolean;
+  gallery_email: string;
+  gallery_name: string;
 }) {
   const router = useRouter();
   const session = useSession();
@@ -48,6 +52,9 @@ export default function PayNowButton({
             user_id: session.data!.user.id,
             user_email: session.data!.user.email,
             art_id,
+            gallery_email,
+            gallery_name,
+            artwork_name: artwork,
           },
           `${url}/payment/success`,
           `${url}/payment/cancel?a_id=${art_id}&u_id=${session.data!.user.id}`

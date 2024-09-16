@@ -6,12 +6,17 @@ import OverviewComponentCard from "../../components/OverviewComponentCard";
 import { salesDataAlgorithm } from "@/utils/salesDataAlgorithm";
 import { useQuery } from "@tanstack/react-query";
 import Load from "@/components/loader/Load";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function ActivityWrapper() {
+  const { data: session } = useSession();
+  const router = useRouter();
+  if (!session || !session.user) router.replace("/auth/login");
   const { data: sales, isLoading } = useQuery({
     queryKey: ["get_overview_sales_activity"],
     queryFn: async () => {
-      const data = await getSalesActivityData();
+      const data = await getSalesActivityData(session!.user.id);
       if (data?.isOk) {
         return data.data;
       }
@@ -27,6 +32,8 @@ export default function ActivityWrapper() {
     );
 
   const activityData = salesDataAlgorithm(sales);
+
+  console.log(activityData);
   return (
     <>
       <OverviewComponentCard
