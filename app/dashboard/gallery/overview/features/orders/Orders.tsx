@@ -36,6 +36,7 @@ export default function Orders() {
       fullWidth={false}
       title={"Recent orders"}
       id="tour-footer"
+      data-tg-tour="Welcome to the tour"
     >
       {isLoading && <div>!</div>}
 

@@ -1,158 +1,74 @@
 "use client";
-import React, { useReducer, useEffect } from "react";
-import JoyRide, { ACTIONS, EVENTS, STATUS } from "react-joyride";
-// Tour steps
-const TOUR_STEPS = [
-  {
-    target: "#tour-highlights",
-    content:
-      "Welcome to your dashboard. You can find quick highlights about the perfomance of your account on the platform here",
-    disableBeacon: true,
-  },
-  {
-    target: "#tour-search",
-    content:
-      "Welcome to your dashboard. Once your artworks starts gaining popularity, we'll be sure to show you your top-rated artworks amongst our users.",
-    disableBeacon: true,
-  },
-  {
-    target: "#tour-orders",
-    content:
-      "You can view your sales progress from this chart here, it keeps track of and shows how much revenue you've made from successful artwork sales.",
-  },
-  {
-    target: "#tour-footer",
-    content:
-      "This is where you can view the most recent list of orders made for various artworks you've uploaded.",
-  },
-  {
-    target: "#navigation-items",
-    content:
-      "You can switch between your dashboard links or navigate to another dashboard page from here",
-  },
-  // {
-  //   target: "#gallery-verification",
-  //   content:
-  //     "Your account is in a pending state as it's being verified. You can expedite this process by clicking this button and an agent will reach out to you within 24 hours.",
-  // },
-];
+import { driver } from "driver.js";
+import "driver.js/dist/driver.css";
+import { useEffect } from "react";
+import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
+export default function Tour() {
+  const steps = [
+    {
+      element: "#tour-highlights",
+      popover: {
+        title: "Welcome aboard!",
+        description:
+          "Welcome to your dashboard. You can find quick highlights about the perfomance of your account on the platform here",
+      },
+    },
+    {
+      element: "#tour-search",
+      popover: {
+        description:
+          "Once your artworks starts gaining popularity, we'll be sure to show you your top-rated artworks amongst our users.",
+      },
+    },
+    {
+      element: "#tour-orders",
+      popover: {
+        description:
+          "You can view your sales progress from this chart here, it keeps track of and shows how much revenue you've made from successful artwork sales.",
+      },
+    },
+    {
+      element: "#tour-footer",
+      popover: {
+        description:
+          "This is where you can view the most recent list of orders made for various artworks you've uploaded.",
+      },
+    },
+    {
+      element: "#navigation-items",
+      popover: {
+        description:
+          "You can switch between your dashboard links or navigate to another dashboard page from here",
+      },
+    },
+    {
+      element: "#gallery-verification",
+      popover: {
+        description:
+          "Your account is currently under verification, and an agent will contact you shortly. To expedite this process, please inform the administrator by clicking the request button.",
+      },
+    },
+  ];
 
-// Tour component
-const INITIAL_STATE = {
-  key: new Date(), // This field makes the tour to re-render when we restart the tour
-  run: false,
-  continuous: true,
-  loading: false,
-  stepIndex: 0,
-  steps: TOUR_STEPS,
-};
-
-// Reducer will manage updating the local state
-const reducer = (
-  state = INITIAL_STATE,
-  action: { type: any; payload: any }
-) => {
-  switch (action.type) {
-    case "START":
-      return { ...state, run: true };
-    case "RESET":
-      return { ...state, stepIndex: 0 };
-    case "STOP":
-      return { ...state, run: false };
-    case "NEXT_OR_PREV":
-      return { ...state, ...action.payload };
-    case "RESTART":
-      return {
-        ...state,
-        stepIndex: 0,
-        run: true,
-        loading: false,
-        key: new Date(),
-      };
-    default:
-      return state;
-  }
-};
-
-// Tour component
-const Tour = () => {
-  // Tour state is the state which control the JoyRide component
-  const [tourState, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [tour, setTour] = useLocalStorage("tour", "");
+  const isFinished = useReadLocalStorage("tour") ?? "";
 
   useEffect(() => {
-    // Auto start the tour if the tour is not viewed before
-    if (!localStorage.getItem("tour")) {
-      dispatch({
-        type: "START",
-        payload: undefined,
+    // Ensure this runs on client-side only
+    if (isFinished === "true") return;
+
+    // Initialize driver only if running on the client-side
+    if (typeof window !== "undefined") {
+      const driverObj = driver({
+        showProgress: true,
+        steps,
+        allowClose: false,
       });
+
+      driverObj.drive();
+      setTour("true");
     }
   }, []);
 
-  // Set once tour is viewed, skipped or closed
-  const setTourViewed = () => {
-    localStorage.setItem("tour", "1");
-  };
-
-  const callback = (data: {
-    action: any;
-    index: any;
-    type: any;
-    status: any;
-  }) => {
-    const { action, index, type, status } = data;
-
-    if (
-      // If close button clicked, then close the tour
-      action === ACTIONS.CLOSE ||
-      // If skipped or end tour, then close the tour
-      (status === STATUS.SKIPPED && tourState.run) ||
-      status === STATUS.FINISHED
-    ) {
-      setTourViewed();
-      dispatch({
-        type: "STOP",
-        payload: undefined,
-      });
-    } else if (type === EVENTS.STEP_AFTER || type === EVENTS.TARGET_NOT_FOUND) {
-      // Check whether next or back button click and update the step.
-      dispatch({
-        type: "NEXT_OR_PREV",
-        payload: { stepIndex: index + (action === ACTIONS.PREV ? -1 : 1) },
-      });
-    }
-  };
-
-  const startTour = () => {
-    // Start the tour manually
-    dispatch({
-      type: "RESTART",
-      payload: undefined,
-    });
-  };
-
-  return (
-    <>
-      <JoyRide
-        {...tourState}
-        callback={callback}
-        showSkipButton={true}
-        showProgress={true}
-        key={1}
-        styles={{
-          tooltipContainer: {
-            textAlign: "left",
-          },
-          buttonBack: {
-            marginRight: 10,
-          },
-        }}
-        locale={{
-          last: "End tour",
-        }}
-      />
-    </>
-  );
-};
-
-export default Tour;
+  return null;
+}

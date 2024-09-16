@@ -54,6 +54,8 @@ type ActionStoreTypes = {
   updateDeleteUserAccountModalPopup: (value: boolean) => void;
   userPasswordModalPopup: boolean;
   userUpdatePasswordModalPopup: (value: boolean) => void;
+  confirmOrderDeliveryPopup: { open: boolean; order_id: string };
+  updateConfirmOrderDeliveryPopup: (value: boolean, order_id: string) => void;
 };
 
 export const actionStore = create<ActionStoreTypes>((set, get) => ({
@@ -209,5 +211,9 @@ export const actionStore = create<ActionStoreTypes>((set, get) => ({
   userPasswordModalPopup: false,
   userUpdatePasswordModalPopup: (value: boolean) => {
     set({ userPasswordModalPopup: value });
+  },
+  confirmOrderDeliveryPopup: { open: false, order_id: "" },
+  updateConfirmOrderDeliveryPopup: (value: boolean, order_id: string) => {
+    set({ confirmOrderDeliveryPopup: { open: value, order_id } });
   },
 }));

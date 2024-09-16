@@ -4,6 +4,7 @@ import Banner from "./LayoutDesign/Banner";
 import NavigationChipTabs from "./LayoutDesign/NavigationTabs";
 import { UpdatePasswordModal } from "./modals/UpdatePasswordModal";
 import { DeleteAccountConfirmationModal } from "./modals/DeleteAccountConfirmationMdal";
+import { ConfirmOrderDeliveryModal } from "./modals/ConfirmOrderDeliveryModal";
 
 export default function UserLayout({
   children,
@@ -23,6 +24,7 @@ export default function UserLayout({
         </div>
         <UpdatePasswordModal />
         <DeleteAccountConfirmationModal />
+        <ConfirmOrderDeliveryModal />
 
         {children}
       </main>
