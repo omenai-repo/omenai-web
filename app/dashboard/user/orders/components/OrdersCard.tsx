@@ -1,7 +1,10 @@
 "use client";
 import { getImageFileView } from "@/lib/storage/getImageFileView";
+import { confirmOrderDelivery } from "@/services/orders/confirmOrderDelivery";
+import { actionStore } from "@/store/actions/ActionStore";
 import { getCurrencySymbol } from "@/utils/getCurrencySymbol";
 import { formatPrice } from "@/utils/priceFormatter";
+import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { GoIssueClosed } from "react-icons/go";
 import { IoClose } from "react-icons/io5";
 import { MdInfo, MdOutlineCallToAction } from "react-icons/md";
+import { toast } from "sonner";
 
 type OverviewOrdersCardProps = {
   title: string;
@@ -49,6 +53,10 @@ export default function OrdersCard({
   if (session.data === null || session.data === undefined)
     router.replace("/auth/login");
 
+  const [updateConfirmOrderDeliveryPopup] = actionStore((state) => [
+    state.updateConfirmOrderDeliveryPopup,
+  ]);
+
   function construct_status(
     status: string,
     payment_status: string,
@@ -60,7 +68,7 @@ export default function OrdersCard({
     if (!availability) {
       return (
         <span className="px-3 py-1 rounded-full bg-[#e0e0e0] flex gap-x-1 items-center w-fit">
-          Artwork unavailable for purchase
+          Artwork already purchased by another buyer
         </span>
       );
     } else {
@@ -146,6 +154,7 @@ export default function OrdersCard({
       }
     }
   }
+
   return (
     <div className="flex md:flex-row flex-col md:justify-between px-5 py-3 w-full">
       <div className=" flex gap-x-3">
@@ -204,14 +213,24 @@ export default function OrdersCard({
                 status !== "completed" &&
                 !delivery_confirmed &&
                 tracking_information.tracking_link !== "" && (
-                  <button className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
-                    <span>View tracking information</span>
-                  </button>
+                  <Link
+                    href={tracking_information.tracking_link}
+                    target="_blank"
+                  >
+                    <button className="whitespace-nowrap bg-dark disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+                      <span>Track this order</span>
+                    </button>
+                  </Link>
                 )}
               {payment_information.status === "completed" &&
                 !delivery_confirmed &&
                 tracking_information.tracking_link !== "" && (
-                  <button className="whitespace-nowrap bg-green-600 disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80">
+                  <button
+                    onClick={() =>
+                      updateConfirmOrderDeliveryPopup(true, order_id)
+                    }
+                    className="whitespace-nowrap bg-green-600 disabled:bg-[#E0E0E0] disabled:text-[#858585] rounded-sm w-full text-white disabled:cursor-not-allowed h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
+                  >
                     <span>Confirm order delivery</span>
                   </button>
                 )}

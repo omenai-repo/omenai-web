@@ -6,7 +6,7 @@ import Load from "@/components/loader/Load";
 
 export default function Orders() {
   const { data: orders, isLoading } = useQuery({
-    queryKey: ["user_orders_pafe"],
+    queryKey: ["user_orders_page"],
     queryFn: async () => {
       const orders = await getOrdersForUser();
 
