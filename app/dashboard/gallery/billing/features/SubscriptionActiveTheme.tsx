@@ -29,10 +29,10 @@ export default function SubscriptionActiveTheme({
   }, []);
 
   return (
-    <div className="w-full h-full grid 2xl:grid-cols-3 grid-cols-2 gap-4 my-5">
+    <div className="w-full h-full grid 2xl:grid-cols-3 gap-4 my-5">
       {/* Card */}
-      <div className="flex flex-col gap-4 items-start col-span-1 2xl:col-span-2">
-        <div className="grid 2xl:grid-cols-2 items-center gap-3 w-full">
+      <div className="flex flex-col gap-4 items-start w-full col-span-1 2xl:col-span-2">
+        <div className="grid grid-cols-2 items-center gap-3 w-full">
           <div className="flex flex-col gap-y-2">
             <BillingCard
               expiry={subscription_data.card.expiry}
@@ -45,7 +45,7 @@ export default function SubscriptionActiveTheme({
           <SubDetail sub_data={subscription_data} />
         </div>
 
-        <div className="grid 2xl:grid-cols-2 items-center gap-3 w-full">
+        <div className="grid grid-cols-2 items-center gap-3 w-full">
           <UpcomingSub sub_data={subscription_data} />
 
           <BillingInfo />
@@ -57,7 +57,7 @@ export default function SubscriptionActiveTheme({
         />
       </div>
 
-      <div className="col-span-1">
+      <div className="col-span-1 w-full">
         <TransactionTable />
       </div>
     </div>

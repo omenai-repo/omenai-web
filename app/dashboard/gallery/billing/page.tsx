@@ -20,7 +20,7 @@ export default function Subscription() {
   if (session === null || !session?.user) router.replace("/auth/login");
 
   const { data: isConfirmed, isLoading } = useQuery({
-    queryKey: ["check_stripe_onboarded"],
+    queryKey: ["subscription_precheck"],
     queryFn: async () => {
       try {
         if (!session?.user) throw new Error("User not authenticated");

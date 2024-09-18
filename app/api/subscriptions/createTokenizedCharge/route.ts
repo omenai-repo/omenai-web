@@ -23,7 +23,9 @@ export async function POST(request: Request) {
       currency: "USD",
       amount,
       email: data.email,
-      tx_ref: data.tx_ref,
+      tx_ref: `${data.tx_ref}&${data.gallery_id}&${data.plan_id}&${
+        data.plan_interval
+      }&${null}`,
       token: data.token,
       narration: `Payment for Omenai Inc. ${data.plan_interval} subscription`,
       meta: {

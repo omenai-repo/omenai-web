@@ -42,17 +42,17 @@ export default function Plan({
     plan_change_params = { action, shouldCharge };
   }
 
-  let buttonText = "Get started today";
+  let buttonText = "Subscribed";
 
   if (sub_data !== null) {
-    if (
-      sub_data.plan_details.type !== name ||
-      (sub_data.plan_details.type === name &&
-        sub_data.plan_details.interval !== tab)
-    ) {
-      buttonText =
-        plan_action === "reactivation" ? "Activate plan" : "Subscribed";
-    }
+    buttonText =
+      plan_action === "reactivation"
+        ? "Activate plan"
+        : sub_data.plan_details.type !== name ||
+          (sub_data.plan_details.type === name &&
+            sub_data.plan_details.interval !== tab)
+        ? "Migrate"
+        : "Subscribed";
   }
 
   return (

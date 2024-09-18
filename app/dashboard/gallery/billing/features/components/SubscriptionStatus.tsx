@@ -22,7 +22,7 @@ export default function SubDetail({
 
   const currency_symbol = getCurrencySymbol(sub_data.plan_details.currency);
   return (
-    <div className="ring-1 ring-[#e0e0e0] rounded-md p-8 h-[250px] relative">
+    <div className="ring-1 ring-[#e0e0e0] rounded-md p-4 h-[250px] relative">
       <div className="w-full flex justify-start relative z-10 my-2">
         <p className="text-dark text-xs font-semibold">Subscription Info</p>
       </div>
@@ -72,26 +72,28 @@ export default function SubDetail({
           </p>
         </div>
       </div>
-      <div className="absolute bottom-5 left-8 mt-4">
+      <div className=" mt-4">
         {sub_data.status === "canceled" ? (
           <Link
             href={`/dashboard/gallery/billing/plans?plan_action=reactivation`}
           >
-            <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
+            <button className=" h-[40px] px-4 rounded-sm w-fit text-[12px] 2xl:text-xs bg-dark text-white hover:bg-dark/70 flex gap-2 items-center">
               Reactivate Subscription
             </button>
           </Link>
         ) : (
           <div className="flex gap-x-2 items-center">
             <button
-              className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-red-600 flex gap-2 items-center"
+              className=" h-[40px] px-4 rounded-sm w-fit text-[12px] 2xl:text-xs bg-red-600 flex gap-2 items-center"
               onClick={() => updateOpenModal()}
             >
               {/* <RxCross1 className="text-base text-white" /> */}
-              <span className="text-white">Cancel Subscription</span>
+              <span className="text-white whitespace-nowrap">
+                Cancel Subscription
+              </span>
             </button>
             <Link href="/dashboard/gallery/billing/plans">
-              <button className=" h-[40px] px-4 rounded-sm w-fit text-[13px] bg-dark flex gap-2 items-center">
+              <button className=" h-[40px] px-4 rounded-sm w-fit text-[12px] 2xl:text-xs bg-dark flex gap-2 items-center">
                 <span className="text-white">Upgrade/Downgrade plan</span>
               </button>
             </Link>

@@ -19,7 +19,7 @@ export default function UploadArtwork() {
   if (!session.data?.user) router.replace("/auth/login");
 
   const { data: isConfirmed, isLoading } = useQuery({
-    queryKey: ["check_stripe_onboarded"],
+    queryKey: ["upload_precheck"],
     queryFn: async () => {
       try {
         if (!session.data?.user) throw new Error("User not authenticated");
