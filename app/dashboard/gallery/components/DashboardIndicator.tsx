@@ -30,7 +30,7 @@ export default function DashboardIndicator({
       const response = await verifyGalleryRequest(gallery_name!);
       if (!response?.isOk)
         toast.error("Error notification", {
-          description: "Something wwent wrong. Please try again",
+          description: response?.message,
           style: {
             background: "red",
             color: "white",

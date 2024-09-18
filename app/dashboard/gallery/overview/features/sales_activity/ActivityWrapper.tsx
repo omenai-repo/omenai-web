@@ -33,7 +33,6 @@ export default function ActivityWrapper() {
 
   const activityData = salesDataAlgorithm(sales);
 
-  console.log(activityData);
   return (
     <>
       <OverviewComponentCard
