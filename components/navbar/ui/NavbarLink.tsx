@@ -30,7 +30,11 @@ export default function NavbarLink({
         </>
       ) : (
         <li className="text-xs w-fit text-black whitespace-nowrap font-normal flex flex-col group">
-          <Link href={link} onClick={() => updateOpenSideNav(false)}>
+          <Link
+            href={link}
+            target="_blank"
+            onClick={() => updateOpenSideNav(false)}
+          >
             {text}
           </Link>
           <div className="h-1 bg-dark w-0 group-hover:w-full duration-300" />

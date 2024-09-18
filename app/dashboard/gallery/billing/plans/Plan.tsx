@@ -42,7 +42,7 @@ export default function Plan({
     plan_change_params = { action, shouldCharge };
   }
 
-  let buttonText = "Subscribed";
+  let buttonText = "Get started today";
 
   if (sub_data !== null) {
     buttonText =

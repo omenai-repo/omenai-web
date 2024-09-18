@@ -11,7 +11,7 @@ import { limiter } from "@/lib/auth/limiter";
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountIndividual } from "@/models/auth/IndividualSchema";
 import { VerificationCodes } from "@/models/auth/verification/codeTimeoutSchema";
-import generateString from "@/utils/generateToken";
+import { generateDigit } from "@/utils/generateToken";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     if (!verified)
       throw new ForbiddenError("Please verify your account first.");
 
-    const email_token = await generateString();
+    const email_token = await generateDigit(7);
 
     const isVerificationTokenActive = await VerificationCodes.findOne({
       author: user_id,

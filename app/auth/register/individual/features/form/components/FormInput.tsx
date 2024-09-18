@@ -55,7 +55,7 @@ export default function FormInput() {
     setIsLoading();
   };
   return (
-    <div className="container">
+    <div className="">
       <form
         className="flex flex-col justify-end gap-4 w-full container lg:px-[2rem] xl:px-[4rem] 2xl:px-[7rem]"
         onSubmit={handleSubmit}

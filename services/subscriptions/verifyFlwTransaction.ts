@@ -1,11 +1,11 @@
 import { getApiUrl } from "@/config";
 
-export async function verifyFlwTransaction(data: { transaction_id: string }) {
+export async function verifyFlwTransaction(transaction_id: string) {
   try {
     const url = getApiUrl();
     const res = await fetch(`${url}/api/transactions/verify_FLW_transaction`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify({ transaction_id }),
     });
 
     const result = await res.json();

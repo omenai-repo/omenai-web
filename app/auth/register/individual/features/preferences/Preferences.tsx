@@ -37,7 +37,7 @@ function Preferences() {
           We would like understand your art interests, please select up to 5
           artwork mediums that resonates with you most
         </p>
-        <p className="text-center text-base font-semibol my-[1.5rem]">
+        <p className="text-center text-xs font-semibold my-[1.5rem]">
           Selected: {preferences.length}/5
         </p>
 

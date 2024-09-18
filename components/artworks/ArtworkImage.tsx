@@ -1,8 +1,5 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { FaHeart } from "react-icons/fa";
-import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
-import InnerImageZoom from "react-inner-image-zoom";
 
 import { formatPrice } from "@/utils/priceFormatter";
 import Link from "next/link";

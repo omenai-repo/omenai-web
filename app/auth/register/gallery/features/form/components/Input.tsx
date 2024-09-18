@@ -4,7 +4,7 @@ import { useGalleryAuthStore } from "@/store/auth/register/GalleryAuthStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChangeEvent, HTMLInputTypeAttribute, useState } from "react";
 import { MdError, MdOutlineArrowForward } from "react-icons/md";
-
+import { PiEyeSlashThin, PiEyeThin } from "react-icons/pi";
 export type InputProps = {
   label: string;
   labelText: string;
@@ -44,6 +44,7 @@ export default function Input({
     setErrorList([]);
     decrementCurrentGallerySignupFormIndex();
   };
+  const [show, setShow] = useState(false);
 
   const handleClick = (value: string, label: string) => {
     setErrorList([]);
@@ -73,16 +74,31 @@ export default function Input({
         <label htmlFor={labelText} className="text-[#858585] text-xs">
           {label}
         </label>
-        <input
-          type={type}
-          className=" focus:ring-1 focus:border-0 border px-2 ring-0 text-[14px] text-dark border-[#E0E0E0] w-full py-2 focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-[#858585] "
-          placeholder={`e.g ${placeholder}`}
-          disabled={disabled}
-          onChange={onChange}
-          onKeyDown={handleKeyPress}
-          name={labelText}
-          value={(gallerySignupData as Record<string, any>)[labelText]}
-        />
+        <div className="w-full relative">
+          <input
+            type={type === "password" ? (show ? "text" : type) : type}
+            className=" focus:ring-1 focus:border-0 border px-2 ring-0 text-[14px] text-dark border-[#E0E0E0] w-full py-2 focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-[#858585] "
+            placeholder={`e.g ${placeholder}`}
+            disabled={disabled}
+            onChange={onChange}
+            onKeyDown={handleKeyPress}
+            name={labelText}
+            value={(gallerySignupData as Record<string, any>)[labelText]}
+          />
+          {type === "password" && (
+            <div className="absolute top-2.5 right-2 w-fit cursor-pointer">
+              {show ? (
+                <PiEyeSlashThin
+                  className="text-md"
+                  onClick={() => setShow(false)}
+                />
+              ) : (
+                <PiEyeThin className="text-md" onClick={() => setShow(true)} />
+              )}
+            </div>
+          )}
+        </div>
+
         {errorList.length > 0 &&
           errorList.map((error, index) => {
             return (

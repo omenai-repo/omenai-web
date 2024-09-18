@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { MdOutlineArrowForward } from "react-icons/md";
 import { MdError } from "react-icons/md";
+import { PiEyeSlashThin, PiEyeThin } from "react-icons/pi";
 
 export default function Input({
   label,
@@ -30,6 +31,7 @@ export default function Input({
   ]);
 
   const [errorList, setErrorList] = useState<string[]>([]);
+  const [show, setShow] = useState(false);
 
   const handleClickPrev = () => {
     setErrorList([]);
@@ -61,16 +63,30 @@ export default function Input({
         <label htmlFor={labelText} className="text-[#858585] text-xs">
           {label}
         </label>
-        <input
-          type={type}
-          className=" focus:ring-1 focus:border-0 border px-2 ring-0 text-[14px] text-dark border-[#E0E0E0] w-full py-2 focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-[#858585]"
-          placeholder={`e.g ${placeholder}`}
-          disabled={disabled}
-          onChange={onChange}
-          name={labelText}
-          onKeyDown={handleKeyPress}
-          value={(individualSignupData as Record<string, string>)[labelText]}
-        />
+        <div className="w-full relative">
+          <input
+            type={type === "password" ? (show ? "text" : type) : type}
+            className=" focus:ring-1 focus:border-0 border px-2 ring-0 text-[14px] text-dark border-[#E0E0E0] w-full py-2 focus:ring-dark placeholder:font-light placeholder:text-xs placeholder:text-[#858585] "
+            placeholder={`e.g ${placeholder}`}
+            disabled={disabled}
+            onChange={onChange}
+            onKeyDown={handleKeyPress}
+            name={labelText}
+            value={(individualSignupData as Record<string, string>)[labelText]}
+          />
+          {type === "password" && (
+            <div className="absolute top-2.5 right-2 w-fit cursor-pointer">
+              {show ? (
+                <PiEyeSlashThin
+                  className="text-md"
+                  onClick={() => setShow(false)}
+                />
+              ) : (
+                <PiEyeThin className="text-md" onClick={() => setShow(true)} />
+              )}
+            </div>
+          )}
+        </div>
 
         {errorList.length > 0 &&
           errorList.map((error, index) => {

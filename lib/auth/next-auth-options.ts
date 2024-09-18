@@ -4,7 +4,7 @@ import { IndividualLoginProvider } from "@/services/login/IndividualLogin";
 import { NextAuthOptions, getServerSession } from "next-auth";
 
 export const nextAuthOptions: NextAuthOptions = {
-  session: { strategy: "jwt", maxAge: 3600 },
+  session: { strategy: "jwt", maxAge: 7200 },
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     IndividualLoginProvider,

@@ -14,7 +14,7 @@ export default function VerifyTransaction({
   const { data: verified, isLoading } = useQuery({
     queryKey: ["verify_subscription_payment"],
     queryFn: async () => {
-      const response = await verifyFlwTransaction({ transaction_id });
+      const response = await verifyFlwTransaction(transaction_id);
       if (!response?.isOk) return null;
       else {
         console.log(response.data);

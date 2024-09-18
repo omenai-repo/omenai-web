@@ -1,16 +1,16 @@
 "use client";
 import { individualLoginStore } from "@/store/auth/login/IndividualLoginStore";
-import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
 import FormActions from "./FormActions";
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-
+import { PiEyeThin } from "react-icons/pi";
+import { PiEyeSlashThin } from "react-icons/pi";
 export default function FormInput() {
   const router = useRouter();
+  const [show, setShow] = useState(false);
 
   //simple state to show password visibility
   // const [hidePassword, setHidePassword] = useState(true);
@@ -86,7 +86,6 @@ export default function FormInput() {
           value={form.email}
           name="email"
           className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
-          onKeyDown={handleKeyPress}
           onChange={handleChange}
           required
         />
@@ -95,15 +94,26 @@ export default function FormInput() {
         <label htmlFor={"password"} className="text-xs text-[#858585]">
           Password
         </label>
-        <input
-          value={form.password}
-          type="password"
-          name="password"
-          className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
-          onKeyDown={handleKeyPress}
-          onChange={handleChange}
-          required
-        />
+        <div className="w-full relative">
+          <input
+            value={form.password}
+            type={show ? "text" : "password"}
+            name="password"
+            className="focus:ring-0 border-0 w-full px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
+            onChange={handleChange}
+            required
+          />
+          <div className="absolute top-0 right-2 w-fit cursor-pointer">
+            {show ? (
+              <PiEyeSlashThin
+                className="text-md"
+                onClick={() => setShow(false)}
+              />
+            ) : (
+              <PiEyeThin className="text-md" onClick={() => setShow(true)} />
+            )}
+          </div>
+        </div>
       </div>
       <FormActions />
     </form>

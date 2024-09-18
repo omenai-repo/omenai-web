@@ -60,14 +60,14 @@ export default function ImageUpload() {
         transition={{ duration: 0.33 }}
         className="flex flex-col gap-2 container w-full items-center"
       >
-        <div className="w-[400px] h-[200px]">
+        <div className="w-[200px] h-[200px]">
           {cover ? (
             <Image
               src={URL.createObjectURL(cover as File)}
               alt="uploaded image"
-              width={400}
+              width={200}
               height={200}
-              className="w-[400px] h-[200px] object-cover object-top mt-2 filter hover:grayscale transition-all duration-200 rounded-lg cursor-not-allowed"
+              className="w-[200px] h-[200px] object-cover object-top mt-2 filter hover:grayscale transition-all duration-200 rounded-lg cursor-not-allowed"
               onClick={() => {
                 setCover(null);
                 updateGallerySignupData("logo", null);

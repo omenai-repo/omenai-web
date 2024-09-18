@@ -8,7 +8,7 @@ import { sendPasswordRecoveryMail } from "@/emails/models/recovery/sendPasswordR
 import { connectMongoDB } from "@/lib/mongo_connect/mongoConnect";
 import { AccountGallery } from "@/models/auth/GallerySchema";
 import { VerificationCodes } from "@/models/auth/verification/codeTimeoutSchema";
-import generateString from "@/utils/generateToken";
+import { generateDigit } from "@/utils/generateToken";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     if (!verified)
       throw new ForbiddenError("Please verifiy your account first.");
 
-    const email_token = await generateString();
+    const email_token = await generateDigit(7);
 
     const isVerificationTokenActive = await VerificationCodes.findOne({
       author: gallery_id,

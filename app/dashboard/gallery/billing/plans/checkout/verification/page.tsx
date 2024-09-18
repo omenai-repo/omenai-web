@@ -19,7 +19,7 @@ export default function TransactionVerification() {
   const { data: verified, isLoading } = useQuery({
     queryKey: ["verify_subscription_payment_on_redirect"],
     queryFn: async () => {
-      const response = await verifyFlwTransaction({ transaction_id });
+      const response = await verifyFlwTransaction(transaction_id);
       if (!response?.isOk) throw new Error("Something went wrong");
       else {
         return { message: response.message, data: response.data };

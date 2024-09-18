@@ -58,7 +58,7 @@ export default function NoVerificationBlock({
           </p>
           <p className=" text-white">
             To expedite this process, please click the{" "}
-            <b>&apos; Request gallery verification &apos;</b> button below{" "}
+            <b>&apos; Send Verification Reminder &apos;</b> button below{" "}
           </p>
         </div>
         <div className="mt-3" id="gallery-verification">
@@ -67,7 +67,7 @@ export default function NoVerificationBlock({
             onClick={handleRequestGalleryVerification}
             className=" w-full text-xs disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-white rounded-sm text-dark h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-[#e0e0e0]"
           >
-            {loading ? <LoadSmall /> : "Request gallery verification"}
+            {loading ? <LoadSmall /> : "Send Verification Reminder"}
           </button>
         </div>
       </div>
