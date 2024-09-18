@@ -4,7 +4,7 @@ import { useIndividualAuthStore } from "@/store/auth/register/IndividualAuthStor
 import { Checkbox, Label } from "flowbite-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
 export default function TC() {
   const [decrementCurrentSignupFormIndex, preferences, isLoading] =
@@ -13,6 +13,7 @@ export default function TC() {
       state.preferences,
       state.isLoading,
     ]);
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <motion.div
       initial={{ x: 100, opacity: 0 }}
@@ -28,7 +29,14 @@ export default function TC() {
 
       <div className="bg-[#FAFAFA] p-5 my-5 flex flex-col gap-y-5">
         <div className="flex items-center gap-2">
-          <Checkbox id="terms of use" required className="border-dark" />
+          <Checkbox
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setIsChecked(e.target.checked)
+            }
+            id="terms of use"
+            required
+            className="border-dark"
+          />
           <Label htmlFor="terms of use" className="text-dark text-xs">
             By ticking this box, I accept the{" "}
             <Link href={"/"} className="underline font-normal">
@@ -53,13 +61,14 @@ export default function TC() {
       <div className="flex flex-col mt-8">
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isLoading || !isChecked}
           className=" h-[40px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-dark text-white text-xs font-normal"
         >
           {isLoading ? <LoadSmall /> : "Create account"}
         </button>
         <button
-          className={` rounded-full  h-[40px] px-4 mt-[1rem] text-dark underline transition-all ease-linear duration-200`}
+          disabled={isLoading}
+          className={` rounded-full  h-[40px] px-4 mt-[1rem] text-dark disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] underline transition-all ease-linear duration-200`}
           type={"button"}
           onClick={decrementCurrentSignupFormIndex}
         >

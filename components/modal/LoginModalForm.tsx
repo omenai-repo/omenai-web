@@ -6,7 +6,6 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleSignIn } from "@/services/login/ModalLogin";
-import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { actionStore } from "@/store/actions/ActionStore";
 import { useRouter } from "next/navigation";
 
@@ -90,7 +89,6 @@ export default function LoginModalForm() {
             className="focus:ring-0 border-0 px-0 text-xs border-b-[1px] border-b-dark/30 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
             required
             onChange={handleChange}
-            onKeyDown={handleKeyPress}
           />
         </div>
         <div className="flex flex-col">
@@ -104,7 +102,6 @@ export default function LoginModalForm() {
             className="focus:ring-0 border-0 px-0 border-b-[1px] text-xs border-b-dark/30 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
             required
             onChange={handleChange}
-            onKeyDown={handleKeyPress}
           />
         </div>
         <LoginModalFormActions loading={loading} />

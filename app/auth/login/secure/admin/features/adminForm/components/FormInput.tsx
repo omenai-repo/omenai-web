@@ -1,5 +1,4 @@
 "use client";
-import { handleKeyPress } from "@/utils/disableSubmitOnEnter";
 import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -82,7 +81,6 @@ export default function FormInput() {
           value={form.email}
           name="email"
           className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
-          onKeyDown={handleKeyPress}
           onChange={handleChange}
           required
         />
@@ -96,7 +94,6 @@ export default function FormInput() {
           type="password"
           name="password"
           className="focus:ring-0 border-0 px-0 border-b-[1px] border-b-dark/20 outline-none focus:outline-none focus:border-b-dark transition-all duration-200 ease-in-out ring-0 placeholder:text-dark/40 py-1"
-          onKeyDown={handleKeyPress}
           onChange={handleChange}
           required
         />

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { LoadSmall } from "@/components/loader/Load";
 import { Checkbox, Label } from "flowbite-react";
+import { ChangeEvent, useState } from "react";
 
 export default function FormConfirm() {
   const [decrementCurrentGallerySignupFormIndex, isLoading] =
@@ -11,6 +12,7 @@ export default function FormConfirm() {
       state.decrementCurrentGallerySignupFormIndex,
       state.isLoading,
     ]);
+  const [isConsentChecked, setIsConcentChecked] = useState(false);
   return (
     <motion.div
       initial={{ x: 100, opacity: 0 }}
@@ -18,7 +20,7 @@ export default function FormConfirm() {
       exit={{ y: -100 }}
       transition={{ duration: 0.33 }}
     >
-      <h1 className="text-md font-normal mb-4">Confirm account creation</h1>
+      <h1 className="text-sm font-normal mb-4">Confirm account creation</h1>
       <p className="text-xs my-4 font-normal">
         Please read through and confirm that you understand and accept all the
         terms stated
@@ -26,7 +28,14 @@ export default function FormConfirm() {
 
       <div className="bg-[#FAFAFA] p-5 my-5 flex flex-col gap-y-5">
         <div className="flex items-center gap-2">
-          <Checkbox id="terms of use" required className="border-dark" />
+          <Checkbox
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setIsConcentChecked(e.target.checked)
+            }
+            id="terms of use"
+            required
+            className="border-dark"
+          />
           <Label htmlFor="terms of use" className="text-dark text-xs">
             By ticking this box, I accept the{" "}
             <Link href={"/"} className="underline font-normal">
@@ -51,13 +60,14 @@ export default function FormConfirm() {
       <div className="flex flex-col mt-8">
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isLoading || !isConsentChecked}
           className="h-[40px] px-4 w-full flex items-center justify-center gap-3 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] bg-dark text-white text-xs font-normal"
         >
           {isLoading ? <LoadSmall /> : "Create account"}
         </button>
         <button
-          className={` rounded-full h-[40px] px-4 mt-[1rem] text-dark underline transition-all ease-linear duration-200`}
+          disabled={isLoading}
+          className={` rounded-full h-[40px] px-4 mt-[1rem]  disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-[#A1A1A1] text-dark underline transition-all ease-linear duration-200`}
           type={"button"}
           onClick={decrementCurrentGallerySignupFormIndex}
         >

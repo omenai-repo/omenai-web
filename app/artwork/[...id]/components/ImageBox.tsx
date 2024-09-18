@@ -3,7 +3,6 @@ import { getImageFileView } from "@/lib/storage/getImageFileView";
 import image from "next/image";
 import Image from "next/image";
 import { useState, useRef } from "react";
-import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
 
 type ImageBoxProps = {
   url: string;

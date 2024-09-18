@@ -74,14 +74,17 @@ export default function DashboardIndicator({
       </div>
       {/* Request verification */}
       {!gallery_verified ? (
-        <div className="" id="gallery-verification">
+        <div className="space-y-1" id="gallery-verification">
           <button
             disabled={loading}
             onClick={handleRequestGalleryVerification}
             className=" w-full text-xs disabled:cursor-not-allowed whitespace-nowrap disabled:bg-[#E0E0E0] bg-dark rounded-sm text-white h-[40px] px-4 flex gap-x-2 items-center justify-center hover:bg-dark/80"
           >
-            {loading ? <LoadSmall /> : "Request gallery verification"}
+            {loading ? <LoadSmall /> : "Send Verification Reminder"}
           </button>
+          <p className="text-xs text-[#858585]">
+            Account currently under review
+          </p>
         </div>
       ) : (
         <div className="flex gap-2 items-center">

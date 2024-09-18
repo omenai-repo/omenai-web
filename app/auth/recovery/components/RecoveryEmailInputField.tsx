@@ -8,35 +8,52 @@ import { toast } from "sonner";
 export default function RecoveryEmailInputField() {
   const [isLoading, setIsloading] = useState(false);
   const [email, setEmail] = useState("");
-  const [recoveryModal] = actionStore((state) => [state.recoveryModal]);
+  const [recoveryModal, updateRecoveryModal] = actionStore((state) => [
+    state.recoveryModal,
+    state.updateRecoveryModal,
+  ]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsloading(true);
 
-    const data = await sendPasswordResetLink(recoveryModal.type, {
-      email,
-    });
-
-    if (data.isOk)
-      toast.success("Operation successful", {
-        description: data.body.message,
-        style: {
-          background: "green",
-          color: "white",
-        },
-        className: "class",
+    try {
+      const data = await sendPasswordResetLink(recoveryModal.type, {
+        email,
       });
-    else
+      if (data.isOk) {
+        toast.success("Operation successful", {
+          description: data.body.message,
+          style: {
+            background: "green",
+            color: "white",
+          },
+          className: "class",
+        });
+        updateRecoveryModal(recoveryModal.type);
+      } else
+        toast.error("Error notification", {
+          description: data.body.message,
+          style: {
+            background: "red",
+            color: "white",
+          },
+          className: "class",
+        });
+    } catch (error) {
       toast.error("Error notification", {
-        description: data.body.message,
+        description:
+          "Something went wrong, please try again or contact support",
         style: {
           background: "red",
           color: "white",
         },
         className: "class",
       });
-    setIsloading(false);
+    } finally {
+      setIsloading(false);
+      setEmail("");
+    }
   };
   return (
     <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit}>

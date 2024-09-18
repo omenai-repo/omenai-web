@@ -21,7 +21,9 @@ export async function POST(request: Request) {
     const { success } = await limiter.limit(ip);
 
     if (!success)
-      throw new RateLimitExceededError("Too many requests, try again later.");
+      throw new RateLimitExceededError(
+        "Too many login attempts, try again after 1 hour."
+      );
 
     await connectMongoDB();
 

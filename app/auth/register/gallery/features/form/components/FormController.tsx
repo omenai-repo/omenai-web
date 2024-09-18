@@ -24,6 +24,9 @@ export default function FormController() {
 
   return (
     <>
+      <p className="text-xs text-[#858585] px-4">
+        Step {currentGallerySignupFormIndex + 1} of {inputProperties.length + 1}
+      </p>
       {currentGallerySignupFormIndex < inputProperties.length &&
         (form.type === "select" ? (
           <SelectInput

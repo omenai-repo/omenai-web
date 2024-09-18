@@ -31,7 +31,7 @@ export const inputProperties: any = [
   {
     label: "Can you give a description of the gallery?",
     type: "text",
-    placeholder: "lorem ipsum dolor amit dans emit...",
+    placeholder: "Tell us a bit more about your gallery",
     labelText: "description",
   },
   {
