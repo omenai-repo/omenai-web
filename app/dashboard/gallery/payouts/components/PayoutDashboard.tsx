@@ -19,7 +19,7 @@ export default function PayoutDashboard() {
     router.replace("/auth/login");
 
   const { data: isConfirmed, isLoading } = useQuery({
-    queryKey: ["check_stripe_onboarded"],
+    queryKey: ["fetch_payout_dataset"],
     queryFn: async () => {
       try {
         // Ensure session data exists
@@ -36,6 +36,8 @@ export default function PayoutDashboard() {
           fetchTransactions(session.data.user.id),
           checkIsStripeOnboarded(connectedAccountId),
         ]);
+
+        console.log(balance, table, response);
 
         // Check if all results are okay
         if (!balance?.isOk || !table?.isOk || !response?.isOk) {

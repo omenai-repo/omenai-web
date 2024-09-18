@@ -130,7 +130,6 @@ export async function POST(request: Request) {
           charge_type !== undefined &&
           charge_type === "card_change"
         ) {
-          console.log(convert_verify_transaction_json_response);
           await Subscriptions.updateOne(
             {
               "customer.gallery_id": gallery_id,

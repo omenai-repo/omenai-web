@@ -18,7 +18,7 @@ export default function UpcomingSub({
   );
 
   return (
-    <div className="ring-1 ring-[#e0e0e0] rounded-md p-8 h-[250px] relative">
+    <div className="ring-1 ring-[#e0e0e0] rounded-md p-4 h-[250px] relative">
       <div className="w-full flex justify-start relative z-10 my-2">
         <p className="text-dark text-xs font-semibold">Upcoming</p>
       </div>
