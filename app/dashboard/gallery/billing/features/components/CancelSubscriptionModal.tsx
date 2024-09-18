@@ -35,7 +35,7 @@ export default function CancelSubscriptionModal({
 
     if (response?.isOk) {
       setLoading(false);
-      query_client.invalidateQueries({ queryKey: ["get_sub_data"] });
+      query_client.invalidateQueries({ queryKey: ["subscription_precheck"] });
       toast.success("Operation successful", {
         description: response.message,
         style: {
