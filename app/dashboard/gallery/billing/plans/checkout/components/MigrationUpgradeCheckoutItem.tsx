@@ -41,10 +41,16 @@ export default function MigrationUpgradeCheckoutItem({
   const days_left = getDaysLeft(startDate, sub_data.plan_details.interval);
 
   const dailyRate =
-    +sub_data.payment.value /
+    (sub_data.plan_details.interval === "yearly"
+      ? +sub_data.plan_details.value.annual_price
+      : +sub_data.plan_details.value.monthly_price) /
     (sub_data.plan_details.interval === "yearly" ? daysInYear : daysInMonth);
 
-  const proratedPrice = +sub_data.payment.value - days_used * dailyRate;
+  const proratedPrice =
+    (sub_data.plan_details.interval === "yearly"
+      ? +sub_data.plan_details.value.annual_price
+      : +sub_data.plan_details.value.monthly_price) -
+    days_used * dailyRate;
 
   // const prorated_cost = days_used > 0 ? proratedPrice : 0;
   const upgrade_cost =
