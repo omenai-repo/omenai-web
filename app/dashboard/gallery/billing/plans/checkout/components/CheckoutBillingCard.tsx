@@ -41,8 +41,6 @@ export default function CheckoutBillingCard({
   const [error, setError] = useState<string>("");
   const searchParams = useSearchParams();
   const plan_action = searchParams.get("plan_action");
-  const is_effected_end_of_billing_cycle =
-    sub_data.plan_details.interval === "yearly" && interval === "monthly";
 
   const [loading, setLoading] = useState<boolean>(false);
   const [migrationLoading, setMigrationLoading] = useState<boolean>(false);
