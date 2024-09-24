@@ -1,6 +1,5 @@
 import { storage } from "@/appwrite";
 import { getApiUrl } from "@/config";
-import { getImageFileView } from "@/lib/storage/getImageFileView";
 import {
   Body,
   Button,
@@ -15,17 +14,9 @@ import {
   Text,
 } from "@react-email/components";
 
-const OrderRequestToGalleryMail = (
-  name: string,
-  buyer: string,
-  date: string,
-  artwork_data: Pick<
-    ArtworkSchemaTypes,
-    "title" | "artist" | "art_id" | "pricing" | "url"
-  >
-) => {
+const OrderRequestReminder = (name: string) => {
   const url = getApiUrl();
-  const image = getImageFileView(artwork_data.url, 200);
+
   return (
     <Html>
       <Head />
@@ -50,60 +41,21 @@ const OrderRequestToGalleryMail = (
             </Text>
             <Text className="text-black text-[14px] leading-[24px]">
               I hope this email finds you well. <br />
-              This is to inform you that a user has recently expressed interest
-              in purchasing one of the artworks you have uploaded to our
-              platform. Specifically, there has been an order request for the{" "}
-              <Link
-                href={`${url}/artwork/${artwork_data.title}`}
-                className="underline text-blue-800 italic font-normal"
-              >
-                {artwork_data.title}
-              </Link>{" "}
-              artwork.
+              This is a friendly reminder that there are pending order requests
+              awaiting your attention on your dashboard. To ensure a positive
+              experience for your customers, we encourage you to review and
+              respond to these requests at your earliest convenience.
             </Text>
-            <Text className="text-black text-[14px] leading-[24px]">
-              As a valued member of our platform, we want to ensure that you are
-              promptly informed of any potential sales opportunities. Therefore,
-              we kindly request that you log in to your gallery dashboard to
-              review and take necessary actions on this order request.
-            </Text>
+
             <div className="w-full grid place-items-center text-center">
               <Link
                 className="w-fit bg-black text-white text-center px-5 cursor-pointer py-3"
                 href={`${url}/dashboard/gallery/orders`}
               >
-                View order on your dashboard
+                View orders on your dashboard
               </Link>
             </div>
 
-            <Text className="text-black text-[14px] leading-[24px]">
-              Here are the details of the order request:
-            </Text>
-
-            <Img
-              src={image}
-              alt="artwork_image"
-              className="mx-auto mt-10 max-w-[200px] w-auto aspect-auto max-h-[250px] h-auto"
-            />
-            <div className="my-0">
-              <ul>
-                <li>
-                  <Text className="text-black text-[14px] leading-[24px]">
-                    Artwork: {artwork_data.title}
-                  </Text>
-                </li>
-                <li>
-                  <Text className="text-black text-[14px] leading-[24px]">
-                    Requested by: {buyer}
-                  </Text>
-                </li>
-                <li>
-                  <Text className="text-black text-[14px] leading-[24px]">
-                    Requested date: {date}
-                  </Text>
-                </li>
-              </ul>
-            </div>
             <Text className="text-black text-[14px] leading-[24px]">
               Upon logging into your dashboard, you will be able to:
             </Text>
@@ -175,4 +127,4 @@ const OrderRequestToGalleryMail = (
   );
 };
 
-export default OrderRequestToGalleryMail;
+export default OrderRequestReminder;

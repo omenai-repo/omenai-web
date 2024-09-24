@@ -46,7 +46,7 @@ export default function MigrationUpgradeCheckoutItem({
 
   const proratedPrice = days_left * dailyRate;
 
-  const prorated_cost = days_used > 0 ? proratedPrice : 0;
+  // const prorated_cost = days_used > 0 ? proratedPrice : 0;
 
   const upgrade_cost =
     interval === "monthly"
@@ -55,7 +55,7 @@ export default function MigrationUpgradeCheckoutItem({
 
   const currency = getCurrencySymbol(plan.currency);
 
-  const total = upgrade_cost - prorated_cost;
+  const total = upgrade_cost - proratedPrice;
 
   const grand_total = Math.round((total + Number.EPSILON) * 100) / 100;
 
@@ -108,7 +108,7 @@ export default function MigrationUpgradeCheckoutItem({
             <p className="text-xs font-bold">
               {!plan_change_params.shouldCharge
                 ? formatPrice(0, currency)
-                : `-${formatPrice(prorated_cost, currency)}`}
+                : `-${formatPrice(proratedPrice, currency)}`}
             </p>
           </div>
           <div className="flex justify-between items-center">
