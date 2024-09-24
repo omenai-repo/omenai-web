@@ -44,7 +44,7 @@ export default function MigrationUpgradeCheckoutItem({
     +sub_data.payment.value /
     (sub_data.plan_details.interval === "yearly" ? daysInYear : daysInMonth);
 
-  const proratedPrice = days_used * dailyRate;
+  const proratedPrice = +sub_data.payment.value - days_used * dailyRate;
 
   // const prorated_cost = days_used > 0 ? proratedPrice : 0;
   const upgrade_cost =
