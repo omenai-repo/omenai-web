@@ -2,16 +2,24 @@
 
 import DesktopNavbar from "@/components/navbar/desktop/DesktopNavbar";
 import { useState } from 'react';
-import ReactQuill from 'react-quill';
+// import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
 
-export default function Page(){
-    const [value, setValue] = useState<string | undefined>(undefined);
+const ReactQuill = dynamic(
+    () => {
+      return import('react-quill');
+    },
+    { ssr: false }
+  );
 
-    const handleValueChange = (value: string) => {
+export default function page(){
+    const [value, setValue] = useState<any>(<p></p>);
+
+    const handleValueChange = (value: any) => {
         setValue(value);
+        // console.log(value)
     };
-    
 
     return(
         <main>
