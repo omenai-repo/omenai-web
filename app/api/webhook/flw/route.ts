@@ -34,8 +34,8 @@ export async function POST(request: Request) {
 
   // Use crypto.timingSafeEqual to compare
   const isValidSignature = crypto.timingSafeEqual(
-    signatureBuffer,
-    secretHashBuffer
+    new Uint8Array(signatureBuffer),
+    new Uint8Array(secretHashBuffer)
   );
 
   if (!isValidSignature) {
