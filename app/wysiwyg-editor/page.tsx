@@ -6,7 +6,12 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 export default function Page(){
-    const [editorState, setEditorState] = useState();
+    const [value, setValue] = useState<string | undefined>(undefined);
+
+    const handleValueChange = (value: string) => {
+        setValue(value);
+    };
+    
 
     return(
         <main>
@@ -14,8 +19,8 @@ export default function Page(){
             <div className="px-4 lg:px-8 py-10">
                 <ReactQuill 
                     theme="snow" 
-                    value={editorState} 
-                    onChange={setEditorState} 
+                    value={value} 
+                    onChange={handleValueChange} 
                 />
             </div>
         </main>
