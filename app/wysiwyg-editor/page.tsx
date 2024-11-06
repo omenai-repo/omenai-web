@@ -11,7 +11,7 @@ export default function page(){
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const [renderedHTML, setRenderedHTML] = useState<React.ReactNode | null>(null)
+    const [renderedHTML, setRenderedHTML] = useState<any>(null)
 
     const log = () => {
         setIsLoading(true)
