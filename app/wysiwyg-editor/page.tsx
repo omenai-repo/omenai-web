@@ -53,9 +53,14 @@ export default function page(){
                         // ],
                         // toolbar: 'image',
                         toolbar: [
-                            'undo redo | styles | fontsize fontfamily | bold italic | alignleft aligncenter alignright | lineheight underline | bullist numlist | insertfile image | tableofcontents tablecellprops | link openlink unlink',
+                            'undo redo | styles | fontsize fontfamily | bold italic | alignleft aligncenter alignright blockquote | lineheight underline | bullist numlist | insertfile image media | tableofcontents tablecellprops | link openlink unlink | copy copy paste pastetext print redo math mergetags pageembed revisionhistory searchreplace spellcheckdialog spellchecker | code codesample typopgraphy anchor checklist | forecolor backcolor emoticons wordcount',
                         ],
-                        plugins: 'image editimage',
+                        // plugins: 'image editimage advlist link lists',
+                        plugins: [
+                            'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+                            'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
+                            'media', 'table', 'emoticons', 'help'
+                          ],
                         editimage_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
                         toolbar_mode: "wrap",
                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
