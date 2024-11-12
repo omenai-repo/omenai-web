@@ -3,10 +3,10 @@
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["shared/*"],
-      "@home/*": ["home/"],
-      "@galleries/*": ["galleries"],
-      "@artist/*": ["artist"],
-      "@api/*": ["api"]
+      "@home/*": ["home/*"],
+      "@galleries/*": ["galleries/*"],
+      "@artist/*": ["artist/*"],
+      "@api/*": ["api/*"]
     }
   }
 }

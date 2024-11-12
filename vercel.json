@@ -1,24 +1,15 @@
 {
-  "projects": [
+  "version": 1,
+  "builds": [
     {
-      "name": "home",
-      "root": "home/"
-    },
-    {
-      "name": "api",
-      "root": "api/"
-    },
-    {
-      "name": "artist",
-      "root": "artist/"
-    },
-    {
-      "name": "galleries",
-      "root": "galleries/"
-    },
-    {
-      "name": "shared",
-      "root": "shared/"
+      "src": "api/**/*",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["shared/**/*"]
+      }
     }
-  ]
+  ],
+  "env": {
+    "SHARED_FOLDER_PATH": "./shared"
+  }
 }
