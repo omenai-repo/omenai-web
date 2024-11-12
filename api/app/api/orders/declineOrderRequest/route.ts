@@ -4,7 +4,6 @@ import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
 
 import { NextResponse } from "next/server";
-import { sendOrderAcceptedMail } from "@shared/emails/models/orders/orderAcceptedMail";
 import { sendOrderDeclinedMail } from "@shared/emails/models/orders/orderDeclinedMail";
 
 export async function POST(request: Request) {

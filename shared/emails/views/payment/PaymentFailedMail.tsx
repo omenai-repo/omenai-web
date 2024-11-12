@@ -1,4 +1,4 @@
-import { getApiUrl } from "@shared/api/config";
+import { getApiUrl } from "@shared/config";
 import {
   Body,
   Container,

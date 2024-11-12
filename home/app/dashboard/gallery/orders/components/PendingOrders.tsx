@@ -1,9 +1,9 @@
 import { formatIntlDateTime } from "@shared/utils/formatIntlDateTime";
 import { AnimatePresence, motion } from "framer-motion";
-import NotFoundData from "../../../../../components/notFound/NotFoundData";
 import OverviewOrdersCard from "../../components/OverviewOrdersCard";
 import { ObjectId } from "mongoose";
 import OrdersTable from "./OrdersTable";
+import NotFoundData from "@shared/components/notFound/NotFoundData";
 
 export default function PendingOrders({
   orders,

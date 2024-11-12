@@ -1,5 +1,5 @@
-import { getApiUrl, getGalleryUrl } from "@shared/api/config";
-import { getImageFileView } from "@shared/api/lib/storage/getImageFileView";
+import { getApiUrl, getGalleryUrl } from "@shared/config";
+import { getImageFileView } from "@shared/lib/storage/getImageFileView";
 import {
   Body,
   Button,

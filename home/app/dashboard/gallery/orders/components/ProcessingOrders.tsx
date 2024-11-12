@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import NotFoundData from "../../../../../components/notFound/NotFoundData";
 import { ObjectId } from "mongoose";
 import OrdersTable from "./OrdersTable";
+import NotFoundData from "@shared/components/notFound/NotFoundData";
 
 export default function ProcessingOrders({
   orders,

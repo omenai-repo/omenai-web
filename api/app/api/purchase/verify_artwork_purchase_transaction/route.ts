@@ -1,4 +1,3 @@
-import { create } from "zustand";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
 import { Wallet } from "@shared/models/wallet/WalletSchema";

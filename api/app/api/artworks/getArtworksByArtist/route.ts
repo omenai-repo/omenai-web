@@ -2,7 +2,6 @@ import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
 import { Artworkuploads } from "@shared/models/artworks/UploadArtworkSchema";
 import { Subscriptions } from "@shared/models/subscriptions/SubscriptionSchema";
-import { buildMongoQuery } from "@shared/utils/buildMongoFilterQuery";
 import { NextResponse } from "next/server";
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
@@ -59,11 +58,11 @@ export async function POST(request: Request) {
     );
 
     // Separate artworks into basic and pro/premium
-    let selectedBasicArtworks = [];
-    let selectedProPremiumArtworks = [];
+    const selectedBasicArtworks = [];
+    const selectedProPremiumArtworks = [];
     let skippedBasicArtworks = 0;
 
-    for (let artwork of allArtworks) {
+    for (const artwork of allArtworks) {
       if (basicGalleryIds.includes(artwork.gallery_id)) {
         if (skippedBasicArtworks < skip) {
           skippedBasicArtworks++;

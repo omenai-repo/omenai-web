@@ -2,12 +2,12 @@
 import { getOverviewOrders } from "@shared/services/orders/getOverviewOrders";
 import OverviewComponentCard from "../../components/OverviewComponentCard";
 import OverviewOrdersCard from "../../../components/OverviewOrdersCard";
-import NotFoundData from "../../../../../../components/notFound/NotFoundData";
 import { formatIntlDateTime } from "@shared/utils/formatIntlDateTime";
 import Link from "next/link";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { useQuery } from "@tanstack/react-query";
 import Load from "@shared/components/loader/Load";
+import NotFoundData from "@shared/components/notFound/NotFoundData";
 
 export default function Orders() {
   const { data: orders, isLoading } = useQuery({

@@ -1,4 +1,3 @@
-import { ForbiddenError } from "@shared/custom/errors/dictionary/errorDictionary";
 import { ServerError } from "@shared/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";

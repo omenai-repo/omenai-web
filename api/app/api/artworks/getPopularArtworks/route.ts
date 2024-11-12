@@ -1,7 +1,6 @@
 import { ServerError } from "@shared/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
-import { ArtworkImpressions } from "@shared/models/artworks/ArtworkImpressionSchema";
 import { Artworkuploads } from "@shared/models/artworks/UploadArtworkSchema";
 import { NextResponse } from "next/server";
 

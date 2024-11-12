@@ -1,6 +1,5 @@
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
-import { ArtworkImpressions } from "@shared/models/artworks/ArtworkImpressionSchema";
 import { SalesActivity } from "@shared/models/sales/SalesActivity";
 import { NextResponse } from "next/server";
 

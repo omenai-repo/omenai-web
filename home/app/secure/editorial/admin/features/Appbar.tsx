@@ -1,9 +1,9 @@
 "use client";
 
 import { CiMenuFries } from "react-icons/ci";
-import IconWrapper from "@shared/app/dashboard/gallery/components/IconWrapper";
 import DashboardIndicator from "./DashboardIndicator";
 import { editorialAdminStore } from "../store/EditorialAdminStore";
+import IconWrapper from "home/app/admin/dashboard/IconWrapper";
 
 export default function Appbar() {
   const [openMobileNav, setOpenMobileNav] = editorialAdminStore((state) => [

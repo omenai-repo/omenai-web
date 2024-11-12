@@ -1,10 +1,4 @@
 "use client";
-import Load from "@shared/components/loader/Load";
-import ArtworkCard from "../../../components/artworks/ArtworkCard";
-import { fetchAllArtworks } from "@shared/services/artworks/fetchAllArtworks";
-import { useQuery } from "@tanstack/react-query";
-import NotFoundData from "@shared/components/notFound/NotFoundData";
-import Link from "next/link";
 
 import {
   MdOutlineKeyboardArrowLeft,

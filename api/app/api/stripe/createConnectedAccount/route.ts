@@ -1,5 +1,4 @@
 import { ServerError } from "@shared/custom/errors/dictionary/errorDictionary";
-import { metadata } from "../../../layout";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
 import { stripe } from "@shared/lib/payments/stripe/stripe";
 import { NextResponse } from "next/server";

@@ -5,7 +5,6 @@ import {
 } from "@shared/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
-import { AccountGallery } from "@shared/models/auth/GallerySchema";
 import { VerificationCodes } from "@shared/models/auth/verification/codeTimeoutSchema";
 import { NextResponse } from "next/server";
 import { hashPassword } from "@shared/lib/hash/hashPassword";

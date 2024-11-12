@@ -1,7 +1,6 @@
 "use client";
 import Load from "@shared/components/loader/Load";
 import DesktopNavbar from "@shared/components/navbar/desktop/DesktopNavbar";
-import { deeplink } from "@shared/config";
 import { releaseOrderLock } from "@shared/services/orders/releaseOrderLock";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
@@ -38,7 +37,6 @@ export default function OrderCanceledPage() {
     );
   }
 
-  const deeplink_url = deeplink();
   return (
     <>
       <DesktopNavbar />

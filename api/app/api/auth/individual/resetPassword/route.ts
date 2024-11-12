@@ -9,7 +9,6 @@ import { hashPassword } from "@shared/lib/hash/hashPassword";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
 import { NextResponse } from "next/server";
 import { VerificationCodes } from "@shared/models/auth/verification/codeTimeoutSchema";
-import { AccountGallery } from "@shared/models/auth/GallerySchema";
 import { AccountIndividual } from "@shared/models/auth/IndividualSchema";
 
 export async function POST(request: Request) {

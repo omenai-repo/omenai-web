@@ -1,5 +1,4 @@
 "use client";
-import NotFoundData from "../../../../../../components/notFound/NotFoundData";
 import { SalesActivity } from "./components/SalesActivity";
 import { getSalesActivityData } from "@shared/services/sales/getSalesActivityData";
 import OverviewComponentCard from "../../components/OverviewComponentCard";
@@ -8,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import Load from "@shared/components/loader/Load";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import NotFoundData from "@shared/components/notFound/NotFoundData";
 
 export default function ActivityWrapper() {
   const { data: session } = useSession();

@@ -1,10 +1,10 @@
 "use client";
-import { Card } from "@shared/app/material_tailwind/MaterialTailwindExports";
 import NotFoundData from "@shared/components/notFound/NotFoundData";
 
 import { formatIntlDateTime } from "@shared/utils/formatIntlDateTime";
 import { formatPrice } from "@shared/utils/priceFormatter";
 import { convertPriceStringToNumber } from "@shared/utils/priceStringToNumberConverter";
+import { Card } from "home/app/material_tailwind/MaterialTailwindExports";
 import { FiArrowDownLeft } from "react-icons/fi";
 import { FiArrowUpRight } from "react-icons/fi";
 

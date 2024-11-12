@@ -1,4 +1,3 @@
-import { create } from "zustand";
 import { sendSubscriptionPaymentFailedMail } from "@shared/emails/models/subscription/sendSubscriptionPaymentFailedMail";
 import { sendSubscriptionPaymentSuccessfulMail } from "@shared/emails/models/subscription/sendSubscriptionPaymentSuccessMail";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";

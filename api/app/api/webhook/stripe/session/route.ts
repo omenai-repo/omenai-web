@@ -1,4 +1,3 @@
-import { sendPaymentSuccessGalleryMail } from "../../../../../emails/models/payment/sendPaymentSuccessGalleryMail";
 import { formatIntlDateTime } from "@shared/utils/formatIntlDateTime";
 import { stripe } from "@shared/lib/payments/stripe/stripe";
 import { CreateOrder } from "@shared/models/orders/CreateOrderSchema";
@@ -13,6 +12,7 @@ import { sendPaymentSuccessMail } from "@shared/emails/models/payment/sendPaymen
 import { releaseOrderLock } from "@shared/services/orders/releaseOrderLock";
 import { Artworkuploads } from "@shared/models/artworks/UploadArtworkSchema";
 import { PurchaseTransactions } from "@shared/models/transactions/TransactionSchema";
+import { sendPaymentSuccessGalleryMail } from "@shared/emails/models/payment/sendPaymentSuccessGalleryMail";
 
 export async function POST(request: Request) {
   const secretHash = process.env.STRIPE_CHECKOUT_SESSION_WEBHOOK_SECRET!;
