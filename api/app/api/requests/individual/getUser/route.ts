@@ -1,6 +1,5 @@
 import { NotFoundError } from "@shared/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
-import { sendPriceEmail } from "@shared/emails/models/orders/requestPriceEmail";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
 import { AccountIndividual } from "@shared/models/auth/IndividualSchema";
 

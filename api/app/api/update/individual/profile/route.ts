@@ -1,7 +1,6 @@
 import { ServerError } from "@shared/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
-import { AccountGallery } from "@shared/models/auth/GallerySchema";
 import { AccountIndividual } from "@shared/models/auth/IndividualSchema";
 import { NextResponse } from "next/server";
 

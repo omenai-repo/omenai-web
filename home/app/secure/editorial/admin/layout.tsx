@@ -3,7 +3,7 @@ import NextTopLoader from "nextjs-toploader";
 import PageLayout from "./features/PageLayout";
 
 import { useWindowSize } from "usehooks-ts";
-import NoMobileView from "@shared/app/dashboard/gallery/components/NoMobileView";
+import NoMobileView from "home/app/dashboard/gallery/components/NoMobileView";
 import { editorialAdminStore } from "./store/EditorialAdminStore";
 import Appbar from "./features/Appbar";
 

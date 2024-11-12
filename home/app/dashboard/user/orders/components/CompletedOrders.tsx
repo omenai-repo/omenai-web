@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import NotFoundData from "../../../../../components/notFound/NotFoundData";
+import NotFoundData from "@shared/components/notFound/NotFoundData";
 import { formatIntlDateTime } from "@shared/utils/formatIntlDateTime";
 import OrdersCard from "./OrdersCard";
 

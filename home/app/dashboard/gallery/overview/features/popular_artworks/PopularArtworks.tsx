@@ -1,10 +1,11 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
-import NotFoundData from "../../../../../../components/notFound/NotFoundData";
+
 import OverviewComponentCard from "../../components/OverviewComponentCard";
 import PopulartArtworkCard from "./components/PopulartArtworkCard";
 import { fetchPopularArtworks } from "@shared/services/artworks/fetchPopularArtworks";
 import Load from "@shared/components/loader/Load";
+import NotFoundData from "@shared/components/notFound/NotFoundData";
+import { useQuery } from "@tanstack/react-query";
 
 export default function PopularArtworks() {
   const { data: popularArtworks, isLoading } = useQuery({

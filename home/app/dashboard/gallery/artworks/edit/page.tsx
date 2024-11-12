@@ -1,9 +1,8 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import PageTitle from "../../components/PageTitle";
 import { useQuery } from "@tanstack/react-query";
 import { fetchSingleArtwork } from "@shared/services/artworks/fetchSingleArtwork";
-import NotFound from "@shared/app/not-found";
 import Load from "@shared/components/loader/Load";
 import EditArtworkWrapper from "./components/EditArtworkWrapper";
 
@@ -11,7 +10,7 @@ export default function EditArtwork() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 
-  if (id === null) return NotFound();
+  if (id === null) return notFound();
 
   const title = decodeURIComponent(id);
 

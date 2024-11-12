@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error) {
     const error_response = handleErrorEdgeCases(error);
 
     return NextResponse.json(

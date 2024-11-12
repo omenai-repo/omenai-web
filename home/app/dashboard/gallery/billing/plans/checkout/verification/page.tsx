@@ -6,7 +6,7 @@ import { verifyFlwTransaction } from "@shared/services/subscriptions/verifyFlwTr
 import Link from "next/link";
 import Load from "@shared/components/loader/Load";
 import { useReadLocalStorage } from "usehooks-ts";
-import PageTitle from "@shared/app/dashboard/gallery/components/PageTitle";
+import PageTitle from "home/app/dashboard/gallery/components/PageTitle";
 export default function TransactionVerification() {
   const transaction_id = useReadLocalStorage("flw_trans_id") as string;
   if (

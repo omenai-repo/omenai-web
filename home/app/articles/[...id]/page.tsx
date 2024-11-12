@@ -1,4 +1,4 @@
-import getEditorialDocument from "@shared/app/secure/editorial/admin/lib/getSingleEditorialPost";
+import getEditorialDocument from "home/app/secure/editorial/admin/lib/getSingleEditorialPost";
 import EditorialData from "./components/EditorialData";
 import { IndividualLogo } from "@shared/components/logo/Logo";
 

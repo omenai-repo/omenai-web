@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import NoCover from "@shared/app/secure/components/NoCover";
-import { getEditorialImageFilePreview } from "@shared/app/secure/editorial/admin/lib/getEditorialImageFilePreview";
 import { getImageFileView } from "@shared/lib/storage/getImageFileView";
+import NoCover from "home/app/secure/components/NoCover";
+import { getEditorialImageFilePreview } from "home/app/secure/editorial/admin/lib/getEditorialImageFilePreview";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -3,10 +3,10 @@ import Link from "next/link";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { useEffectOnce } from "usehooks-ts";
-import { updateDocView } from "@shared/app/secure/editorial/admin/lib/updateEditorialViews";
 import { getImageFileView } from "@shared/lib/storage/getImageFileView";
-import { getEditorialImageFilePreview } from "@shared/app/secure/editorial/admin/lib/getEditorialImageFilePreview";
+import { getEditorialImageFilePreview } from "home/app/secure/editorial/admin/lib/getEditorialImageFilePreview";
+import { updateDocView } from "home/app/secure/editorial/admin/lib/updateEditorialViews";
+import { useEffect } from "react";
 
 /* eslint-disable @next/next/no-img-element */
 type EditorialDataTypes = {
@@ -16,7 +16,7 @@ type EditorialDataTypes = {
 export default function EditorialData({
   singleEditorialData,
 }: EditorialDataTypes) {
-  useEffectOnce(() => {
+  useEffect(() => {
     updateDocView(singleEditorialData?.id, singleEditorialData?.views);
   });
 

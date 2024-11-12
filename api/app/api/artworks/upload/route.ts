@@ -1,4 +1,3 @@
-import { plan_details } from "../../../dashboard/gallery/billing/plans/plan_details";
 import {
   ForbiddenError,
   ServerError,

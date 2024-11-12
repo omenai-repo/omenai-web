@@ -1,5 +1,4 @@
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
-import { stripe } from "@shared/lib/payments/stripe/stripe";
 import { AccountGallery } from "@shared/models/auth/GallerySchema";
 import { NextResponse } from "next/server";
 

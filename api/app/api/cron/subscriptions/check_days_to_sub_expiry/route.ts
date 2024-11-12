@@ -35,5 +35,6 @@ export async function POST() {
     // todo: Send reminder mail to users
 
     return NextResponse.json({ data: results, mesage: "Success" });
-  } catch (error) {}
+  } finally {
+  }
 }

@@ -1,4 +1,4 @@
-import { getGalleryUrl } from "@shared/api/config";
+import { getGalleryUrl } from "@shared/config";
 import {
   Body,
   Container,

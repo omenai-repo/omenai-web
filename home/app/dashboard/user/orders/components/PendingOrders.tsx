@@ -1,6 +1,6 @@
 import { formatIntlDateTime } from "@shared/utils/formatIntlDateTime";
 import { AnimatePresence, motion } from "framer-motion";
-import NotFoundData from "../../../../../components/notFound/NotFoundData";
+import NotFoundData from "@shared/components/notFound/NotFoundData";
 import { ObjectId } from "mongoose";
 import OrdersCard from "./OrdersCard";
 

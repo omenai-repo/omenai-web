@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Lottie from "lottie-react";
 import { useSearchParams } from "next/navigation";
-import animationData from "../../../json/order-received.json";
+import animationData from "@shared/json/order-received.json";
 import { toast } from "sonner";
 import { signOut } from "next-auth/react";
 import { useLocalStorage } from "usehooks-ts";

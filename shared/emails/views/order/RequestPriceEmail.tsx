@@ -1,6 +1,6 @@
-import { getApiUrl } from "@shared/api/config";
-import { storage } from "@shared/api//appwrite";
-import { formatPrice } from "@shared/api/utils/priceFormatter";
+import { getApiUrl } from "@shared/config";
+import { storage } from "@shared//appwrite";
+import { formatPrice } from "@shared/utils/priceFormatter";
 import {
   Body,
   Container,

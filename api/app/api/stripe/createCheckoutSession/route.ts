@@ -1,4 +1,3 @@
-import { getApiUrl } from "@shared/config";
 import {
   ForbiddenError,
   ServerError,
@@ -13,7 +12,6 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     // Create Checkout Sessions from body params.
-    const url = getApiUrl();
     await connectMongoDB();
     const { item, amount, gallery_id, meta, success_url, cancel_url } =
       await request.json();

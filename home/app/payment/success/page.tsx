@@ -1,12 +1,9 @@
 import DesktopNavbar from "@shared/components/navbar/desktop/DesktopNavbar";
-import { deeplink } from "@shared/config";
 
 import Image from "next/image";
 import Link from "next/link";
 
 export default function OrderCompletedPage() {
-  const deeplink_url = deeplink();
-
   return (
     <>
       <DesktopNavbar />

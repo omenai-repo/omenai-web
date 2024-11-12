@@ -3,7 +3,6 @@ import {
   ServerError,
 } from "@shared/custom/errors/dictionary/errorDictionary";
 import { handleErrorEdgeCases } from "@shared/custom/errors/handler/errorHandler";
-import { sendIndividualMail } from "@shared/emails/models/individuals/sendIndividualMail";
 import { parseRegisterData } from "@shared/lib/auth/parseRegisterData";
 import { connectMongoDB } from "@shared/lib/mongo_connect/mongoConnect";
 import { AccountAdmin } from "@shared/models/auth/AccountAdmin";
