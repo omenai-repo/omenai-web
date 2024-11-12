@@ -1,0 +1,29 @@
+import { IndividualLogo } from "@shared/components/logo/Logo";
+import Link from "next/link";
+import TokenBlock from "./components/TokenBlock";
+// export const dynamicParams = false;
+
+export default async function VerifyEmail({
+  params,
+}: {
+  params: { token: string };
+}) {
+  // Check if user is verified and then redirect
+  return (
+    <div className="w-full h-full font-dark p-5">
+      <div className="container lg:w-50% my-4">
+        {/* Header */}
+        <div className="flex xxs:flex-row flex-col gap-y-4 justify-between items-center">
+          <IndividualLogo />
+
+          <Link href={"/auth/login/"} className="underline">
+            Back to login
+          </Link>
+        </div>
+        <hr className="bg-gray-400/20 my-8" />
+        {/* Body */}
+        <TokenBlock token={params.token} />
+      </div>
+    </div>
+  );
+}
